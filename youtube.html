@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>YouTube</title>
+  <title>Diseño estilo YouTube</title>
   <style>
     :root{
       --bg:#0f0f0f;
@@ -90,7 +90,8 @@
 
     /* ACTIONS */
     .actions{margin-top:10px;display:flex;gap:10px}
-    .chip{flex:1;background:var(--panel2);border:1px solid #262626;border-radius:16px;padding:10px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--text);font-weight:650;font-size:13px}
+    .chip{flex:1;background:var(--panel2);border:1px solid #262626;border-radius:16px;padding:10px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--muted);font-weight:650;font-size:13px}
+    .chip.active{color:var(--text);background:#262626}
     .chip:hover{background:#262626}
     .chip .count{font-weight:700}
     .chip.secondary{flex:1.1}
@@ -120,8 +121,9 @@
 
     .c-actions{margin-top:10px;display:flex;align-items:center;justify-content:space-between;color:var(--muted)}
     .c-actions-left{display:flex;align-items:center;gap:18px}
-    .c-act{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
+    .c-act{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;color:var(--muted)}
     .c-act:hover{color:var(--text)}
+    .c-act.active{color:var(--text)}
     .c-act svg{width:18px;height:18px;fill:currentColor}
     .c-like-count{font-size:12px;font-weight:650}
 
@@ -222,21 +224,21 @@
       </div>
 
       <div class="actions">
-        <div class="chip" title="Me gusta">
+        <div class="chip" id="btnLike" data-toggle="like" title="Me gusta">
           <svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-          <span class="count">3000</span>
+          <span class="count">3 mil</span>
         </div>
 
-        <div class="chip" title="No me gusta">
+        <div class="chip" id="btnDislike" data-toggle="dislike" title="No me gusta">
           <svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg>
         </div>
 
-        <div class="chip secondary" title="Compartir">
+        <div class="chip secondary" id="btnShare" data-toggle="share" title="Compartir">
           <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.02-4.11A2.99 2.99 0 0018 7.91a3 3 0 10-3-3c0 .24.04.47.09.7L8.07 9.72A3 3 0 006 9a3 3 0 100 6c.86 0 1.64-.36 2.2-.93l6.83 3.99c-.05.2-.08.41-.08.63a3 3 0 103-3z"/></svg>
           <span>Compartir</span>
         </div>
 
-        <div class="chip secondary" title="Guardar">
+        <div class="chip secondary" id="btnSave" data-toggle="save" title="Guardar">
           <svg viewBox="0 0 24 24"><path d="M17 3H7a2 2 0 00-2 2v16l7-3 7 3V5a2 2 0 00-2-2z"/></svg>
           <span>Guardar</span>
         </div>
@@ -247,7 +249,7 @@
         <div class="comments-bar">
           <div class="comments-left">
             <span class="label">Comentarios</span>
-            <span class="count">96</span>
+            <span class="count">15</span>
           </div>
         </div>
 
@@ -345,12 +347,10 @@
         const videoH = video.getBoundingClientRect().height;
         const playerH = player.getBoundingClientRect().height;
         const extra = Math.max(0, Math.round(playerH - videoH));
-        // limita para evitar “buraco” gigante em caso de bug do player
         const capped = Math.min(extra, 220);
         video.style.paddingBottom = capped ? (capped + 'px') : '0px';
       };
 
-      // Observa mudanças de tamanho (quando CTA aparecer)
       try{
         const ro = new ResizeObserver(() => requestAnimationFrame(applyGap));
         ro.observe(player);
@@ -363,6 +363,7 @@
       setTimeout(applyGap, 3500);
     })();
 
+    // SUBSCRIBE
     const btn = document.getElementById('btnSubscribe');
     btn.addEventListener('click', () => {
       if(btn.classList.contains('subscribed')){
@@ -376,6 +377,45 @@
         btn.style.background = '#2b2b2b';
         btn.style.color = '#f1f1f1';
       }
+    });
+
+    // TOP ACTIONS (Like/Dislike/Share/Save)
+    const topLike = document.getElementById('btnLike');
+    const topDislike = document.getElementById('btnDislike');
+    const topShare = document.getElementById('btnShare');
+    const topSave = document.getElementById('btnSave');
+
+    const setExclusive = (onEl, offEl) => {
+      onEl.classList.toggle('active');
+      if(onEl.classList.contains('active')) offEl.classList.remove('active');
+    };
+
+    if(topLike && topDislike){
+      topLike.addEventListener('click', () => setExclusive(topLike, topDislike));
+      topDislike.addEventListener('click', () => setExclusive(topDislike, topLike));
+    }
+    if(topShare){
+      topShare.addEventListener('click', () => topShare.classList.toggle('active'));
+    }
+    if(topSave){
+      topSave.addEventListener('click', () => topSave.classList.toggle('active'));
+    }
+
+    // COMMENTS Like/Dislike (por comentário)
+    document.querySelectorAll('.c-item').forEach(item => {
+      const likeBtn = item.querySelector('.c-act[title="Me gusta"]');
+      const dislikeBtn = item.querySelector('.c-act[title="No me gusta"]');
+      if(!likeBtn || !dislikeBtn) return;
+
+      likeBtn.addEventListener('click', () => {
+        likeBtn.classList.toggle('active');
+        if(likeBtn.classList.contains('active')) dislikeBtn.classList.remove('active');
+      });
+
+      dislikeBtn.addEventListener('click', () => {
+        dislikeBtn.classList.toggle('active');
+        if(dislikeBtn.classList.contains('active')) likeBtn.classList.remove('active');
+      });
     });
   </script>
 </body>
