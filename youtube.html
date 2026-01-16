@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Diseño estilo YouTube</title>
+  <title>YouTube</title>
   <style>
     :root{
       --bg:#0f0f0f;
@@ -30,20 +30,16 @@
       min-height:100vh;
       background:var(--bg);
       color:var(--text);
-      overflow:hidden;
+      overflow:visible;
       box-shadow:none;
     }
 
-    /* DESKTOP: replica do layout mobile, só que em escala maior */
+    /* DESKTOP: mantém igual ao mobile, só ajusta proporção do vídeo */
     @media (min-width: 980px){
-      /* desktop = mesma UI do mobile, só ocupando 100% da tela */
       .video{aspect-ratio:16/9}
     }
-      .phone{max-width:100%;border-radius:0}
-      .video{aspect-ratio:16/9}
-    }
-      .phone{max-width:980px;border-radius:14px}
-      .topbar{
+
+    .topbar{
       height:54px;
       padding:0 12px;
       display:flex;
@@ -60,7 +56,8 @@
     .icon-btn:hover{background:#2a2a2a}
 
     /* VIDEO */
-    .video{position:relative;width:100%;aspect-ratio:16/10;background:#000;overflow:hidden}
+    .video{position:relative;width:100%;aspect-ratio:16/10;background:#000;overflow:visible}
+    /* não usar z-index alto aqui para não cobrir o layout */
 
     /* INFO */
     .info{background:var(--panel);padding:12px}
@@ -103,7 +100,7 @@
   
 
     /* COMMENTS (YouTube real) */
-    .comments{margin-top:14px;padding-top:12px;border-top:1px solid #262626}
+    .comments{margin-top:14px;padding-top:12px;border-top:1px solid #262626;margin-bottom:24px}
     .comments-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
     .comments-left{display:flex;align-items:baseline;gap:8px}
     .comments-left .label{font-size:16px;font-weight:750}
@@ -132,6 +129,41 @@
     .c-more:hover{background:#2a2a2a}
     .c-more svg{width:18px;height:18px;fill:currentColor}
 
+  .footer-divider{
+      width:100%;
+      height:1px;
+      background:#262626;
+      margin:24px 0 16px 0;
+    }
+    .yt-footer{
+      background:var(--bg);
+      padding:20px 16px 28px;
+      text-align:center;
+    }
+    .yt-footer-inner{
+      max-width:720px;
+      margin:0 auto;
+    }
+    .yt-footer-links{
+      font-size:12px;
+      margin-bottom:10px;
+    }
+    .yt-footer-links a{
+      color:#3ea6ff;
+      text-decoration:none;
+    }
+    .yt-footer-links a:hover{text-decoration:underline}
+    .yt-footer-copy{
+      font-size:12px;
+      color:#aaa;
+      margin-bottom:10px;
+    }
+    .yt-footer-disclaimer{
+      font-size:11px;
+      line-height:1.45;
+      color:#888;
+    }
+
   </style>
 </head>
 <body>
@@ -155,7 +187,13 @@
 
     <!-- VIDEO -->
     <div class="video">
-      <vturb-smartplayer id="vid-6965e5f32e6d8eb8b772c6e1" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/6965e5f32e6d8eb8b772c6e1/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+      <vturb-smartplayer id="vid-6965e5f32e6d8eb8b772c6e1" style="display:block;margin:0 auto;width:100%;"></vturb-smartplayer>
+      <script type="text/javascript">
+        var s=document.createElement("script");
+        s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/6965e5f32e6d8eb8b772c6e1/v4/player.js";
+        s.async=true;
+        document.head.appendChild(s);
+      </script>
     </div>
 
     <!-- INFO -->
@@ -275,11 +313,56 @@
             </div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
       </div>
 
-    </div>
+    <!-- DIVIDER FOOTER -->
+    <div class="footer-divider"></div>
+
+    <!-- FOOTER LEGAL -->
+    <footer class="yt-footer">
+      <div class="yt-footer-inner">
+        <div class="yt-footer-links">
+          <a href="#" rel="nofollow">Términos de Uso</a>
+          <span>·</span>
+          <a href="#" rel="nofollow">Política de Privacidad</a>
+        </div>
+        <div class="yt-footer-copy">Copyright 2025 — TRUCO DE LA GELATINA® · Todos los derechos reservados</div>
+        <div class="yt-footer-disclaimer">
+          Este sitio no forma parte de Facebook™ ni de Meta Platforms, Inc., y no está respaldado por ellos. La información presentada tiene fines educativos y no constituye asesoramiento médico. Los resultados pueden variar de una persona a otra.
+        </div>
+      </div>
+    </footer>
 
   </div>
 
   <script>
+    // FIX CTA do player: quando o player aumentar de altura (ex.: botão/CTA com delay),
+    // a headline desce naturalmente porque adicionamos padding-bottom no container do vídeo.
+    (function(){
+      const video = document.querySelector('.video');
+      const player = document.getElementById('vid-6965e5f32e6d8eb8b772c6e1');
+      if(!video || !player) return;
+
+      const applyGap = () => {
+        const videoH = video.getBoundingClientRect().height;
+        const playerH = player.getBoundingClientRect().height;
+        const extra = Math.max(0, Math.round(playerH - videoH));
+        // limita para evitar “buraco” gigante em caso de bug do player
+        const capped = Math.min(extra, 220);
+        video.style.paddingBottom = capped ? (capped + 'px') : '0px';
+      };
+
+      // Observa mudanças de tamanho (quando CTA aparecer)
+      try{
+        const ro = new ResizeObserver(() => requestAnimationFrame(applyGap));
+        ro.observe(player);
+      }catch(e){
+        setInterval(applyGap, 700);
+      }
+
+      window.addEventListener('load', () => setTimeout(applyGap, 600));
+      setTimeout(applyGap, 1500);
+      setTimeout(applyGap, 3500);
+    })();
+
     const btn = document.getElementById('btnSubscribe');
     btn.addEventListener('click', () => {
       if(btn.classList.contains('subscribed')){
