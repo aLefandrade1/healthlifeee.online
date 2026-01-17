@@ -1,382 +1,549 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Diseño estilo YouTube</title>
+  <meta charset="UTF-8" />
+  <title>Desbloqueo del Truco de la Gelatina</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+
   <style>
-    :root{
-      --bg:#0f0f0f;
-      --panel:#181818;
-      --panel2:#202020;
-      --text:#f1f1f1;
-      --muted:#aaaaaa;
-      --btn:#f1f1f1;
-      --btnText:#111;
-      --blue:#3ea6ff;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:var(--bg);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      display:block;
-      padding:0;
-      min-height:100vh;
-    }
-    .phone{
-      width:100%;
-      max-width:none;
-      min-height:100vh;
-      background:var(--bg);
-      color:var(--text);
-      overflow:visible;
-      box-shadow:none;
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background-color: #0f0f0f;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #ffffff;
+      overflow-x: hidden;
     }
 
-    /* DESKTOP: mantém igual ao mobile, só ajusta proporção do vídeo */
-    @media (min-width: 980px){
-      .video{aspect-ratio:16/9}
+    body { text-align: center; padding: 26px 0 36px; }
+
+    .box {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 18px;
     }
 
-    .topbar{
-      height:54px;
-      padding:0 12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      background:var(--panel);
-      border-bottom:1px solid #141414;
-    }
-    .yt-logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700}
-    .yt-badge{width:26px;height:18px;border-radius:4px;background:#ff0000;position:relative}
-    .yt-badge:before{content:"";position:absolute;left:10px;top:5px;border-left:7px solid #fff;border-top:4px solid transparent;border-bottom:4px solid transparent}
-    .top-actions{display:flex;align-items:center;gap:14px}
-    .icon-btn{width:28px;height:28px;display:grid;place-items:center;border-radius:999px;cursor:pointer}
-    .icon-btn:hover{background:#2a2a2a}
-
-    /* VIDEO */
-    .video{position:relative;width:100%;aspect-ratio:16/10;background:#000;overflow:visible}
-    /* não usar z-index alto aqui para não cobrir o layout */
-
-    /* INFO */
-    .info{background:var(--panel);padding:12px}
-    .title-row{display:flex;align-items:flex-start;gap:10px}
-    .title{font-size:18px;line-height:1.25;font-weight:650;margin:0;flex:1}
-    
-    .meta{margin-top:6px;color:var(--muted);font-size:12px;display:flex;gap:6px;align-items:center}
-
-    /* CHANNEL */
-    .channel{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .channel-left{display:flex;align-items:center;gap:10px;min-width:0}
-    .avatar{width:36px;height:36px;border-radius:999px;background:#222;overflow:hidden;display:block}
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-    .ch-text{min-width:0;display:flex;align-items:center;gap:8px}
-    .ch-name{font-size:13px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .ch-subs{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .subscribe{
-      border:0;
-      background:var(--btn);
-      color:var(--btnText);
-      padding:8px 14px;
-      border-radius:999px;
-      font-weight:700;
-      font-size:14px;
-      line-height:1;
-      height:34px;
-      cursor:pointer;
-      white-space:nowrap;
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin: 6px 0 10px;
+      font-weight: 900;
+      color: #00e676; /* verde neon */
+      letter-spacing: .3px;
+      text-shadow:
+        0 0 6px rgba(0,230,118,.9),
+        0 0 14px rgba(0,230,118,.7),
+        0 0 26px rgba(0,230,118,.5);
     }
 
-    /* ACTIONS */
-    .actions{margin-top:10px;display:flex;gap:10px}
-    .chip{flex:1;background:var(--panel2);border:1px solid #262626;border-radius:16px;padding:10px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--text);font-weight:650;font-size:13px}
-    .chip:hover{background:#262626}
-    .chip .count{font-weight:700}
-    .chip.secondary{flex:1.1}
+    .sub {
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.35;
+      margin: 0 0 12px;
+      opacity: .98;
+    }
 
-    svg{width:18px;height:18px;fill:currentColor}
-    .mini svg{width:20px;height:20px}
+    p {
+      font-size: 15px;
+      line-height: 1.55;
+      opacity: .95;
+      margin: 10px 0;
+    }
+
+    .hl { color: #ffd700; font-weight: 900; }
+    .danger { color: #ff3b3b; font-weight: 900; }
+
+    .panel {
+      background: rgba(255, 215, 0, .10);
+      border: 1px solid rgba(255, 215, 0, .30);
+      border-radius: 14px;
+      padding: 12px 12px;
+      text-align: left;
+      margin: 12px auto 14px;
+      max-width: 100%;
+    }
+
+    .card {
+      background: #ffffff;
+      color: #111;
+      border-radius: 14px;
+      padding: 16px 14px;
+      text-align: left;
+      margin: 14px auto;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,.10);
+      margin: 16px 0;
+    }
+
+    /* CTA */
+    .btn {
+      display: block;
+      width: 100%;
+      max-width: 92%;
+      margin: 12px auto 0;
+      padding: 14px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.15;
+      letter-spacing: .2px;
+    }
+
+    .btn-primary {
+      background: #ffd700; /* amarelo */
+      color: #000000;      /* letras pretas */
+      animation: pulseSoft 3.5s ease-in-out infinite;
+    }
+
+    .btn-secondary {
+      background: #1a1a1a;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    .btn:hover { opacity: .92; }
+
+    @keyframes pulseSoft {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    /* Decision boxes */
+    .decision-wrap { margin-top: 8px; }
+
+    .decision {
+      border-radius: 14px;
+      padding: 14px;
+      margin: 12px 0;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,77,77,.16); /* vermelho clarinho */
+      color: #000000; /* letras pretas */
+    }
+
+    /* Texto PRETO quando fundo é claro */
+    .decision-danger{
+      color:#000000 !important; /* letras pretas */
+    }
+    .decision-light{
+      color:#000000 !important; /* letras pretas */
+    }
+
+    /* DECISAO 1 (BLOCO VERMELHO CLARO + TRACINHOS BRANCOS) */
+    .decision-danger{
+      background: rgba(255, 77, 77, .16);
+      border: 2px dashed rgba(255,255,255,.65);
+    }
+
+    .decision-title {
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: .2px;
+    }
+
+    .decision ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      opacity: .95;
+      line-height: 1.55;
+    }
+
+    .note {
+      font-size: 12px;
+      opacity: .85;
+      margin-top: 8px;
+      line-height: 1.45;
+    }
+
+    /* Doctor */
+    .doctor {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .doctor img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #e9e9e9;
+    }
+
+    .doctor .meta strong { display: block; font-size: 15px; }
+    .doctor .meta span { font-size: 13px; opacity: .85; }
+
+    /* Price pack */
+    .pack {
+      margin: 14px auto 14px;
+      max-width: 100%;
+    }
+
+    .pack-inner {
+      background: #e8ffe8;
+      border: 2px dashed #3bb54a;
+      border-radius: 16px;
+      padding: 18px 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      text-align: center;
+      color: #111;
+    }
+
+    .pack-title {
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: .3px;
+    }
+
+    .pack-price {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0 12px;
+    }
+
+    .old {
+      font-weight: 900;
+      color: #777;
+      text-decoration: line-through;
+      font-size: 15px;
+    }
+
+    .new {
+      font-weight: 900;
+      color: #1a9f49;
+      font-size: 36px;
+    }
+
+    .usd {
+      font-weight: 900;
+      color: #1a9f49;
+      font-size: 12px;
+    }
+
+    .pack-sub {
+      font-size: 12px;
+      font-weight: 900;
+      opacity: .75;
+      margin-top: 6px;
+    }
+
+    /* Benefits */
+    .benefits-wrap{display:grid;grid-template-columns:1fr;gap:10px;margin:12px auto 4px;}
+    .benefits{
+      background:#ffffff;color:#000;border-radius:12px;padding:12px 10px;
+      box-shadow:0 8px 20px rgba(0,0,0,.25);
+      text-align:center;
+      font-weight:900;
+    }
+    .benefit-row{display:flex;justify-content:space-between;gap:10px;font-size:15px;}
+
+    /* Testimonials */
+    .tcard{
+      background:#ffffff;color:#111;border-radius:12px;padding:14px 14px;margin:10px auto;
+      text-align:left;box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
+    .trow{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+    .avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:0 0 46px;}
+    .tname{font-weight:900;font-size:15px;line-height:1.1;}
+    .tstars{font-size:16px;letter-spacing:1px;color:#f5c400;}
+    .ttext{font-size:14px;line-height:1.35;}
+
+    /* Marquee social proof */
+    .slider{margin:12px 0 6px;overflow:hidden;background:transparent;}
+    .slider::-webkit-scrollbar{display:none;}
+    .slider{-ms-overflow-style:none;scrollbar-width:none;}
+    .track{display:flex;gap:12px;padding:6px 2px;width:max-content;animation:marquee 18s linear infinite;}
+    @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);} }
+    .slide{flex:0 0 auto;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.35);background:transparent;}
+    .slide img{display:block;width:260px;height:auto;}
+    @media (max-width:480px){.slide img{width:220px;} h1{font-size:22px;} }
+
+    /* Bonus list */
+    .checklist{background:#ffffff;color:#000;border-radius:12px;padding:14px 12px;margin:10px auto 12px;text-align:left;box-shadow:0 8px 20px rgba(0,0,0,.25);} 
+    .check-item{font-size:14px;font-weight:900;margin:7px 0;}
+
+    /* Footer */
+    footer{width:100%;background:#000;color:#fff;padding:18px 12px;font-size:12px;line-height:1.6;text-align:center;margin-top:18px;}
+    footer a{color:#fff;text-decoration:underline;}
   
 
-    /* COMMENTS (YouTube real) */
-    .comments{margin-top:14px;padding-top:12px;border-top:1px solid #262626;margin-bottom:24px}
-    .comments-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-    .comments-left{display:flex;align-items:baseline;gap:8px}
-    .comments-left .label{font-size:16px;font-weight:750}
-    .comments-left .count{font-size:13px;color:var(--muted);font-weight:650}
-
-    .c-item{display:flex;gap:10px;padding:14px 0}
-    .c-item + .c-item{border-top:1px solid #242424}
-    .c-ava{width:36px;height:36px;border-radius:999px;flex:0 0 auto;overflow:hidden;background:#222}
-    .c-ava img{width:100%;height:100%;object-fit:cover;display:block}
-    .c-ava.gray{background:#90a4ae}
-
-    .c-body{flex:1;min-width:0}
-    .c-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .c-user{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .c-time{font-size:12px;color:var(--muted);white-space:nowrap}
-    .c-text{margin-top:6px;font-size:13px;line-height:1.35;color:var(--text)}
-
-    .c-actions{margin-top:10px;display:flex;align-items:center;justify-content:space-between;color:var(--muted)}
-    .c-actions-left{display:flex;align-items:center;gap:18px}
-    .c-act{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
-    .c-act:hover{color:var(--text)}
-    .c-act svg{width:18px;height:18px;fill:currentColor}
-    .c-like-count{font-size:12px;font-weight:650}
-
-    .c-more{width:30px;height:30px;border-radius:999px;display:grid;place-items:center;cursor:pointer}
-    .c-more:hover{background:#2a2a2a}
-    .c-more svg{width:18px;height:18px;fill:currentColor}
-
-  .footer-divider{
-      width:100%;
-      height:1px;
-      background:#262626;
-      margin:24px 0 16px 0;
+    /* ===== CONFETES DE COMEMORAÇÃO (ESTILO FESTA) ===== */
+    .confetti{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:9999;
     }
-    .yt-footer{
-      background:var(--bg);
-      padding:20px 16px 28px;
-      text-align:center;
+    .confetti-piece{
+      position:absolute;
+      top:-10vh;
+      width:12px;
+      height:12px;
+      opacity:.95;
+      border-radius:50%; /* bolinhas de festa */
+      will-change:transform, opacity;
+      animation:confettiFall 3.8s linear forwards;
     }
-    .yt-footer-inner{
-      max-width:720px;
-      margin:0 auto;
+    .confetti-streamer{
+      position:absolute;
+      top:-12vh;
+      width:6px;
+      height:26px;
+      opacity:.9;
+      border-radius:3px;
+      will-change:transform, opacity;
+      animation:streamerFall 4.2s ease-out forwards;
     }
-    .yt-footer-links{
-      font-size:12px;
-      margin-bottom:10px;
+    @keyframes confettiFall{
+      0%{ transform:translateY(-10vh) rotate(0deg); }
+      100%{ transform:translateY(120vh) rotate(360deg); }
     }
-    .yt-footer-links a{
-      color:#3ea6ff;
-      text-decoration:none;
+    @keyframes streamerFall{
+      0%{ transform:translateY(-12vh) rotate(0deg); }
+      100%{ transform:translateY(120vh) rotate(540deg); }
     }
-    .yt-footer-links a:hover{text-decoration:underline}
-    .yt-footer-copy{
-      font-size:12px;
-      color:#aaa;
-      margin-bottom:10px;
-    }
-    .yt-footer-disclaimer{
-      font-size:11px;
-      line-height:1.45;
-      color:#888;
-    }
-
   </style>
 </head>
+
 <body>
-  <div class="phone">
+  <!-- Confetes -->
+  <div class="confetti" id="confetti"></div>
+  <div class="box">
+    <h1>GANASTE EL TRUCO DE LA GELATINA GRATIS</h1>
+    <div class="sub">Entre 50 mujeres, <span class="hl">fuiste la elegida</span>.</div>
 
-    <!-- TOP BAR -->
-    <div class="topbar">
-      <div class="yt-logo">
-        <span class="yt-badge" aria-hidden="true"></span>
-        <span>YouTube</span>
-      </div>
-      <div class="top-actions">
-        <div class="icon-btn mini" title="Buscar" aria-label="Buscar">
-          <svg viewBox="0 0 24 24"><path d="M10 4a6 6 0 104.47 10.03l4.25 4.25 1.41-1.41-4.25-4.25A6 6 0 0010 4zm0 2a4 4 0 110 8 4 4 0 010-8z"/></svg>
-        </div>
-        <div class="icon-btn mini" title="Más opciones" aria-label="Más opciones">
-          <svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg>
-        </div>
-      </div>
+    <div class="panel">
+      <p style="margin:0;">
+        Solo necesito informarte algo antes.
+        <br><br>
+        El Truco de la Gelatina <strong>no es una receta “genérica”</strong>.
+        Solo funciona cuando está <strong>personalizado</strong> para tu <strong>cuerpo</strong>, tu <strong>edad</strong> y tu <strong>estatura</strong>.
+      </p>
     </div>
 
-    <!-- VIDEO -->
-    <div class="video">
-      <vturb-smartplayer id="vid-6965e5f32e6d8eb8b772c6e1" style="display:block;margin:0 auto;width:100%;"></vturb-smartplayer>
-      <script type="text/javascript">
-        var s=document.createElement("script");
-        s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/6965e5f32e6d8eb8b772c6e1/v4/player.js";
-        s.async=true;
-        document.head.appendChild(s);
-      </script>
-    </div>
+    <p>
+      Si eliges la versión gratuita <strong>sin personalización</strong>, incluso puedes probarla…
+      <br>
+      pero existe hasta un <span class="danger">89% de probabilidad</span> de que tu cuerpo <strong>no responda</strong>.
+    </p>
 
-    <!-- INFO -->
-    <div class="info">
-      <div class="title-row">
-        <h1 class="title">Nunca uses este truco de la gelatina… a menos que quieras perder peso mucho más rápido de lo normal.</h1>
-        
-      </div>
+    <p>
+      Y aquí está el punto de inflexión:
+      <br>
+      la personalización es lo que hace que el método <strong>“encaje” en tu cuerpo</strong> —
+      ajustando las cantidades, el horario y el paso a paso según tu perfil.
+      <br><br>
+      Por eso, cuando es personalizado, <strong>funciona al 100%</strong> (porque está calculado para ti).
+    </p>
 
-      <div class="meta">
-        <span>100 mil visualizaciones</span>
-        <span>•</span>
-        <span>hace 1 mes</span>
-        <span>…más</span>
-      </div>
+    <div class="divider"></div>
 
-      <div class="channel">
-        <div class="channel-left">
-          <div class="avatar"><img src="https://i.postimg.cc/kGdqxJdq/unnamed-(1).jpg" alt="Dr. Juan Rivera"></div>
-          <div class="ch-text">
-            <div class="ch-name">Dr. Juan Rivera</div>
-            <div class="ch-subs">438 mil</div>
+    <div class="card">
+      <div style="font-weight:900;font-size:16px;margin-bottom:6px;">Ahora tienes dos decisiones:</div>
+
+      <div class="decision-wrap">
+        <div class="decision decision-danger">
+          <div class="decision-title">DECISIÓN 1 — TOMAR LA RECETA GRATIS (NO PERSONALIZADA)</div>
+          <ul>
+            <li>Recibes la receta base (no personalizada)</li>
+            <li>No está calculada para tu cuerpo/edad/estatura</li>
+            <li>Alto riesgo de no obtener resultados</li>
+          </ul>
+          <div style="margin-top:10px;padding:12px;border-radius:10px;background:rgba(255,255,255,.9);color:#000;font-size:14px;line-height:1.45;">
+            <strong>Aquí está la receta para adelgazar:</strong><br>
+            • Prepara 1 porción de gelatina <strong>sin azúcar</strong> (sin sabor o con sabor, pero sin azúcar).<br>
+            • Agrega <strong>1 cucharadita</strong> de <strong>linaza dorada</strong>.<br>
+            • Agrega <strong>extracto de té verde</strong> (en cápsula o en polvo) en la cantidad indicada en el envase.<br>
+            • Mezcla bien, deja cuajar y consume <strong>1 cubo al día</strong>, preferiblemente por la noche.
+            <div style="margin-top:6px;font-size:12px;opacity:.85;"><em>Tip: si eres sensible a la cafeína, elige extracto descafeinado o tómalo más temprano.</em></div>
           </div>
         </div>
-        <button class="subscribe" id="btnSubscribe">Suscribirse</button>
-      </div>
-
-      <div class="actions">
-        <div class="chip" title="Me gusta">
-          <svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-          <span class="count">3000</span>
         </div>
 
-        <div class="chip" title="No me gusta">
-          <svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg>
-        </div>
+        <div class="decision decision-light" style="border:1px solid rgba(255,215,0,.35); background:rgba(255,215,0,.08);">
+          <div class="decision-title">DECISIÓN 2 — PERSONALIZACIÓN POR EL DR. JUAN (RECOMENDADO)</div>
+          <ul>
+            <li>Receta calculada para tu cuerpo, edad y estatura</li>
+            <li>Paso a paso ajustado para ti</li>
+            <li><strong>Funciona 100%</strong> porque es personalizado</li>
+            <li>Incluye todos los bonos</li>
+          </ul>
 
-        <div class="chip secondary" title="Compartir">
-          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.02-4.11A2.99 2.99 0 0018 7.91a3 3 0 10-3-3c0 .24.04.47.09.7L8.07 9.72A3 3 0 006 9a3 3 0 100 6c.86 0 1.64-.36 2.2-.93l6.83 3.99c-.05.2-.08.41-.08.63a3 3 0 103-3z"/></svg>
-          <span>Compartir</span>
-        </div>
-
-        <div class="chip secondary" title="Guardar">
-          <svg viewBox="0 0 24 24"><path d="M17 3H7a2 2 0 00-2 2v16l7-3 7 3V5a2 2 0 00-2-2z"/></svg>
-          <span>Guardar</span>
-        </div>
-      </div>
-
-      <!-- COMMENTS -->
-      <div class="comments">
-        <div class="comments-bar">
-          <div class="comments-left">
-            <span class="label">Comentarios</span>
-            <span class="count">15</span>
-          </div>
-        </div>
-
-        <div class="c-item">
-          <div class="c-ava"><img src="https://i.postimg.cc/L6TsBSN7/15.png" alt="Elena Morales"></div>
-          <div class="c-body">
-            <div class="c-head">
-              <div class="c-user">Elena Morales</div>
-              <div class="c-time">1 h</div>
+          <div class="doctor">
+            <img src="https://i.postimg.cc/kGdqxJdq/unnamed-(1).jpg" alt="Dr. Juan">
+            <div class="meta">
+              <strong>Dr. Juan</strong>
+              <span>Personalización del Truco de la Gelatina</span>
             </div>
-            <div class="c-text">Cuando explicó lo de las hormonas GLP-1 y GIP sentí que por fin alguien decía la verdad. Ahora entiendo por qué nada me funcionaba antes.</div>
-            <div class="c-actions">
-              <div class="c-actions-left">
-                <div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">241</span></div>
-                <div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div>
-                <div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div>
+          </div>
+
+          <div class="pack" style="margin-top:14px;">
+            <div class="pack-inner">
+              <div class="pack-title">PERSONALIZACIÓN COMPLETA + BONOS</div>
+              <div class="pack-price">
+                <span class="old">$50</span>
+                <span class="new">$17</span> <span class="usd">USD</span>
               </div>
-              <div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div>
+              <a href="https://healthlifee.mycartpanda.com/ckt/mv4MBP" class="btn btn-primary">SÍ, QUIERO MI PERSONALIZACIÓN POR $17</a>
+              <div class="pack-sub">Oferta exclusiva para la elegida (1 entre 50)</div>
             </div>
           </div>
         </div>
-
-        <div class="c-item">
-          <div class="c-ava"><img src="https://i.postimg.cc/Nfgs0VBF/14.png" alt="Clara Domínguez"></div>
-          <div class="c-body">
-            <div class="c-head"><div class="c-user">Clara Domínguez</div><div class="c-time">2 h</div></div>
-            <div class="c-text">Yo usé Ozempic y recuperé todo el peso después. Esto de activar las hormonas de forma natural con la gelatina tiene muchísimo más sentido.</div>
-            <div class="c-actions"><div class="c-actions-left">
-              <div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">198</span></div>
-              <div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div>
-              <div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div>
-            </div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div>
-          </div>
-        </div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/yx7Hkg4z/13.png" alt="Sofía Herrera"></div><div class="c-body"><div class="c-head"><div class="c-user">Sofía Herrera</div><div class="c-time">3 h</div></div><div class="c-text">Lo que contó sobre Adamari me hizo llorar. Yo también me sentía derrotada por mi cuerpo… ahora tengo esperanza otra vez.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">227</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/7Z5yGrcG/12.png" alt="Camila Rojas"></div><div class="c-body"><div class="c-head"><div class="c-user">Camila Rojas</div><div class="c-time">4 h</div></div><div class="c-text">Siempre pensé que mi problema era la falta de fuerza de voluntad. Hoy entendí que era hormonal, no psicológico.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">184</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/g03Q8zHQ/11.png" alt="Amalia García"></div><div class="c-body"><div class="c-head"><div class="c-user">Amalia García</div><div class="c-time">5 h</div></div><div class="c-text">Empecé el truco de la gelatina hace 9 días y ya noto menos hinchazón y cero ansiedad por dulce.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">263</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/VkCVPfpF/10.png" alt="Julieta Blanco"></div><div class="c-body"><div class="c-head"><div class="c-user">Julieta Blanco</div><div class="c-time">6 h</div></div><div class="c-text">Trabajo en clínica y lo que dijo sobre el rebote del Mounjaro es real. Lo veo todos los días.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">301</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/bJJ08LrT/09.png" alt="Chloe Fuentes"></div><div class="c-body"><div class="c-head"><div class="c-user">Chloe Fuentes</div><div class="c-time">7 h</div></div><div class="c-text">La parte de las hormonas dormidas fue una bomba para mí. Ahora todo encaja.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">215</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/2jgtcL9K/08.png" alt="Ana Lucía León"></div><div class="c-body"><div class="c-head"><div class="c-user">Ana Lucía León</div><div class="c-time">8 h</div></div><div class="c-text">Después de los 40 nada me funcionaba… esto explica exactamente por qué.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">192</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/qRzmQpsr/07.png" alt="Matilde Carrión"></div><div class="c-body"><div class="c-head"><div class="c-user">Matilde Carrión</div><div class="c-time">9 h</div></div><div class="c-text">Le mandé este video a mi hermana. Las dos estamos empezando hoy mismo.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">178</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03 .32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/c4QFF9nv/06.png" alt="Beatriz Marchán"></div><div class="c-body"><div class="c-head"><div class="c-user">Beatriz Marchán</div><div class="c-time">10 h</div></div><div class="c-text">Por primera vez siento que no tengo que sufrir para adelgazar. Esto cambia todo.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">256</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03 .32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/TPH0KBzW/05.png" alt="Helena Reynoso"></div><div class="c-body"><div class="c-head"><div class="c-user">Helena Reynoso</div><div class="c-time">11 h</div></div><div class="c-text">La explicación sobre por qué la grasa vuelve después de las inyecciones fue brutalmente honesta.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">289</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03 .32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/vT5tSTcg/04.png" alt="Noemí Peletier"></div><div class="c-body"><div class="c-head"><div class="c-user">Noemí Peletier</div><div class="c-time">12 h</div></div><div class="c-text">Nunca había entendido la ciencia detrás de adelgazar. Ahora sí.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">201</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03 .32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/9QLtkvFf/03.png" alt="Virginia Lamas"></div><div class="c-body"><div class="c-head"><div class="c-user">Virginia Lamas</div><div class="c-time">13 h</div></div><div class="c-text">Esto no es otro truco más… se nota que hay investigación real detrás.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">233</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03 .32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/XJCfpqKh/02.png" alt="Lucía Bernal"></div><div class="c-body"><div class="c-head"><div class="c-user">Lucía Bernal</div><div class="c-time">14 h</div></div><div class="c-text">La historia del vestido que no cerraba me rompió por dentro. Es exactamente mi vida.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">174</span></div><div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03 .32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div></div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
-
-        <div class="c-item"><div class="c-ava"><img src="https://i.postimg.cc/8PDRz17Z/01.png" alt="Mariana Lefevre"></div><div class="c-body"><div class="c-head"><div class="c-user">Mariana Lefevre</div><div class="c-time">15 h</div></div><div class="c-text">Si esto funciona como explica, es el fin de las dietas y las inyecciones.</div><div class="c-actions"><div class="c-actions-left"><div class="c-act" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13 1 6.59 7.41C6.22 7.78 6 8.3 6 8.83V19c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg><span class="c-like-count">0</span></div>
-              <div class="c-act" title="No me gusta"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22L1.14 11.27c-.09.23-.14 .47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03 .32c0 .41.17.79.44 1.06L11 23l6.41-6.41c.37-.37.59-.89.59-1.42V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div>
-              <div class="c-act" title="Responder"><svg viewBox="0 0 24 24"><path d="M21 6h-18c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4v3l4-3h10c1.1 0 2-.9 2-2v-10c0-1.1-.9-2-2-2z"/></svg></div>
-            </div><div class="c-more" title="Más"><svg viewBox="0 0 24 24"><path d="M12 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4zm0 7a2 2 0 110-4 2 2 0 010 4z"/></svg></div></div></div></div>
       </div>
+    </div>
 
-    <!-- DIVIDER FOOTER -->
-    <div class="footer-divider"></div>
+    <div class="divider"></div>
 
-    <!-- FOOTER LEGAL -->
-    <footer class="yt-footer">
-      <div class="yt-footer-inner">
-        <div class="yt-footer-links">
-          <a href="#" rel="nofollow">Términos de Uso</a>
-          <span>·</span>
-          <a href="#" rel="nofollow">Política de Privacidad</a>
-        </div>
-        <div class="yt-footer-copy">Copyright 2025 — TRUCO DE LA GELATINA® · Todos los derechos reservados</div>
-        <div class="yt-footer-disclaimer">
-          Este sitio no forma parte de Facebook™ ni de Meta Platforms, Inc., y no está respaldado por ellos. La información presentada tiene fines educativos y no constituye asesoramiento médico. Los resultados pueden variar de una persona a otra.
+    <div style="font-weight:900;margin:8px 0 8px;">Pruebas sociales (resultados reales)</div>
+
+    <!-- LETREIRO / SLIDER (igual ao modelo antigo) -->
+    <div class="slider" aria-label="Resultados">
+      <div class="track">
+        <!-- Set 1 -->
+        <a href="https://i.postimg.cc/T2mkbDp1/etapa-4-(4).png" class="slide"><img src="https://i.postimg.cc/T2mkbDp1/etapa-4-(4).png" alt="Resultado 1"></a>
+        <a href="https://i.postimg.cc/RZ8fGgDj/etapa-4-(5).png" class="slide"><img src="https://i.postimg.cc/RZ8fGgDj/etapa-4-(5).png" alt="Resultado 2"></a>
+        <a href="https://i.postimg.cc/fyBSdCdg/etapa-4-(6).png" class="slide"><img src="https://i.postimg.cc/fyBSdCdg/etapa-4-(6).png" alt="Resultado 3"></a>
+        <a href="https://i.postimg.cc/wjSyD7tD/etapa-4-(7).png" class="slide"><img src="https://i.postimg.cc/wjSyD7tD/etapa-4-(7).png" alt="Resultado 4"></a>
+        <a href="https://i.postimg.cc/fy2kyLnM/etapa-4-(8).png" class="slide"><img src="https://i.postimg.cc/fy2kyLnM/etapa-4-(8).png" alt="Resultado 5"></a>
+
+        <!-- Set 2 (clone p/ loop) -->
+        <a href="https://i.postimg.cc/T2mkbDp1/etapa-4-(4).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/T2mkbDp1/etapa-4-(4).png" alt=""></a>
+        <a href="https://i.postimg.cc/RZ8fGgDj/etapa-4-(5).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/RZ8fGgDj/etapa-4-(5).png" alt=""></a>
+        <a href="https://i.postimg.cc/fyBSdCdg/etapa-4-(6).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/fyBSdCdg/etapa-4-(6).png" alt=""></a>
+        <a href="https://i.postimg.cc/wjSyD7tD/etapa-4-(7).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/wjSyD7tD/etapa-4-(7).png" alt=""></a>
+        <a href="https://i.postimg.cc/fy2kyLnM/etapa-4-(8).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/fy2kyLnM/etapa-4-(8).png" alt=""></a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="font-weight:900;margin:8px 0 8px;">¿Por qué tanta gente está haciendo esto ahora?</div>
+
+    <div class="benefits-wrap">
+      <div class="benefits"><div class="benefit-row"><span>🔥 Activa tu cuerpo</span><span>🚫 Apaga el hambre</span></div></div>
+      <div class="benefits"><div class="benefit-row"><span>🔥 Derrite grasa</span><span>🌙 Mientras duermes</span></div></div>
+      <div class="benefits"><div class="benefit-row"><span>✅ Sin rebote</span><span>⚡ Metabolismo acelerado</span></div></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="font-weight:900;margin:8px 0 8px;">Lo que dicen las nuevas alumnas:</div>
+
+    <div class="tcard">
+      <div class="trow">
+        <img src="https://i.postimg.cc/KYffZ6vx/etapa-4-(9).png" alt="Patricia" class="avatar">
+        <div>
+          <div class="tname">Patricia, 55 años</div>
+          <div class="tstars">★★★★★</div>
         </div>
       </div>
-    </footer>
+      <div class="ttext">“El mejor regalo que me he dado. Fácil y rápido.”</div>
+    </div>
+
+    <div class="tcard">
+      <div class="trow">
+        <img src="https://i.postimg.cc/SxyVwQkL/etapa-4-(10).png" alt="Lucía" class="avatar">
+        <div>
+          <div class="tname">Lucía, 42 años</div>
+          <div class="tstars">★★★★★</div>
+        </div>
+      </div>
+      <div class="ttext">“Me ayudó a controlar el hambre por la noche. Me siento más ligera.”</div>
+    </div>
+
+    <div class="tcard">
+      <div class="trow">
+        <img src="https://i.postimg.cc/SRkDkmc2/etapa-4-(11).png" alt="Mariana" class="avatar">
+        <div>
+          <div class="tname">Mariana, 38 años</div>
+          <div class="tstars">★★★★★</div>
+        </div>
+      </div>
+      <div class="ttext">“Lo hice tal cual y fue súper práctico. Ya lo recomiendo a mis amigas.”</div>
+    </div>
+
+    <img src="https://i.postimg.cc/nVByxzb6/A1W7C27.png" alt="Imagen adicional" style="display:block;width:100%;border-radius:10px;margin:12px auto 0;">
+
+    <div class="divider"></div>
+
+    <div style="font-weight:900;margin:8px 0 8px;">Bonos incluidos en la personalización:</div>
+
+    <div class="checklist">
+      <div class="check-item">✔️ <strong>Guía Principal:</strong> El Truco de la Gelatina</div>
+      <div class="check-item">✔️ <strong>BONUS 1:</strong> Vientre Plano en 24h</div>
+      <div class="check-item">✔️ <strong>BONUS 2:</strong> Truco de Glúteos Firmes</div>
+      <div class="check-item">✔️ <strong>BONUS 3:</strong> Adiós Celulitis</div>
+      <div class="check-item">✔️ <strong>BONUS 4:</strong> Secretos de la Menopausia</div>
+      <div class="check-item">✔️ <strong>BONUS 5:</strong> Secreto de las Coreanas</div>
+    </div>
+
+    <img src="https://i.postimg.cc/JhfCMHTJ/Captura-de-tela-7-1-2026-35038-gelatinabariatrica-vivasalud-site.jpg" alt="Bonos" style="display:block;width:100%;border-radius:10px;margin:10px auto 12px;">
+
+    <a href="https://healthlifee.mycartpanda.com/ckt/mv4MBP" class="btn btn-primary">ACTIVAR PERSONALIZACIÓN + BONOS POR $17</a>
+    <p class="note" style="text-align:center;">Si sales de esta página, el acceso especial puede desaparecer.</p>
 
   </div>
 
+  <footer>
+    Copyright © 2026 - Truco de la Gelatina. Todos los derechos reservados.<br><br>
+    <a href="#">Privacidad</a>
+    &nbsp;|&nbsp;
+    <a href="#">Términos</a>
+  </footer>
   <script>
-    // FIX CTA do player: quando o player aumentar de altura (ex.: botão/CTA com delay),
-    // a headline desce naturalmente porque adicionamos padding-bottom no container do vídeo.
     (function(){
-      const video = document.querySelector('.video');
-      const player = document.getElementById('vid-6965e5f32e6d8eb8b772c6e1');
-      if(!video || !player) return;
+      var root = document.getElementById('confetti');
+      if(!root) return;
 
-      const applyGap = () => {
-        const videoH = video.getBoundingClientRect().height;
-        const playerH = player.getBoundingClientRect().height;
-        const extra = Math.max(0, Math.round(playerH - videoH));
-        // limita para evitar “buraco” gigante em caso de bug do player
-        const capped = Math.min(extra, 220);
-        video.style.paddingBottom = capped ? (capped + 'px') : '0px';
-      };
+      var colors = ['#2ecc71','#1abc9c','#27ae60','#16a085','#00c853','#00e676','#a5ffcf'];
+      var pieces = 70;      // bolinhas
+      var streamers = 22;   // fitas
 
-      // Observa mudanças de tamanho (quando CTA aparecer)
-      try{
-        const ro = new ResizeObserver(() => requestAnimationFrame(applyGap));
-        ro.observe(player);
-      }catch(e){
-        setInterval(applyGap, 700);
+      function rand(min,max){ return Math.random()*(max-min)+min; }
+
+      // Bolinhas
+      for (var i = 0; i < pieces; i++) {
+        var p = document.createElement('div');
+        p.className = 'confetti-piece';
+        p.style.left = rand(0,100) + 'vw';
+        p.style.background = colors[Math.floor(Math.random()*colors.length)];
+        p.style.animationDelay = rand(0,0.8) + 's';
+        p.style.transform = 'translateX(' + rand(-20,20) + 'vw)';
+        root.appendChild(p);
       }
 
-      window.addEventListener('load', () => setTimeout(applyGap, 600));
-      setTimeout(applyGap, 1500);
-      setTimeout(applyGap, 3500);
+      // Fitas
+      for (var j = 0; j < streamers; j++) {
+        var s = document.createElement('div');
+        s.className = 'confetti-streamer';
+        s.style.left = rand(0,100) + 'vw';
+        s.style.background = colors[Math.floor(Math.random()*colors.length)];
+        s.style.animationDelay = rand(0,0.6) + 's';
+        s.style.transform = 'translateX(' + rand(-25,25) + 'vw)';
+        root.appendChild(s);
+      }
+
+      setTimeout(function(){
+        root.parentNode && root.parentNode.removeChild(root);
+      }, 6500);
     })();
-
-    const btn = document.getElementById('btnSubscribe');
-    btn.addEventListener('click', () => {
-      if(btn.classList.contains('subscribed')){
-        btn.classList.remove('subscribed');
-        btn.textContent = 'Suscribirse';
-        btn.style.background = '#f1f1f1';
-        btn.style.color = '#111';
-      } else {
-        btn.classList.add('subscribed');
-        btn.textContent = 'Suscrito';
-        btn.style.background = '#2b2b2b';
-        btn.style.color = '#f1f1f1';
-      }
-    });
   </script>
 </body>
 </html>
