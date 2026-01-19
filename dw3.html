@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Downsell 3 — VIP WhatsApp (P01)</title>
 
-  <!-- CartPanda OCU (no HEAD) -->
-  <script src="https://assets.mycartpanda.com/cartx-ecomm-ui-assets/js/libs/ocu-external.js"></script>
-  <script> new OcuExternal(); </script>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin:0; padding:0; width:100%; overflow-x:hidden; }
@@ -19,7 +15,6 @@
       color:#1f1f1f;
     }
 
-    /* Barra superior vermelha (full width) */
     .topbar{
       width:100%;
       background:#e54b41;
@@ -43,7 +38,6 @@
       max-width:540px;
     }
 
-    /* Cards */
     .card{
       width:100%;
       border-radius:10px;
@@ -52,7 +46,6 @@
       margin:0 auto 22px;
     }
 
-    /* === PARTE 02 (oferta/checkout) === */
     .offer-card{
       background:#fff;
       border:2px solid rgba(41,168,90,.55);
@@ -307,7 +300,6 @@
 </head>
 
 <body>
-  <!-- PARTE 01: Topbar + 3 cards (verde, azul, branco) -->
   <div class="topbar">⚠️ Atención: esta es tu última oportunidad oferta final por tiempo limitado.</div>
 
   <div class="page">
@@ -332,8 +324,6 @@
         <div class="w-title">Además...</div>
         <p class="w-text">Tendrás acceso al Grupo Exclusivo de Alumnas VIP una comunidad privada para resolver dudas, compartir avances y recibir motivación diaria.</p>
       </section>
-
-      <!-- PARTE 02: Oferta/Preço/Timer/CTA/Garantia -->
 
       <section class="offer-card">
         <div class="offer-topline">Precio regular: 200 USD/mes</div>
@@ -362,16 +352,10 @@
           </ul>
         </div>
 
-        <!-- BOTÕES (KIWIFY REMOVIDO) -->
-        <div id="cta-slot" style="margin-top:6px;">
-          <a class="cta-btn" id="accept-offer-btn" href="https://healthlifee.mycartpanda.com/ex-ocu/next-offer/3e2ZLEKYgb?accepted=yes">
-            Quiero aprovechar la última oportunidad
-          </a>
-
-          <a class="cta-decline" id="decline-offer-btn" href="https://healthlifee.mycartpanda.com/ex-ocu/next-offer/3e2ZLEKYgb?accepted=no">
-            No, prefiero continuar sin soporte VIP ni grupo.
-          </a>
-        </div>
+        <div style="text-align:center" id="kiwify-upsell-abbonXF" data-upsell-url="" data-downsell-url="">
+  <button id="kiwify-upsell-trigger-abbonXF" style="background-color:#1CA085;padding:12px 16px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:4px;border:1px solid #1CA085;font-size:20px;">Quiero aprovechar la última oportunidad</button>
+  <div id="kiwify-upsell-cancel-trigger-abbonXF" style="margin-top:1rem;cursor:pointer;font-size:16px;text-decoration:underline;font-family:sans-serif;">No, prefiero continuar sin soporte VIP ni grupo.</div>
+</div><script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
       </section>
 
       <div class="guarantee-wide">🔒 🛡️ Garantía de 30 días — Sin riesgos</div>
