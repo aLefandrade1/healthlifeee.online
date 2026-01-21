@@ -138,30 +138,15 @@
       margin-top:1px;
     }
 
-    .cta-btn{
-      display:block;
-      width:100%;
-      background:#2ecc71;
-      color:#fff;
-      border:none;
-      border-radius:6px;
-      padding:13px 14px;
-      font-weight:900;
-      font-size:14px;
-      cursor:pointer;
-      text-align:center;
-      box-shadow:0 10px 18px rgba(46,204,113,.18);
-      text-decoration:none;
+    /* === PULSE DO BOTÃO (SEM QUEBRAR KIWIFY) === */
+    @keyframes pulseCTA {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(28,160,133,0.60); }
+      70% { transform: scale(1.06); box-shadow: 0 0 0 18px rgba(28,160,133,0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(28,160,133,0); }
     }
-
-    .cta-decline{
-      display:block;
-      text-align:center;
-      margin-top:10px;
-      font-size:11.5px;
-      color:#6b7785;
-      text-decoration:underline;
-      cursor:pointer;
+    .pulse{
+      animation: pulseCTA 1.8s infinite;
+      transform-origin:center;
     }
 
     .guarantee-wide{
@@ -333,7 +318,7 @@
           (lote promocional). Después de hoy, el precio volverá a subir.
         </div>
 
-        <div class="price"><span class="cur">$</span><span class="val">12</span><span class="usd">USD</span></div>
+        <div class="price"><span class="cur">$</span><span class="val">15</span><span class="usd">USD</span></div>
         <div class="offer-sub">Pago único — Última oportunidad</div>
 
         <div class="timer-box">
@@ -352,10 +337,12 @@
           </ul>
         </div>
 
+        <!-- BOTÕES (KIWIFY) -->
         <div style="text-align:center" id="kiwify-upsell-abbonXF" data-upsell-url="" data-downsell-url="">
-  <button id="kiwify-upsell-trigger-abbonXF" style="background-color:#1CA085;padding:12px 16px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:4px;border:1px solid #1CA085;font-size:20px;">Quiero aprovechar la última oportunidad</button>
-  <div id="kiwify-upsell-cancel-trigger-abbonXF" style="margin-top:1rem;cursor:pointer;font-size:16px;text-decoration:underline;font-family:sans-serif;">No, prefiero continuar sin soporte VIP ni grupo.</div>
-</div><script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
+          <button id="kiwify-upsell-trigger-abbonXF" class="pulse" style="background-color:#1CA085;padding:10px 14px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:999px;border:1px solid #1CA085;font-size:18px;">Quiero aprovechar la última oportunidad</button>
+          <div id="kiwify-upsell-cancel-trigger-abbonXF" style="font-size:11px; margin-top:0.6rem; cursor:pointer; text-decoration:underline; font-family:sans-serif; opacity:0.7;">No, prefiero continuar sin soporte VIP ni grupo.</div>
+        </div>
+
       </section>
 
       <div class="guarantee-wide">🔒 🛡️ Garantía de 30 días — Sin riesgos</div>
@@ -399,5 +386,8 @@
 
     </div>
   </div>
+
+  <!-- KIWIFY SCRIPT (1x, NO FINAL) -->
+  <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 </body>
 </html>
