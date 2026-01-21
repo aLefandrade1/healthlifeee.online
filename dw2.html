@@ -151,34 +151,15 @@
       font-style:italic;
     }
 
-    .cta{
-      display:block;
-      width:100%;
-      max-width:430px;
-      margin:0 auto;
-      background:#c62828;
-      color:#fff;
-      border:none;
-      border-radius:12px;
-      padding:14px 14px;
-      font-size:16px;
-      font-weight:900;
-      cursor:pointer;
-      box-shadow:0 10px 22px rgba(198,40,40,.25);
-      animation:pulseSoft 4.2s ease-in-out infinite;
-      transform-origin:center;
-      text-decoration:none;
+    @keyframes pulseCTA {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(39,175,96,0.60); }
+      70% { transform: scale(1.06); box-shadow: 0 0 0 18px rgba(39,175,96,0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(39,175,96,0); }
     }
-    @keyframes pulseSoft{
-      0%{transform:scale(1);} 50%{transform:scale(1.02);} 100%{transform:scale(1);} }
 
-    .decline{
-      display:block;
-      margin-top:10px;
-      font-size:12.5px;
-      color:#8b7b7b;
-      text-decoration:underline;
-      cursor:pointer;
+    .pulse{
+      animation: pulseCTA 1.8s infinite;
+      transform-origin:center;
     }
 
     .bottom-alert{
@@ -243,11 +224,10 @@
           <div class="price">$17 USD</div>
           <div class="micro">(El costo mínimo de la plataforma)</div>
 
-          <div style="text-align:center" id="kiwify-upsell-BvdlKXp" data-upsell-url="https://healthlifeee.online/up02" data-downsell-url="https://healthlifeee.online/up02"> 
-  <button id="kiwify-upsell-trigger-BvdlKXp" style="background-color:#27AF60;padding:12px 16px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:4px;border:1px solid #27AF60;font-size:20px;">Sí, quiero aprovechar la última oportunidad</button>
-  <div id="kiwify-upsell-cancel-trigger-BvdlKXp" style="margin-top:1rem;cursor:pointer;font-size:16px;text-decoration:underline;font-family:sans-serif;">No, dejaré que mi piel siga debilitándose</div>
-</div>
-<script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
+          <div style="text-align:center" id="kiwify-upsell-BvdlKXp" data-upsell-url="https://healthlifeee.online/up02" data-downsell-url="https://healthlifeee.online/up02">
+            <button id="kiwify-upsell-trigger-BvdlKXp" class="pulse" style="background-color:#27AF60;padding:10px 14px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:999px;border:1px solid #27AF60;font-size:18px;">Sí, quiero aprovechar la última oportunidad</button>
+            <div id="kiwify-upsell-cancel-trigger-BvdlKXp" style="font-size:11px; margin-top:0.6rem; cursor:pointer; text-decoration:underline; font-family:sans-serif; opacity:0.7;">No, dejaré que mi piel siga debilitándose</div>
+          </div>
         </div>
 
         <div class="bottom-alert">⚠️ Oferta final si sales de esta página, la oportunidad desaparece</div>
@@ -255,5 +235,7 @@
 
     </div>
   </div>
+
+  <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 </body>
 </html>
