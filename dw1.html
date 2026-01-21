@@ -112,37 +112,15 @@
       margin:0 0 12px;
     }
 
-    .cta{
-      display:block;
-      width:100%;
-      max-width:420px;
-      margin:0 auto;
-      background:#0aa06a;
-      color:#fff;
-      text-decoration:none;
-      border:none;
-      border-radius:10px;
-      padding:14px 14px;
-      font-size:16px;
-      font-weight:900;
-      cursor:pointer;
-      box-shadow:0 8px 18px rgba(10,160,106,.25);
-      animation:pulseSoft 3.6s ease-in-out infinite;
-      transform-origin:center;
-    }
-    @keyframes pulseSoft{
-      0%{transform:scale(1);} 
-      50%{transform:scale(1.02);} 
-      100%{transform:scale(1);} 
+    @keyframes pulseCTA {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46,204,112,0.60); }
+      70% { transform: scale(1.06); box-shadow: 0 0 0 18px rgba(46,204,112,0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46,204,112,0); }
     }
 
-    .decline{
-      display:block;
-      margin-top:10px;
-      font-size:13px;
-      color:#6b6b6b;
-      text-decoration:underline;
-      cursor:pointer;
+    .pulse{
+      animation: pulseCTA 1.8s infinite;
+      transform-origin:center;
     }
 
     .benefits{
@@ -216,10 +194,9 @@
           <div class="today">Hoy: $27 USD</div>
 
           <div style="text-align:center" id="kiwify-upsell-l0BV8Yh" data-upsell-url="https://healthlifeee.online/up02" data-downsell-url="https://healthlifeee.online/dw2">
-  <button id="kiwify-upsell-trigger-l0BV8Yh" style="background-color:#2ECC70;padding:12px 16px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:4px;border:1px solid #2ECC70;font-size:20px;">Sí, quiero aprovechar esta oferta por solo $27 ahora</button>
-  <div id="kiwify-upsell-cancel-trigger-l0BV8Yh" style="margin-top:1rem;cursor:pointer;font-size:16px;text-decoration:underline;font-family:sans-serif;">No, no me importa quedarme con flacidez</div>
-</div>
-<script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
+            <button id="kiwify-upsell-trigger-l0BV8Yh" class="pulse" style="background-color:#2ECC70;padding:10px 14px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:999px;border:1px solid #2ECC70;font-size:18px;">Sí, quiero aprovechar esta oferta por solo $27 ahora</button>
+            <div id="kiwify-upsell-cancel-trigger-l0BV8Yh" style="font-size:11px; margin-top:0.6rem; cursor:pointer; text-decoration:underline; font-family:sans-serif; opacity:0.7;">No, no me importa quedarme con flacidez</div>
+          </div>
 
         </div>
       </div>
@@ -235,5 +212,7 @@
 
     </div>
   </div>
+
+  <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 </body>
 </html>
