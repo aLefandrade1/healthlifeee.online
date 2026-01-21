@@ -80,37 +80,24 @@
       display:block;
     }
 
-    .cta-wrap{ margin:14px auto 6px; }
+    @keyframes pulseCTA {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46,204,113,0.60); }
+      70% { transform: scale(1.06); box-shadow: 0 0 0 18px rgba(46,204,113,0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46,204,113,0); }
+    }
 
-    .cta{
-      display:block;
-      width:100%;
-      max-width:640px;
-      margin:0 auto;
-      background:#2ecc71;
-      color:#fff;
-      text-decoration:none;
-      border:none;
-      border-radius:10px;
-      padding:14px 16px;
-      font-size:16px;
-      font-weight:900;
-      cursor:pointer;
-      box-shadow:0 12px 22px rgba(46,204,113,.18);
-      animation:pulseSoft 4.5s ease-in-out infinite;
+    .pulse{
+      animation: pulseCTA 1.8s infinite;
       transform-origin:center;
     }
 
-    @keyframes pulseSoft{
-      0%{transform:scale(1);} 50%{transform:scale(1.018);} 100%{transform:scale(1);} }
-
-    .decline{
-      display:inline-block;
-      margin-top:8px;
-      font-size:12.5px;
-      color:#6f7a85;
-      text-decoration:underline;
+    .decline-small{
+      font-size:11px;
+      margin-top:0.6rem;
       cursor:pointer;
+      text-decoration:underline;
+      font-family:sans-serif;
+      opacity:0.7;
     }
 
     .desc{
@@ -143,7 +130,6 @@
     @media (max-width:480px){
       .page{ padding:18px 12px 22px; }
       h1{ font-size:26px; line-height:1.2; }
-      .cta{ font-size:14px; }
     }
   </style>
 </head>
@@ -172,11 +158,10 @@
 
       <div style="opacity:.55; font-weight:800; font-size:14px; margin-top:6px;">tendrás acceso al grupo secreto</div>
 
-      <!-- CARTPANDA REMOVIDO: troque os links abaixo pelos seus destinos finais -->
       <div style="text-align:center" id="kiwify-upsell-smLdTt8" data-upsell-url="" data-downsell-url="https://healthlifeee.online/dw3">
-  <button id="kiwify-upsell-trigger-smLdTt8" style="background-color:#2ECC70;padding:12px 16px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:4px;border:1px solid #2ECC70;font-size:20px;">Quiero soporte directo del Doctor en Whatsapp y el grupo</button>
-  <div id="kiwify-upsell-cancel-trigger-smLdTt8" style="margin-top:1rem;cursor:pointer;font-size:16px;text-decoration:underline;font-family:sans-serif;">No, Prefiero continuar sola</div>
-</div><script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
+        <button id="kiwify-upsell-trigger-smLdTt8" class="pulse" style="background-color:#2ECC70;padding:10px 14px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:999px;border:1px solid #2ECC70;font-size:18px;">Quiero soporte directo del Doctor en Whatsapp y el grupo</button>
+        <div id="kiwify-upsell-cancel-trigger-smLdTt8" class="decline-small">No, Prefiero continuar sola</div>
+      </div>
 
       <div class="desc">
         Durante todo el día, todos los días, usted podrá hablar directamente con el Doctor por <b class="green">WhatsApp</b>.
@@ -186,5 +171,7 @@
 
     </div>
   </div>
+
+  <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 </body>
 </html>
