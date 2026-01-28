@@ -1,7 +1,74 @@
-<script type="module">
-  import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Truco de la Gelatina</title>
 
-  Typebot.initStandard({ typebot: "truco-de-la-gelatina-5stb5x0" });
-</script>
+  <!-- UTMIFY -->
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-xcod-sck
+    data-utmify-prevent-subids
+    async
+    defer
+  ></script>
 
-<typebot-standard style="width: 100%; height: 600px; "></typebot-standard>
+  <!-- UTMIFY PIXEL -->
+  <script>
+    window.pixelId = "68cac216526f0dc841486576";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background:#000;
+    }
+
+    .top-banner{
+      width:100%;
+      height:180px;
+      background:url("https://i.postimg.cc/05LSL0K7/channels4-banner.jpg") center/cover no-repeat;
+    }
+
+    .chat-wrapper{
+      width:100%;
+      height: calc(100vh - 180px);
+    }
+
+    typebot-standard{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BANNER -->
+  <div class="top-banner"></div>
+
+  <!-- CHAT -->
+  <div class="chat-wrapper">
+    <typebot-standard></typebot-standard>
+  </div>
+
+  <!-- TYPEBOT -->
+  <script type="module">
+    import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js';
+    Typebot.initStandard({ typebot: "truco-de-la-gelatina-5stb5x0" });
+  </script>
+
+</body>
+</html>
