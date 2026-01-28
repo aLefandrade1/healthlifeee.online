@@ -25,15 +25,9 @@
   </script>
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+    *{ margin:0; padding:0; box-sizing:border-box; }
 
-    html, body{
-      height: 100%;
-    }
+    html, body{ height:100%; }
 
     body{
       font-family: Arial, Helvetica, sans-serif;
@@ -47,29 +41,41 @@
       min-height: 100dvh;
     }
 
-    /* BANNER TOPO (responsivo e congruente desktop/mobile) */
+    /* BANNER TOPO — SEM BARRAS PRETAS (FULL BLEED)
+       Estratégia: forçar proporção do banner (4:1) e usar cover.
+       Isso elimina "preto dos lados"; se a imagem não for 4:1, vai cortar.
+    */
     .top-banner{
       width:100%;
-      /* desktop-friendly, mas responsivo no mobile */
-      height: clamp(130px, 18vh, 190px);
-      background-image: url("https://i.postimg.cc/05LSL0K7/channels4-banner.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      /* iOS notch safe-area */
-      padding-top: env(safe-area-inset-top);
+      aspect-ratio: 4 / 1;              /* proporção congruente */
+      max-height: 240px;                /* limite desktop */
+      overflow:hidden;
+      background:#000;
     }
 
-    /* Em telas muito pequenas, puxa o crop para o topo (fica mais "YouTube banner") */
-    @media (max-width: 420px){
-      .top-banner{ background-position: center top; }
+    .top-banner img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit: cover;                /* preenche sem barras */
+      object-position: center;          /* ajuste o foco aqui */
+    }
+
+    /* MOBILE */
+    @media (max-width: 767px){
+      .top-banner{ max-height: 180px; }
+    }
+
+    /* DESKTOP GRANDE */
+    @media (min-width: 1200px){
+      .top-banner{ max-height: 280px; }
     }
 
     /* CHAT */
     .chat-wrapper{
       width:100%;
-      flex: 1;
-      min-height: 0; /* importante para o Typebot ocupar o restante */
+      flex:1;
+      min-height:0;
     }
 
     typebot-standard{
@@ -82,7 +88,9 @@
 <body>
 
   <!-- BANNER -->
-  <div class="top-banner"></div>
+  <div class="top-banner">
+    <img src="https://i.postimg.cc/9FkqGtCZ/Design-sem-nome-(47).png" alt="Banner" />
+  </div>
 
   <!-- CHAT -->
   <div class="chat-wrapper">
@@ -107,4 +115,15 @@
       setVh();
       window.addEventListener('resize', setVh);
       window.addEventListener('orientationchange', setVh);
+    })();
+  </script>
+
+  <style>
+    /* Usa --vh quando disponível (mobile) */
+    @supports (height: calc(var(--vh) * 100)){
+      body{ min-height: calc(var(--vh) * 100); }
+    }
+  </style>
+
+</body>
 </html>
