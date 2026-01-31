@@ -1,548 +1,415 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-ES">
 <head>
   <meta charset="UTF-8" />
-  <title>Desbloqueo del Truco de la Gelatina</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex,nofollow" />
+  <title>Truco de la gelatina</title>
+
+  <!-- PRELOAD VTURB VELOCIDADE -->
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+  <link rel="preload" href="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/6972408349a6c7ee5483ed37/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload" href="https://cdn.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/696d083e521058214ca823f0/main.m3u8" as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+  <!-- UTMIFY -->
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-xcod-sck
+    data-utmify-prevent-subids
+    data-utmify-ignore-iframe
+    data-utmify-is-cartpanda
+    async
+    defer
+  ></script>
+
+  <!-- PIXEL -->
+  <script>
+    window.pixelId = "68cac216526f0dc841486576";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
+
+  <!-- BACK REDIRECT -->
+  <script>
+    const link = 'https://healthlifeee.online/gelaredy';
+
+    function setBackRedirect(url) {
+      let urlBackRedirect = url;
+      urlBackRedirect = urlBackRedirect.trim() + (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') + document.location.search.replace('?', '').toString();
+
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+
+      window.addEventListener('popstate', () => {
+        setTimeout(() => { location.href = urlBackRedirect; }, 1);
+      });
+    }
+
+    setBackRedirect(link);
+  </script>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
+    *, *::before, *::after{ box-sizing:border-box; }
+    html, body{ margin:0; padding:0; width:100%; overflow-x:hidden; font-family: Arial, Helvetica, sans-serif; background:#ffffff; color:#111; }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
-      background-color: #0f0f0f;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #ffffff;
-      overflow-x: hidden;
-    }
+    .page-wrapper{ width:100%; }
 
-    body { text-align: center; padding: 26px 0 36px; }
+    /* headline */
+    .headline-wrap{ max-width:720px; margin:14px auto 8px auto; padding:0 10px; text-align:center; }
+    .headline-wrap h1{ font-size:22px; line-height:1.25; font-weight:800; margin:0; }
 
-    .box {
-      width: 100%;
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 18px;
-    }
+    /* vsl */
+    .vsl-section{ padding:12px 10px 0 10px; }
+    .video-container{ width:100%; max-width:720px; margin:0 auto; }
 
-    h1 {
-      font-size: 24px;
-      line-height: 1.2;
-      margin: 6px 0 10px;
-      font-weight: 900;
-      color: #00e676; /* verde neon */
-      letter-spacing: .3px;
-      text-shadow:
-        0 0 6px rgba(0,230,118,.9),
-        0 0 14px rgba(0,230,118,.7),
-        0 0 26px rgba(0,230,118,.5);
-    }
+    /* live count */
+    .live-wrap{ max-width:720px; margin:10px auto 16px auto; padding:0 10px; text-align:center; font-size:13px; color:#111; }
 
-    .sub {
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.35;
-      margin: 0 0 12px;
-      opacity: .98;
-    }
-
-    p {
-      font-size: 15px;
-      line-height: 1.55;
-      opacity: .95;
-      margin: 10px 0;
-    }
-
-    .hl { color: #ffd700; font-weight: 900; }
-    .danger { color: #ff3b3b; font-weight: 900; }
-
-    .panel {
-      background: rgba(255, 215, 0, .10);
-      border: 1px solid rgba(255, 215, 0, .30);
-      border-radius: 14px;
-      padding: 12px 12px;
-      text-align: left;
-      margin: 12px auto 14px;
-      max-width: 100%;
-    }
-
-    .card {
-      background: #ffffff;
-      color: #111;
-      border-radius: 14px;
-      padding: 16px 14px;
-      text-align: left;
-      margin: 14px auto;
-      box-shadow: 0 10px 24px rgba(0,0,0,.35);
-    }
-
-    .divider {
-      height: 1px;
-      background: rgba(255,255,255,.10);
-      margin: 16px 0;
-    }
-
-    /* CTA */
-    .btn {
-      display: block;
-      width: 100%;
-      max-width: 92%;
-      margin: 12px auto 0;
-      padding: 14px 14px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 900;
-      text-align: center;
-      line-height: 1.15;
-      letter-spacing: .2px;
-    }
-
-    .btn-primary {
-      background: #ffd700; /* amarelo */
-      color: #000000;      /* letras pretas */
-      animation: pulseSoft 3.5s ease-in-out infinite;
-    }
-
-    .btn-secondary {
-      background: #1a1a1a;
-      color: #ffffff;
-      border: 1px solid rgba(255,255,255,.18);
-    }
-
-    .btn:hover { opacity: .92; }
-
-    @keyframes pulseSoft {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-      100% { transform: scale(1); }
-    }
-
-    /* Decision boxes */
-    .decision-wrap { margin-top: 8px; }
-
-    .decision {
-      border-radius: 14px;
-      padding: 14px;
-      margin: 12px 0;
-      text-align: left;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,77,77,.16); /* vermelho clarinho */
-      color: #000000; /* letras pretas */
-    }
-
-    /* Texto PRETO quando fundo é claro */
-    .decision-danger{
-      color:#000000 !important; /* letras pretas */
-    }
-    .decision-light{
-      color:#000000 !important; /* letras pretas */
-    }
-
-    /* DECISAO 1 (BLOCO VERMELHO CLARO + TRACINHOS BRANCOS) */
-    .decision-danger{
-      background: rgba(255, 77, 77, .16);
-      border: 2px dashed rgba(255,255,255,.65);
-    }
-
-    .decision-title {
-      font-weight: 900;
-      margin-bottom: 8px;
-      letter-spacing: .2px;
-    }
-
-    .decision ul {
-      margin: 10px 0 0;
-      padding-left: 18px;
-      opacity: .95;
-      line-height: 1.55;
-    }
-
-    .note {
-      font-size: 12px;
-      opacity: .85;
-      margin-top: 8px;
-      line-height: 1.45;
-    }
-
-    /* Doctor */
-    .doctor {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .doctor img {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: #e9e9e9;
-    }
-
-    .doctor .meta strong { display: block; font-size: 15px; }
-    .doctor .meta span { font-size: 13px; opacity: .85; }
-
-    /* Price pack */
-    .pack {
-      margin: 14px auto 14px;
-      max-width: 100%;
-    }
-
-    .pack-inner {
-      background: #e8ffe8;
-      border: 2px dashed #3bb54a;
-      border-radius: 16px;
-      padding: 18px 14px;
-      box-shadow: 0 10px 24px rgba(0,0,0,.35);
-      text-align: center;
-      color: #111;
-    }
-
-    .pack-title {
-      font-weight: 900;
-      font-size: 16px;
-      letter-spacing: .3px;
-    }
-
-    .pack-price {
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: 10px;
-      margin: 10px 0 12px;
-    }
-
-    .old {
-      font-weight: 900;
-      color: #777;
-      text-decoration: line-through;
-      font-size: 15px;
-    }
-
-    .new {
-      font-weight: 900;
-      color: #1a9f49;
-      font-size: 36px;
-    }
-
-    .usd {
-      font-weight: 900;
-      color: #1a9f49;
-      font-size: 12px;
-    }
-
-    .pack-sub {
-      font-size: 12px;
-      font-weight: 900;
-      opacity: .75;
-      margin-top: 6px;
-    }
-
-    /* Benefits */
-    .benefits-wrap{display:grid;grid-template-columns:1fr;gap:10px;margin:12px auto 4px;}
-    .benefits{
-      background:#ffffff;color:#000;border-radius:12px;padding:12px 10px;
-      box-shadow:0 8px 20px rgba(0,0,0,.25);
-      text-align:center;
-      font-weight:900;
-    }
-    .benefit-row{display:flex;justify-content:space-between;gap:10px;font-size:15px;}
-
-    /* Testimonials */
-    .tcard{
-      background:#ffffff;color:#111;border-radius:12px;padding:14px 14px;margin:10px auto;
-      text-align:left;box-shadow:0 8px 20px rgba(0,0,0,.35);
-    }
-    .trow{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-    .avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:0 0 46px;}
-    .tname{font-weight:900;font-size:15px;line-height:1.1;}
-    .tstars{font-size:16px;letter-spacing:1px;color:#f5c400;}
-    .ttext{font-size:14px;line-height:1.35;}
-
-    /* Marquee social proof */
-    .slider{margin:12px 0 6px;overflow:hidden;background:transparent;}
-    .slider::-webkit-scrollbar{display:none;}
-    .slider{-ms-overflow-style:none;scrollbar-width:none;}
-    .track{display:flex;gap:12px;padding:6px 2px;width:max-content;animation:marquee 18s linear infinite;}
-    @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);} }
-    .slide{flex:0 0 auto;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.35);background:transparent;}
-    .slide img{display:block;width:260px;height:auto;}
-    @media (max-width:480px){.slide img{width:220px;} h1{font-size:22px;} }
-
-    /* Bonus list */
-    .checklist{background:#ffffff;color:#000;border-radius:12px;padding:14px 12px;margin:10px auto 12px;text-align:left;box-shadow:0 8px 20px rgba(0,0,0,.25);} 
-    .check-item{font-size:14px;font-weight:900;margin:7px 0;}
-
-    /* Footer */
-    footer{width:100%;background:#000;color:#fff;padding:18px 12px;font-size:12px;line-height:1.6;text-align:center;margin-top:18px;}
-    footer a{color:#fff;text-decoration:underline;}
-  
-
-    /* ===== CONFETES DE COMEMORAÇÃO (ESTILO FESTA) ===== */
-    .confetti{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
+    /* AUTHOR BLOCK (UNIFORME: PC lado a lado / Mobile empilhado) */
+    .author-box{
+      width:100%;
+      margin:0 0 28px 0;
+      padding:0;
+      background:#0a7a2f;
+      border:0;
       overflow:hidden;
-      z-index:9999;
     }
-    .confetti-piece{
-      position:absolute;
-      top:-10vh;
-      width:12px;
-      height:12px;
-      opacity:.95;
-      border-radius:50%; /* bolinhas de festa */
-      will-change:transform, opacity;
-      animation:confettiFall 3.8s linear forwards;
+
+    .author-wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:22px 16px 0 16px; /* sem sobra embaixo */
+      display:flex;
+      gap:28px;
+      align-items:flex-end; /* base alinhada */
+      justify-content:flex-start;
     }
-    .confetti-streamer{
-      position:absolute;
-      top:-12vh;
-      width:6px;
-      height:26px;
-      opacity:.9;
-      border-radius:3px;
-      will-change:transform, opacity;
-      animation:streamerFall 4.2s ease-out forwards;
+
+    .author-image{
+      width:520px;          /* imagem grande como no exemplo */
+      min-width:520px;
+      height:320px;         /* controla a altura do azul */
+      border-radius:0;
+      background-image:url('https://i.postimg.cc/G3JMjLq5/Sem-nome-(500-x-300-px).png');
+      background-repeat:no-repeat;
+      background-position:left bottom; /* cola no chão */
+      background-size:contain;         /* sem corte */
+      background-color:transparent;
     }
-    @keyframes confettiFall{
-      0%{ transform:translateY(-10vh) rotate(0deg); }
-      100%{ transform:translateY(120vh) rotate(360deg); }
+
+    .author-copy{
+      flex:1;
+      min-width:0;
+      color:#ffffff;
+      padding-bottom:8px; /* micro ajuste visual */
     }
-    @keyframes streamerFall{
-      0%{ transform:translateY(-12vh) rotate(0deg); }
-      100%{ transform:translateY(120vh) rotate(540deg); }
+
+    .author-copy h3{
+      margin:0 0 10px 0;
+      font-size:44px;
+      line-height:1.05;
+      font-weight:900;
+      letter-spacing:.2px;
+      color:#ffffff;
     }
+
+    .author-copy p{
+      margin:0 0 14px 0;
+      font-size:20px;
+      line-height:1.55;
+      color:rgba(255,255,255,.92);
+    }
+    .author-copy p:last-child{margin-bottom:0;}
+
+    /* Tablet */
+    @media (max-width:980px){
+      .author-image{width:420px; min-width:420px; height:300px;}
+      .author-copy h3{font-size:36px;}
+      .author-copy p{font-size:18px;}
+    }
+
+    /* Mobile */
+    @media (max-width:640px){
+      .author-wrap{flex-direction:column; align-items:center; text-align:center; padding:18px 16px 0 16px;}
+      .author-image{width:100%; min-width:100%; max-width:520px; height:280px; background-position:center bottom;}
+      .author-copy{padding:12px 0 18px 0;}
+      .author-copy h3{font-size:32px;}
+      .author-copy p{font-size:18px;}
+    }
+
+    /* comments */
+    .comments-section{ margin-top:24px; padding:18px 10px 44px 10px; background:#ffffff; border-top:1px solid #1c1c1c; }
+    .comments-title{ font-weight:700; margin-bottom:12px; font-size:16px; }
+
+    .comment{ display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; font-size:14px; color:#222; padding:12px; background:#f7f8fa; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.08); border:1px solid #e4e6eb; }
+    .comment-name{ font-weight:700; margin-bottom:2px; color:#050505; }
+    .comment-text{ line-height:1.4; margin-bottom:6px; color:#050505; }
+    .comment-meta{ font-size:12px; color:#65676b; display:flex; align-items:center; gap:6px; }
+
+    .comments-closed{ margin-top:14px; padding:10px 12px; text-align:center; font-size:13px; color:#65676b; background:#f7f8fa; border:1px dashed #cfd2d6; border-radius:8px; }
+
+    .like-icon{ display:inline-block; width:14px; height:14px; margin-right:4px; vertical-align:middle; background-image:url('https://i.postimg.cc/wTCDvX90/R.png'); background-size:contain; background-repeat:no-repeat; }
+
+    .avatar{ width:36px; height:36px; border-radius:50%; background:#d8d8d8; flex-shrink:0; background-size:cover; background-position:center; }
+    .avatar-1 { background-image: url('https://i.postimg.cc/L6TsBSN7/15.png'); }
+    .avatar-2 { background-image: url('https://i.postimg.cc/Nfgs0VBF/14.png'); }
+    .avatar-3 { background-image: url('https://i.postimg.cc/yx7Hkg4z/13.png'); }
+    .avatar-4 { background-image: url('https://i.postimg.cc/7Z5yGrcG/12.png'); }
+    .avatar-5 { background-image: url('https://i.postimg.cc/g03Q8zHQ/11.png'); }
+    .avatar-6 { background-image: url('https://i.postimg.cc/VkCVPfpF/10.png'); }
+    .avatar-7 { background-image: url('https://i.postimg.cc/bJJ08LrT/09.png'); }
+    .avatar-8 { background-image: url('https://i.postimg.cc/2jgtcL9K/08.png'); }
+    .avatar-9 { background-image: url('https://i.postimg.cc/qRzmQpsr/07.png'); }
+    .avatar-10 { background-image: url('https://i.postimg.cc/c4QFF9nv/06.png'); }
+    .avatar-11 { background-image: url('https://i.postimg.cc/TPH0KBzW/05.png'); }
+    .avatar-12 { background-image: url('https://i.postimg.cc/vT5tSTcg/04.png'); }
+    .avatar-13 { background-image: url('https://i.postimg.cc/9QLtkvFf/03.png'); }
+    .avatar-14 { background-image: url('https://i.postimg.cc/XJCfpqKh/02.png'); }
+    .avatar-15 { background-image: url('https://i.postimg.cc/8PDRz17Z/01.png'); }
+
+    /* footer */
+    .disclaimer{ width:100%; background:#000; color:#fff; padding:22px 16px; font-size:12px; line-height:1.5; text-align:center; }
+    .disclaimer .inner{ max-width:720px; margin:0 auto; }
+    .disclaimer a{ color:#ffffff; text-decoration:underline; }
   </style>
 </head>
-
 <body>
-  <!-- Confetes -->
-  <div class="confetti" id="confetti"></div>
-  <div class="box">
-    <h1>GANASTE EL TRUCO DE LA GELATINA GRATIS</h1>
-    <div class="sub">Entre 50 mujeres, <span class="hl">fuiste la elegida</span>.</div>
+  <div class="page-wrapper">
 
-    <div class="panel">
-      <p style="margin:0;">
-        Solo necesito informarte algo antes.
-        <br><br>
-        El Truco de la Gelatina <strong>no es una receta “genérica”</strong>.
-        Solo funciona cuando está <strong>personalizado</strong> para tu <strong>cuerpo</strong>, tu <strong>edad</strong> y tu <strong>estatura</strong>.
-      </p>
+    <!-- HEADLINE EDITORIAL -->
+    <div class="headline-wrap">
+      <h1>
+        <span style="color:#b10e0e;">REVELADO:</span>
+        <span style="color:#111111;"> Por qué nunca debes </span>
+        <span style="color:#b10e0e;">comer gelatina pura</span>
+        <span style="color:#111111;"> si quieres </span>
+        <span style="color:#0a7a2f;">bajar hasta 7 kg</span>
+        <span style="color:#111111;"> rápidamente</span>
+      </h1>
     </div>
 
-    <p>
-      Si eliges la versión gratuita <strong>sin personalización</strong>, incluso puedes probarla…
-      <br>
-      pero existe hasta un <span class="danger">89% de probabilidad</span> de que tu cuerpo <strong>no responda</strong>.
-    </p>
+    <!-- VSL -->
+    <section class="vsl-section">
+      <div class="video-container">
+        <vturb-smartplayer id="vid-696564e0babb3c836812bf5c" style="display:block; margin:0 auto; width:100%;"></vturb-smartplayer>
+        <script type="text/javascript">
+          var s=document.createElement("script");
+          s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/696564e0babb3c836812bf5c/v4/player.js";
+          s.async=!0;
+          document.head.appendChild(s);
+        </script>
+      </div>
+    </section>
 
-    <p>
-      Y aquí está el punto de inflexión:
-      <br>
-      la personalización es lo que hace que el método <strong>“encaje” en tu cuerpo</strong> —
-      ajustando las cantidades, el horario y el paso a paso según tu perfil.
-      <br><br>
-      Por eso, cuando es personalizado, <strong>funciona al 100%</strong> (porque está calculado para ti).
-    </p>
+    <!-- LIVE COUNT -->
+    <div class="live-wrap">
+      Tú y <strong><span id="liveCount">510</span></strong> personas más están viendo esto ahora.
+    </div>
 
-    <div class="divider"></div>
-
-    <div class="card">
-      <div style="font-weight:900;font-size:16px;margin-bottom:6px;">Ahora tienes dos decisiones:</div>
-
-      <div class="decision-wrap">
-        <div class="decision decision-danger">
-          <div class="decision-title">DECISIÓN 1 — TOMAR LA RECETA GRATIS (NO PERSONALIZADA)</div>
-          <ul>
-            <li>Recibes la receta base (no personalizada)</li>
-            <li>No está calculada para tu cuerpo/edad/estatura</li>
-            <li>Alto riesgo de no obtener resultados</li>
-          </ul>
-          <div style="margin-top:10px;padding:12px;border-radius:10px;background:rgba(255,255,255,.9);color:#000;font-size:14px;line-height:1.45;">
-            <strong>Aquí está la receta para adelgazar:</strong><br>
-            • Prepara 1 porción de gelatina <strong>sin azúcar</strong> (sin sabor o con sabor, pero sin azúcar).<br>
-            • Agrega <strong>1 cucharadita</strong> de <strong>linaza dorada</strong>.<br>
-            • Agrega <strong>extracto de té verde</strong> (en cápsula o en polvo) en la cantidad indicada en el envase.<br>
-            • Mezcla bien, deja cuajar y consume <strong>1 cubo al día</strong>, preferiblemente por la noche.
-            <div style="margin-top:6px;font-size:12px;opacity:.85;"><em>Tip: si eres sensible a la cafeína, elige extracto descafeinado o tómalo más temprano.</em></div>
-          </div>
-        </div>
-        </div>
-
-        <div class="decision decision-light" style="border:1px solid rgba(255,215,0,.35); background:rgba(255,215,0,.08);">
-          <div class="decision-title">DECISIÓN 2 — PERSONALIZACIÓN POR EL DR. JUAN (RECOMENDADO)</div>
-          <ul>
-            <li>Receta calculada para tu cuerpo, edad y estatura</li>
-            <li>Paso a paso ajustado para ti</li>
-            <li><strong>Funciona 100%</strong> porque es personalizado</li>
-            <li>Incluye todos los bonos</li>
-          </ul>
-
-          <div class="doctor">
-            <img src="https://i.postimg.cc/kGdqxJdq/unnamed-(1).jpg" alt="Dr. Juan">
-            <div class="meta">
-              <strong>Dr. Juan</strong>
-              <span>Personalización del Truco de la Gelatina</span>
-            </div>
-          </div>
-
-          <div class="pack" style="margin-top:14px;">
-            <div class="pack-inner">
-              <div class="pack-title">PERSONALIZACIÓN COMPLETA + BONOS</div>
-              <div class="pack-price">
-                <span class="old">$50</span>
-                <span class="new">$17</span> <span class="usd">USD</span>
-              </div>
-              <a href="https://healthlifee.mycartpanda.com/ckt/mv4MBP" class="btn btn-primary">SÍ, QUIERO MI PERSONALIZACIÓN POR $17</a>
-              <div class="pack-sub">Oferta exclusiva para la elegida (1 entre 50)</div>
-            </div>
-          </div>
+    <!-- AUTOR / AUTORIDAD -->
+    <section class="author-box">
+      <div class="author-wrap">
+        <div class="author-image" aria-label="Dr. Juan Rivera"></div>
+        <div class="author-copy">
+          <h3>Dr. Juan Rivera</h3>
+          <p>
+            Médico preventivo formado y entrenado en instituciones reconocidas, con amplia experiencia en salud, bienestar y estrategias de adelgazamiento.
+            Apasionado por ayudar a las personas a alcanzar una vida más saludable, el Dr. Juan combina ciencia, empatía y creatividad para crear métodos prácticos y eficaces.
+          </p>
+          <p>
+            Además, es el creador del <strong>Truco de la Gelatina</strong>, una técnica exclusiva que ya ha ayudado a más de <strong>23.500 mujeres</strong> en todo el mundo.
+          </p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="divider"></div>
+    <!-- COMENTARIOS -->
+    <section class="comments-section">
+      <div class="comments-title">Comentarios</div>
 
-    <div style="font-weight:900;margin:8px 0 8px;">Pruebas sociales (resultados reales)</div>
-
-    <!-- LETREIRO / SLIDER (igual ao modelo antigo) -->
-    <div class="slider" aria-label="Resultados">
-      <div class="track">
-        <!-- Set 1 -->
-        <a href="https://i.postimg.cc/T2mkbDp1/etapa-4-(4).png" class="slide"><img src="https://i.postimg.cc/T2mkbDp1/etapa-4-(4).png" alt="Resultado 1"></a>
-        <a href="https://i.postimg.cc/RZ8fGgDj/etapa-4-(5).png" class="slide"><img src="https://i.postimg.cc/RZ8fGgDj/etapa-4-(5).png" alt="Resultado 2"></a>
-        <a href="https://i.postimg.cc/fyBSdCdg/etapa-4-(6).png" class="slide"><img src="https://i.postimg.cc/fyBSdCdg/etapa-4-(6).png" alt="Resultado 3"></a>
-        <a href="https://i.postimg.cc/wjSyD7tD/etapa-4-(7).png" class="slide"><img src="https://i.postimg.cc/wjSyD7tD/etapa-4-(7).png" alt="Resultado 4"></a>
-        <a href="https://i.postimg.cc/fy2kyLnM/etapa-4-(8).png" class="slide"><img src="https://i.postimg.cc/fy2kyLnM/etapa-4-(8).png" alt="Resultado 5"></a>
-
-        <!-- Set 2 (clone p/ loop) -->
-        <a href="https://i.postimg.cc/T2mkbDp1/etapa-4-(4).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/T2mkbDp1/etapa-4-(4).png" alt=""></a>
-        <a href="https://i.postimg.cc/RZ8fGgDj/etapa-4-(5).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/RZ8fGgDj/etapa-4-(5).png" alt=""></a>
-        <a href="https://i.postimg.cc/fyBSdCdg/etapa-4-(6).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/fyBSdCdg/etapa-4-(6).png" alt=""></a>
-        <a href="https://i.postimg.cc/wjSyD7tD/etapa-4-(7).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/wjSyD7tD/etapa-4-(7).png" alt=""></a>
-        <a href="https://i.postimg.cc/fy2kyLnM/etapa-4-(8).png" class="slide" aria-hidden="true" tabindex="-1"><img src="https://i.postimg.cc/fy2kyLnM/etapa-4-(8).png" alt=""></a>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div style="font-weight:900;margin:8px 0 8px;">¿Por qué tanta gente está haciendo esto ahora?</div>
-
-    <div class="benefits-wrap">
-      <div class="benefits"><div class="benefit-row"><span>🔥 Activa tu cuerpo</span><span>🚫 Apaga el hambre</span></div></div>
-      <div class="benefits"><div class="benefit-row"><span>🔥 Derrite grasa</span><span>🌙 Mientras duermes</span></div></div>
-      <div class="benefits"><div class="benefit-row"><span>✅ Sin rebote</span><span>⚡ Metabolismo acelerado</span></div></div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div style="font-weight:900;margin:8px 0 8px;">Lo que dicen las nuevas alumnas:</div>
-
-    <div class="tcard">
-      <div class="trow">
-        <img src="https://i.postimg.cc/KYffZ6vx/etapa-4-(9).png" alt="Patricia" class="avatar">
+      <div class="comment">
+        <div class="avatar avatar-1"></div>
         <div>
-          <div class="tname">Patricia, 55 años</div>
-          <div class="tstars">★★★★★</div>
+          <div class="comment-name">Elena Morales</div>
+          <div class="comment-text">Cuando explicó lo de las hormonas GLP-1 y GIP sentí que por fin alguien decía la verdad. Ahora entiendo por qué nada me funcionaba antes.</div>
+          <div class="comment-meta"><span class="like-icon"></span>241 · Me gusta · Responder · 1 h</div>
         </div>
       </div>
-      <div class="ttext">“El mejor regalo que me he dado. Fácil y rápido.”</div>
-    </div>
 
-    <div class="tcard">
-      <div class="trow">
-        <img src="https://i.postimg.cc/SxyVwQkL/etapa-4-(10).png" alt="Lucía" class="avatar">
+      <div class="comment">
+        <div class="avatar avatar-2"></div>
         <div>
-          <div class="tname">Lucía, 42 años</div>
-          <div class="tstars">★★★★★</div>
+          <div class="comment-name">Clara Domínguez</div>
+          <div class="comment-text">Yo usé Ozempic y recuperé todo el peso después. Esto de activar las hormonas de forma natural con la gelatina tiene muchísimo más sentido.</div>
+          <div class="comment-meta"><span class="like-icon"></span>198 · Me gusta · Responder · 2 h</div>
         </div>
       </div>
-      <div class="ttext">“Me ayudó a controlar el hambre por la noche. Me siento más ligera.”</div>
-    </div>
 
-    <div class="tcard">
-      <div class="trow">
-        <img src="https://i.postimg.cc/SRkDkmc2/etapa-4-(11).png" alt="Mariana" class="avatar">
+      <div class="comment">
+        <div class="avatar avatar-3"></div>
         <div>
-          <div class="tname">Mariana, 38 años</div>
-          <div class="tstars">★★★★★</div>
+          <div class="comment-name">Sofía Herrera</div>
+          <div class="comment-text">Lo que contó sobre Adamari me hizo llorar. Yo también me sentía derrotada por mi cuerpo… ahora tengo esperanza otra vez.</div>
+          <div class="comment-meta"><span class="like-icon"></span>227 · Me gusta · Responder · 3 h</div>
         </div>
       </div>
-      <div class="ttext">“Lo hice tal cual y fue súper práctico. Ya lo recomiendo a mis amigas.”</div>
-    </div>
 
-    <img src="https://i.postimg.cc/nVByxzb6/A1W7C27.png" alt="Imagen adicional" style="display:block;width:100%;border-radius:10px;margin:12px auto 0;">
+      <div class="comment">
+        <div class="avatar avatar-4"></div>
+        <div>
+          <div class="comment-name">Camila Rojas</div>
+          <div class="comment-text">Siempre pensé que mi problema era la falta de fuerza de voluntad. Hoy entendí que era hormonal, no psicológico.</div>
+          <div class="comment-meta"><span class="like-icon"></span>184 · Me gusta · Responder · 4 h</div>
+        </div>
+      </div>
 
-    <div class="divider"></div>
+      <div class="comment">
+        <div class="avatar avatar-5"></div>
+        <div>
+          <div class="comment-name">Amalia García</div>
+          <div class="comment-text">Empecé el truco de la gelatina hace 9 días y ya noto menos hinchazón y cero ansiedad por dulce.</div>
+          <div class="comment-meta"><span class="like-icon"></span>263 · Me gusta · Responder · 5 h</div>
+        </div>
+      </div>
 
-    <div style="font-weight:900;margin:8px 0 8px;">Bonos incluidos en la personalización:</div>
+      <div class="comment">
+        <div class="avatar avatar-6"></div>
+        <div>
+          <div class="comment-name">Julieta Blanco</div>
+          <div class="comment-text">Trabajo en clínica y lo que dijo sobre el rebote del Mounjaro es real. Lo veo todos los días.</div>
+          <div class="comment-meta"><span class="like-icon"></span>301 · Me gusta · Responder · 6 h</div>
+        </div>
+      </div>
 
-    <div class="checklist">
-      <div class="check-item">✔️ <strong>Guía Principal:</strong> El Truco de la Gelatina</div>
-      <div class="check-item">✔️ <strong>BONUS 1:</strong> Vientre Plano en 24h</div>
-      <div class="check-item">✔️ <strong>BONUS 2:</strong> Truco de Glúteos Firmes</div>
-      <div class="check-item">✔️ <strong>BONUS 3:</strong> Adiós Celulitis</div>
-      <div class="check-item">✔️ <strong>BONUS 4:</strong> Secretos de la Menopausia</div>
-      <div class="check-item">✔️ <strong>BONUS 5:</strong> Secreto de las Coreanas</div>
-    </div>
+      <div class="comment">
+        <div class="avatar avatar-7"></div>
+        <div>
+          <div class="comment-name">Chloe Fuentes</div>
+          <div class="comment-text">La parte de las hormonas dormidas fue una bomba para mí. Ahora todo encaja.</div>
+          <div class="comment-meta"><span class="like-icon"></span>215 · Me gusta · Responder · 7 h</div>
+        </div>
+      </div>
 
-    <img src="https://i.postimg.cc/JhfCMHTJ/Captura-de-tela-7-1-2026-35038-gelatinabariatrica-vivasalud-site.jpg" alt="Bonos" style="display:block;width:100%;border-radius:10px;margin:10px auto 12px;">
+      <div class="comment">
+        <div class="avatar avatar-8"></div>
+        <div>
+          <div class="comment-name">Ana Lucía León</div>
+          <div class="comment-text">Después de los 40 nada me funcionaba… esto explica exactamente por qué.</div>
+          <div class="comment-meta"><span class="like-icon"></span>192 · Me gusta · Responder · 8 h</div>
+        </div>
+      </div>
 
-    <a href="https://healthlifee.mycartpanda.com/ckt/mv4MBP" class="btn btn-primary">ACTIVAR PERSONALIZACIÓN + BONOS POR $17</a>
-    <p class="note" style="text-align:center;">Si sales de esta página, el acceso especial puede desaparecer.</p>
+      <div class="comment">
+        <div class="avatar avatar-9"></div>
+        <div>
+          <div class="comment-name">Matilde Carrión</div>
+          <div class="comment-text">Le mandé este video a mi hermana. Las dos estamos empezando hoy mismo.</div>
+          <div class="comment-meta"><span class="like-icon"></span>178 · Me gusta · Responder · 9 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-10"></div>
+        <div>
+          <div class="comment-name">Beatriz Marchán</div>
+          <div class="comment-text">Por primera vez siento que no tengo que sufrir para adelgazar. Esto cambia todo.</div>
+          <div class="comment-meta"><span class="like-icon"></span>256 · Me gusta · Responder · 10 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-11"></div>
+        <div>
+          <div class="comment-name">Helena Reynoso</div>
+          <div class="comment-text">La explicación sobre por qué la grasa vuelve después de las inyecciones fue brutalmente honesta.</div>
+          <div class="comment-meta"><span class="like-icon"></span>289 · Me gusta · Responder · 11 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-12"></div>
+        <div>
+          <div class="comment-name">Noemí Peletier</div>
+          <div class="comment-text">Nunca había entendido la ciencia detrás de adelgazar. Ahora sí.</div>
+          <div class="comment-meta"><span class="like-icon"></span>201 · Me gusta · Responder · 12 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-13"></div>
+        <div>
+          <div class="comment-name">Virginia Lamas</div>
+          <div class="comment-text">Esto no es otro truco más… se nota que hay investigación real detrás.</div>
+          <div class="comment-meta"><span class="like-icon"></span>233 · Me gusta · Responder · 13 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-14"></div>
+        <div>
+          <div class="comment-name">Lucía Bernal</div>
+          <div class="comment-text">La historia del vestido que no cerraba me rompió por dentro. Es exactamente mi vida.</div>
+          <div class="comment-meta"><span class="like-icon"></span>174 · Me gusta · Responder · 14 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-15"></div>
+        <div>
+          <div class="comment-name">Mariana Lefevre</div>
+          <div class="comment-text">Si esto funciona como explica, es el fin de las dietas y las inyecciones.</div>
+          <div class="comment-meta"><span class="like-icon"></span>318 · Me gusta · Responder · 15 h</div>
+        </div>
+      </div>
+
+      <div class="comments-closed">No es posible publicar nuevos comentarios en esta publicación.</div>
+    </section>
+
+    <!-- DISCLAIMER -->
+    <footer class="disclaimer">
+      <div class="inner">
+        <strong>Copyright 2025 — TRUCO DE LA GELATINA®</strong> • Todos los derechos reservados<br><br>
+        <a href="#" style="margin-right:8px;">Términos de Uso</a>
+        <a href="#">Política de Privacidad</a><br><br>
+        Este sitio no forma parte de Facebook™ ni de Meta Platforms, Inc., y NO está respaldado por ellos.
+        La información presentada tiene fines educativos y no constituye asesoramiento médico.
+        Los resultados pueden variar de una persona a outra.
+      </div>
+    </footer>
 
   </div>
 
-  <footer>
-    Copyright © 2026 - Truco de la Gelatina. Todos los derechos reservados.<br><br>
-    <a href="#">Privacidad</a>
-    &nbsp;|&nbsp;
-    <a href="#">Términos</a>
-  </footer>
   <script>
-    (function(){
-      var root = document.getElementById('confetti');
-      if(!root) return;
+    (function () {
+      var el = document.getElementById('liveCount');
+      if (!el) return;
 
-      var colors = ['#2ecc71','#1abc9c','#27ae60','#16a085','#00c853','#00e676','#a5ffcf'];
-      var pieces = 70;      // bolinhas
-      var streamers = 22;   // fitas
+      var current = 510;
+      var min = 480;
+      var max = 680;
 
-      function rand(min,max){ return Math.random()*(max-min)+min; }
+      function update() {
+        var biasUp = Math.random() < 0.65;
+        var delta = Math.floor(Math.random() * 6) + 1;
 
-      // Bolinhas
-      for (var i = 0; i < pieces; i++) {
-        var p = document.createElement('div');
-        p.className = 'confetti-piece';
-        p.style.left = rand(0,100) + 'vw';
-        p.style.background = colors[Math.floor(Math.random()*colors.length)];
-        p.style.animationDelay = rand(0,0.8) + 's';
-        p.style.transform = 'translateX(' + rand(-20,20) + 'vw)';
-        root.appendChild(p);
+        if (biasUp) current += delta;
+        else current -= delta;
+
+        if (current < min) current = min + Math.floor(Math.random() * 10);
+        if (current > max) current = max - Math.floor(Math.random() * 10);
+
+        el.textContent = current;
       }
 
-      // Fitas
-      for (var j = 0; j < streamers; j++) {
-        var s = document.createElement('div');
-        s.className = 'confetti-streamer';
-        s.style.left = rand(0,100) + 'vw';
-        s.style.background = colors[Math.floor(Math.random()*colors.length)];
-        s.style.animationDelay = rand(0,0.6) + 's';
-        s.style.transform = 'translateX(' + rand(-25,25) + 'vw)';
-        root.appendChild(s);
-      }
-
-      setTimeout(function(){
-        root.parentNode && root.parentNode.removeChild(root);
-      }, 6500);
+      setInterval(update, 3500);
     })();
   </script>
 </body>
