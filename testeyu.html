@@ -1,664 +1,464 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es-ES">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VSL</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Truco de la gelatina</title>
+
+
+
+  <!-- PRELOAD VTURB VELOCIDADE -->
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/698bc6491e643e3dce37e5f0/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/698bc42d9a130410492bd341/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-xcod-sck
+    data-utmify-prevent-subids
+    data-utmify-ignore-iframe
+    data-utmify-is-cartpanda
+    async
+    defer
+  ></script>
+
+  <script>
+    window.pixelId = "68cac216526f0dc841486576";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
+
+  <script>
+    // ALTERE O LINK PARA A PÁGINA QUE QUISER MOSTRAR QUANDO O USUÁRIO TENTAR SAIR
+    const link = 'https://healthlifeee.online/gelaredy';
+
+    function setBackRedirect(url) {
+      let urlBackRedirect = url;
+      urlBackRedirect = urlBackRedirect =
+        urlBackRedirect.trim() +
+        (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+        document.location.search.replace('?', '').toString();
+
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+
+      window.addEventListener('popstate', () => {
+        console.log('onpopstate', urlBackRedirect);
+        setTimeout(() => {
+          location.href = urlBackRedirect;
+        }, 1);
+      });
+    }
+
+    setBackRedirect(link);
+  </script>
+
   <style>
-    :root{
-      --bg: #f2f2f2;
-      --text: #111;
-      --muted: #666;
-      --card: #ffffff;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-      --radius: 18px;
-      --blue: #5b6ee1; /* título */
-      --red: #e03131;  /* contador */
+    html, body {
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
     }
-    *{ box-sizing: border-box; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
-    .wrap{
-      width: min(980px, 100%);
+
+    .page-wrapper {
+      width: 100%;
       margin: 0 auto;
-      padding: 18px 16px 40px;
     }
 
-    /* ====== TOP VIDEO (9:16) ====== */
-    .vsl-shell{
-      background:#0f0f10;
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      margin-top: 6px;
-    }
-    .vsl-portrait{
+    .top-header {
       width: 100%;
-      aspect-ratio: 9 / 16;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-    }
-    /* fallback si el navegador no soporta aspect-ratio */
-    @supports not (aspect-ratio: 9 / 16){
-      .vsl-portrait{ height: 0; padding-top: 177.78%; }
-      .vsl-portrait > *{ position:absolute; inset:0; }
+      background: #b10e0e;
+      color: #fff;
     }
 
-    /* Slot donde pegaremos tu player (Vturb/ConverteAI/etc.) */
-    .player-slot{
-      width: 100%;
-      height: 100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 0;
-    }
-    .player-placeholder{
-      color: rgba(255,255,255,.85);
-      text-align:center;
-      padding: 22px;
-      line-height: 1.35;
-    }
-    .player-placeholder b{ display:block; font-size: 18px; margin-bottom: 8px; }
-    .player-placeholder code{ background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 6px; }
-
-    /* ====== LIVE VIEWERS ====== */
-    .live{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      margin: 14px 0 12px;
-      color: #2a2a2a;
-      font-size: 15px;
-    }
-    .live .eye{ font-size: 18px; opacity:.9; }
-    .live .num{ color: var(--red); font-weight: 800; }
-
-    /* ====== CARD ====== */
-    .card{
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px 18px 16px;
-    }
-    .card h2{
-      margin: 2px 0 10px;
-      color: var(--blue);
+    .top-bar {
+      height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      font-weight: bold;
       font-size: 26px;
-      letter-spacing: -.2px;
-    }
-    .card p{
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.55;
-    }
-    .logos{
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-start;
-    }
-    .logo{
-      background:#f6f7fb;
-      border: 1px solid rgba(0,0,0,.06);
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 12px;
-      color:#333;
     }
 
-    /* ====== TESTIMONIOS (FB STYLE) ====== */
-    .testimonials{ margin-top: 18px; }
-
-    .fb-card{
-      margin-top: 12px;
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 14px 14px 12px;
-    }
-    .fb-head{
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      padding: 4px 2px 10px;
-    }
-    .fb-avatar{
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #e9ecef, #cfd4da);
-      flex: 0 0 auto;
-      border: 1px solid rgba(0,0,0,.06);
-    }
-    .fb-avatar.sm{ width: 40px; height: 40px; }
-
-    .fb-meta{ line-height: 1.1; }
-    .fb-name{ font-weight: 800; font-size: 15px; }
-    .fb-sub{ font-size: 12.5px; color: var(--muted); margin-top: 3px; }
-
-    .fb-body{
-      font-size: 15px;
-      line-height: 1.55;
-      color: #222;
-      padding: 0 2px 10px;
+    .top-title {
+      text-align: center;
+      flex: 1;
+      font-size: 26px;
+      letter-spacing: 0.5px;
     }
 
-    .fb-actions{
-      display:flex;
-      gap: 16px;
-      align-items:center;
-      color: #444;
-      font-size: 13px;
-      padding: 6px 2px 10px;
+    .top-icon {
+      width: 40px;
+      text-align: center;
+      opacity: 0.95;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .fb-actions b{ font-weight: 800; }
 
-    .fb-reply{
-      display:flex;
-      gap: 12px;
-      margin-top: 8px;
-      padding-left: 10px;
-    }
-    .fb-reply-line{
-      width: 4px;
-      border-radius: 999px;
-      background: #2f6fed;
-      opacity: .7;
-      flex: 0 0 auto;
-    }
-    .fb-reply-box{
+    .ticker-wrapper {
       width: 100%;
-      background: #f6f7fb;
-      border: 1px solid rgba(0,0,0,.06);
-      border-radius: 14px;
-      padding: 12px 12px 10px;
+      overflow: hidden;
+      background: #8e0b0b;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      position: relative;
     }
 
-    /* ====== SECTION HEADLINE ====== */
-    .section-title{
-      margin: 20px 2px 0;
-      font-size: 30px;
-      line-height: 1.15;
-      letter-spacing: -.4px;
-    }
-
-    /* ====== FOOTER ====== */
-    .footer{
-      margin-top: 22px;
-      padding: 0;
-      color: #fff;
-      text-align:center;
-    }
-    .footer-inner{
-      background: #0b0b0d;
-      border-radius: 18px;
-      box-shadow: none;
-      padding: 22px 14px 18px;
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .footer-brand{
-      font-weight: 900;
-      letter-spacing: .2px;
-      color: #fff;
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-    .footer-links{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      justify-content:center;
-      flex-wrap:wrap;
-      font-size: 14px;
-      margin-bottom: 12px;
-      color: rgba(255,255,255,.75);
-    }
-    .footer-links a{ color:#fff; text-decoration:none; font-weight: 800; opacity:.92; }
-    .footer-links a:hover{ text-decoration: underline; opacity: 1; }
-
-    .footer-copy{ font-size: 13px; margin-bottom: 10px; color: rgba(255,255,255,.9); }
-    .footer-disclaimer{ font-size: 12.5px; line-height: 1.45; opacity: .85; }
-
-    /* ====== FAQ ====== */
-    .faq{ margin-top: 18px; }
-    .faq-title{
-      text-align:center;
-      margin: 14px 0 14px;
-      font-size: 34px;
-      letter-spacing: -.6px;
-    }
-    .faq-list{ display:flex; flex-direction:column; gap: 14px; }
-
-    .faq-item{
-      background: var(--card);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      border: 1px solid rgba(0,0,0,.03);
-    }
-
-    .faq-item summary{
-      list-style:none;
-      cursor:pointer;
-      padding: 18px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      font-weight: 900;
-      color: #5160d6;
-      font-size: 18px;
-    }
-    .faq-item summary::-webkit-details-marker{ display:none; }
-
-    .faq-item[open] summary{ border-bottom: 1px solid rgba(0,0,0,.06); }
-
-    .faq-content{
-      padding: 14px 16px 18px;
-      color: #2a2a2a;
+    .ticker {
+      display: inline-flex;
+      white-space: nowrap;
       font-size: 15px;
-      line-height: 1.6;
+      letter-spacing: 1.2px;
+      padding: 8px 0;
+      animation: marquee 40s linear infinite;
+      color: #ffffff;
     }
 
-    .chev{ color:#5160d6; font-weight: 900; }
-    details[open] .chev{ transform: rotate(180deg); display:inline-block; }
-
-    /* ====== MOBILE TUNING ====== */
-    @media (max-width: 520px){
-      .wrap{ padding: 12px 12px 36px; }
-      .card{ padding: 16px 14px 14px; }
-      .card h2{ font-size: 24px; }
-      .section-title{ font-size: 28px; }
-      .vsl-shell{ border-radius: 18px; }
+    .ticker span {
+      padding-right: 40px;
     }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .hamburger {
+      width: 26px;
+      height: 18px;
+      position: relative;
+    }
+
+    .hamburger::before,
+    .hamburger::after,
+    .hamburger div {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+    }
+
+    .hamburger::before { top: 0; }
+    .hamburger div { top: 7.5px; }
+    .hamburger::after { bottom: 0; }
+
+    .comments-section {
+      margin-top: 32px;
+      padding: 18px 10px 44px 10px;
+      background: #ffffff;
+      border-top: 1px solid #1c1c1c;
+    }
+
+    .comments-title {
+      font-weight: 700;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .comment {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: #222222;
+      padding: 12px;
+      background: #f7f8fa;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      border: 1px solid #e4e6eb;
+    }
+
+    .comment-name {
+      font-weight: 700;
+      margin-bottom: 2px;
+      color: #050505;
+    }
+
+    .comment-text {
+      line-height: 1.4;
+      margin-bottom: 6px;
+      color: #050505;
+    }
+
+    .comment-meta {
+      font-size: 12px;
+      color: #65676b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .comments-closed {
+      margin-top: 14px;
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 13px;
+      color: #65676b;
+      background: #f7f8fa;
+      border: 1px dashed #cfd2d6;
+      border-radius: 8px;
+    }
+
+    .like-icon {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: 4px;
+      vertical-align: middle;
+      background-image: url('https://i.postimg.cc/wTCDvX90/R.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #d8d8d8;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .avatar-1 { background-image: url('https://i.postimg.cc/L6TsBSN7/15.png'); }
+    .avatar-2 { background-image: url('https://i.postimg.cc/Nfgs0VBF/14.png'); }
+    .avatar-3 { background-image: url('https://i.postimg.cc/yx7Hkg4z/13.png'); }
+    .avatar-4 { background-image: url('https://i.postimg.cc/7Z5yGrcG/12.png'); }
+    .avatar-5 { background-image: url('https://i.postimg.cc/g03Q8zHQ/11.png'); }
+    .avatar-6 { background-image: url('https://i.postimg.cc/VkCVPfpF/10.png'); }
+    .avatar-7 { background-image: url('https://i.postimg.cc/bJJ08LrT/09.png'); }
+    .avatar-8 { background-image: url('https://i.postimg.cc/2jgtcL9K/08.png'); }
+    .avatar-9 { background-image: url('https://i.postimg.cc/qRzmQpsr/07.png'); }
+    .avatar-10 { background-image: url('https://i.postimg.cc/c4QFF9nv/06.png'); }
+    .avatar-11 { background-image: url('https://i.postimg.cc/TPH0KBzW/05.png'); }
+    .avatar-12 { background-image: url('https://i.postimg.cc/vT5tSTcg/04.png'); }
+    .avatar-13 { background-image: url('https://i.postimg.cc/9QLtkvFf/03.png'); }
+    .avatar-14 { background-image: url('https://i.postimg.cc/XJCfpqKh/02.png'); }
+    .avatar-15 { background-image: url('https://i.postimg.cc/8PDRz17Z/01.png'); }
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <div class="page-wrapper">
 
-    <!-- PARTE 1: VIDEO (FORMATO STORY) -->
-    <section class="vsl-shell">
-      <div class="vsl-portrait">
-        <div class="player-slot" id="player-slot">
-          <!-- 
-            👉 Pega o código do player que você vai me mandar e cola AQUI dentro.
-            Ex: <vturb-smartplayer ...></vturb-smartplayer><script ...></script>
-          -->
-          <div class="player-placeholder">
-            <b>ESPACIO RESERVADO PARA EL VIDEO (9:16)</b>
-            Pega aquí el <code>embed</code> del reproductor cuando me lo envíes.
-          </div>
-        </div>
+    <!-- TOPO REMOVIDO (SOMENTE VSL) -->
+
+<!-- VSL -->
+    <section class="vsl-section" style="padding:12px 10px 0 10px;">
+      <div class="video-container" style="width:100%; max-width:720px; margin:0 auto;">
+        <vturb-smartplayer id="vid-698bc6491e643e3dce37e5f0" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/698bc6491e643e3dce37e5f0/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
       </div>
     </section>
 
-    <!-- PARTE 2: LIVE VIEWERS -->
-    <div class="live" aria-label="personas viendo ahora">
-      <span class="eye">👁️</span>
-      <span><span class="num" id="liveCount">434</span> Personas viendo ahora</span>
+    <!-- TEXTO SIMPLES DE PROVA SOCIAL -->
+    <div style="max-width:720px; margin:10px auto 16px auto; text-align:center; font-size:13px; color:#111;">
+      Tú y <strong><span id="liveCount">510</span></strong> personas más están viendo esto ahora.
     </div>
 
-    <!-- PARTE 2: VALIDACIÓN (CARD) -->
-    <section class="card" aria-label="validación">
-      <h2>Respaldado por Evidencia</h2>
-      <p>
-        Desarrollado a partir de investigaciones sobre saciedad metabólica (GLP-1 y GIP) y cómo activar estos mecanismos de forma natural.
-        Más de 121.300 personas ya aplicaron este protocolo.
-      </p>
+    <!-- REFERÊNCIAS REMOVIDAS -->
 
-      <!-- Logos (placeholders) – vamos a reemplazar por imágenes quando você mandar os links -->
-      <div class="logos" aria-label="logos">
-        <div class="logo">EVIDENCIA</div>
-        <div class="logo">GLP-1</div>
-        <div class="logo">GIP</div>
-        <div class="logo">METABOLISMO</div>
-        <div class="logo">SACIACIÓN</div>
+<!-- COMENTÁRIOS -->
+    <section class="comments-section">
+      <div class="comments-title">Comentarios</div>
+
+      <div class="comment">
+        <div class="avatar avatar-1"></div>
+        <div>
+          <div class="comment-name">Elena Morales</div>
+          <div class="comment-text">Cuando explicó lo de las hormonas GLP-1 y GIP sentí que por fin alguien decía la verdad. Ahora entiendo por qué nada me funcionaba antes.</div>
+          <div class="comment-meta"><span class="like-icon"></span>241 · Me gusta · Responder · 1 h</div>
+        </div>
       </div>
+
+      <div class="comment">
+        <div class="avatar avatar-2"></div>
+        <div>
+          <div class="comment-name">Clara Domínguez</div>
+          <div class="comment-text">Yo usé Ozempic y recuperé todo el peso después. Esto de activar las hormonas de forma natural con la gelatina tiene muchísimo más sentido.</div>
+          <div class="comment-meta"><span class="like-icon"></span>198 · Me gusta · Responder · 2 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-3"></div>
+        <div>
+          <div class="comment-name">Sofía Herrera</div>
+          <div class="comment-text">Lo que contó sobre Adamari me hizo llorar. Yo también me sentía derrotada por mi cuerpo… ahora tengo esperanza otra vez.</div>
+          <div class="comment-meta"><span class="like-icon"></span>227 · Me gusta · Responder · 3 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-4"></div>
+        <div>
+          <div class="comment-name">Camila Rojas</div>
+          <div class="comment-text">Siempre pensé que mi problema era la falta de fuerza de voluntad. Hoy entendí que era hormonal, no psicológico.</div>
+          <div class="comment-meta"><span class="like-icon"></span>184 · Me gusta · Responder · 4 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-5"></div>
+        <div>
+          <div class="comment-name">Amalia García</div>
+          <div class="comment-text">Empecé el truco de la gelatina hace 9 días y ya noto menos hinchazón y cero ansiedad por dulce.</div>
+          <div class="comment-meta"><span class="like-icon"></span>263 · Me gusta · Responder · 5 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-6"></div>
+        <div>
+          <div class="comment-name">Julieta Blanco</div>
+          <div class="comment-text">Trabajo en clínica y lo que dijo sobre el rebote del Mounjaro es real. Lo veo todos los días.</div>
+          <div class="comment-meta"><span class="like-icon"></span>301 · Me gusta · Responder · 6 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-7"></div>
+        <div>
+          <div class="comment-name">Chloe Fuentes</div>
+          <div class="comment-text">La parte de las hormonas dormidas fue una bomba para mí. Ahora todo encaja.</div>
+          <div class="comment-meta"><span class="like-icon"></span>215 · Me gusta · Responder · 7 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-8"></div>
+        <div>
+          <div class="comment-name">Ana Lucía León</div>
+          <div class="comment-text">Después de los 40 nada me funcionaba… esto explica exactamente por qué.</div>
+          <div class="comment-meta"><span class="like-icon"></span>192 · Me gusta · Responder · 8 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-9"></div>
+        <div>
+          <div class="comment-name">Matilde Carrión</div>
+          <div class="comment-text">Le mandé este video a mi hermana. Las dos estamos empezando hoy mismo.</div>
+          <div class="comment-meta"><span class="like-icon"></span>178 · Me gusta · Responder · 9 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-10"></div>
+        <div>
+          <div class="comment-name">Beatriz Marchán</div>
+          <div class="comment-text">Por primera vez siento que no tengo que sufrir para adelgazar. Esto cambia todo.</div>
+          <div class="comment-meta"><span class="like-icon"></span>256 · Me gusta · Responder · 10 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-11"></div>
+        <div>
+          <div class="comment-name">Helena Reynoso</div>
+          <div class="comment-text">La explicación sobre por qué la grasa vuelve después de las inyecciones fue brutalmente honesta.</div>
+          <div class="comment-meta"><span class="like-icon"></span>289 · Me gusta · Responder · 11 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-12"></div>
+        <div>
+          <div class="comment-name">Noemí Peletier</div>
+          <div class="comment-text">Nunca había entendido la ciencia detrás de adelgazar. Ahora sí.</div>
+          <div class="comment-meta"><span class="like-icon"></span>201 · Me gusta · Responder · 12 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-13"></div>
+        <div>
+          <div class="comment-name">Virginia Lamas</div>
+          <div class="comment-text">Esto no es otro truco más… se nota que hay investigación real detrás.</div>
+          <div class="comment-meta"><span class="like-icon"></span>233 · Me gusta · Responder · 13 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-14"></div>
+        <div>
+          <div class="comment-name">Lucía Bernal</div>
+          <div class="comment-text">La historia del vestido que no cerraba me rompió por dentro. Es exactamente mi vida.</div>
+          <div class="comment-meta"><span class="like-icon"></span>174 · Me gusta · Responder · 14 h</div>
+        </div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar avatar-15"></div>
+        <div>
+          <div class="comment-name">Mariana Lefevre</div>
+          <div class="comment-text">Si esto funciona como explica, es el fin de las dietas y las inyecciones.</div>
+          <div class="comment-meta"><span class="like-icon"></span>318 · Me gusta · Responder · 15 h</div>
+        </div>
+      </div>
+
+      <div class="comments-closed">No es posible publicar nuevos comentarios en esta publicación.</div>
     </section>
 
-    <!-- PARTE 3: TESTIMONIOS (ESTILO FACEBOOK) -->
-    <section class="testimonials" aria-label="testimonios">
-      <h3 class="section-title">Lo que dicen quienes ya probaron el Truco de la Gelatina</h3>
-
-      <div class="fb-card">
-        <div class="fb-head">
-          <div class="fb-avatar" aria-hidden="true"></div>
-          <div class="fb-meta">
-            <div class="fb-name">Mariana Rojas</div>
-            <div class="fb-sub">Estados Unidos · Hace 2 días</div>
-          </div>
-        </div>
-
-        <div class="fb-body">
-          Chicas, yo pensé que era otra promesa más… pero me sorprendió.
-          En 14 días mi abdomen se desinflamó, mi apetito bajó muchísimo y mi ropa empezó a quedarme suelta.
-          Lo mejor: sin dietas locas y sin gimnasio.
-          Yo solo hice el cubito de gelatina cada mañana. 😳
-        </div>
-
-        <div class="fb-actions">
-          <span class="fb-like">👍 <b>892</b></span>
-          <span class="fb-comment">💬 <b>12</b></span>
-        </div>
-
-        <div class="fb-reply">
-          <div class="fb-reply-line"></div>
-          <div class="fb-reply-box">
-            <div class="fb-head" style="margin:0; padding:0;">
-              <div class="fb-avatar sm" aria-hidden="true"></div>
-              <div class="fb-meta">
-                <div class="fb-name">Valeria Méndez</div>
-                <div class="fb-sub">Responder · Hace 1 día</div>
-              </div>
-            </div>
-
-            <div class="fb-body" style="margin-top:10px;">
-              Mariana, ¡yo también! 😭
-              En mi caso fueron 7 kilos en 30 días.
-              Y yo soy de las que odia dieta y odia gym.
-              Esto es lo único que me funcionó. 💗
-            </div>
-
-            <div class="fb-actions" style="padding-bottom:0;">
-              <span class="fb-like">👍 <b>134</b></span>
-              <span class="fb-comment">💬 <b>3</b></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PARTE 4: MÁS TESTIMONIOS (2 CARDS) -->
-    <section class="testimonials" aria-label="más testimonios">
-
-      <div class="fb-card">
-        <div class="fb-head">
-          <div class="fb-avatar" aria-hidden="true"></div>
-          <div class="fb-meta">
-            <div class="fb-name">Roberto Costa</div>
-            <div class="fb-sub">Puerto Rico · Hace 4 días</div>
-          </div>
-        </div>
-
-        <div class="fb-body">
-          Compré el protocolo para mi esposa y para mí.
-          Ella estaba frustrada porque nada le funcionaba después de los 40.
-          Hoy, 10 semanas después, bajó 12 kilos, su cintura cambió muchísimo y volvió a usar ropa que estaba guardada.
-          Yo también bajé barriga.
-          Impresionante.
-        </div>
-
-        <div class="fb-actions">
-          <span class="fb-like">👍 <b>1.2k</b></span>
-          <span class="fb-comment">💬 <b>18</b></span>
-        </div>
-      </div>
-
-      <div class="fb-card">
-        <div class="fb-head">
-          <div class="fb-avatar" aria-hidden="true"></div>
-          <div class="fb-meta">
-            <div class="fb-name">Mariana Oliveira</div>
-            <div class="fb-sub">México · Hace 5 días</div>
-          </div>
-        </div>
-
-        <div class="fb-body">
-          Soy enfermera y trabajo con mujeres de diferentes edades.
-          Ya vi de todo.
-          Cuando una amiga me habló del Truco de la Gelatina fui escéptica, lo confieso.
-          Pero lo recomendé a una prima (48 años) y los resultados fueron reales.
-          Menos ansiedad, menos hambre y la barriga empezó a desinflamarse en días.
-          Ya se lo recomendé a otras amigas.
-        </div>
-
-        <div class="fb-actions">
-          <span class="fb-like">👍 <b>1.5k</b></span>
-          <span class="fb-comment">💬 <b>23</b></span>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- PARTE 5: TESTIMONIO + 2 RESPUESTAS (THREAD) -->
-    <section class="testimonials" aria-label="testimonio con respuestas">
-
-      <div class="fb-card">
-        <div class="fb-head">
-          <div class="fb-avatar" aria-hidden="true"></div>
-          <div class="fb-meta">
-            <div class="fb-name">José Carlos</div>
-            <div class="fb-sub">Colombia · Hace 1 semana</div>
-          </div>
-        </div>
-
-        <div class="fb-body">
-          Mi esposa estaba en una etapa en la que ya había perdido la esperanza.
-          Gastábamos dinero en dietas, consultas, pastillas… y nada duraba.
-          Compré el protocolo y hoy (4º mes) ella volvió a sentirse independiente.
-          Bajó más de 18 kilos, recuperó autoestima y volvió a ser ella.
-          Y lo mejor: sin vivir con hambre.
-          🙏
-        </div>
-
-        <div class="fb-actions">
-          <span class="fb-like">👍 <b>2.1k</b></span>
-          <span class="fb-comment">💬 <b>34</b></span>
-        </div>
-
-        <!-- Reply 1 -->
-        <div class="fb-reply">
-          <div class="fb-reply-line"></div>
-          <div class="fb-reply-box">
-            <div class="fb-head" style="margin:0; padding:0;">
-              <div class="fb-avatar sm" aria-hidden="true"></div>
-              <div class="fb-meta">
-                <div class="fb-name">Luciana Ferreira</div>
-                <div class="fb-sub">Responder · Hace 6 días</div>
-              </div>
-            </div>
-
-            <div class="fb-body" style="margin-top:10px;">
-              José Carlos, estoy pasando por lo mismo.
-              ¿Cuánto tiempo tardaste en ver las primeras señales?
-              Compré la semana pasada y estoy ansiosa.
-            </div>
-
-            <div class="fb-actions" style="padding-bottom:0;">
-              <span class="fb-like">👍 <b>67</b></span>
-              <span class="fb-comment">💬 <b>1</b></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Reply 2 (José responde) -->
-        <div class="fb-reply" style="margin-top:10px;">
-          <div class="fb-reply-line" style="opacity:.35;"></div>
-          <div class="fb-reply-box">
-            <div class="fb-head" style="margin:0; padding:0;">
-              <div class="fb-avatar sm" aria-hidden="true"></div>
-              <div class="fb-meta">
-                <div class="fb-name">José Carlos</div>
-                <div class="fb-sub">Responder · Hace 6 días</div>
-              </div>
-            </div>
-
-            <div class="fb-body" style="margin-top:10px;">
-              Luciana, en la segunda semana ella ya estaba con menos hambre,
-              más desinflamada y con más energía.
-              Pero el cambio grande de verdad fue después del 2º mes.
-              Sigue firme porque funciona.
-              Cualquier cosa, escríbeme aquí.
-            </div>
-
-            <div class="fb-actions" style="padding-bottom:0;">
-              <span class="fb-like">👍 <b>156</b></span>
-              <span class="fb-comment">💬 <b>5</b></span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- +5 COMENTARIOS EXTRA (PARA DAR VOLUME) -->
-    <section class="testimonials" aria-label="comentarios extra">
-
-      <div class="fb-card">
-        <div class="fb-head">
-          <div class="fb-avatar" aria-hidden="true"></div>
-          <div class="fb-meta">
-            <div class="fb-name">Andrea Salazar</div>
-            <div class="fb-sub">España · Hace 3 días</div>
-          </div>
-        </div>
-        <div class="fb-body">
-          Yo venía de intentar keto, ayuno y pastillas… siempre rebote.
-          Con el Truco de la Gelatina lo que más noté fue que se me fue la ansiedad.
-          En 21 días bajé 6 kilos y la barriga se desinflamó muchísimo.
-        </div>
-        <div class="fb-actions">
-          <span class="fb-like">👍 <b>1.1k</b></span>
-          <span class="fb-comment">💬 <b>14</b></span>
-        </div>
-      </div>
-
-      <div class="fb-card">
-        <div class="fb-head">
-          <div class="fb-avatar" aria-hidden="true"></div>
-          <div class="fb-meta">
-            <div class="fb-name">Camila Torres</div>
-            <div class="fb-sub">Chile · Hace 2 días</div>
-          </div>
-        </div>
-        <div class="fb-body">
-          Yo no podía bajar de 78kg por nada.
-          En la primera semana ya sentí el estómago “calmado”.
-          A los 30 días: 9 kilos menos.
-          Y lo mejor es que mi cara no quedó flácida.
-        </div>
-        <div class="fb-actions">
-          <span class="fb-like">👍 <b>980</b></span>
-          <span class="fb-comment">💬 <b>9</b></span>
-        </div>
-      </div>
-
-      <div class="fb-card">
-        <div class="fb-head">
-          <div class="fb-avatar" aria-hidden="true"></div>
-          <div class="fb-meta">
-            <div class="fb-name">Sofía Ramírez</div>
-            <div class="fb-sub">Costa Rica · Hace 6 días</div>
-          </div>
-        </div>
-        <div class="fb-body">
-          Soy mamá y trabajo todo el día.
-          No tengo tiempo para gym.
-          Esto fue lo único que encajó en mi rutina.
-          15 días: -4kg.
-          45 días: -13kg.
-          Estoy en shock.
-        </div>
-        <div class="fb-actions">
-          <span class="fb-like">👍 <b>1.7k</b></span>
-          <span class="fb-comment">💬 <b>26</b></span>
-        </div>
-      </div>
-
-      <div class="fb-card">
-        <div class="fb-head">
-          <div class="fb-avatar" aria-hidden="true"></div>
-          <div class="fb-meta">
-            <div class="fb-name">Paola Gutiérrez</div>
-            <div class="fb-sub">México · Hace 1 semana</div>
-          </div>
-        </div>
-        <div class="fb-body">
-          Lo compré por curiosidad.
-          En 10 días ya se notaba en el pantalón.
-          Mi esposo me dijo “te ves diferente” y yo casi lloro.
-          No es solo bajar peso… es recuperar autoestima.
-        </div>
-        <div class="fb-actions">
-          <span class="fb-like">👍 <b>2.3k</b></span>
-          <span class="fb-comment">💬 <b>31</b></span>
-        </div>
-      </div>
-
-      <div class="fb-card">
-        <div class="fb-head">
-          <div class="fb-avatar" aria-hidden="true"></div>
-          <div class="fb-meta">
-            <div class="fb-name">Daniela Vélez</div>
-            <div class="fb-sub">Puerto Rico · Hace 4 días</div>
-          </div>
-        </div>
-        <div class="fb-body">
-          Yo estaba por comprar Ozempic… gracias a Dios vi esto antes.
-          Me siento saciada, como normal y sigo bajando.
-          Ya van 8 kilos en 5 semanas.
-          Si estás dudando, mira el video hasta el final.
-        </div>
-        <div class="fb-actions">
-          <span class="fb-like">👍 <b>1.9k</b></span>
-          <span class="fb-comment">💬 <b>22</b></span>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- FINAL: DERECHOS RESERVADOS -->
-    <footer class="footer" aria-label="derechos reservados">
-      <div class="footer-inner">
-        <div class="footer-brand">Truco de la Gelatina</div>
-        <div class="footer-links">
-          <a href="#" rel="nofollow">Términos</a>
-          <span>·</span>
-          <a href="#" rel="nofollow">Privacidad</a>
-          <span>·</span>
-          <a href="mailto:contato@nexusvision10.com">Contacto</a>
-        </div>
-        <div class="footer-copy">
-          © <span id="year"></span> Truco de la Gelatina. Todos los derechos reservados.
-        </div>
-        <div class="footer-disclaimer">
-          Este sitio no forma parte de Facebook™ ni de Meta™.
-          Los resultados pueden variar de persona a persona.
-        </div>
+    <!-- DISCLAIMER / DERECHOS RESERVADOS -->
+    <footer class="disclaimer" style="width:100%; background:#000000; color:#ffffff; padding:22px 16px; font-size:12px; line-height:1.5; text-align:center;">
+      <div style="max-width:720px; margin:0 auto;">
+        <strong>Copyright 2025 — TRUCO DE LA GELATINA®</strong> • Todos los derechos reservados<br><br>
+        <a href="#" style="color:#ffffff; text-decoration:underline; margin-right:8px;">Términos de Uso</a>
+        <a href="#" style="color:#ffffff; text-decoration:underline;">Política de Privacidad</a><br><br>
+        Este sitio no forma parte de Facebook™ ni de Meta Platforms, Inc., y NO está respaldado por ellos.
+        La información presentada tiene fines educativos y no constituye asesoramiento médico.
+        Los resultados pueden variar de una persona a otra.
       </div>
     </footer>
 
-  </main>
-
+  </div>
   <script>
-    // Opcional: simula variación del contador para dar "vida".
-    // Si você não quiser, eu removo.
-    (function(){
-      // Live viewers
-      const el = document.getElementById('liveCount');
-      if(el){
-        let n = parseInt(el.textContent, 10) || 434;
-        setInterval(()=>{
-          const delta = Math.floor(Math.random()*5) - 2; // -2..+2
-          n = Math.max(120, n + delta);
-          el.textContent = n.toString();
-        }, 2200);
+    (function () {
+      var el = document.getElementById('liveCount');
+      if (!el) return;
+
+      var current = 510;
+      var min = 480;
+      var max = 680;
+
+      function update() {
+        var biasUp = Math.random() < 0.65;
+        var delta = Math.floor(Math.random() * 6) + 1;
+
+        if (biasUp) {
+          current += delta;
+        } else {
+          current -= delta;
+        }
+
+        if (current < min) current = min + Math.floor(Math.random() * 10);
+        if (current > max) current = max - Math.floor(Math.random() * 10);
+
+        el.textContent = current;
       }
 
-      // Footer year
-      const y = document.getElementById('year');
-      if(y) y.textContent = new Date().getFullYear();
+      setInterval(update, 3500);
     })();
   </script>
 </body>
