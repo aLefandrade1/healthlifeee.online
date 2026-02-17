@@ -1,1 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Downsell — Manual Cero Estrías ($27)</title>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: hidden; }
+
+    :root{
+      --bg:#0b0f14;
+      --card:#0f1621;
+      --text:#eaf0f6;
+      --muted:#b7c4d1;
+      --green:#19d27c;
+      --green2:#2ecc71;
+      --red:#ff3b3b;
+      --yellow:#ffd400;
+      --shadow: 0 22px 60px rgba(0,0,0,.45);
+    }
+
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(1200px 700px at 50% -10%, rgba(25,210,124,0.18), rgba(11,15,20,0) 55%), var(--bg);
+      color:var(--text);
+    }
+
+    .page{
+      width:100%;
+      padding:22px 14px 26px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:760px;
+      text-align:center;
+    }
+
+    /* 🔥 ALERTA "ERROR" */
+    .system-alert{
+      width:100%;
+      max-width:720px;
+      margin: 0 auto 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 212, 0, 0.12);
+      border: 1px solid rgba(255, 212, 0, 0.22);
+      color:#ffe37a;
+      font-weight: 1000;
+      font-size: 14px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.28);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Headline curta e violenta */
+    h1{
+      margin: 10px 0 10px;
+      font-size: 36px;
+      line-height: 1.05;
+      font-weight: 1000;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    .sub{
+      margin: 0 auto 18px;
+      max-width: 720px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .card{
+      max-width: 720px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 18px 14px 18px;
+      text-align:center;
+    }
+
+    /* Badge do cupom */
+    .coupon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(25,210,124,0.10);
+      border: 1px solid rgba(25,210,124,0.22);
+      color: #b9ffe0;
+      font-weight: 1000;
+      font-size: 13px;
+      margin: 0 auto 14px;
+      max-width: 100%;
+    }
+
+    .copy{
+      margin: 0 auto 14px;
+      max-width: 660px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #d2deea;
+      text-align:center;
+    }
+
+    .copy strong{ color:#ffffff; }
+
+    .strike{
+      display:inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255,59,59,.12);
+      border: 1px solid rgba(255,59,59,.22);
+      color:#ffb3b3;
+      font-weight: 1000;
+      font-size: 12px;
+      margin: 8px 0 6px;
+      letter-spacing:.4px;
+    }
+
+    .price{
+      margin: 12px auto 10px;
+      max-width: 560px;
+      background: rgba(25,210,124, 0.10);
+      border: 1px solid rgba(25,210,124, 0.22);
+      border-radius: 20px;
+      padding: 14px 14px 16px;
+    }
+
+    .old{
+      font-size: 14px;
+      opacity:.75;
+      font-weight:900;
+      margin-bottom: 8px;
+      color:#c7d3df;
+    }
+
+    .today{
+      font-size: 46px;
+      line-height: 1;
+      font-weight: 1000;
+      color: var(--green);
+      margin: 6px 0 10px;
+    }
+
+    .mini-note{
+      font-size: 12px;
+      font-weight: 1000;
+      opacity:.85;
+      margin-top: 0;
+      margin-bottom: 12px;
+      color:#d8e5f2;
+    }
+
+    @keyframes pulseCTA {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(18,183,106,0.55); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 18px rgba(18,183,106,0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(18,183,106,0); }
+    }
+
+    .pulse{ animation: pulseCTA 1.8s infinite; }
+
+    /* ⚠️ não mexer no botão (estilo vem do snippet que você manda) */
+    .btn{
+      background: linear-gradient(180deg, #19d27c, #12b76a);
+      color:#06110a;
+      border: 1px solid rgba(25,210,124,0.55);
+      border-radius: 999px;
+      padding: 13px 16px;
+      font-size: 18px;
+      font-weight: 1000;
+      cursor:pointer;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .decline{
+      margin-top: 10px;
+      font-size: 12px;
+      opacity: .78;
+      text-decoration: underline;
+      cursor: pointer;
+      font-family: sans-serif;
+      color:#b7c4d1;
+    }
+
+    .bullets{
+      margin: 16px auto 0;
+      max-width: 660px;
+      text-align:left;
+      display:grid;
+      gap:10px;
+      font-size: 14px;
+      color:#eaf0f6;
+    }
+
+    .bullets div{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      line-height: 1.35;
+    }
+
+    .check{
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(25,210,124,0.14);
+      border: 1px solid rgba(25,210,124,0.30);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex: 0 0 18px;
+      margin-top: 2px;
+      font-weight: 1000;
+      color:#19d27c;
+      font-size: 12px;
+    }
+
+    .guarantee{
+      margin: 16px auto 0;
+      max-width: 640px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(25,210,124,.22);
+      background: rgba(25,210,124,.08);
+      color:#b9ffe0;
+      font-weight:1000;
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .warning{
+      margin: 16px auto 0;
+      max-width: 720px;
+      background: rgba(255, 212, 0, 0.10);
+      border: 1px solid rgba(255, 212, 0, 0.20);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 1000;
+      color:#ffe37a;
+      font-size: 13px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.20);
+    }
+
+    @media (max-width:480px){
+      .page{ padding:18px 12px 22px; }
+      h1{ font-size:28px; }
+      .today{ font-size: 40px; }
+      .btn{ font-size: 17px; }
+    }
+      h1{ font-size:30px; }
+      .today{ font-size: 40px; }
+      .btn{ font-size: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="wrap">
+
+      <!-- ALERTA DE "ERRO" / EXCLUSIVIDADE -->
+      <div class="system-alert">⚠️ Espera… esto NO debería aparecer para ti (pero lo liberé igual)</div>
+
+      <!-- HEADLINE NOVA -->
+      <h1>CUPÓN FINAL ACTIVADO</h1>
+
+      <div class="sub">
+        No quiero que pierdas tu resultado por un detalle que casi nadie advierte.
+      </div>
+
+      <div class="card">
+<div class="copy">
+          <strong>Si tu piel ya fue estirada</strong> (abdomen, glúteos o ingles)…<br>
+          adelgazar sin preparar la zona puede dejar estrías visibles.
+          <br><br>
+          Por eso creé el <strong>Manual Cero Estrías</strong>:
+          una guía rápida y simple para aplicar en casa.
+        </div>
+
+        <div class="price">
+          <div class="strike">DESCUENTO FINAL (SOLO AHORA)</div>
+          <div class="old">Antes: <s>$300 USD</s></div>
+          <div class="today">Hoy: $27 USD</div>
+          <!-- BOTÃO (VOCÊ VAI MANDAR O SNIPPET DO $27) -->
+          <div style="text-align:center" id="kiwify-upsell-THnvl0o" data-upsell-url="https://healthlifeee.online/up03" data-downsell-url="https://healthlifeee.online/d3zc2">
+            <button id="kiwify-upsell-trigger-THnvl0o" class="btn pulse">
+              Sí, agregar el Manual por $27 (última oportunidad)
+            </button>
+            <div id="kiwify-upsell-cancel-trigger-THnvl0o" class="decline">No, prefiero arriesgarme a que me queden estrías</div>
+          </div>
+
+        </div>
+
+        <div class="bullets">
+          <div><span class="check">✓</span> Rutina rápida (3–5 min al día) después de la ducha</div>
+          <div><span class="check">✓</span> Paso a paso por zona (abdomen, glúteos e ingles)</div>
+          <div><span class="check">✓</span> Mezcla de aceites naturales (aplicación directa)</div>
+          <div><span class="check">✓</span> Guía simple, sin tratamientos caros</div>
+        </div>
+
+        <div class="guarantee">🛡️ Garantía de 30 días — Sin riesgos</div>
+
+      </div>
+
+      <div class="warning">⚠️ Si sales de esta página, el cupón desaparece.</div>
+
+    </div>
+  </div>
+
+  <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
+</body>
+</html>
 
