@@ -1,1 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Downsell — Manual Cero Estrías ($17)</title>
+
+  <style>
+    *, *::before, *::after{ box-sizing:border-box; }
+    html, body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background: var(--bg);
+    }
+
+    .page{
+      width:100%;
+      padding:18px 14px 22px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:720px;
+      text-align:center;
+    }
+
+    /* ALERTA SIMPLES */
+    .alertbar{
+      width:100%;
+      margin:0 auto 12px;
+      padding:12px 14px;
+      border-radius:12px;
+      background: #d72626;
+      border:1px solid #b51f1f;
+      color:#ffffff;
+      font-weight:1000;
+      font-size:14px;
+    }
+
+    /* HEADLINE SIMPLES */
+    h1{
+      margin: 6px 0 10px;
+      font-size: 30px;
+      line-height: 1.12;
+      font-weight: 1000;
+      letter-spacing: .2px;
+      color: #111111;
+    }
+
+    .sub{
+      margin: 0 auto 14px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    /* CARD ÚNICO */
+    .offer{
+      width:100%;
+      background: var(--card);
+      border: 1px solid #e6eaf0;
+      border-radius: 16px;
+      padding: 16px 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .badge{
+      display:inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(215, 38, 38, 0.08);
+      border: 1px solid rgba(215, 38, 38, 0.20);
+      color:#7a1b1b;
+      font-weight: 1000;
+      font-size: 12px;
+      margin: 0 auto 12px;
+      max-width: 100%;
+    }
+
+    .hook{
+      font-size: 14px;
+      line-height: 1.55;
+      color:#111111;
+      font-weight: 700;
+      margin: 0 auto 12px;
+    }
+
+    .hook b{ color:#111111; }
+
+    /* LISTA SIMPLES */
+    .list{
+      margin: 12px auto 0;
+      text-align:left;
+      display:grid;
+      gap:10px;
+      font-size: 14px;
+      color:#111111;
+    }
+
+    .item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      line-height: 1.35;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f6f8fb;
+      border: 1px solid #e6eaf0;
+    }
+
+    .dot{
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(39,175,96,0.14);
+      border: 1px solid rgba(39,175,96,0.28);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex: 0 0 18px;
+      margin-top: 2px;
+      font-weight: 1000;
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    /* PREÇO SIMPLES */
+    .pricebox{
+      margin: 14px auto 0;
+      width:100%;
+      background: rgba(215, 38, 38, 0.08);
+      border: 1px solid rgba(215, 38, 38, 0.20);
+      border-radius: 14px;
+      padding: 14px 12px;
+    }
+
+    .old{
+      font-size: 13px;
+      opacity:.9;
+      font-weight:900;
+      color:#7a1b1b;
+      margin-bottom: 6px;
+    }
+
+    .now{
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 1000;
+      color: #111111;
+      margin: 6px 0 10px;
+    }
+
+    @keyframes pulseCTA{
+      0%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(18,183,106,0.55); }
+      70%{ transform: scale(1.05); box-shadow: 0 0 0 18px rgba(18,183,106,0); }
+      100%{ transform: scale(1); box-shadow: 0 0 0 0 rgba(18,183,106,0); }
+    }
+
+    .pulse{ animation: pulseCTA 1.8s infinite; }
+
+    .btn{
+      background: linear-gradient(180deg, #27AF60, #1f9b54);
+      color:#ffffff;
+      border: 1px solid rgba(39,175,96,0.65);
+      border-radius: 6px;
+      padding: 13px 16px;
+      font-size: 17px;
+      font-weight: 900;
+      cursor:pointer;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .decline{
+      margin-top: 10px;
+      font-size: 12px;
+      opacity: .85;
+      text-decoration: underline;
+      cursor: pointer;
+      font-family: sans-serif;
+      color:#2b2b2b;
+    }
+
+    .guarantee{
+      margin: 14px auto 0;
+      width:100%;
+      padding:12px 14px;
+      border-radius: 12px;
+      border:1px solid #e6eaf0;
+      background: #f6f8fb;
+      color:#111111;
+      font-weight:900;
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .warning{
+      margin: 14px auto 0;
+      width:100%;
+      background: rgba(215, 38, 38, 0.08);
+      border: 1px solid rgba(215, 38, 38, 0.18);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-weight: 900;
+      color:#8a1b1b;
+      font-size: 13px;
+    }
+
+    @media (max-width:480px){
+      .page{ padding:16px 12px 20px; }
+      h1{ font-size:26px; }
+      .now{ font-size: 36px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="wrap">
+
+      <!-- 1) ALERTA DE “ACABÓ” -->
+      <div class="alertbar">🚨 Atención: tu descuento anterior fue rechazado. Esta es la última liberación disponible.</div>
+
+      <!-- 2) HEADLINE NUEVA (NADA DE “CIERRE FINAL POR $17”) -->
+      <h1>NO QUIERO QUE EMPIECES…<br>Y TE QUEDEN ESTRÍAS</h1>
+
+      <div class="sub">
+        Ya tienes el <b>Truco de la Gelatina</b>. Perfecto.
+        Ahora solo falta proteger tu piel <b>antes</b> de que el abdomen empiece a bajar.
+      </div>
+
+      <!-- 3) BLOQUE “SE ESTÁ CERRANDO” -->
+      <div class="closing-box">
+        <div class="closing-title">⛔ Aviso rápido (y muy serio):</div>
+        <div class="closing-line">
+          Este es el último precio que puedo liberar. No es una oferta pública.
+          Si sales de esta página, el sistema cierra el acceso y no vuelve a aparecer.
+        </div>
+      </div>
+
+      <!-- 4) OFERTA CON ESTRUCTURA TOTALMENTE DIFERENTE -->
+      <div class="offer">
+
+        <div class="badge">⚠️ ÚLTIMA LIBERACIÓN • Manual Cero Estrías</div>
+
+        <div class="hook">
+          Muchas mujeres creen que el problema es la grasa…
+          <br>
+          pero lo que más duele es cuando el cuerpo baja y la piel queda marcada.
+          <br><br>
+          Por eso creé el <b>Manual Cero Estrías</b>.
+          Es una guía simple para apoyar la apariencia de la piel en casa.
+        </div>
+
+        <!-- LISTA TOTALMENTE DIFERENTE -->
+        <div class="list">
+          <div class="item"><span class="dot">1</span> Qué hacer en las primeras semanas (cuando la piel empieza a cambiar)</div>
+          <div class="item"><span class="dot">2</span> Mezcla de aceites naturales + forma correcta de aplicar por zona</div>
+          <div class="item"><span class="dot">3</span> Enfoque directo en abdomen, glúteos e ingles</div>
+          <div class="item"><span class="dot">4</span> Rutina rápida (sin clínicas, sin cremas caras)</div>
+        </div>
+
+        <!-- PRECIO DIFERENTE (NO ES CAJA VERDE) -->
+        <div class="pricebox">
+          <div class="price-top">
+            <div class="chip">última oportunidad</div>
+            <div class="old">Antes: <s>$300 USD</s></div>
+          </div>
+
+          <div class="now">Hoy: $17 USD</div>
+          <div class="note">⚠️ Este cupón desaparece si rechazas otra vez.</div>
+
+          <!-- BOTÃO (VOCÊ VAI MANDAR O SNIPPET DO $17) -->
+          <div style="text-align:center" id="kiwify-upsell-c9Jj5Cc" data-upsell-url="https://healthlifeee.online/up03" data-downsell-url="https://healthlifeee.online/up03">
+            <button id="kiwify-upsell-trigger-c9Jj5Cc" class="btn pulse">Sí, quiero asegurar el precio mínimo de $17 ahora</button>
+            <div id="kiwify-upsell-cancel-trigger-c9Jj5Cc" class="decline">No, prefiero no proteger mi piel</div>
+          </div>
+        </div>
+
+        <div class="guarantee">🛡️ Garantía de 30 días — Sin riesgos</div>
+
+      </div>
+
+      <div class="warning">🚨 Si sales de esta página, el sistema cierra este precio y no vuelve a aparecer.</div>
+
+    </div>
+  </div>
+
+  <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
+</body>
+</html>
 
