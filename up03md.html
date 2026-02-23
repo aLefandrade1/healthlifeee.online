@@ -7,17 +7,23 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { overflow-x: hidden; }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: #eef3f6;
+}
 
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:#eef3f6;
-      color:#1f1f1f;
-    }
-
-    .page{
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  color:#1f1f1f;
+  min-height:100vh;
+}
+.page{
       width:100%;
+      min-height:100vh;
       padding:22px 14px 26px;
       display:flex;
       justify-content:center;
@@ -61,7 +67,6 @@
       border-radius:12px;
       overflow:hidden;
       background:transparent;
-      box-shadow:none;
       position:relative;
     }
 
@@ -89,15 +94,6 @@
     .pulse{
       animation: pulseCTA 1.8s infinite;
       transform-origin:center;
-    }
-
-    .decline-small{
-      font-size:11px;
-      margin-top:0.6rem;
-      cursor:pointer;
-      text-decoration:underline;
-      font-family:sans-serif;
-      opacity:0.7;
     }
 
     .desc{
@@ -156,11 +152,11 @@
         </div>
       </div>
 
-      <div style="opacity:.55; font-weight:800; font-size:14px; margin-top:6px;">tendrás acceso al grupo secreto</div>
-
-      <div style="text-align:center" id="kiwify-upsell-smLdTt8" data-upsell-url="" data-downsell-url="https://healthlifeee.online/dw4">
-        <button id="kiwify-upsell-trigger-smLdTt8" class="pulse" style="background-color:#2ECC70;padding:10px 14px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:999px;border:1px solid #2ECC70;font-size:18px;">Quiero soporte directo del Doctor en Whatsapp y el grupo</button>
-        <div id="kiwify-upsell-cancel-trigger-smLdTt8" class="decline-small">No, Prefiero continuar sola</div>
+      <!-- BOTÃO CHECKOUT -->
+      <div style="text-align:center; margin:18px 0 22px;">
+        <a href="https://pay.mycheckoutt.com/019c8202-41c2-731d-a385-4a614ede8748?ref=" target="_blank" class="pulse" style="display:inline-block; background-color:#2ECC71; padding:14px 22px; color:#FFFFFF; font-weight:800; border-radius:999px; border:1px solid #2ECC71; font-size:18px; text-decoration:none; max-width:360px; width:100%;">
+          Sí, quiero el soporte VIP ahora
+        </a>
       </div>
 
       <div class="desc">
@@ -171,7 +167,5 @@
 
     </div>
   </div>
-
-  <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 </body>
 </html>
