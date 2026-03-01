@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Upsell — Manual Cero Estrías</title>
 
+  <script src="https://upsell.mundpay.com/script-v2.js" defer async></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body { overflow-x: hidden; }
@@ -29,44 +31,6 @@
       text-align:center;
     }
 
-    /* 🔴 Top Bar */
-    .top-alert{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:12px 18px;
-      border-radius:14px;
-      background:linear-gradient(90deg,#e33b3b,#cf1f1f);
-      color:#fff;
-      font-weight:800;
-      font-size:14px;
-      box-shadow:0 10px 20px rgba(207,31,31,.18);
-      margin-bottom:18px;
-      max-width:100%;
-    }
-
-    /* 🟡 Headline amarela */
-    h1{
-      margin:8px 0 6px;
-      font-size:34px;
-      line-height:1.15;
-      font-weight:900;
-      color:#ffcc00;
-      letter-spacing:.2px;
-      text-shadow: 0 1px 0 rgba(0,0,0,.06);
-    }
-
-    .subhead{
-      margin: 0 auto 18px;
-      max-width: 680px;
-      font-size: 14px;
-      line-height: 1.45;
-      color:#3b4650;
-      font-weight:800;
-      opacity:.95;
-    }
-
     .video-card{
       width:100%;
       max-width:360px;
@@ -74,16 +38,13 @@
       border-radius:12px;
       overflow:hidden;
       background:#000;
-      box-shadow:none;
       position:relative;
     }
 
     .video-aspect{
       width:100%;
-      /* 9:16 (story) */
       padding-top:177.78%;
       position:relative;
-      background:transparent;
     }
 
     .video-aspect vturb-smartplayer{
@@ -94,69 +55,10 @@
       display:block;
     }
 
-    @keyframes pulseCTA {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46,204,113,0.60); }
-      70% { transform: scale(1.06); box-shadow: 0 0 0 18px rgba(46,204,113,0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46,204,113,0); }
-    }
-
-    .pulse{
-      animation: pulseCTA 1.8s infinite;
-      transform-origin:center;
-    }
-
-    .mini{
-      opacity:.55;
-      font-weight:800;
-      font-size:14px;
-      margin-top:6px;
-      margin-bottom:14px;
-    }
-
-    .decline-small{
-      font-size:11px;
-      margin-top:0.6rem;
-      cursor:pointer;
-      text-decoration:underline;
-      font-family:sans-serif;
-      opacity:0.7;
-    }
-
-    .desc{
-      margin:14px auto 16px;
-      max-width:640px;
-      font-size:14px;
-      line-height:1.55;
-      color:#214a35;
-      padding:14px 14px;
-      text-align:center;
-      background: rgba(46, 204, 113, 0.14);
-      border: 1px solid rgba(46, 204, 113, 0.28);
-      border-radius: 14px;
-    }
-
-    .desc p{ margin: 0 0 10px; }
-
-    .guarantee{
-      margin:0 auto;
-      max-width:640px;
-      padding:12px 14px;
-      border-radius:10px;
-      border:1.8px solid rgba(46,204,113,.55);
-      background:#eefaf3;
-      color:#2b6b48;
-      font-weight:800;
-      font-size:13px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-    }
-
+    
+    
     @media (max-width:480px){
       .page{ padding:18px 12px 22px; }
-      h1{ font-size:26px; line-height:1.2; }
-      .subhead{ font-size: 13px; }
       .desc{ font-size: 13.5px; }
     }
   </style>
@@ -181,29 +83,9 @@
         </div>
       </div>
 
-      <!-- 🟢 Botão Checkout -->
-      <div style="text-align:center; margin:18px 0 22px;">
-        <a href="https://pay.mycheckoutt.com/019c81fe-1648-726b-9e4e-9d847c050b03?ref=" target="_blank" class="pulse" style="display:inline-block; background-color:#2ECC70; padding:12px 18px; color:#FFFFFF; font-weight:900; border-radius:999px; border:1px solid #2ECC70; font-size:16px; text-decoration:none; max-width:360px; width:100%;">
-          Sí, quiero el Manual Cero Estrías ahora
-        </a>
-      </div>
+      <div data-mndpay-render="019ca86e-31ac-7283-b1cc-bcfe04b9c741"></div>
 
-      <!-- 📝 Texto explicativo -->
-      <div class="desc">
-        <p>Durante los próximos días, muchas mujeres notan que el abdomen baja…<br>
-        la ropa afloja… y la piel se ve más firme.</p>
-
-        <p><b>Pero hay un detalle que casi nadie advierte:</b></p>
-
-        <p>Cuando la piel ya fue estirada…<br>
-        las estrías pueden aparecer justo cuando estás más delgada.</p>
-
-        <p>Por eso creé el <b>Manual Cero Estrías</b>,<br>
-        una mezcla de aceites naturales que se aplica directamente en la zona.</p>
-      </div>
-
-      <!-- 🛡️ Garantía -->
-      <div class="guarantee">🛡️ Garantía de 30 días — Sin riesgos</div>
+      
 
     </div>
   </div>
