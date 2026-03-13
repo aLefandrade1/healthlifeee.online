@@ -1,171 +1,227 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Upsell 3 — Soporte VIP WhatsApp</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soporte VIP – Bella Piel</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://upsell.mundpay.com/script-v2.js" defer async></script>
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/69b39be3a10d9a398abbb410/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/69b39bcaa10d9a398abbb3e1/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  background: #eef3f6;
-}
+  body {
+    background: #0d0d0d;
+    font-family: 'Open Sans', sans-serif;
+    color: #f0e0e8;
+    overflow-x: hidden;
+  }
 
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  color:#1f1f1f;
-  min-height:100vh;
-}
-.page{
-      width:100%;
-      min-height:100vh;
-      padding:22px 14px 26px;
-      display:flex;
-      justify-content:center;
-    }
+  /* ── TOP ALERT — vermelho, mantido ── */
+  .top-alert {
+    background: #e53935;
+    color: #fff;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
 
-    .wrap{
-      width:100%;
-      max-width:760px;
-      text-align:center;
-    }
+  /* ── WRAPPER ── */
+  .wrapper {
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 36px 22px 64px;
+  }
 
-    .top-alert{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:12px 18px;
-      border-radius:12px;
-      background:linear-gradient(90deg,#e33b3b,#cf1f1f);
-      color:#fff;
-      font-weight:800;
-      font-size:14px;
-      box-shadow:0 10px 20px rgba(207,31,31,.18);
-      margin-bottom:18px;
-      max-width:100%;
-    }
+  /* ── VIDEO BOX ── */
+  .video-box {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(220,130,160,0.18);
+    background: #1a0f14;
+  }
 
-    h1{
-      margin:8px 0 18px;
-      font-size:34px;
-      line-height:1.15;
-      font-weight:900;
-      color:#2ecc71;
-      letter-spacing:.2px;
-    }
+  .video-box iframe,
+  .video-box video,
+  .video-box > * {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    border: none;
+  }
 
-    .video-card{
-      width:100%;
-      max-width:640px;
-      margin:0 auto 16px;
-      border-radius:12px;
-      overflow:hidden;
-      background:transparent;
-      position:relative;
-    }
+  .video-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: rgba(220,130,160,0.7);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    padding: 20px;
+  }
 
-    .video-aspect{
-      width:100%;
-      padding-top:56.25%;
-      position:relative;
-      background:transparent;
-    }
+  .play-icon {
+    width: 56px; height: 56px;
+    border: 1.5px solid rgba(220,130,160,0.45);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    color: rgba(220,130,160,0.6);
+  }
 
-    .video-aspect vturb-smartplayer{
-      position:absolute;
-      inset:0;
-      width:100% !important;
-      height:100% !important;
-      display:block;
-    }
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
 
-    @keyframes pulseCTA {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46,204,113,0.60); }
-      70% { transform: scale(1.06); box-shadow: 0 0 0 18px rgba(46,204,113,0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46,204,113,0); }
-    }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(220,130,160,0.3), transparent);
+  }
 
-    .pulse{
-      animation: pulseCTA 1.8s infinite;
-      transform-origin:center;
-    }
+  .divider span {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(220,130,160,0.55);
+    white-space: nowrap;
+    font-weight: 300;
+  }
 
-    .desc{
-      margin:12px auto 16px;
-      max-width:640px;
-      font-size:14px;
-      line-height:1.55;
-      color:#47525c;
-      padding:0 6px;
-    }
+  /* ── CTA LABEL ── */
+  .cta-label {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(220,130,160,0.55);
+    font-style: italic;
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
+  }
 
-    .desc b.green{ color:#2ecc71; }
+  /* ── MUNDPAY BUTTON WRAPPER ── */
+  .btn-wrapper {
+    margin-bottom: 14px;
+  }
 
-    .guarantee{
-      margin:0 auto;
-      max-width:640px;
-      padding:12px 14px;
-      border-radius:10px;
-      border:1.8px solid rgba(46,204,113,.55);
-      background:#eefaf3;
-      color:#2b6b48;
-      font-weight:800;
-      font-size:13px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-    }
+  /* ── DECLINE ── */
+  .decline-link {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-bottom: 36px;
+    letter-spacing: 0.02em;
+  }
 
-    @media (max-width:480px){
-      .page{ padding:18px 12px 22px; }
-      h1{ font-size:26px; line-height:1.2; }
-    }
-  </style>
+  .decline-link:hover { color: rgba(255,255,255,0.45); }
+
+  /* ── FOOTER TEXT ── */
+  .footer-text {
+    text-align: center;
+    font-size: 13.5px;
+    color: rgba(240,224,232,0.5);
+    line-height: 1.75;
+    margin-bottom: 22px;
+    font-weight: 300;
+    padding: 0 4px;
+  }
+
+  .footer-text strong {
+    color: #d882a0;
+    font-weight: 600;
+  }
+
+  /* ── GUARANTEE ── */
+  .guarantee {
+    border: 1px solid rgba(220,130,160,0.18);
+    border-radius: 10px;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 13.5px;
+    font-weight: 400;
+    color: rgba(220,130,160,0.6);
+    letter-spacing: 0.04em;
+    background: rgba(220,130,160,0.04);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .top-alert    { animation: fadeIn 0.4s ease 0.1s both; }
+  .video-box    { animation: fadeIn 0.6s ease 0.2s both; }
+  .divider      { animation: fadeIn 0.5s ease 0.4s both; }
+  .cta-label    { animation: fadeIn 0.5s ease 0.5s both; }
+  .btn-wrapper  { animation: fadeIn 0.6s ease 0.55s both; }
+  .decline-link { animation: fadeIn 0.5s ease 0.65s both; }
+  .footer-text  { animation: fadeIn 0.5s ease 0.7s both; }
+  .guarantee    { animation: fadeIn 0.5s ease 0.8s both; }
+
+  @media (max-width: 480px) {
+    .wrapper { padding: 28px 16px 52px; }
+  }
+</style>
 </head>
-
 <body>
-  <div class="page">
-    <div class="wrap">
 
-      <div class="top-alert">⚠️ Atención: tenemos algo aún más especial para ti.</div>
+<!-- TOPO: vermelho com headline mantido -->
+<div class="top-alert">
+  ⚠️ Atención: tenemos algo aún más especial para ti.
+</div>
 
-      <h1>Soporte VIP directo del Doctor en<br>WhatsApp, 24/7</h1>
+<div class="wrapper">
 
-      <div class="video-card">
-        <div class="video-aspect" id="video-slot">
-          <vturb-smartplayer id="vid-696003ccda723d6f86850984"></vturb-smartplayer>
-          <script type="text/javascript">
-            (function(){
-              var s = document.createElement("script");
-              s.src = "https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/696003ccda723d6f86850984/v4/player.js";
-              s.async = true;
-              document.head.appendChild(s);
-            })();
-          </script>
-        </div>
-      </div>
-
-      <!-- BOTÃO CHECKOUT -->
-      <div style="text-align:center; margin:18px 0 22px;">
-        <a href="https://pay.mycheckoutt.com/019c8202-41c2-731d-a385-4a614ede8748?ref=" target="_blank" class="pulse" style="display:inline-block; background-color:#2ECC71; padding:14px 22px; color:#FFFFFF; font-weight:800; border-radius:999px; border:1px solid #2ECC71; font-size:18px; text-decoration:none; max-width:360px; width:100%;">
-          Sí, quiero el soporte VIP ahora
-        </a>
-      </div>
-
-      <div class="desc">
-        Durante todo el día, todos los días, usted podrá hablar directamente con el Doctor por <b class="green">WhatsApp</b>.
-      </div>
-
-      <div class="guarantee">🛡️ Garantía de 30 días - Sin riesgos</div>
-
-    </div>
+  <!-- ═══════════════════════════════════
+       COLE SEU EMBED DE VÍDEO AQUI
+       ═══════════════════════════════════ -->
+  <div class="video-box">
+    <vturb-smartplayer id="vid-69b39be3a10d9a398abbb410" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>
+    <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/69b39be3a10d9a398abbb410/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
   </div>
+
+  <!-- BOTÃO MUNDPAY -->
+  <div class="btn-wrapper">
+    <div data-mndpay-render="019ce588-8eec-7120-b43c-3ef9d7ab2dcf"></div>
+  </div>
+
+  <div class="guarantee">
+    🛡️ Garantía de 30 días — Sin riesgos
+  </div>
+
+</div>
+
 </body>
 </html>
