@@ -51,7 +51,7 @@
       --cream: #ede8de;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: var(--bg); color: var(--ink); font-family: Arial, sans-serif; overflow-x: hidden; }
+    html, body { background: #ffffff; color: var(--ink); font-family: Arial, sans-serif; overflow-x: hidden; }
 
     /* ── UTILITY BAR ── */
     .utility-bar { background: var(--ink); color: #aaa; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 1px; display: flex; align-items: center; justify-content: space-between; padding: 5px 20px; }
@@ -60,7 +60,7 @@
     .utility-bar .tags a { color: #aaa; text-decoration: none; text-transform: uppercase; pointer-events: none; cursor: default; }
 
     /* ── MASTHEAD ── compacto */
-    .masthead { background: var(--paper); border-bottom: 3px solid var(--ink); }
+    .masthead { background: #ffffff; border-bottom: 3px solid var(--ink); }
     .masthead-inner { max-width: 780px; margin: 0 auto; padding: 10px 20px; display: flex; flex-direction: column; align-items: center; }
     .masthead-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 2px 10px; margin-bottom: 6px; }
     .masthead-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(32px, 8vw, 52px); font-weight: 900; letter-spacing: -1px; line-height: 1; color: var(--ink); text-align: center; }
@@ -85,11 +85,11 @@
     .article-headline em { font-style: italic; color: var(--red); font-weight: 900; }
 
     /* ── CONTADOR ── mais urgente */
-    .live-readers { display: flex; align-items: center; gap: 8px; background: #fff3f3; border-left: 4px solid var(--red); border-top: 1px solid #f5c6c6; border-bottom: 1px solid #f5c6c6; border-right: 1px solid #f5c6c6; padding: 9px 14px; margin-bottom: 12px; }
-    .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); animation: pulse 1.2s infinite; flex-shrink: 0; }
+    .live-readers { display: flex; align-items: center; gap: 6px; background: #fff3f3; border-left: 3px solid var(--red); padding: 6px 10px; margin-bottom: 12px; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: pulse 1.2s infinite; flex-shrink: 0; }
     @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.4); } }
-    .live-readers p { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: #333; }
-    .live-readers p strong { color: var(--red); font-size: 15px; }
+    .live-readers p { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; color: #333; }
+    .live-readers p strong { color: var(--red); font-size: 13px; }
     .live-readers p em { font-style: normal; font-weight: 700; color: var(--ink); }
 
     /* ── VSL ── */
@@ -125,21 +125,9 @@
 </head>
 <body>
 
-  <!-- UTILITY BAR -->
-  <div class="utility-bar">
-    <span class="date" id="live-date">Cargando fecha...</span>
-    <div class="tags">
-      <a href="javascript:void(0)">Nutrición</a>
-      <a href="javascript:void(0)">Hormonas</a>
-      <a href="javascript:void(0)">Peso &amp; Salud</a>
-      <a href="javascript:void(0)">Bienestar</a>
-    </div>
-  </div>
-
   <!-- MASTHEAD compacto -->
   <div class="masthead">
     <div class="masthead-inner">
-      <div class="masthead-eyebrow">Revista de Salud &amp; Bienestar Femenino</div>
       <div class="masthead-title">Salud <em>Al Día</em></div>
     </div>
   </div>
@@ -167,7 +155,7 @@
     <div class="article-header">
       <div class="article-section-label">Exclusivo · Salud Femenina</div>
       <h1 class="article-headline">
-        ¿Cómo puede un simple truco con <em>gelatina</em> derretir la grasa que años de sacrificio no pudieron? El Dr. Juan Rivera lo explica en este video
+        ¿Cómo puede un simple truco con <em>gelatina</em> derretir la grasa que años de sacrificio no pudieron? Descubre por qué funciona cuando nada más funcionó
       </h1>
     </div>
 
