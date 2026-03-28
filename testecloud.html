@@ -1,569 +1,947 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-ES">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ritual Bella Piel – Versión Esencial</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #F4FAF4;
-    --blush: #A8D5A2;
-    --rose: #2E7D32;
-    --deep: #1B4332;
-    --warm: #388E3C;
-    --light: #E8F5E9;
-    --gold: #66BB6A;
-    --text: #1B3A2B;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salud Al Día — Truco de la Gelatina</title>
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <!-- PRELOAD VTURB VELOCIDADE -->
+  <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+  <link rel="preload" href="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/ab-test/69c75a0fbf67b8a39f80735a/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://m3u8.vturb.net">
+  <link rel="dns-prefetch" href="https://api.vturb.com.br">
 
-  body {
-    background-color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text);
-    overflow-x: hidden;
-  }
+  <!-- UTMIFY -->
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-xcod-sck
+    data-utmify-prevent-subids
+    async
+    defer
+  ></script>
 
-  /* === NOISE TEXTURE OVERLAY === */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
+  <!-- PIXEL -->
+  <script>
+    window.pixelId = "68cac216526f0dc841486576";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
 
-  .wrapper {
-    position: relative;
-    z-index: 1;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-  }
-
-  /* === TOP BANNER === */
-  .top-banner {
-    background: linear-gradient(135deg, var(--rose), var(--deep));
-    color: #fff;
-    text-align: center;
-    padding: 12px 20px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  /* === EXIT INDICATOR === */
-  .exit-line {
-    text-align: center;
-    padding: 32px 0 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 600;
-    color: #CC0000;
-    text-shadow: 0 2px 12px rgba(204,0,0,0.18);
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.2s forwards;
-  }
-
-  /* === HEADLINE BLOCK === */
-  .headline-block {
-    text-align: center;
-    padding: 0 0 28px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.4s forwards;
-  }
-
-  .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--rose);
-    font-weight: 500;
-    margin-bottom: 14px;
-  }
-
-  .headline-block h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 6vw, 52px);
-    font-weight: 300;
-    line-height: 1.2;
-    color: var(--deep);
-    margin-bottom: 10px;
-  }
-
-  .headline-block h1 em {
-    font-style: italic;
-    color: var(--rose);
-  }
-
-  .headline-block h1 strong {
-    font-weight: 600;
-  }
-
-  /* === DIVIDER === */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 6px 0 16px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.6s forwards;
-  }
-
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--blush), transparent);
-  }
-
-  .divider-icon {
-    font-size: 20px;
-    color: var(--gold);
-  }
-
-  /* === STORY SECTION === */
-  .story {
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.7s forwards;
-  }
-
-  .story p {
-    font-size: 16.5px;
-    line-height: 1.8;
-    color: var(--text);
-    margin-bottom: 18px;
-  }
-
-  .story .highlight-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-style: italic;
-    color: var(--deep);
-    background: var(--light);
-    border-left: 3px solid var(--rose);
-    padding: 18px 24px;
-    margin: 28px 0;
-    border-radius: 0 8px 8px 0;
-    line-height: 1.5;
-  }
-
-  /* === AREAS BLOCK === */
-  .areas-block {
-    background: linear-gradient(135deg, var(--light), var(--cream));
-    border: 1px solid var(--blush);
-    border-radius: 16px;
-    padding: 30px;
-    margin: 28px 0;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.9s forwards;
-  }
-
-  .areas-block p.intro {
-    font-size: 16px;
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  .areas-list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .areas-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--deep);
-  }
-
-  .areas-list li::before {
-    content: '✦';
-    color: var(--rose);
-    font-size: 12px;
-    flex-shrink: 0;
-  }
-
-  /* === SOLUTION SECTION === */
-  .solution {
-    opacity: 0;
-    animation: fadeUp 0.7s ease 1.0s forwards;
-    margin: 28px 0;
-  }
-
-  .solution p {
-    font-size: 16.5px;
-    line-height: 1.8;
-    margin-bottom: 18px;
-  }
-
-  /* === WHAT YOU GET === */
-  .what-you-get {
-    background: var(--deep);
-    color: var(--cream);
-    border-radius: 20px;
-    padding: 36px 34px;
-    margin: 32px 0;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 1.1s forwards;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .what-you-get::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(46,125,50,0.25), transparent 70%);
-    border-radius: 50%;
-  }
-
-  .what-you-get h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
-    font-weight: 400;
-    margin-bottom: 22px;
-    color: var(--blush);
-    font-style: italic;
-  }
-
-  .get-items {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .get-items li {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    font-size: 15.5px;
-    line-height: 1.5;
-  }
-
-  .get-items li .dot {
-    width: 22px; height: 22px;
-    background: var(--rose);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-    font-size: 11px;
-    color: white;
-    font-weight: 700;
-  }
-
-  .no-items {
-    margin-top: 20px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(168,213,162,0.35);
-    font-size: 14px;
-    color: rgba(244,250,244,0.60);
-    font-style: italic;
-    line-height: 1.6;
-  }
-
-  /* === PRICE BLOCK === */
-  .price-block {
-    text-align: center;
-    padding: 36px 20px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 1.2s forwards;
-  }
-
-  .price-label {
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--warm);
-    margin-bottom: 10px;
-  }
-
-  .price-main {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 10vw, 80px);
-    font-weight: 300;
-    color: var(--deep);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .price-main sup {
-    font-size: 32px;
-    vertical-align: top;
-    margin-top: 12px;
-    display: inline-block;
-    color: var(--rose);
-  }
-
-  .price-note {
-    font-size: 14px;
-    color: var(--warm);
-    margin-bottom: 32px;
-  }
-
-  /* === CTA BUTTON === */
-  .cta-btn {
-    display: block;
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto 16px;
-    padding: 20px 32px;
-    background: linear-gradient(135deg, #2E7D32, #1B5E20);
-    color: #fff;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-align: center;
-    border: none;
-    border-radius: 60px;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 8px 30px rgba(46,125,50,0.45);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-btn::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .cta-btn:hover::before { left: 100%; }
-  .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 40px rgba(46,125,50,0.55);
-  }
-
-  .cta-sub {
-    font-size: 12px;
-    color: var(--warm);
-    text-align: center;
-    margin-bottom: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .cta-sub::before, .cta-sub::after {
-    content: '🔒';
-    font-size: 13px;
-  }
-
-  /* === DECLINE LINK === */
-  .decline {
-    display: block;
-    text-align: center;
-    font-size: 13px;
-    color: #aaa;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-    max-width: 300px;
-    margin: 0 auto;
-    line-height: 1.5;
-    cursor: pointer;
-  }
-
-  .decline:hover {
-    color: var(--warm);
-    border-color: var(--blush);
-  }
-
-  /* === TRUST BADGES === */
-  .trust-row {
-    display: flex;
-    justify-content: center;
-    gap: 28px;
-    flex-wrap: wrap;
-    padding: 28px 0 0;
-    border-top: 1px solid var(--blush);
-    margin-top: 28px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 1.4s forwards;
-  }
-
-  .trust-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    font-size: 11.5px;
-    color: var(--warm);
-    letter-spacing: 0.05em;
-    text-align: center;
-  }
-
-  .trust-item span.icon {
-    font-size: 22px;
-  }
-
-  /* === ANIMATIONS === */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* === PULSE CTA === */
-  @keyframes pulse {
-    0%, 100% { 
-      box-shadow: 0 8px 30px rgba(46,125,50,0.45);
-      transform: scale(1);
+  <!-- BACK REDIRECT -->
+  <script>
+    const link = 'https://healthlifeee.online/gelaredy';
+    function setBackRedirect(url) {
+      let urlBackRedirect = url.trim() + (url.indexOf('?') > 0 ? '&' : '?') + document.location.search.replace('?','').toString();
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      window.addEventListener('popstate', () => { setTimeout(() => { location.href = urlBackRedirect; }, 1); });
     }
-    50% { 
-      box-shadow: 0 12px 40px rgba(46,125,50,0.65);
-      transform: scale(1.025);
+    setBackRedirect(link);
+  </script>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red:     #c0392b;
+      --red-dark:#9b2318;
+      --ink:     #1a1a1a;
+      --muted:   #555;
+      --rule:    #1a1a1a;
+      --bg:      #f5f0e8;
+      --paper:   #faf7f2;
+      --cream:   #ede8de;
     }
-  }
 
-  .cta-btn { animation: pulse 2.2s ease-in-out infinite; }
-  .cta-btn:hover { animation: none; transform: translateY(-2px); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* === MOBILE === */
-  @media (max-width: 480px) {
-    .areas-list { grid-template-columns: 1fr; }
-    .what-you-get { padding: 28px 22px; }
-    .trust-row { gap: 18px; }
-  }
-</style>
+    html, body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════════
+       TOPO — BARRA UTILITÁRIA
+    ══════════════════════════════════ */
+    .utility-bar {
+      background: var(--ink);
+      color: #aaa;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 20px;
+    }
+
+    .utility-bar .date { color: #ccc; }
+    .utility-bar .tags { display: flex; gap: 14px; }
+    .utility-bar .tags a {
+      color: #aaa;
+      text-decoration: none;
+      text-transform: uppercase;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ══════════════════════════════════
+       MASTHEAD
+    ══════════════════════════════════ */
+    .masthead {
+      background: var(--paper);
+      border-bottom: 3px solid var(--ink);
+      padding: 0;
+    }
+
+    .masthead-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 18px 20px 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .masthead-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      border-top: 2px solid var(--red);
+      border-bottom: 1px solid var(--red);
+      padding: 3px 12px;
+      margin-bottom: 10px;
+    }
+
+    .masthead-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(42px, 10vw, 82px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    .masthead-title em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .masthead-tagline {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    .masthead-rule {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 14px;
+    }
+
+    .masthead-rule span {
+      flex: 1;
+      height: 1px;
+      background: var(--ink);
+    }
+
+    .masthead-rule strong {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0 14px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* NAV */
+    .nav-bar {
+      background: var(--ink);
+      width: 100%;
+    }
+
+    .nav-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-inner::-webkit-scrollbar { display: none; }
+
+    .nav-inner a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #ccc;
+      text-decoration: none;
+      padding: 9px 16px;
+      white-space: nowrap;
+      border-right: 1px solid #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .nav-inner a.active { background: var(--red); color: #fff; }
+
+    /* ══════════════════════════════════
+       BREAKING TICKER
+    ══════════════════════════════════ */
+    .breaking-bar {
+      background: var(--red);
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .breaking-label {
+      background: var(--ink);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .ticker-scroll {
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: ticker 45s linear infinite;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: #fff;
+      padding: 7px 0;
+    }
+
+    .ticker-track span { padding-right: 60px; }
+    .ticker-track span::before { content: "◆  "; opacity: 0.7; font-size: 9px; }
+
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ══════════════════════════════════
+       ARTIGO — HEADLINE AREA
+    ══════════════════════════════════ */
+    .article-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .article-header {
+      padding: 28px 0 20px 0;
+      border-bottom: 3px double var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .article-section-label {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--red);
+      padding: 3px 10px;
+      margin-bottom: 12px;
+    }
+
+    .article-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(26px, 6vw, 42px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .article-headline em { font-style: italic; color: var(--red); }
+
+    .article-deck {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.5;
+      color: #333;
+      border-left: 3px solid var(--red);
+      padding-left: 14px;
+      margin-bottom: 14px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .article-byline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+    }
+
+    .article-byline strong { color: var(--ink); }
+
+    .article-timestamp {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      color: #999;
+      letter-spacing: 0.5px;
+    }
+
+    .share-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #e8f5e9;
+      border: 1px solid #b2dfdb;
+      color: #2e7d32;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    /* Leitores ao vivo */
+    .live-readers {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--cream);
+      border: 1px solid #d0c9bc;
+      padding: 8px 14px;
+      margin-bottom: 20px;
+      border-radius: 2px;
+    }
+
+    .live-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulse 1.4s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .live-readers p {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      color: var(--ink);
+    }
+
+    .live-readers p strong { color: var(--red); font-size: 15px; }
+
+    /* ══════════════════════════════════
+       VSL
+    ══════════════════════════════════ */
+    .vsl-wrap {
+      background: #000;
+      margin: 0 -20px;
+      padding: 0;
+      position: relative;
+    }
+
+    .vsl-caption {
+      background: var(--ink);
+      color: #ccc;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 12px;
+      padding: 8px 20px;
+      text-align: center;
+      border-top: 2px solid var(--red);
+    }
+
+    .vsl-caption strong { color: #fff; font-style: normal; }
+
+    /* ══════════════════════════════════
+       COMENTÁRIOS — estilo jornal
+    ══════════════════════════════════ */
+    .comments-wrap {
+      margin-top: 32px;
+      padding-bottom: 40px;
+    }
+
+    .comments-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .comments-header h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .comments-count {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      background: var(--ink);
+      color: #fff;
+      padding: 3px 9px;
+      border-radius: 2px;
+    }
+
+    .comment-item {
+      display: flex;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid #d8d0c4;
+    }
+
+    .comment-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ccc;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid var(--cream);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+    }
+
+    .av1  { background-image: url('https://i.postimg.cc/L6TsBSN7/15.png'); }
+    .av2  { background-image: url('https://i.postimg.cc/Nfgs0VBF/14.png'); }
+    .av3  { background-image: url('https://i.postimg.cc/yx7Hkg4z/13.png'); }
+    .av4  { background-image: url('https://i.postimg.cc/7Z5yGrcG/12.png'); }
+    .av5  { background-image: url('https://i.postimg.cc/g03Q8zHQ/11.png'); }
+    .av6  { background-image: url('https://i.postimg.cc/VkCVPfpF/10.png'); }
+    .av7  { background-image: url('https://i.postimg.cc/bJJ08LrT/09.png'); }
+    .av8  { background-image: url('https://i.postimg.cc/2jgtcL9K/08.png'); }
+    .av9  { background-image: url('https://i.postimg.cc/qRzmQpsr/07.png'); }
+    .av10 { background-image: url('https://i.postimg.cc/c4QFF9nv/06.png'); }
+    .av11 { background-image: url('https://i.postimg.cc/TPH0KBzW/05.png'); }
+    .av12 { background-image: url('https://i.postimg.cc/vT5tSTcg/04.png'); }
+    .av13 { background-image: url('https://i.postimg.cc/9QLtkvFf/03.png'); }
+    .av14 { background-image: url('https://i.postimg.cc/XJCfpqKh/02.png'); }
+    .av15 { background-image: url('https://i.postimg.cc/8PDRz17Z/01.png'); }
+
+    .comment-body {}
+
+    .comment-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .comment-text {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #222;
+      margin-bottom: 6px;
+    }
+
+    .comment-footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .comment-like {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .comment-like img {
+      width: 13px;
+      height: 13px;
+      opacity: 0.7;
+    }
+
+    .comment-time {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      color: #999;
+      letter-spacing: 0.5px;
+    }
+
+    .comments-closed-notice {
+      margin-top: 18px;
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: #999;
+      border: 1px dashed #ccc;
+      padding: 10px;
+    }
+
+    /* ══════════════════════════════════
+       SIDEBAR FAKE (desktop ornamento)
+    ══════════════════════════════════ */
+    .related-box {
+      background: var(--cream);
+      border: 1px solid #d0c9bc;
+      border-left: 4px solid var(--red);
+      padding: 16px;
+      margin: 24px 0;
+    }
+
+    .related-box h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .related-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid #d0c9bc;
+    }
+
+    .related-item:last-child { border-bottom: none; }
+
+    .related-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: #ccc;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 28px;
+    }
+
+    .related-text {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 13px;
+      line-height: 1.4;
+      color: #333;
+    }
+
+    /* ══════════════════════════════════
+       FOOTER
+    ══════════════════════════════════ */
+    .footer-top {
+      background: var(--ink);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .footer-top .ft-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .footer-top .ft-logo em { color: var(--red); font-style: italic; }
+
+    .footer-top .ft-tagline {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .footer-bottom {
+      background: #111;
+      color: #555;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      line-height: 1.8;
+      text-align: center;
+      padding: 16px 20px;
+    }
+
+    .footer-bottom a { color: #777; text-decoration: underline; }
+    .footer-bottom strong { color: #888; }
+  </style>
 </head>
 <body>
 
-<div class="top-banner">⏳ Oferta disponible solo en esta página — por tiempo limitado</div>
-
-<div class="wrapper">
-
-  <p class="exit-line">Antes de irte, lee esto con atención…</p>
-
-  <div class="headline-block">
-
-
+  <!-- ── UTILITY BAR ── -->
+  <div class="utility-bar">
+    <span class="date" id="live-date">Cargando fecha...</span>
+    <div class="tags">
+      <a href="javascript:void(0)">Nutrición</a>
+      <a href="javascript:void(0)">Hormonas</a>
+      <a href="javascript:void(0)">Peso &amp; Salud</a>
+      <a href="javascript:void(0)">Bienestar</a>
+    </div>
   </div>
 
-  <div class="divider"><span class="divider-icon">✦</span></div>
-
-  <div class="story">
-    <p>
-      En las últimas semanas, muchas mujeres me enviaron mensajes emocionadas diciendo que el Ritual Bella Piel había transformado su piel — adelgazaron, la piel se volvió más firme, las estrías comenzaron a desaparecer...
-    </p>
-
-    <div class="highlight-quote">
-      "Adelgacé… la piel se volvió más firme… hasta las estrías comenzaron a mejorar."
+  <!-- ── MASTHEAD ── -->
+  <div class="masthead">
+    <div class="masthead-inner">
+      <div class="masthead-eyebrow">Revista de Salud & Bienestar Femenino</div>
+      <div class="masthead-title">Salud <em>Al Día</em></div>
+      <div class="masthead-tagline">La verdad sobre tu cuerpo — sin filtros, sin rodeos</div>
+      <div class="masthead-rule">
+        <span></span>
+        <strong>Est. 2018 · Ed. Digital</strong>
+        <span></span>
+      </div>
     </div>
 
-    <p>
-      Pero había <strong>un detalle que aún molestaba.</strong> Un punto que ninguna crema de farmacia resuelve. Que ninguna loción genérica se acerca siquiera a tratar.
-    </p>
+
   </div>
 
-  <div class="areas-block">
-    <p class="intro">
-      Las <strong>manchas oscuras en áreas delicadas</strong> — esas que escondemos pero que tanto nos molestan:
-    </p>
-    <ul class="areas-list">
-      <li>Axilas</li>
-      <li>Ingle</li>
-      <li>Parte interna de los muslos</li>
-      <li>Zona íntima</li>
-    </ul>
-  </div>
-
-  <div class="solution">
-    <p>
-      Entonces hice algo diferente. En lugar de ofrecer el Ritual Bella Piel completo, <strong>separé solo la parte esencial del método</strong> — la que trata específicamente esas áreas.
-    </p>
-    <p>
-      Una versión reducida, enfocada, y por eso mucho más accesible.
-    </p>
-  </div>
-
-  <div class="what-you-get">
-    <h2>Lo que recibes hoy:</h2>
-    <ul class="get-items">
-      <li>
-        <div class="dot">✓</div>
-        <span><strong>La mezcla natural</strong> — los ingredientes exactos usados en el ritual para uniformizar la piel en esas zonas</span>
-      </li>
-      <li>
-        <div class="dot">✓</div>
-        <span><strong>Cómo preparar</strong> — el paso a paso correcto para activar las propiedades de la fórmula</span>
-      </li>
-      <li>
-        <div class="dot">✓</div>
-        <span><strong>Cómo aplicar</strong> — la técnica de aplicación que potencia los resultados en las áreas delicadas</span>
-      </li>
-    </ul>
-    <p class="no-items">
-      Sin el resto del contenido. Sin la guía adicional.<br>
-      Solo la parte principal del ritual — y por eso el precio es este.
-    </p>
-  </div>
-
-  <div class="price-block">
-    <p class="price-label">Acceso inmediato por solo</p>
-    <div class="price-main">
-      <sup>$</sup>27
-    </div>
-    <p class="price-note">Pago único · Acceso inmediato · 100% digital</p>
-
-    <!-- Kiwify upsell wrapper (oculto) — mantiene los IDs necesarios para que el script funcione -->
-    <div id="kiwify-upsell-HOdFi2K" data-upsell-url="" data-downsell-url="" style="display:none;">
-      <button id="kiwify-upsell-trigger-HOdFi2K"></button>
-      <div id="kiwify-upsell-cancel-trigger-HOdFi2K"></div>
-    </div>
-    <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
-
-    <a href="#" class="cta-btn" onclick="document.getElementById('kiwify-upsell-trigger-HOdFi2K').click(); return false;">
-      ✦ &nbsp;Sí, quiero la versión esencial&nbsp; ✦
-    </a>
-
-    <p class="cta-sub">Compra 100% segura y protegida</p>
-
-    <a href="#" class="decline" onclick="document.getElementById('kiwify-upsell-cancel-trigger-HOdFi2K').click(); return false;">
-      No, prefiero continuar sin esto.
-    </a>
-
-    <div class="trust-row">
-      <div class="trust-item">
-        <span class="icon">🔒</span>
-        Pago Seguro
-      </div>
-      <div class="trust-item">
-        <span class="icon">⚡</span>
-        Acceso Inmediato
-      </div>
-      <div class="trust-item">
-        <span class="icon">📱</span>
-        100% Digital
-      </div>
-      <div class="trust-item">
-        <span class="icon">✦</span>
-        Método Natural
+  <!-- ── BREAKING TICKER ── -->
+  <div class="breaking-bar">
+    <div class="breaking-label">🔴 EN VIVO</div>
+    <div class="ticker-scroll">
+      <div class="ticker-track">
+        <span>Médica revela por qué Ozempic y Mounjaro producen el efecto rebote</span>
+        <span>Miles de mujeres hispanas ya probaron el Truco de la Gelatina</span>
+        <span>GLP-1 natural: el aminoácido que activa tus hormonas sin inyecciones</span>
+        <span>Estudio confirma que la grasa abdominal está ligada a hormonas dormidas</span>
+        <span>El Dr. Juan Rivera explica el método que los laboratorios prefieren que no sepas</span>
+        <span>Médica revela por qué Ozempic y Mounjaro producen el efecto rebote</span>
+        <span>Miles de mujeres hispanas ya probaron el Truco de la Gelatina</span>
+        <span>GLP-1 natural: el aminoácido que activa tus hormonas sin inyecciones</span>
+        <span>Estudio confirma que la grasa abdominal está ligada a hormonas dormidas</span>
+        <span>El Dr. Juan Rivera explica el método que los laboratorios prefieren que no sepas</span>
       </div>
     </div>
   </div>
 
-</div>
+  <!-- ── ARTICLE AREA ── -->
+  <div class="article-wrap">
+
+    <div class="article-header">
+      <div class="article-section-label">Exclusivo · Salud Femenina</div>
+      <h1 class="article-headline">
+        El Dr. Juan Rivera descubrió el <em>Truco de la Gelatina</em> para despertar las hormonas que queman grasa sin dieta
+      </h1>
+
+      <div class="article-meta">
+        <span class="article-byline">Por <strong>Redacción Salud Al Día</strong></span>
+        <span class="article-timestamp" id="art-date">—</span>
+        <span class="share-pill">🤝 Compartido 14.2K veces</span>
+      </div>
+    </div>
+
+    <!-- LIVE READERS -->
+    <div class="live-readers">
+      <div class="live-dot"></div>
+      <p>Tú y <strong><span id="liveCount">510</span></strong> personas están leyendo este artículo ahora mismo.</p>
+    </div>
+
+    <!-- VSL -->
+    <div class="vsl-wrap">
+      <vturb-smartplayer id="ab-69c75a0fbf67b8a39f80735a" style="display:block; margin:0 auto; width:100%;"></vturb-smartplayer>
+      <script type="text/javascript">
+        var s = document.createElement("script");
+        s.src = "https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/ab-test/69c75a0fbf67b8a39f80735a/player.js";
+        s.async = !0;
+        document.head.appendChild(s);
+      </script>
+      <div class="vsl-caption">
+        <strong>VIDEO EXCLUSIVO:</strong> Mira el reporte completo antes de que sea eliminado — la presentación dura tiempo limitado.
+      </div>
+    </div>
+
+
+
+    <!-- ── COMENTARIOS ── -->
+    <div class="comments-wrap">
+      <div class="comments-header">
+        <h2>Comentarios</h2>
+        <span class="comments-count">15</span>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av1"></div>
+        <div class="comment-body">
+          <div class="comment-name">Elena Morales</div>
+          <div class="comment-text">Cuando explicó lo de las hormonas GLP-1 y GIP sentí que por fin alguien decía la verdad. Ahora entiendo por qué nada me funcionaba antes.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 241</span>
+            <span class="comment-time">Hace 1 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av2"></div>
+        <div class="comment-body">
+          <div class="comment-name">Clara Domínguez</div>
+          <div class="comment-text">Yo usé Ozempic y recuperé todo el peso después. Esto de activar las hormonas de forma natural con la gelatina tiene muchísimo más sentido.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 198</span>
+            <span class="comment-time">Hace 2 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av3"></div>
+        <div class="comment-body">
+          <div class="comment-name">Sofía Herrera</div>
+          <div class="comment-text">Lo que contó sobre Adamari me hizo llorar. Yo también me sentía derrotada por mi cuerpo… ahora tengo esperanza otra vez.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 227</span>
+            <span class="comment-time">Hace 3 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av4"></div>
+        <div class="comment-body">
+          <div class="comment-name">Camila Rojas</div>
+          <div class="comment-text">Siempre pensé que mi problema era la falta de fuerza de voluntad. Hoy entendí que era hormonal, no psicológico.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 184</span>
+            <span class="comment-time">Hace 4 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av5"></div>
+        <div class="comment-body">
+          <div class="comment-name">Amalia García</div>
+          <div class="comment-text">Empecé el truco de la gelatina hace 9 días y ya noto menos hinchazón y cero ansiedad por dulce.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 263</span>
+            <span class="comment-time">Hace 5 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av6"></div>
+        <div class="comment-body">
+          <div class="comment-name">Julieta Blanco</div>
+          <div class="comment-text">Trabajo en clínica y lo que dijo sobre el rebote del Mounjaro es real. Lo veo todos los días.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 301</span>
+            <span class="comment-time">Hace 6 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av7"></div>
+        <div class="comment-body">
+          <div class="comment-name">Chloe Fuentes</div>
+          <div class="comment-text">La parte de las hormonas dormidas fue una bomba para mí. Ahora todo encaja.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 215</span>
+            <span class="comment-time">Hace 7 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av8"></div>
+        <div class="comment-body">
+          <div class="comment-name">Ana Lucía León</div>
+          <div class="comment-text">Después de los 40 nada me funcionaba… esto explica exactamente por qué.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 192</span>
+            <span class="comment-time">Hace 8 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av9"></div>
+        <div class="comment-body">
+          <div class="comment-name">Matilde Carrión</div>
+          <div class="comment-text">Le mandé este video a mi hermana. Las dos estamos empezando hoy mismo.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 178</span>
+            <span class="comment-time">Hace 9 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av10"></div>
+        <div class="comment-body">
+          <div class="comment-name">Beatriz Marchán</div>
+          <div class="comment-text">Por primera vez siento que no tengo que sufrir para adelgazar. Esto cambia todo.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 256</span>
+            <span class="comment-time">Hace 10 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av11"></div>
+        <div class="comment-body">
+          <div class="comment-name">Helena Reynoso</div>
+          <div class="comment-text">La explicación sobre por qué la grasa vuelve después de las inyecciones fue brutalmente honesta.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 289</span>
+            <span class="comment-time">Hace 11 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av12"></div>
+        <div class="comment-body">
+          <div class="comment-name">Noemí Peletier</div>
+          <div class="comment-text">Nunca había entendido la ciencia detrás de adelgazar. Ahora sí.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 201</span>
+            <span class="comment-time">Hace 12 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av13"></div>
+        <div class="comment-body">
+          <div class="comment-name">Virginia Lamas</div>
+          <div class="comment-text">Esto no es otro truco más… se nota que hay investigación real detrás.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 233</span>
+            <span class="comment-time">Hace 13 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av14"></div>
+        <div class="comment-body">
+          <div class="comment-name">Lucía Bernal</div>
+          <div class="comment-text">La historia del vestido que no cerraba me rompió por dentro. Es exactamente mi vida.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 174</span>
+            <span class="comment-time">Hace 14 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-avatar av15"></div>
+        <div class="comment-body">
+          <div class="comment-name">Mariana Lefevre</div>
+          <div class="comment-text">Si esto funciona como explica, es el fin de las dietas y las inyecciones.</div>
+          <div class="comment-footer">
+            <span class="comment-like"><img src="https://i.postimg.cc/wTCDvX90/R.png" alt=""> 318</span>
+            <span class="comment-time">Hace 15 h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comments-closed-notice">
+        🔒 Los comentarios están cerrados en este artículo.
+      </div>
+    </div>
+
+  </div><!-- /article-wrap -->
+
+  <!-- ── FOOTER ── -->
+  <div class="footer-top">
+    <div class="ft-logo">Salud <em>Al Día</em></div>
+    <div class="ft-tagline">Periodismo de salud independiente para la mujer hispana</div>
+  </div>
+
+  <div class="footer-bottom">
+    <strong>Copyright 2025 — TRUCO DE LA GELATINA®</strong> · Todos los derechos reservados<br>
+    <a href="javascript:void(0)">Términos de Uso</a> &nbsp;·&nbsp; <a href="javascript:void(0)">Política de Privacidad</a><br><br>
+    Este sitio no forma parte de Facebook™ ni de Meta Platforms, Inc., y NO está respaldado por ellos.<br>
+    La información presentada tiene fines educativos y no constituye asesoramiento médico. Los resultados pueden variar de una persona a otra.
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Data dinâmica
+    (function(){
+      const d = new Date();
+      const days   = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+      const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+      const str = days[d.getDay()] + ', ' + d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
+      const el = document.getElementById('live-date');
+      const el2 = document.getElementById('art-date');
+      if(el) el.textContent = str;
+      if(el2) el2.textContent = str;
+    })();
+
+    // Contador ao vivo
+    (function(){
+      var el = document.getElementById('liveCount');
+      if(!el) return;
+      var current = 510, min = 480, max = 680;
+      function update(){
+        var biasUp = Math.random() < 0.65;
+        var delta  = Math.floor(Math.random() * 6) + 1;
+        if(biasUp){ current += delta; } else { current -= delta; }
+        if(current < min) current = min + Math.floor(Math.random() * 10);
+        if(current > max) current = max - Math.floor(Math.random() * 10);
+        el.textContent = current;
+      }
+      setInterval(update, 3500);
+    })();
+  </script>
 
 </body>
 </html>
