@@ -41,7 +41,6 @@
       text-align:center;
     }
 
-    /* 🔥 ALERTA "ERROR" */
     .system-alert{
       width:100%;
       max-width:720px;
@@ -57,7 +56,6 @@
       backdrop-filter: blur(8px);
     }
 
-    /* Headline curta e violenta */
     h1{
       margin: 10px 0 10px;
       font-size: 36px;
@@ -86,23 +84,6 @@
       box-shadow: var(--shadow);
       padding: 18px 14px 18px;
       text-align:center;
-    }
-
-    /* Badge do cupom */
-    .coupon{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(25,210,124,0.10);
-      border: 1px solid rgba(25,210,124,0.22);
-      color: #b9ffe0;
-      font-weight: 1000;
-      font-size: 13px;
-      margin: 0 auto 14px;
-      max-width: 100%;
     }
 
     .copy{
@@ -154,15 +135,6 @@
       margin: 6px 0 10px;
     }
 
-    .mini-note{
-      font-size: 12px;
-      font-weight: 1000;
-      opacity:.85;
-      margin-top: 0;
-      margin-bottom: 12px;
-      color:#d8e5f2;
-    }
-
     @keyframes pulseCTA {
       0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(18,183,106,0.55); }
       70% { transform: scale(1.05); box-shadow: 0 0 0 18px rgba(18,183,106,0); }
@@ -170,20 +142,6 @@
     }
 
     .pulse{ animation: pulseCTA 1.8s infinite; }
-
-    /* ⚠️ não mexer no botão (estilo vem do snippet que você manda) */
-    .btn{
-      background: linear-gradient(180deg, #19d27c, #12b76a);
-      color:#06110a;
-      border: 1px solid rgba(25,210,124,0.55);
-      border-radius: 999px;
-      padding: 13px 16px;
-      font-size: 18px;
-      font-weight: 1000;
-      cursor:pointer;
-      width: 100%;
-      max-width: 560px;
-    }
 
     .decline{
       margin-top: 10px;
@@ -261,11 +219,6 @@
       .page{ padding:18px 12px 22px; }
       h1{ font-size:28px; }
       .today{ font-size: 40px; }
-      .btn{ font-size: 17px; }
-    }
-      h1{ font-size:30px; }
-      .today{ font-size: 40px; }
-      .btn{ font-size: 17px; }
     }
   </style>
 </head>
@@ -274,10 +227,8 @@
   <div class="page">
     <div class="wrap">
 
-      <!-- ALERTA DE "ERRO" / EXCLUSIVIDADE -->
       <div class="system-alert">⚠️ Espera… esto NO debería aparecer para ti (pero lo liberé igual)</div>
 
-      <!-- HEADLINE NOVA -->
       <h1>CUPÓN FINAL ACTIVADO</h1>
 
       <div class="sub">
@@ -285,7 +236,7 @@
       </div>
 
       <div class="card">
-<div class="copy">
+        <div class="copy">
           <strong>Si tu piel ya fue estirada</strong> (abdomen, glúteos o ingles)…<br>
           adelgazar sin preparar la zona puede dejar estrías visibles.
           <br><br>
@@ -297,14 +248,13 @@
           <div class="strike">DESCUENTO FINAL (SOLO AHORA)</div>
           <div class="old">Antes: <s>$300 USD</s></div>
           <div class="today">Hoy: $27 USD</div>
-          <!-- BOTÃO (VOCÊ VAI MANDAR O SNIPPET DO $27) -->
-          <div style="text-align:center" id="kiwify-upsell-THnvl0o" data-upsell-url="https://healthlifeee.online/up03" data-downsell-url="https://healthlifeee.online/d3zc2">
-            <button id="kiwify-upsell-trigger-THnvl0o" class="btn pulse">
-              Sí, agregar el Manual por $27 (última oportunidad)
-            </button>
-            <div id="kiwify-upsell-cancel-trigger-THnvl0o" class="decline">No, prefiero arriesgarme a que me queden estrías</div>
-          </div>
 
+          <div style="text-align:center" id="kiwify-upsell-i6Qop8X" data-upsell-url="https://healthlifeee.online/up03" data-downsell-url="https://healthlifeee.online/d3zc2">
+            <button id="kiwify-upsell-trigger-i6Qop8X" class="pulse" style="background-color:#27AF60;padding:12px 16px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:999px;border:1px solid #27AF60;font-size:20px;width:100%;max-width:560px;">
+              SI QUIERO ADELGAZAR SIN ESTRÍAS POR $27
+            </button>
+            <div id="kiwify-upsell-cancel-trigger-i6Qop8X" class="decline">No, prefiero arriesgarme a que me queden estrías</div>
+          </div>
         </div>
 
         <div class="bullets">
@@ -326,4 +276,3 @@
   <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 </body>
 </html>
-
