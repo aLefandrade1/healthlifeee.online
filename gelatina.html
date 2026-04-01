@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Salud Al Día — Truco de la Gelatina</title>
+  <title>Truco de la Gelatina</title>
 
   <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
-  <link rel="preload" href="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/ab-test/69c75a0fbf67b8a39f80735a/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/69c74fd05610b6167ac2c5fc/v4/player.js" as="script">
   <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload" href="https://cdn.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/69c74e2346ccd0a645839a87/main.m3u8" as="fetch">
   <link rel="dns-prefetch" href="https://cdn.converteai.net">
   <link rel="dns-prefetch" href="https://scripts.converteai.net">
   <link rel="dns-prefetch" href="https://images.converteai.net">
-  <link rel="dns-prefetch" href="https://m3u8.vturb.net">
   <link rel="dns-prefetch" href="https://api.vturb.com.br">
 
   <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
@@ -42,65 +42,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@600;700;800;900&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --red:   #c0392b;
-      --ink:   #1a1a1a;
-      --muted: #555;
-      --bg:    #f5f0e8;
-      --paper: #faf7f2;
-      --cream: #ede8de;
-    }
+    :root { --red:#c0392b; --ink:#1a1a1a; --muted:#555; --cream:#ede8de; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background: #ffffff; color: var(--ink); font-family: Arial, sans-serif; overflow-x: hidden; }
 
-    /* ── UTILITY BAR ── */
-    .utility-bar { background: var(--ink); color: #aaa; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 1px; display: flex; align-items: center; justify-content: space-between; padding: 5px 20px; }
-    .utility-bar .date { color: #ccc; }
-    .utility-bar .tags { display: flex; gap: 14px; }
-    .utility-bar .tags a { color: #aaa; text-decoration: none; text-transform: uppercase; pointer-events: none; cursor: default; }
-
-    /* ── MASTHEAD ── compacto */
-    .masthead { background: #ffffff; border-bottom: 3px solid var(--ink); }
-    .masthead-inner { max-width: 780px; margin: 0 auto; padding: 10px 20px; display: flex; flex-direction: column; align-items: center; }
-    .masthead-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 2px 10px; margin-bottom: 6px; }
-    .masthead-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(32px, 8vw, 52px); font-weight: 900; letter-spacing: -1px; line-height: 1; color: var(--ink); text-align: center; }
-    .masthead-title em { font-style: italic; color: var(--red); }
-
-    /* ── TICKER ── tom discreto */
-    .breaking-bar { background: #2c2c2c; display: flex; align-items: stretch; overflow: hidden; }
-    .breaking-label { background: var(--red); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 12px; white-space: nowrap; display: flex; align-items: center; flex-shrink: 0; }
-    .ticker-scroll { overflow: hidden; flex: 1; }
-    .ticker-track { display: inline-flex; white-space: nowrap; animation: ticker 50s linear infinite; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 0.8px; font-weight: 600; color: #ccc; padding: 6px 0; }
-    .ticker-track span { padding-right: 60px; }
-    .ticker-track span::before { content: "·  "; opacity: 0.5; }
-    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    /* ── ARTICLE ── */
     .article-wrap { max-width: 780px; margin: 0 auto; padding: 0 16px; }
-    .article-header { padding: 16px 0 14px 0; border-bottom: 2px solid var(--ink); margin-bottom: 12px; }
-    .article-section-label { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: #fff; background: var(--red); padding: 3px 10px; margin-bottom: 10px; }
 
-    /* headline Montserrat */
-    .article-headline { font-family: 'Montserrat', sans-serif; font-size: clamp(17px, 4.2vw, 24px); font-weight: 800; line-height: 1.25; color: var(--ink); margin-bottom: 0; }
-    .article-headline em { font-style: italic; color: var(--red); font-weight: 900; }
-    .article-sub { font-family: Arial, sans-serif; font-size: 14px; color: #444; line-height: 1.5; margin-top: 10px; font-style: italic; }
-    .social-proof { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: #333; background: #f0f7f0; border-left: 3px solid #27ae60; padding: 7px 12px; margin-bottom: 8px; }
-    .social-proof strong { color: #1a7a3a; font-size: 13px; }
-
-    /* ── CONTADOR ── mais urgente */
-    .live-readers { display: flex; align-items: center; gap: 6px; background: #fff3f3; border-left: 3px solid var(--red); padding: 6px 10px; margin-bottom: 12px; }
-    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: pulse 1.2s infinite; flex-shrink: 0; }
-    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.4); } }
-    .live-readers p { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; color: #333; }
-    .live-readers p strong { color: var(--red); font-size: 13px; }
-    .live-readers p em { font-style: normal; font-weight: 700; color: var(--ink); }
-
-    /* ── VSL ── */
     .vsl-wrap { background: #000; margin: 0 -16px; }
     .vsl-caption { background: var(--ink); color: #bbb; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-style: italic; padding: 7px 20px; text-align: center; border-top: 2px solid var(--red); letter-spacing: 0.3px; }
     .vsl-caption strong { color: #fff; font-style: normal; }
 
-    /* ── COMENTÁRIOS ── */
+    .live-readers { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 10px; margin-top: 6px; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: pulse 1.2s infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.4); } }
+    .live-readers p { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; color: #333; text-align: center; }
+    .live-readers p strong { color: var(--red); font-size: 13px; }
+
     .comments-wrap { margin-top: 28px; padding-bottom: 40px; }
     .comments-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
     .comments-header h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 700; }
@@ -116,7 +73,6 @@
     .comment-time { font-family: Arial, sans-serif; font-size: 11px; color: #999; }
     .comments-closed-notice { margin-top: 18px; text-align: center; font-family: Arial, sans-serif; font-size: 12px; color: #999; border: 1px dashed #ccc; padding: 10px; border-radius: 4px; }
 
-    /* ── FOOTER ── */
     .footer-top { background: var(--ink); padding: 18px 20px; text-align: center; }
     .ft-logo { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 900; color: #fff; }
     .ft-logo em { color: var(--red); font-style: italic; }
@@ -128,60 +84,27 @@
 </head>
 <body>
 
-  <!-- MASTHEAD compacto -->
-  <div class="masthead">
-    <div class="masthead-inner">
-      <div class="masthead-title">Salud <em>Al Día</em></div>
-    </div>
-  </div>
-
-  <!-- TICKER discreto -->
-  <div class="breaking-bar">
-    <div class="breaking-label">🔴 EN VIVO</div>
-    <div class="ticker-scroll">
-      <div class="ticker-track">
-        <span>Médico revela por qué Ozempic y Mounjaro producen el efecto rebote</span>
-        <span>Miles de mujeres hispanas ya probaron el Truco de la Gelatina</span>
-        <span>Estudio confirma que la grasa abdominal está ligada a hormonas dormidas</span>
-        <span>El Dr. Juan Rivera explica el método que los laboratorios prefieren que no sepas</span>
-        <span>Médico revela por qué Ozempic y Mounjaro producen el efecto rebote</span>
-        <span>Miles de mujeres hispanas ya probaron el Truco de la Gelatina</span>
-        <span>Estudio confirma que la grasa abdominal está ligada a hormonas dormidas</span>
-        <span>El Dr. Juan Rivera explica el método que los laboratorios prefieren que no sepas</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ARTICLE -->
   <div class="article-wrap">
-
-    <div class="article-header">
-      <div class="article-section-label">Exclusivo · Salud Femenina</div>
-      <h1 class="article-headline">
-        ¿Cómo puede un simple truco con <em>gelatina</em> derretir la grasa que años de sacrificio no pudieron? Descubre por qué funciona cuando nada más funcionó
-      </h1>
-      <p class="article-sub">Miles de mujeres lo están haciendo en casa, con algo que ya tienen en su cocina — y está cambiando todo.</p>
-    </div>
-
-    <!-- PROVA SOCIAL NUMÉRICA -->
-    <div class="social-proof">
-      👁 <strong>47.312 mujeres</strong> ya vieron este video esta semana
-    </div>
-
-    <!-- CONTADOR urgente -->
-    <div class="live-readers">
-      <div class="live-dot"></div>
-      <p>⚡ Tú y <strong><span id="liveCount">510</span></strong> personas están viendo esto ahora. <em>No lo cierres.</em></p>
-    </div>
 
     <!-- VSL -->
     <div class="vsl-wrap">
-      <vturb-smartplayer id="ab-69c75a0fbf67b8a39f80735a" style="display:block; margin:0 auto; width:100%;"></vturb-smartplayer>
-      <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/ab-test/69c75a0fbf67b8a39f80735a/player.js";s.async=!0;document.head.appendChild(s);</script>
-      <div class="vsl-caption">⚠️ <strong>ACCESO LIMITADO:</strong> Este video está disponible por tiempo limitado en esta página — míralo completo ahora.</div>
+      <vturb-smartplayer id="vid-69c74fd05610b6167ac2c5fc" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+      <script type="text/javascript">
+        var s = document.createElement("script");
+        s.src = "https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/69c74fd05610b6167ac2c5fc/v4/player.js";
+        s.async = !0;
+        document.head.appendChild(s);
+      </script>
+      <div class="vsl-caption"><strong>⚠️ ACCESO LIMITADO:</strong> Este video está disponible por tiempo limitado en esta página — míralo completo ahora.</div>
     </div>
 
-    <!-- COMENTÁRIOS — primeiros 3 falam do truco, não de hormônios -->
+    <!-- CONTADOR -->
+    <div class="live-readers">
+      <div class="live-dot"></div>
+      <p>Tú y <strong><span id="liveCount">510</span></strong> personas están viendo esto ahora. No lo cierres.</p>
+    </div>
+
+    <!-- COMENTÁRIOS -->
     <div class="comments-wrap">
       <div class="comments-header"><h2>Comentarios</h2><span class="comments-count">15</span></div>
 
@@ -220,12 +143,6 @@
 
   </div>
 
-  <!-- FOOTER -->
-  <div class="footer-top">
-    <div class="ft-logo">Salud <em>Al Día</em></div>
-    <div class="ft-tagline">Periodismo de salud independiente para la mujer hispana</div>
-  </div>
-
   <div class="footer-bottom">
     <strong>Copyright 2025 — TRUCO DE LA GELATINA®</strong> · Todos los derechos reservados<br>
     <a href="javascript:void(0)">Términos de Uso</a> &nbsp;·&nbsp; <a href="javascript:void(0)">Política de Privacidad</a><br><br>
@@ -234,14 +151,6 @@
   </div>
 
   <script>
-    (function(){
-      const d=new Date();
-      const days=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-      const months=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-      const str=days[d.getDay()]+', '+d.getDate()+' de '+months[d.getMonth()]+' de '+d.getFullYear();
-      const el=document.getElementById('live-date');
-      if(el) el.textContent=str;
-    })();
     (function(){
       var el=document.getElementById('liveCount');
       if(!el) return;
