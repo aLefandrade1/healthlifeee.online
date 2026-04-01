@@ -1,352 +1,212 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cupón Final Activado – Bella Piel</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://upsell.mundpay.com/script-v2.js" defer async></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ritual Bella Piel — Última oportunidad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; }
 
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: #0f1f0f;
-    font-family: 'Open Sans', sans-serif;
-    color: #e8f5e8;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  .wrapper {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 20px 40px;
-  }
-
-  /* ── TOP ALERT BANNER ── */
-  .top-alert {
-    background: #1a3a1a;
-    border: 1.5px solid #3a6a2a;
-    border-radius: 8px;
-    text-align: center;
-    padding: 14px 20px;
-    margin: 24px 0 20px;
-    font-size: 15px;
-    font-weight: 700;
-    color: #f0c040;
-    letter-spacing: 0.01em;
-  }
-
-  .top-alert .warn { margin-right: 6px; }
-
-  /* ── HEADLINE ── */
-  .headline {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(32px, 7vw, 52px);
-    font-weight: 900;
-    color: #f0c040;
-    letter-spacing: 0.02em;
-    line-height: 1.1;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-  }
-
-  .subheadline {
-    text-align: center;
-    font-size: clamp(14px, 2.5vw, 17px);
-    font-weight: 700;
-    color: #e8f5e8;
-    margin-bottom: 28px;
-    line-height: 1.5;
-    padding: 0 10px;
-  }
-
-  /* ── MAIN CARD ── */
-  .main-card {
-    background: #1a3a1a;
-    border: 1.5px solid #2e6e2e;
-    border-radius: 14px;
-    padding: 32px 28px;
-    margin-bottom: 28px;
-  }
-
-  .card-text {
-    text-align: center;
-    font-size: 15.5px;
-    line-height: 1.75;
-    color: #d0ead0;
-    margin-bottom: 22px;
-  }
-
-  .card-text strong {
-    color: #ffffff;
-    font-weight: 700;
-  }
-
-  .card-text-2 {
-    text-align: center;
-    font-size: 15.5px;
-    line-height: 1.75;
-    color: #d0ead0;
-    margin-bottom: 24px;
-  }
-
-  .card-text-2 strong { color: #ffffff; font-weight: 700; }
-
-  /* ── PRICE BOX ── */
-  .price-box {
-    background: #0f2a0f;
-    border: 1.5px solid #2e6e2e;
-    border-radius: 12px;
-    padding: 26px 24px 24px;
-    text-align: center;
-  }
-
-  .discount-badge {
-    display: inline-block;
-    background: #c0392b;
-    color: #fff;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 6px 18px;
-    border-radius: 100px;
-    margin-bottom: 14px;
-  }
-
-  .price-before {
-    font-size: 16px;
-    color: #888;
-    text-decoration: line-through;
-    margin-bottom: 6px;
-    font-weight: 400;
-  }
-
-  .price-now {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(42px, 9vw, 64px);
-    font-weight: 900;
-    color: #4cde4c;
-    line-height: 1.05;
-    margin-bottom: 22px;
-  }
-
-  /* ── CTA BUTTON ── */
-  .cta-btn {
-    display: block;
-    width: 100%;
-    padding: 20px 24px;
-    background: linear-gradient(180deg, #3de03d 0%, #28b428 100%);
-    color: #0a1a0a;
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(15px, 3vw, 18px);
-    font-weight: 800;
-    text-align: center;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    text-decoration: none;
-    letter-spacing: 0.01em;
-    line-height: 1.3;
-    transition: filter 0.2s ease, transform 0.2s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.55s ease;
-  }
-
-  .cta-btn:hover::after { transform: translateX(100%); }
-  .cta-btn:hover {
-    filter: brightness(1.08);
-    transform: translateY(-2px);
-    animation: none;
-  }
-
-  .decline-link {
-    display: block;
-    text-align: center;
-    font-size: 13px;
-    color: #888;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    margin-top: 14px;
-    cursor: pointer;
-    transition: color 0.2s;
-    line-height: 1.5;
-  }
-
-  .decline-link:hover { color: #aaa; }
-
-  /* ── CHECKLIST ── */
-  .checklist {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 24px;
-    padding: 0 4px;
-  }
-
-  .checklist li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 15.5px;
-    line-height: 1.5;
-    color: #d8ecd8;
-  }
-
-  .check-icon {
-    width: 24px; height: 24px;
-    background: #2e7d32;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-    font-size: 13px;
-    color: #fff;
-    font-weight: 700;
-  }
-
-  /* ── GUARANTEE ── */
-  .guarantee {
-    background: #1a3a1a;
-    border: 1.5px solid #2e6e2e;
-    border-radius: 10px;
-    text-align: center;
-    padding: 16px 20px;
-    font-size: 15px;
-    font-weight: 700;
-    color: #d0ead0;
-    margin-bottom: 28px;
-  }
-
-  .guarantee .shield { margin-right: 8px; font-size: 18px; }
-
-  /* ── BOTTOM ALERT ── */
-  .bottom-alert {
-    background: #1a3a1a;
-    border: 1.5px solid #3a6a2a;
-    border-radius: 8px;
-    text-align: center;
-    padding: 16px 20px;
-    font-size: 15px;
-    font-weight: 700;
-    color: #f0c040;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes pulse {
-    0%, 100% {
-      box-shadow: 0 6px 24px rgba(61,224,61,0.40);
-      transform: scale(1);
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fdf9f6;
+      color: #2c2c2c;
+      min-height: 100vh;
     }
-    50% {
-      box-shadow: 0 10px 40px rgba(61,224,61,0.65);
-      transform: scale(1.018);
+
+    /* TOP */
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid #ede8e0;
+      padding: 11px 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
-  }
 
-  .cta-btn { animation: pulse 2.2s ease-in-out infinite; }
+    /* PAGE */
+    .page {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 40px 22px 64px;
+    }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+    /* ESPERA */
+    .espera {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(32px, 8vw, 48px);
+      font-weight: 600;
+      color: #c0392b;
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
 
-  .top-alert    { animation: fadeIn 0.5s ease 0.1s both; }
-  .headline     { animation: fadeIn 0.6s ease 0.25s both; }
-  .subheadline  { animation: fadeIn 0.6s ease 0.35s both; }
-  .main-card    { animation: fadeIn 0.7s ease 0.45s both; }
-  .checklist    { animation: fadeIn 0.7s ease 0.65s both; }
-  .guarantee    { animation: fadeIn 0.6s ease 0.75s both; }
-  .bottom-alert { animation: fadeIn 0.6s ease 0.85s both; }
+    /* COPY */
+    .copy {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
 
-  @media (max-width: 480px) {
-    .main-card { padding: 24px 18px; }
-    .price-box { padding: 20px 16px 20px; }
-  }
-</style>
+    .copy p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #3a3a3a;
+    }
+
+    /* linhas em itálico emocional */
+    .copy .emotional {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #5a4a4a;
+      padding-left: 16px;
+      border-left: 2px solid #d4b896;
+    }
+
+    /* destaque verde — promessa */
+    .copy .promise {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #3a3a3a;
+    }
+
+    .copy .promise strong { color: #1a6b3c; }
+
+    /* destaque marrom — preço */
+    .copy .price-line {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #3a3a3a;
+    }
+
+    .copy .price-line strong { color: #b08060; font-size: 17px; }
+
+    /* alerta final */
+    .copy .warning {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #7a5a5a;
+      font-style: italic;
+    }
+
+    /* PRICE BOX */
+    .pricebox {
+      background: #fff;
+      border: 1px solid #ede8e0;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .price-amount {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 52px;
+      font-weight: 600;
+      color: #1e1e1e;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .price-note {
+      font-size: 12px;
+      color: #9a8a7a;
+      margin-bottom: 22px;
+      font-style: italic;
+    }
+
+    @keyframes pulseCTA {
+      0%   { transform: scale(1);    box-shadow: 0 0 0 0    rgba(39,175,96,0.50); }
+      70%  { transform: scale(1.04); box-shadow: 0 0 0 14px rgba(39,175,96,0);   }
+      100% { transform: scale(1);    box-shadow: 0 0 0 0    rgba(39,175,96,0);    }
+    }
+
+    .pulse { animation: pulseCTA 1.8s infinite; }
+
+    .guarantee {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #7a8a7a;
+      margin-top: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #fff;
+      border-top: 1px solid #ede8e0;
+      padding: 20px;
+      text-align: center;
+      font-size: 11px;
+      color: #bbb;
+      line-height: 1.7;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="wrapper">
+  <div class="topbar">Ritual Bella Piel</div>
 
-  <div class="top-alert">
-    <span class="warn">⚠️</span> Espera… esto NO debería aparecer para ti (pero lo liberé igual)
-  </div>
+  <div class="page">
 
-  <h1 class="headline">Cupón Final Activado</h1>
+    <div class="espera">Espera…</div>
 
-  <p class="subheadline">No quiero que pierdas tu resultado por un detalle que casi nadie advierte.</p>
+    <div class="copy">
+      <p>La mayoría de las mujeres que llegan hasta aquí sí se preocupan por las manchas… solo que todavía no se han dado <strong>permiso para resolverlo.</strong></p>
 
-  <div class="main-card">
+      <p>Y lo entiendo.</p>
 
-    <p class="card-text">
-      <strong>Si tu piel ya fue estirada</strong> (abdomen, glúteos o ingles)…<br>
-      adelgazar sin preparar la zona puede dejar estrías visibles.
-    </p>
+      <p><span style="color:#9a8a7a;">Crecemos escuchando que eso es una tontería. Que hay cosas más importantes. Que nadie lo va a notar.</span></p>
 
-    <p class="card-text-2">
-      Por eso creé el <strong>Manual Cero Estrías</strong>: una guía rápida y simple para aplicar en casa.
-    </p>
+      <p><strong style="color:#1e1e1e;">Pero tú sí lo notas.</strong></p>
 
-    <div class="price-box">
+      <div class="emotional">
+        Cada vez que te cambias de ropa.<br>
+        Cada vez que te miras al espejo.<br>
+        Cada vez que alguien está cerca.
+      </div>
 
-      <div class="discount-badge">Descuento Final (Solo Ahora)</div>
+      <p class="promise">Por <strong>17 dólares</strong> recibes la <strong>receta de la mezcla aclaradora</strong>, cómo prepararla y cómo aplicarla.</p>
 
-      <p class="price-before">Antes: $300 USD</p>
+      <p><span style="color:#9a8a7a;">Solo eso. Simple. Natural. En casa.</span></p>
 
-      <div class="price-now">Hoy: $17 USD</div>
-
-      <div data-mndpay-render="019ce588-8eec-7120-b43c-3ef9d7ab2dcf"></div>
-
-
-
+      <p class="warning">Si no funciona, no habrás perdido nada.<br><br>
+      Pero si funciona… <strong style="color:#5a4a4a;">recordarás que casi dejaste pasar esta oportunidad por 17 dólares.</strong></p>
     </div>
+
+    <div class="pricebox">
+      <div class="price-amount">$17</div>
+      <div class="price-note">Acceso inmediato tras la confirmación</div>
+
+      <div style="text-align:center" id="kiwify-upsell-TOtFnEU" data-upsell-url="" data-downsell-url="">
+        <button id="kiwify-upsell-trigger-TOtFnEU" class="pulse" style="background-color:#27AF60;padding:12px 16px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:999px;border:1px solid #27AF60;font-size:18px;width:100%;max-width:480px;">SÍ, YO MEREZCO ESTO</button>
+        <div id="kiwify-upsell-cancel-trigger-TOtFnEU" style="font-size:11px; margin-top:0.8rem; cursor:pointer; text-decoration:underline; font-family:sans-serif; opacity:0.45; color:#2c2c2c;">No, prefiero seguir notándolo cada vez que me miro al espejo</div>
+      </div>
+
+      <div class="guarantee">🛡️ Garantía de 30 días — Sin riesgos</div>
+    </div>
+
   </div>
 
-  <ul class="checklist">
-    <li>
-      <div class="check-icon">✓</div>
-      <span>Rutina rápida (3–5 min al día) después de la ducha</span>
-    </li>
-    <li>
-      <div class="check-icon">✓</div>
-      <span>Paso a paso por zona (abdomen, glúteos e ingles)</span>
-    </li>
-    <li>
-      <div class="check-icon">✓</div>
-      <span>Mezcla de aceites naturales (aplicación directa)</span>
-    </li>
-    <li>
-      <div class="check-icon">✓</div>
-      <span>Guía simple, sin tratamientos caros</span>
-    </li>
-  </ul>
+  <footer>
+    Copyright 2025 — Ritual Bella Piel • Todos los derechos reservados<br>
+    Este sitio no forma parte de Facebook™ ni de Meta Platforms, Inc., y NO está respaldado por ellos.<br>
+    La información presentada es solo con fines educativos. Los resultados pueden variar.
+  </footer>
 
-  <div class="guarantee">
-    <span class="shield">🛡️</span> Garantía de 30 días — Sin riesgos
-  </div>
-
-  <div class="bottom-alert">
-    <span>⚠️</span> Si sales de esta página, el cupón desaparece.
-  </div>
-
-</div>
-
-
-
+  <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 </body>
 </html>
