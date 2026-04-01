@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Soporte VIP – Bella Piel</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-<script src="https://upsell.mundpay.com/script-v2.js" defer async></script>
 <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
 <link rel="preload" href="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/69b39be3a10d9a398abbb410/v4/player.js" as="script">
 <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
@@ -24,7 +23,6 @@
     overflow-x: hidden;
   }
 
-  /* ── TOP ALERT — vermelho, mantido ── */
   .top-alert {
     background: #e53935;
     color: #fff;
@@ -35,14 +33,12 @@
     letter-spacing: 0.02em;
   }
 
-  /* ── WRAPPER ── */
   .wrapper {
     max-width: 660px;
     margin: 0 auto;
     padding: 36px 22px 64px;
   }
 
-  /* ── VIDEO BOX ── */
   .video-box {
     border-radius: 12px;
     overflow: hidden;
@@ -53,8 +49,6 @@
     background: #1a0f14;
   }
 
-  .video-box iframe,
-  .video-box video,
   .video-box > * {
     width: 100%;
     height: 100%;
@@ -63,35 +57,6 @@
     border: none;
   }
 
-  .video-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    color: rgba(220,130,160,0.7);
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    inset: 0;
-    text-align: center;
-    padding: 20px;
-  }
-
-  .play-icon {
-    width: 56px; height: 56px;
-    border: 1.5px solid rgba(220,130,160,0.45);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    color: rgba(220,130,160,0.6);
-  }
-
-  /* ── DIVIDER ── */
   .divider {
     display: flex;
     align-items: center;
@@ -115,54 +80,16 @@
     font-weight: 300;
   }
 
-  /* ── CTA LABEL ── */
-  .cta-label {
-    text-align: center;
-    font-size: 13px;
-    color: rgba(220,130,160,0.55);
-    font-style: italic;
-    margin-bottom: 16px;
-    letter-spacing: 0.03em;
+  @keyframes pulseCTA {
+    0%   { transform: scale(1);    box-shadow: 0 0 0 0   rgba(39,175,96,0.60); }
+    70%  { transform: scale(1.06); box-shadow: 0 0 0 18px rgba(39,175,96,0);   }
+    100% { transform: scale(1);    box-shadow: 0 0 0 0   rgba(39,175,96,0);    }
   }
 
-  /* ── MUNDPAY BUTTON WRAPPER ── */
-  .btn-wrapper {
-    margin-bottom: 14px;
-  }
+  .pulse { animation: pulseCTA 1.8s infinite; }
 
-  /* ── DECLINE ── */
-  .decline-link {
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    color: rgba(255,255,255,0.25);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    cursor: pointer;
-    transition: color 0.2s;
-    margin-bottom: 36px;
-    letter-spacing: 0.02em;
-  }
+  .btn-wrapper { margin-bottom: 14px; }
 
-  .decline-link:hover { color: rgba(255,255,255,0.45); }
-
-  /* ── FOOTER TEXT ── */
-  .footer-text {
-    text-align: center;
-    font-size: 13.5px;
-    color: rgba(240,224,232,0.5);
-    line-height: 1.75;
-    margin-bottom: 22px;
-    font-weight: 300;
-    padding: 0 4px;
-  }
-
-  .footer-text strong {
-    color: #d882a0;
-    font-weight: 600;
-  }
-
-  /* ── GUARANTEE ── */
   .guarantee {
     border: 1px solid rgba(220,130,160,0.18);
     border-radius: 10px;
@@ -175,20 +102,16 @@
     background: rgba(220,130,160,0.04);
   }
 
-  /* ── ANIMATIONS ── */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  .top-alert    { animation: fadeIn 0.4s ease 0.1s both; }
-  .video-box    { animation: fadeIn 0.6s ease 0.2s both; }
-  .divider      { animation: fadeIn 0.5s ease 0.4s both; }
-  .cta-label    { animation: fadeIn 0.5s ease 0.5s both; }
-  .btn-wrapper  { animation: fadeIn 0.6s ease 0.55s both; }
-  .decline-link { animation: fadeIn 0.5s ease 0.65s both; }
-  .footer-text  { animation: fadeIn 0.5s ease 0.7s both; }
-  .guarantee    { animation: fadeIn 0.5s ease 0.8s both; }
+  .top-alert   { animation: fadeIn 0.4s ease 0.1s both; }
+  .video-box   { animation: fadeIn 0.6s ease 0.2s both; }
+  .divider     { animation: fadeIn 0.5s ease 0.4s both; }
+  .btn-wrapper { animation: fadeIn 0.6s ease 0.55s both; }
+  .guarantee   { animation: fadeIn 0.5s ease 0.8s both; }
 
   @media (max-width: 480px) {
     .wrapper { padding: 28px 16px 52px; }
@@ -197,24 +120,29 @@
 </head>
 <body>
 
-<!-- TOPO: vermelho com headline mantido -->
 <div class="top-alert">
   ⚠️ Atención: tenemos algo aún más especial para ti.
 </div>
 
 <div class="wrapper">
 
-  <!-- ═══════════════════════════════════
-       COLE SEU EMBED DE VÍDEO AQUI
-       ═══════════════════════════════════ -->
   <div class="video-box">
-    <vturb-smartplayer id="vid-69b39be3a10d9a398abbb410" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>
-    <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/69b39be3a10d9a398abbb410/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+    <vturb-smartplayer id="vid-69b39be3a10d9a398abbb410" style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+    <script type="text/javascript">
+      var s = document.createElement("script");
+      s.src = "https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/69b39be3a10d9a398abbb410/v4/player.js";
+      s.async = !0;
+      document.head.appendChild(s);
+    </script>
   </div>
 
-  <!-- BOTÃO MUNDPAY -->
+  <div class="divider"><span>oferta especial</span></div>
+
   <div class="btn-wrapper">
-    <div data-mndpay-render="019ce588-8eec-7120-b43c-3ef9d7ab2dcf"></div>
+    <div style="text-align:center" id="kiwify-upsell-Cz6lUxE" data-upsell-url="" data-downsell-url="https://healthlifeee.online/dw4">
+      <button id="kiwify-upsell-trigger-Cz6lUxE" class="pulse" style="background-color:#27AF60;padding:12px 16px;cursor:pointer;color:#FFFFFF;font-weight:600;border-radius:999px;border:1px solid #27AF60;font-size:20px;width:100%;max-width:560px;">SÍ QUIERO TENER MI TRANSFORMACIÓN COMPLETA</button>
+      <div id="kiwify-upsell-cancel-trigger-Cz6lUxE" style="font-size:11px; margin-top:0.6rem; cursor:pointer; text-decoration:underline; font-family:sans-serif; opacity:0.7; color:#fff;">No, quiero continuar insegura con mis manchas</div>
+    </div>
   </div>
 
   <div class="guarantee">
@@ -223,5 +151,6 @@
 
 </div>
 
+<script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 </body>
 </html>
