@@ -44,16 +44,17 @@
   <style>
     :root { --red:#c0392b; --ink:#1a1a1a; --muted:#555; --cream:#ede8de; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: #ffffff; color: var(--ink); font-family: Arial, sans-serif; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
-    .article-wrap { flex: 1; }
+    html { min-height: 100%; }
+    body { background: #ffffff; color: var(--ink); font-family: Arial, sans-serif; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+    .footer-bottom { margin-top: auto; }
 
-    .article-wrap { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+    .article-wrap { max-width: 780px; margin: 0 auto; padding: 0 16px 16px; }
 
     .vsl-wrap { background: #000; margin: 0 -16px; }
     .vsl-caption { background: var(--ink); color: #bbb; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-style: italic; padding: 7px 20px; text-align: center; border-top: 2px solid var(--red); letter-spacing: 0.3px; }
     .vsl-caption strong { color: #fff; font-style: normal; }
 
-    .live-readers { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 10px; margin-top: 6px; }
+    .live-readers { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 5px 10px; margin-top: 0; }
     .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: pulse 1.2s infinite; flex-shrink: 0; }
     @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.4); } }
     .live-readers p { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; color: #333; text-align: center; }
@@ -89,8 +90,7 @@
 
     <!-- VSL -->
     <vturb-smartplayer id="vid-69d319a0c996282c916a4dd7" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/69d319a0c996282c916a4dd7/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
-      <div class="vsl-caption"><strong>⚠️ ACCESO LIMITADO:</strong> Este video está disponible por tiempo limitado en esta página — míralo completo ahora.</div>
-    </div>
+    <div class="vsl-caption"><strong>⚠️ ACCESO LIMITADO:</strong> Este video está disponible por tiempo limitado en esta página — míralo completo ahora.</div>
 
     <!-- CONTADOR -->
     <div class="live-readers">
