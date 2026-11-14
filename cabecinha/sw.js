@@ -1,6 +1,6 @@
-const CACHE = "cabecinha-v2";
+const CACHE = "cabecinha-v3";
 const FILES = ["./", "index.html", "styles.css", "app.js", "content.js", "manifest.webmanifest",
-  "assets/logo.jpg", "assets/hero.jpg", "assets/icon-192.png", "assets/icon-512.png", "assets/icon-180.png"];
+  "assets/mascote.png", "assets/icon-192.png", "assets/icon-512.png", "assets/icon-180.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

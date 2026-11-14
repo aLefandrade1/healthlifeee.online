@@ -73,8 +73,11 @@ window.addEventListener("hashchange", route);
 function renderOnboarding(edit) {
   const p = profile();
   view.innerHTML = `
-  <div class="card hero" style="grid-template-columns:1fr">
-    <img src="assets/logo.jpg" alt="Logo" style="width:100%;height:auto;border-radius:14px;border:0;box-shadow:none">
+  <div class="card brandcard">
+    <img src="assets/mascote.png" alt="">
+    <div class="kicker">Método</div>
+    <div class="bname">Cabecinha Redonda</div>
+    <p class="small">Cuidar da cabecinha do seu bebê com carinho, segurança e hábitos simples.</p>
   </div>
   <div class="card">
     <div class="kicker">${edit ? "Seus dados" : "Bem-vinda, mamãe 💗"}</div>
@@ -123,7 +126,7 @@ function renderHome() {
       <h1>Olá, mamãe 💗</h1>
       <p>${ageDays() != null ? esc(babyName()) + " tem <b>" + ageLabel() + "</b>. " : ""}Cada pequeno cuidado de hoje conta.</p>
     </div>
-    <img src="assets/hero.jpg" alt="">
+    <img src="assets/mascote.png" alt="">
   </div>
 
   <div class="card">
