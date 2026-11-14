@@ -52,13 +52,12 @@ function route() {
   const tab = parts[0] === "modulo" ? "metodo" : (parts[0] || "inicio");
   document.querySelectorAll(".tabs a").forEach(a => a.classList.toggle("on", a.dataset.tab === tab));
   $("#backBtn").hidden = parts.length < 2 && parts[0] !== "perfil";
-  const skipOnb = EMBED && (parts[0] === "modulo" || parts[0] === "bonus");
+  const skipOnb = EMBED && parts[0] === "modulo";
   if (!profile().ok && parts[0] !== "perfil" && !skipOnb) return renderOnboarding();
   switch (parts[0]) {
     case undefined: renderHome(); break;
     case "metodo": renderMethod(); break;
     case "modulo": renderLesson(parts[1]); break;
-    case "bonus": renderLesson("leite"); break;
     case "ferramentas":
       if (parts[1] === "tummy") renderTummy();
       else if (parts[1] === "rotina") renderRoutine();
@@ -149,8 +148,6 @@ function renderHome() {
     <a class="item" href="#/ferramentas/lado"><div class="ic">🛏️</div><div class="tx"><strong>Lado da vez</strong><span>${sideToday().end}</span></div><div class="st">›</div></a>
   </div>
 
-  <h2>Seu presente</h2>
-  <a class="item" href="#/bonus"><div class="ic" style="background:var(--gold-soft)">🎁</div><div class="tx"><strong>${window.BONUS.title}</strong><span>Bônus: sinais de fome e de bebê satisfeito</span></div><div class="st">›</div></a>
 
   <p class="foot">Conteúdo educativo. Não substitui a orientação do pediatra.<br><a href="#/perfil">Editar dados do bebê</a></p>`;
 }
@@ -170,14 +167,12 @@ function renderMethod() {
         <div class="tx"><strong>${m.num}. ${esc(m.title)}</strong><span>${m.minutes} min · ${esc(m.subtitle)}</span></div>
         <div class="st">${s.has(m.id) ? "✓" : "›"}</div>
       </a>`).join("")}
-    <a class="item" href="#/bonus"><div class="ic" style="background:var(--gold-soft)">🎁</div><div class="tx"><strong>Bônus: ${esc(window.BONUS.title)}</strong><span>${window.BONUS.minutes} min</span></div><div class="st">${s.has("leite") ? "✓" : "›"}</div></a>
   </div>`;
 }
 
 function renderLesson(id) {
   const mods = window.MODULES;
-  const isBonus = id === "leite";
-  const m = isBonus ? window.BONUS : mods.find(x => x.id === id);
+  const m = mods.find(x => x.id === id);
   if (!m) { location.hash = "#/metodo"; return; }
   const i = mods.indexOf(m);
   const prev = i > 0 ? mods[i - 1] : null;
@@ -186,7 +181,7 @@ function renderLesson(id) {
   view.innerHTML = `
   <article class="lesson card">
     <div class="lesson-head">
-      <span class="num">${isBonus ? "🎁 Bônus" : "Módulo " + m.num + " de " + mods.length}</span>
+      <span class="num">Módulo ${m.num} de ${mods.length}</span>
       <h1>${m.emoji} ${esc(m.title)}</h1>
       <p class="small">${esc(m.subtitle)} · ${m.minutes} min de leitura</p>
     </div>
@@ -195,7 +190,7 @@ function renderLesson(id) {
   </article>
   <div class="lesson-nav">
     ${prev ? `<a class="btn alt" href="#/modulo/${prev.id}">‹ Anterior</a>` : `<span></span>`}
-    ${next ? `<a class="btn" href="#/modulo/${next.id}">Próximo ›</a>` : (isBonus ? `<a class="btn" href="#/metodo">Ver módulos</a>` : `<a class="btn gold" href="#/bonus">Abrir bônus 🎁</a>`)}
+    ${next ? `<a class="btn" href="#/modulo/${next.id}">Próximo ›</a>` : `<a class="btn gold" href="#/ferramentas">Ir para as ferramentas 🧰</a>`}
   </div>`;
   $("#doneBtn").addEventListener("click", () => {
     markDone(m.id);
