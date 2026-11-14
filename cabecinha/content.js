@@ -6,6 +6,11 @@ id: "entenda", num: 1, emoji: "👶", minutes: 4,
 title: "Entendendo a cabecinha do seu bebê",
 subtitle: "Por que ela muda de formato e por que agora é a melhor hora de agir",
 html: `
+<div class="callout gold">
+  <strong>Oi, mamãe! Aqui é a Sofia 💗</strong>
+  <p>Que bom ter você aqui. Organizei neste Método tudo o que eu ensino para as mães no consultório, em passos curtos para aplicar no meio da rotina, sem nenhum equipamento. Leia um módulo por vez e comece a aplicar hoje mesmo.</p>
+</div>
+
 <p class="lead">Se você reparou que a cabecinha do seu bebê está mais achatada de um lado ou atrás, respire fundo: isso é <strong>muito comum</strong>, tem explicação e, na maioria dos casos, hábitos simples em casa fazem diferença.</p>
 
 <h3>Por que a cabecinha "molda"?</h3>
@@ -17,6 +22,16 @@ html: `
   <div class="mini"><strong>Plagiocefalia posicional</strong><span>Achatamento de um lado da parte de trás. Vista de cima, a cabeça lembra um paralelogramo, e uma orelha ou um lado da testa pode ficar um pouco mais à frente.</span></div>
   <div class="mini"><strong>Braquicefalia posicional</strong><span>Achatamento da parte de trás inteira. A cabeça fica mais larga e "reta" atrás.</span></div>
 </div>
+<figure class="fig">
+<svg viewBox="0 0 330 130" role="img" aria-label="Cabeça vista de cima: formato arredondado, plagiocefalia e braquicefalia">
+  <g font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#7a1430" text-anchor="middle">
+    <g transform="translate(55,58)"><ellipse rx="34" ry="42" fill="#fbe3e6" stroke="#2f8f5b" stroke-width="3"/><path d="M-6,-42 L0,-50 L6,-42" fill="#fbe3e6" stroke="#2f8f5b" stroke-width="3"/><circle cx="-36" cy="-4" r="5" fill="#f3c9cf"/><circle cx="36" cy="-4" r="5" fill="#f3c9cf"/><text y="66">Arredondada</text></g>
+    <g transform="translate(165,58)"><path d="M0,-44 C26,-44 36,-20 35,4 C34,30 22,42 4,42 C-14,42 -30,36 -34,20 L-30,-6 C-28,-30 -20,-44 0,-44Z" transform="skewX(-8)" fill="#fbe3e6" stroke="#d9566e" stroke-width="3"/><path d="M-6,-44 L0,-52 L6,-44" fill="#fbe3e6" stroke="#d9566e" stroke-width="3"/><circle cx="-36" cy="-10" r="5" fill="#f3c9cf"/><circle cx="35" cy="-2" r="5" fill="#f3c9cf"/><text y="66">Plagiocefalia</text></g>
+    <g transform="translate(275,58)"><path d="M0,-42 C30,-42 40,-18 40,6 L38,34 L-38,34 L-40,6 C-40,-18 -30,-42 0,-42Z" fill="#fbe3e6" stroke="#c8994a" stroke-width="3"/><path d="M-6,-42 L0,-50 L6,-42" fill="#fbe3e6" stroke="#c8994a" stroke-width="3"/><circle cx="-41" cy="-2" r="5" fill="#f3c9cf"/><circle cx="41" cy="-2" r="5" fill="#f3c9cf"/><text y="58">Braquicefalia</text></g>
+  </g>
+</svg>
+<figcaption>Vista de cima, com o nariz apontando para cima. Na plagiocefalia, um lado de trás achata e uma orelha fica mais à frente.</figcaption>
+</figure>
 <p>As duas são chamadas de <em>posicionais</em> porque vêm da posição em que o bebê passa a maior parte do tempo. Elas são diferentes da craniossinostose, uma condição rara em que as costuras se fecham cedo demais e que precisa de avaliação médica (você vai ver os sinais no Módulo 8).</p>
 
 <h3>Por que acontece</h3>
@@ -56,7 +71,21 @@ html: `
   <li><strong>Num dia</strong>, deite o bebê com a cabeça na cabeceira.</li>
   <li><strong>No outro</strong>, com a cabeça nos pés do berço.</li>
 </ul>
+<figure class="fig">
+<svg viewBox="0 0 330 150" role="img" aria-label="Berço visto de cima: num dia a cabeça fica na cabeceira, no outro nos pés; o bebê vira para a porta">
+  <g font-family="Nunito,sans-serif" font-size="11" font-weight="700" fill="#7a1430" text-anchor="middle">
+    <rect x="0" y="62" width="10" height="44" fill="#c8994a" rx="2"/><text x="20" y="140" text-anchor="start" font-size="10">🚪 porta</text>
+    <g transform="translate(95,20)"><text y="0">Dia 1</text><rect x="-55" y="10" width="110" height="100" rx="10" fill="#fff" stroke="#7a1430" stroke-width="2.5"/><text y="24" font-size="9" fill="#7d5a63">cabeceira</text>
+      <circle cx="0" cy="44" r="13" fill="#fbe3e6" stroke="#d9566e" stroke-width="2"/><path d="M-9,44 q-6,0 -10,-2" stroke="#d9566e" stroke-width="2" fill="none"/><rect x="-14" y="57" width="28" height="40" rx="10" fill="#fbe3e6" stroke="#d9566e" stroke-width="2"/><text x="-38" y="48" font-size="14">◀</text></g>
+    <g transform="translate(235,20)"><text y="0">Dia 2</text><rect x="-55" y="10" width="110" height="100" rx="10" fill="#fff" stroke="#7a1430" stroke-width="2.5"/><text y="24" font-size="9" fill="#7d5a63">cabeceira</text>
+      <rect x="-14" y="30" width="28" height="40" rx="10" fill="#fbe3e6" stroke="#d9566e" stroke-width="2"/><circle cx="0" cy="83" r="13" fill="#fbe3e6" stroke="#d9566e" stroke-width="2"/><text x="-38" y="88" font-size="14">◀</text></g>
+  </g>
+</svg>
+<figcaption>O bebê olha para a porta. Trocando a ponta do berço, ele vira a cabeça para o outro lado e muda o ponto de apoio.</figcaption>
+</figure>
 <p>Assim ele naturalmente vira para o lado oposto e muda o ponto de apoio. A ferramenta <em>Lado da vez</em> te lembra qual é a ponta de hoje.</p>
+<h3>Por que nada de travesseiros e posicionadores?</h3>
+<p>Travesseiros "anti-cabeça chata", rolinhos e posicionadores parecem ajudar, mas <strong>não são indicados para o sono</strong>: o bebê pequeno ainda não consegue tirar o rosto de um tecido que cobre o nariz e a boca, o que aumenta o risco de sufocação. A cabecinha se protege com os hábitos deste Método, e o berço fica vazio.</p>
 
 <h3>2. Vire a cabecinha com carinho</h3>
 <p>Ao deitar o bebê (sempre de costas), vire a cabeça dele suavemente para o lado <strong>mais arredondado</strong>, deixando o lado achatado livre. Se ele voltar a virar durante o sono, está tudo bem: não precisa ficar corrigindo a noite toda.</p>
@@ -190,22 +219,37 @@ html: `
 </ul>
 `},
 {
-id: "rotina", num: 6, emoji: "📅", minutes: 3,
-title: "Sua rotina diária pronta",
-subtitle: "O que fazer em cada momento do dia, sem precisar pensar",
+id: "rotina", num: 6, emoji: "📅", minutes: 5,
+title: "A Rotina dos 4 Momentos",
+subtitle: "Berço, colo, amamentação e bruços, fase por fase até os 6 meses",
 html: `
-<p class="lead">Juntando tudo, esta é a rotina do Método. Você não precisa de tempo extra, só encaixar os cuidados no que já faz.</p>
+<p class="lead">Este é o coração do Método. Você não precisa de tempo extra, só ajustar <strong>4 momentos</strong> que já fazem parte do seu dia com o bebê.</p>
 
 <div class="timeline">
-  <div><span>☀️ Ao acordar</span><p>Troca de fralda, depois 1 a 3 min de tummy time (peito com peito vale!).</p></div>
-  <div><span>🍼 Em cada mamada</span><p>Alterne o braço ou o lado. Depois, colo em pé para arrotar.</p></div>
-  <div><span>🧷 Em cada troca</span><p>Alterne a posição no trocador e emende 1 a 2 min de tummy time.</p></div>
-  <div><span>🧸 Hora de brincar</span><p>Chão, de bruços e de ladinho, com brinquedos do lado menos usado.</p></div>
-  <div><span>🚶 Passeios</span><p>Sling ou colo sempre que der. Bebê conforto, só no carro.</p></div>
-  <div><span>🌙 Na hora de dormir</span><p>De costas, berço vazio, ponta do dia, cabeça virada para o lado arredondado.</p></div>
+  <div><span>🛏️ Momento 1: Berço</span><p>Sempre de costas, berço vazio. Alterne a ponta do berço a cada dia e vire a cabecinha para o lado arredondado ao deitar.</p></div>
+  <div><span>🤱 Momento 2: Colo</span><p>Prefira colo em pé e sling. Troque o braço que segura. Bebê conforto, só no carro.</p></div>
+  <div><span>🍼 Momento 3: Amamentação</span><p>Alterne o lado (peito) ou o braço (mamadeira) a cada mamada. Depois, colo em pé para arrotar.</p></div>
+  <div><span>🧸 Momento 4: Bruços</span><p>Tummy time acordado e com você do lado, em pequenas doses: ao acordar, depois das trocas, na hora de brincar.</p></div>
 </div>
 
-<p>Use o <a href="#/ferramentas/rotina">Checklist do dia</a> para marcar o que já fez. Em poucos dias, vira automático.</p>
+<h3>Fase por fase</h3>
+<div class="mini" style="margin-bottom:10px"><strong>🍼 Do nascimento a 1 mês</strong><span>
+<b>Berço:</b> comece a alternar a ponta desde a primeira semana.<br>
+<b>Colo:</b> muito colo e pele com pele; apoie sempre a cabecinha.<br>
+<b>Amamentação:</b> alterne lados a cada mamada.<br>
+<b>Bruços:</b> peito com peito e no seu colo, 1 a 3 min por vez, ~10 min no dia.</span></div>
+<div class="mini" style="margin-bottom:10px"><strong>🌱 De 1 a 3 meses</strong><span>
+<b>Berço:</b> mantenha a alternância e os estímulos (móbile, sua voz) do lado menos usado.<br>
+<b>Colo:</b> sling ergonômico nos passeios e afazeres.<br>
+<b>Amamentação:</b> ofereça primeiro o lado que faz ele virar para o lado "esquecido".<br>
+<b>Bruços:</b> no chão com rolinho de toalha, espelho e brinquedos; de 20 a 30 min no dia.</span></div>
+<div class="mini" style="margin-bottom:10px"><strong>🌼 De 3 a 6 meses</strong><span>
+<b>Berço:</b> continue de costas; quando ele começar a rolar sozinho, siga as orientações do pediatra.<br>
+<b>Colo:</b> mais tempo no chão e menos em cadeirinhas.<br>
+<b>Amamentação:</b> siga alternando; aproveite para conversar pelo lado menos usado.<br>
+<b>Bruços:</b> sessões mais longas e brincadeiras de alcançar brinquedos; 45 a 60 min no dia.</span></div>
+
+<p>Use o <a href="#/ferramentas/rotina">Checklist do dia</a> para marcar os 4 Momentos. Em poucos dias, vira automático.</p>
 `},
 {
 id: "acompanhar", num: 7, emoji: "📸", minutes: 3,

@@ -1,4 +1,4 @@
-const CACHE = "cabecinha-v1";
+const CACHE = "cabecinha-v2";
 const FILES = ["./", "index.html", "styles.css", "app.js", "content.js", "manifest.webmanifest",
   "assets/logo.jpg", "assets/hero.jpg", "assets/icon-192.png", "assets/icon-512.png", "assets/icon-180.png"];
 

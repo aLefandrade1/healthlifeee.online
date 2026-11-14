@@ -287,12 +287,12 @@ function renderTummy() {
 
 /* routine */
 const ROUTINE = [
-  ["acordar", "☀️ Tummy time ao acordar", "1 a 3 min depois da primeira troca"],
-  ["mamada", "🍼 Alternei o braço/lado nas mamadas", "Mamadeira: troque o braço a cada mamada"],
-  ["trocas", "🧷 Tummy time depois das trocas", "1 a 2 min, várias vezes ao dia"],
-  ["chao", "🧸 Brincadeira no chão", "De bruços e de ladinho, brinquedo do lado menos usado"],
-  ["colo", "🤱 Colo em pé ou sling", "Bebê conforto só no carro"],
-  ["dormir", "🌙 Sono: ponta do dia + cabeça virada", "Sempre de costas, berço vazio"]
+  ["dormir", "🛏️ Berço: ponta do dia + cabeça virada", "Sempre de costas, berço vazio"],
+  ["colo", "🤱 Colo: em pé ou sling, troquei o braço", "Bebê conforto só no carro"],
+  ["mamada", "🍼 Amamentação: alternei lado/braço", "Em todas as mamadas do dia"],
+  ["acordar", "🧸 Bruços ao acordar", "1 a 3 min depois da primeira troca"],
+  ["trocas", "🧸 Bruços depois das trocas", "1 a 2 min, várias vezes ao dia"],
+  ["chao", "🧸 Brincadeira no chão", "De bruços e de ladinho, brinquedo do lado menos usado"]
 ];
 function renderRoutine() {
   const k = "chk_" + dayKey();
