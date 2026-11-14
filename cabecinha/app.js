@@ -41,6 +41,10 @@ function progressPct() { const s = doneSet(); return Math.round(window.MODULES.f
 
 /* ---------- router ---------- */
 let cleanup = null;
+// ?embed=1: aberto dentro da AppSell (iframe). Esconde cabeçalho/abas próprios e
+// abre módulos e bônus direto, sem o cadastro inicial.
+const EMBED = /[?&]embed=1\b/.test(location.search);
+if (EMBED) document.body.classList.add("embed");
 function route() {
   if (cleanup) { cleanup(); cleanup = null; }
   const h = location.hash.replace(/^#\/?/, "");
@@ -48,7 +52,8 @@ function route() {
   const tab = parts[0] === "modulo" ? "metodo" : (parts[0] || "inicio");
   document.querySelectorAll(".tabs a").forEach(a => a.classList.toggle("on", a.dataset.tab === tab));
   $("#backBtn").hidden = parts.length < 2 && parts[0] !== "perfil";
-  if (!profile().ok && parts[0] !== "perfil") return renderOnboarding();
+  const skipOnb = EMBED && (parts[0] === "modulo" || parts[0] === "bonus");
+  if (!profile().ok && parts[0] !== "perfil" && !skipOnb) return renderOnboarding();
   switch (parts[0]) {
     case undefined: renderHome(); break;
     case "metodo": renderMethod(); break;

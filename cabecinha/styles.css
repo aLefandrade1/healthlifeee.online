@@ -21,6 +21,8 @@ button{font:inherit;cursor:pointer}
 .top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:8px;
   padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:rgba(252,243,240,.92);
   backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body.embed{padding-bottom:16px}
+body.embed .top,body.embed .tabs{display:none}
 .brand{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",serif;font-weight:700;color:var(--wine);font-size:1.1rem}
 .brand img{width:44px;height:auto;object-fit:contain}
 .back{border:0;background:var(--rose-soft);color:var(--wine);width:36px;height:36px;border-radius:50%;font-size:1.6rem;line-height:1;padding:0 0 3px}
