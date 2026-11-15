@@ -37,3 +37,9 @@ cakto-upsell-reject::part(button){color:#8a849c;font-size:.9rem}
 .buttons-only{margin-top:4px}
 body.dark{background:linear-gradient(180deg,#1f2a4a 0,#3b3f75 100%);min-height:100vh}
 body.dark cakto-upsell-reject::part(button){color:#c9c6e2}
+.loadbar{margin:0 0 14px}
+.loadbar-txt{display:flex;justify-content:space-between;color:#fff;font-weight:800;font-size:.95rem;margin-bottom:6px}
+.loadbar-txt b{color:#7ee2a8}
+.loadbar-track{height:14px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.loadbar-fill{width:75%;height:100%;border-radius:99px;background:linear-gradient(90deg,#2fa36b,#5fd59a);background-size:200% 100%;animation:lb 1.6s linear infinite}
+@keyframes lb{0%{background-position:0 0}100%{background-position:200% 0}}
