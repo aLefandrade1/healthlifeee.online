@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="oferta.css?v=2">
+<link rel="stylesheet" href="oferta.css?v=3">
 </head>
 <body>
 
@@ -38,7 +38,7 @@
   </div>
   <!-- ===== fim da VSL ===== -->
 
-  <section class="offer">
+  <section class="offer esconder">
     <div class="tag">🌙 Material extra</div>
     <h2>Noites Tranquilas</h2>
     <p class="lead">Aprenda a ler o choro do seu bebê, saiba o que fazer em cada caso e tenha noites mais leves. Tudo explicado de forma simples, para aplicar ainda hoje.</p>
@@ -82,9 +82,17 @@
     </div>
   </section>
 
-  <p class="foot">Conteúdo educativo. Não substitui a orientação do pediatra.</p>
+  <p class="foot esconder">Conteúdo educativo. Não substitui a orientação do pediatra.</p>
 </main>
 
 <script src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+<!-- Oferta e botões aparecem no pitch da VSL (1:42) -->
+<script>
+  var delaySeconds = 102;
+  var player = document.querySelector("vturb-smartplayer");
+  player.addEventListener("player:ready", function () {
+    player.displayHiddenElements(delaySeconds, [".esconder"], { persist: true });
+  });
+</script>
 </body>
 </html>
