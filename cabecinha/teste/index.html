@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teste da Cabecinha</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#fcf3f0">
+<!-- ANTES DE MANDAR TRÁFEGO: colar aqui os scripts do <head> do quiz atual (pixel Meta + Utmify) -->
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fcf3f0; --card:#fff; --ink:#3b1420; --muted:#7d5a63;
+    --wine:#7a1430; --rose:#d9566e; --rose-soft:#fbe3e6; --gold:#c8994a; --gold-soft:#f8eedb;
+    --green:#2f8f5b; --green-soft:#e3f3ea; --line:#f0dcd8; --red:#c0392b;
+    --shadow:0 6px 24px rgba(122,20,48,.08);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font:17px/1.5 Nunito,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  main{max-width:480px;margin:0 auto;padding:12px 16px 40px}
+  h1,h2{font-family:"Playfair Display",Georgia,serif;color:var(--wine);line-height:1.2;margin:.3em 0}
+  h1{font-size:1.6rem}
+  h2{font-size:1.35rem}
+  p{margin:.5em 0}
+  .muted{color:var(--muted)}
+  .center{text-align:center}
+
+  /* topo */
+  .bar{position:sticky;top:0;z-index:5;background:rgba(252,243,240,.95);backdrop-filter:blur(8px);padding:10px 0 8px}
+  .brand{display:flex;align-items:center;justify-content:center;gap:8px;font-family:"Playfair Display",serif;font-weight:700;color:var(--wine)}
+  .brand img{width:34px}
+  .prog{height:8px;background:var(--rose-soft);border-radius:99px;margin-top:8px;overflow:hidden}
+  .prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--wine));border-radius:99px;transition:width .4s}
+  .step-n{font-size:.8rem;color:var(--muted);text-align:center;margin-top:4px;font-weight:700}
+
+  /* telas */
+  .screen{animation:in .35s ease}
+  @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .hero img{width:150px;margin:6px auto 0;display:block}
+  .pill{display:inline-flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:8px 0 2px}
+  .pill span{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:4px 10px;font-size:.85rem;font-weight:700;color:var(--muted)}
+
+  .q{font-family:"Playfair Display",serif;font-size:1.35rem;color:var(--wine);text-align:center;margin:14px 0 4px;line-height:1.25}
+  .hint{text-align:center;color:var(--muted);font-size:.92rem;margin:0 0 14px}
+  .opts{display:grid;gap:10px}
+  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px 16px;font:inherit;font-weight:700;color:var(--ink);cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,border-color .15s}
+  .opt:active{transform:scale(.98)}
+  .opt.sel{border-color:var(--rose);background:var(--rose-soft)}
+  .opt .e{font-size:1.5rem;width:32px;text-align:center;flex:none}
+  .grid2{grid-template-columns:1fr 1fr}
+  .shape{flex-direction:column;text-align:center;gap:6px;padding:12px 8px}
+  .shape svg{width:84px;height:100px}
+  .shape small{font-weight:600;color:var(--muted);font-size:.8rem;line-height:1.2}
+
+  .field{width:100%;font:inherit;font-size:1.1rem;padding:14px 16px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);outline:none}
+  .field:focus{border-color:var(--rose)}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+
+  .btn{display:block;width:100%;border:0;border-radius:16px;padding:17px 18px;font:inherit;font-weight:900;font-size:1.08rem;color:#fff;background:linear-gradient(180deg,#e0607a,var(--wine));box-shadow:0 8px 20px rgba(122,20,48,.25);cursor:pointer;text-align:center;text-decoration:none;margin-top:16px}
+  .btn:disabled{opacity:.45}
+  .btn.green{background:linear-gradient(180deg,#38a96b,#257a4b);box-shadow:0 8px 20px rgba(47,143,91,.3)}
+  .pulse{animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+
+  .feedback{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:99px;font-weight:700;font-size:.92rem;z-index:20;animation:in .25s}
+
+  /* respiro */
+  .card{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--shadow);margin:12px 0}
+  .big{font-size:2.6rem;font-weight:900;color:var(--rose);line-height:1}
+  .src{font-size:.78rem;color:var(--muted)}
+
+  /* análise */
+  .ring{width:120px;height:120px;margin:20px auto 8px;position:relative}
+  .ring svg{transform:rotate(-90deg)}
+  .ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:1.6rem;color:var(--wine)}
+  .checks{list-style:none;padding:0;margin:16px 0}
+  .checks li{display:flex;gap:10px;align-items:center;padding:8px 0;color:var(--muted);font-weight:700;opacity:.35;transition:opacity .3s}
+  .checks li.on{opacity:1;color:var(--ink)}
+  .checks li .ok{width:24px;height:24px;border-radius:50%;background:var(--line);display:grid;place-items:center;color:#fff;font-size:.8rem;flex:none}
+  .checks li.on .ok{background:var(--green)}
+
+  /* resultado */
+  .tag{display:inline-block;background:var(--gold-soft);color:#8a6322;border-radius:99px;padding:4px 12px;font-weight:800;font-size:.85rem}
+  .meter{margin:14px 0 4px}
+  .meter-track{height:14px;border-radius:99px;background:linear-gradient(90deg,#3fae7a,#f2c14e 50%,#e0607e);position:relative}
+  .meter-dot{position:absolute;top:50%;width:26px;height:26px;border-radius:50%;background:#fff;border:4px solid var(--wine);transform:translate(-50%,-50%);transition:left 1.2s ease;left:0}
+  .meter-lbl{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);font-weight:700;margin-top:6px}
+  .risks{list-style:none;padding:0;margin:8px 0 0}
+  .risks li{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .risks li:last-child{border:0}
+  .risks .i{flex:none;width:26px;height:26px;border-radius:8px;background:var(--rose-soft);display:grid;place-items:center}
+  .window{background:var(--green-soft);border-radius:16px;padding:14px 16px;margin:12px 0;color:#1f5e3c}
+  .window b{color:#174a2f}
+  .note{font-size:.8rem;color:var(--muted);text-align:center;margin-top:14px}
+
+  /* vsl */
+  .vsl-h{font-family:"Playfair Display",serif;color:var(--wine);font-size:1.3rem;text-align:center;line-height:1.25;margin:10px 0 4px}
+  .vsl-sub{text-align:center;color:var(--muted);font-size:.92rem;margin-bottom:12px}
+  .sound{display:flex;align-items:center;justify-content:center;gap:6px;font-size:.85rem;font-weight:800;color:var(--wine);margin-bottom:8px}
+  .esconder{display:none}
+  .seals{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;color:var(--muted);font-weight:700;margin-top:10px}
+  .depo-ph{border:2px dashed #d9b3bb;border-radius:16px;padding:16px;text-align:center;color:var(--muted);font-size:.88rem;margin:10px 0;background:#fff8f8}
+  .guarantee{display:flex;gap:12px;align-items:center}
+  .guarantee .g{font-size:2.2rem}
+  footer{text-align:center;font-size:.75rem;color:var(--muted);margin-top:26px}
+</style>
+</head>
+<body>
+<main>
+  <div class="bar" id="bar" hidden>
+    <div class="brand"><img src="../assets/mascote.png" alt="">Teste da Cabecinha</div>
+    <div class="prog"><i id="prog"></i></div>
+    <div class="step-n" id="stepn"></div>
+  </div>
+  <div id="app"></div>
+</main>
+
+<script>
+(function(){
+  var app=document.getElementById('app'), bar=document.getElementById('bar'),
+      prog=document.getElementById('prog'), stepn=document.getElementById('stepn');
+  var A={nome:'',sexo:'f'};
+  var TOTAL=7;
+  var CHECKOUT='https://pay.cakto.com.br/fzk7na6';
+  var VTURB_ACC='a863f268-2fb0-429d-88e9-42f82a5da6f4', VTURB_PLAYER='6af73b62316ca0a2a4f4a0ba';
+  var PITCH_SECONDS=196; // botão aparece no pitch (3:16)
+
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function nome(){return esc(A.nome||(A.sexo==='m'?'seu bebê':'sua bebê'))}
+  function deN(){return A.nome?((A.sexo==='m'?'do ':'da ')+esc(A.nome)):'do seu bebê'}
+  function ele(){return A.sexo==='m'?'ele':'ela'}
+  function dele(){return A.sexo==='m'?'dele':'dela'}
+  function o(){return A.sexo==='m'?'o':'a'}
+  function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+  function show(html,step){
+    window.scrollTo(0,0);
+    if(step){bar.hidden=false;prog.style.width=(step/TOTAL*100)+'%';stepn.textContent='Pergunta '+step+' de '+TOTAL;}
+    else bar.hidden=true;
+    app.innerHTML='<div class="screen">'+html+'</div>';
+  }
+  function toast(t){var d=document.createElement('div');d.className='feedback';d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},1300)}
+
+  // pergunta de toque único
+  function ask(step,q,hint,opts,key,next,cls,fb){
+    var h='<p class="q">'+q+'</p>'+(hint?'<p class="hint">'+hint+'</p>':'')+'<div class="opts '+(cls||'')+'">';
+    opts.forEach(function(op,i){h+='<button class="opt '+(op.svg?'shape':'')+'" data-i="'+i+'">'+(op.svg||('<span class="e">'+op.e+'</span>'))+'<span>'+op.t+(op.s?'<br><small>'+op.s+'</small>':'')+'</span></button>'});
+    show(h+'</div>',step);
+    app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      b.classList.add('sel');A[key]=opts[+b.dataset.i].v;
+      if(fb)toast(fb);
+      setTimeout(next,fb?650:280);
+    }});
+  }
+
+  // ---------- ilustrações (cabecinha vista de cima) ----------
+  var ear='<ellipse cx="9" cy="62" rx="5" ry="9" fill="#f2c4b0"/><ellipse cx="91" cy="62" rx="5" ry="9" fill="#f2c4b0"/>';
+  var nose='<path d="M45 12 L50 3 L55 12 Z" fill="#e8a990"/>';
+  function head(d){return '<svg viewBox="0 0 100 116" aria-hidden="true">'+ear+'<path d="'+d+'" fill="#f9d9c9" stroke="#c98d78" stroke-width="2.5"/>'+nose+'<path d="M50 30 Q60 40 50 50" fill="none" stroke="#c98d78" stroke-width="1.5" opacity=".5"/></svg>'}
+  var SHAPES={
+    redonda:head('M50 10 C78 10 90 38 90 62 C90 92 72 110 50 110 C28 110 10 92 10 62 C10 38 22 10 50 10 Z'),
+    lado:head('M44 10 C74 8 90 32 90 56 C90 72 87 86 80 98 L62 108 C34 112 12 96 10 66 C8 36 18 12 44 10 Z'),
+    nuca:head('M50 14 C80 14 94 40 94 66 C94 82 92 92 89 99 L11 99 C8 92 6 82 6 66 C6 40 20 14 50 14 Z'),
+    nao:'<svg viewBox="0 0 100 116" aria-hidden="true"><circle cx="50" cy="58" r="40" fill="#fbe3e6"/><text x="50" y="74" text-anchor="middle" font-size="46" font-weight="900" fill="#d9566e" font-family="Nunito">?</text></svg>'
+  };
+
+  // ---------- telas ----------
+  function intro(){
+    show('<div class="hero center"><img src="../assets/mascote.png" alt="">'+
+      '<h1>A cabecinha do seu bebê está se formando do jeito certo?</h1>'+
+      '<p class="muted">Faça o <b>Teste da Cabecinha</b> e descubra em 1 minuto se ela precisa de atenção, e o que fazer em casa a partir de hoje.</p>'+
+      '<div class="pill"><span>⏱️ 1 minuto</span><span>📝 7 perguntas</span><span>💗 Gratuito</span></div>'+
+      '<button class="btn pulse" id="go">Começar o teste</button>'+
+      '<p class="note">Teste educativo. Não substitui a avaliação do pediatra.</p></div>');
+    document.getElementById('go').onclick=q1;
+  }
+  function q1(){
+    show('<p class="q">Como seu bebê se chama?</p><p class="hint">Vamos usar o nome para personalizar o resultado.</p>'+
+      '<input class="field" id="nm" maxlength="24" placeholder="Nome do bebê" autocomplete="off">'+
+      '<div class="seg"><button class="opt" data-s="f"><span class="e">👧</span>Menina</button><button class="opt" data-s="m"><span class="e">👦</span>Menino</button></div>'+
+      '<button class="btn" id="nx" disabled>Continuar</button>',1);
+    var nm=document.getElementById('nm'),nx=document.getElementById('nx'),sx=null;
+    function chk(){nx.disabled=!(nm.value.trim().length>=2&&sx)}
+    nm.oninput=chk;
+    app.querySelectorAll('[data-s]').forEach(function(b){b.onclick=function(){
+      app.querySelectorAll('[data-s]').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');sx=b.dataset.s;chk();
+    }});
+    nx.onclick=function(){A.nome=cap(nm.value.trim());A.sexo=sx;q2()};
+  }
+  function q2(){
+    ask(2,'Quantos meses '+nome()+' tem?','A idade muda tudo: a cabecinha é mais moldável nos primeiros meses.',[
+      {e:'🍼',t:'0 a 2 meses',v:'0-2'},{e:'🧸',t:'3 a 4 meses',v:'3-4'},{e:'🌼',t:'5 a 6 meses',v:'5-6'},
+      {e:'🚼',t:'7 a 12 meses',v:'7-12'},{e:'🎂',t:'Mais de 1 ano',v:'12+'}],'idade',q3);
+  }
+  function q3(){
+    ask(3,'Olhe a cabecinha '+deN()+' de cima. Parece mais com qual?','Dica: fica mais fácil no banho, com o cabelinho molhado.',[
+      {svg:SHAPES.redonda,t:'Redondinha',s:'os dois lados iguais',v:'redonda'},
+      {svg:SHAPES.lado,t:'Um lado achatado',s:'atrás, de um lado só',v:'lado'},
+      {svg:SHAPES.nuca,t:'Nuca achatada',s:'reta atrás, mais larga',v:'nuca'},
+      {svg:SHAPES.nao,t:'Não sei dizer',s:'nunca reparei',v:'nao'}],'formato',q4,'grid2');
+  }
+  function q4(){
+    ask(4,cap(nome())+' prefere virar a cabeça sempre para o mesmo lado?','Repare quando '+ele()+' dorme ou mama.',[
+      {e:'👉',t:'Sim, quase sempre',v:'sempre'},{e:'🔄',t:'Às vezes',v:'asvezes'},
+      {e:'🙂',t:'Não, vira para os dois lados',v:'nao'},{e:'🤔',t:'Nunca reparei',v:'naosei'}],'lado',q5,'',
+      'Anotado! Isso ajuda muito no resultado.');
+  }
+  function q5(){
+    ask(5,'Quanto tempo por dia '+nome()+' fica de bruços acordad'+o()+'?','',[
+      {e:'🚫',t:'Quase nunca',s:''+ele()+' chora ou eu tenho medo',v:'nunca'},{e:'⏳',t:'Menos de 10 minutos',v:'pouco'},
+      {e:'🙂',t:'De 10 a 30 minutos',v:'medio'},{e:'💪',t:'Mais de 30 minutos',v:'bom'}],'brucos',respiro);
+  }
+  function respiro(){
+    show('<div class="card center"><p class="muted" style="font-weight:800;margin:0">Você não está sozinha</p>'+
+      '<p class="big">46%</p><p><b>dos bebês de 2 a 3 meses</b> têm algum grau de achatamento na cabecinha.</p>'+
+      '<p class="src">Estudo com 440 bebês publicado na revista Pediatrics (2013).</p></div>'+
+      '<div class="card"><p style="margin:0">A maioria das mães só percebe tarde porque <b>ninguém ensina o que olhar</b>. Você já está fazendo diferente. Faltam só 2 perguntas.</p></div>'+
+      '<div class="depo-ph">💬 <b>Espaço para depoimento real</b><br>Print de WhatsApp de uma cliente contando como a rotina mudou</div>'+
+      '<button class="btn" id="nx">Continuar</button>');
+    bar.hidden=false;prog.style.width=(5.5/TOTAL*100)+'%';stepn.textContent='Quase lá';
+    document.getElementById('nx').onclick=q6;
+  }
+  function q6(){
+    ask(6,'O que mais te preocupa sobre a cabecinha '+deN()+'?','',[
+      {e:'🪞',t:'Ficar com a cabeça torta para sempre',v:'estetica'},
+      {e:'🧠',t:'Atrapalhar o desenvolvimento',v:'desenv'},
+      {e:'⛑️',t:'Precisar usar capacete',v:'capacete'},
+      {e:'👀',t:'Os outros comentarem',v:'julgamento'}],'medo',q7);
+  }
+  function q7(){
+    ask(7,'O pediatra já falou alguma coisa sobre a cabecinha?','',[
+      {e:'🙅',t:'Não falou nada',v:'nada'},{e:'⏸️',t:'Disse para esperar',v:'esperar'},
+      {e:'🩺',t:'Indicou fisioterapia ou capacete',v:'trat'},{e:'📅',t:'Ainda não consultei',v:'naoconsultei'}],'pediatra',analise);
+  }
+
+  function analise(){
+    bar.hidden=true;
+    var items=['Idade e fase da cabecinha','Formato visto de cima','Posição preferida da cabeça','Tempo de bruços','Montando o plano para '+nome()];
+    var h='<h2 class="center">Analisando as respostas '+deN()+'…</h2><div class="ring"><svg viewBox="0 0 120 120" width="120" height="120"><circle cx="60" cy="60" r="52" fill="none" stroke="#fbe3e6" stroke-width="12"/><circle id="arc" cx="60" cy="60" r="52" fill="none" stroke="#d9566e" stroke-width="12" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327"/></svg><b id="pc">0%</b></div><ul class="checks">';
+    items.forEach(function(t){h+='<li><span class="ok">✓</span>'+t+'</li>'});
+    show(h+'</ul>');
+    var li=app.querySelectorAll('.checks li'),arc=document.getElementById('arc'),pc=document.getElementById('pc'),p=0;
+    var t=setInterval(function(){p+=2;arc.style.strokeDashoffset=327-327*p/100;pc.textContent=p+'%';
+      var k=Math.floor(p/20);for(var i=0;i<k&&i<li.length;i++)li[i].classList.add('on');
+      if(p>=100){clearInterval(t);setTimeout(resultado,500)}},80);
+  }
+
+  // ---------- pontuação ----------
+  function score(){
+    var s={'0-2':22,'3-4':26,'5-6':30,'7-12':24,'12+':14}[A.idade]||20;
+    s+={redonda:4,lado:30,nuca:28,nao:18}[A.formato]||0;
+    s+={sempre:22,asvezes:12,nao:2,naosei:12}[A.lado]||0;
+    s+={nunca:16,pouco:12,medio:5,bom:0}[A.brucos]||0;
+    return Math.max(18,Math.min(92,s));
+  }
+  function resultado(){
+    var s=score(), N=nome();
+    var nivel = s>=60?'Precisa de atenção agora':s>=38?'Atenção moderada':'Fase de prevenção';
+    var titulo = s>=60 ? 'A cabecinha '+deN()+' precisa de atenção agora.'
+               : s>=38 ? 'A cabecinha '+deN()+' tem sinais que merecem cuidado.'
+               : 'A cabecinha '+deN()+' está bem, e é agora que dá para prevenir.';
+    var risks=[];
+    if(A.formato==='lado')risks.push(['📐','Você notou um lado achatado','É o sinal mais comum da <b>plagiocefalia posicional</b>: a cabecinha achata do lado em que '+ele()+' mais apoia.']);
+    if(A.formato==='nuca')risks.push(['📐','Você notou a nuca achatada','Acontece quando '+ele()+' passa muito tempo de barriga para cima, sempre na mesma posição.']);
+    if(A.formato==='nao')risks.push(['👀','Você ainda não sabe como está o formato','Normal: quase ninguém ensina a olhar. Mas sem olhar, não dá para agir a tempo.']);
+    if(A.lado==='sempre'||A.lado==='asvezes')risks.push(['🔄','Prefere virar para um lado','O peso da cabecinha fica sempre no mesmo ponto e vai achatando aos pouquinhos.']);
+    if(A.lado==='naosei')risks.push(['🔄','Você não sabe se '+ele()+' tem um lado preferido','Esse é o primeiro ponto a observar nos próximos dias.']);
+    if(A.brucos==='nunca'||A.brucos==='pouco')risks.push(['⏳','Pouco tempo de bruços','Tirar o peso da parte de trás da cabeça é um dos cuidados mais simples, e quase toda mãe tem dificuldade no começo.']);
+    if(!risks.length)risks.push(['💗','Nenhum sinal forte agora','Ótimo. O objetivo é manter assim com pequenos ajustes na rotina.']);
+
+    var janela={
+      '0-2':'<b>'+cap(N)+' tem menos de 3 meses:</b> está no começo da melhor fase para cuidar da cabecinha com hábitos simples.',
+      '3-4':'<b>'+cap(N)+' está na melhor janela.</b> Até os 6 meses a cabecinha ainda é bem moldável. Cada semana conta.',
+      '5-6':'<b>A janela está fechando.</b> Depois dos 6 meses a cabecinha vai ficando mais firme. O ideal é começar hoje.',
+      '7-12':'<b>Ainda dá para ajudar,</b> com mais constância. Vale também mostrar a cabecinha para o pediatra.',
+      '12+':'<b>Depois de 1 ano a cabecinha já está mais firme.</b> Converse com o pediatra; os cuidados de rotina continuam ajudando.'
+    }[A.idade];
+    var ped={trat:'Como o pediatra já indicou tratamento, siga a orientação dele. Os cuidados de casa ajudam no dia a dia.',
+             esperar:'"Esperar para ver" é comum, mas esperar sem mudar a rotina pode fazer você perder a melhor fase.'}[A.pediatra]||'';
+    var h='<p class="center" style="margin-top:8px"><span class="tag">Resultado do teste</span></p>'+
+      '<h1 class="center">'+titulo+'</h1>'+
+      '<div class="card"><div style="display:flex;justify-content:space-between;align-items:baseline"><b>Nível de atenção</b><b style="color:var(--wine)">'+nivel+'</b></div>'+
+      '<div class="meter"><div class="meter-track"><span class="meter-dot" id="dot"></span></div><div class="meter-lbl"><span>Prevenção</span><span>Moderado</span><span>Agir agora</span></div></div></div>'+
+      '<div class="card"><b>O que encontramos nas suas respostas:</b><ul class="risks">';
+    risks.forEach(function(r){h+='<li><span class="i">'+r[0]+'</span><span><b>'+r[1]+'</b><br><span class="muted">'+r[2]+'</span></span></li>'});
+    h+='</ul></div><div class="window">'+janela+(ped?'<br><br>'+ped:'')+'</div>'+
+      '<div class="card"><b>A boa notícia:</b> na maioria dos casos, a cabecinha melhora com <b>ajustes simples no dia a dia</b>: posição no berço, colo, mamada e tempo de bruços. Preparamos um vídeo curto mostrando como fazer isso com '+N+'.</div>'+
+      '<button class="btn green pulse" id="vsl">▶ Ver o plano para '+N+'</button>'+
+      '<p class="note">Resultado educativo, baseado nas suas respostas. Não substitui a avaliação do pediatra.</p>';
+    show(h);
+    setTimeout(function(){document.getElementById('dot').style.left=s+'%'},150);
+    document.getElementById('vsl').onclick=vsl;
+  }
+
+  function vsl(){
+    var N=nome();
+    var q=location.search?location.search:'';
+    var h='<p class="vsl-h">Assista até o final: veja como cuidar da cabecinha '+deN()+' em casa, com 4 momentos do dia.</p>'+
+      '<p class="vsl-sub">Vídeo curto · funciona melhor com o som ligado</p>'+
+      '<p class="sound">🔊 Ative o som</p>'+
+      '<div id="vsl-box"><vturb-smartplayer id="vid-'+VTURB_PLAYER+'" style="display:block;margin:0 auto;width:100%;"></vturb-smartplayer></div>'+
+      '<div class="esconder">'+
+        '<a class="btn green pulse" id="buy" href="'+CHECKOUT+q+'">QUERO CUIDAR DA CABECINHA '+deN().toUpperCase()+'</a>'+
+        '<div class="seals"><span>🔒 Garantia de 30 dias</span><span>⚡ Acesso imediato no app</span><span>💳 Pix ou cartão</span></div>'+
+        '<div class="card guarantee"><span class="g">🛡️</span><span><b>Garantia de 30 dias.</b> Se não gostar, devolvemos 100% do valor. Sem perguntas.</span></div>'+
+        '<div class="depo-ph">💬 <b>Espaço para depoimento real 1</b><br>Print de WhatsApp de cliente</div>'+
+        '<div class="depo-ph">💬 <b>Espaço para depoimento real 2</b><br>Print de WhatsApp de cliente</div>'+
+      '</div>'+
+      '<footer>Conteúdo educativo. Não substitui a orientação do pediatra.</footer>';
+    show(h);
+    var s=document.createElement('script');
+    s.src='https://scripts.converteai.net/'+VTURB_ACC+'/players/'+VTURB_PLAYER+'/v4/player.js';s.async=true;
+    document.head.appendChild(s);
+    var p=document.querySelector('vturb-smartplayer');
+    p.addEventListener('player:ready',function(){p.displayHiddenElements(PITCH_SECONDS,['.esconder'],{persist:true})});
+  }
+
+  // atalho de preview: ?tela=resultado ou ?tela=vsl (só para conferir o layout)
+  var tela=new URLSearchParams(location.search).get('tela');
+  var T={q1:q1,q2:q2,q3:q3,q4:q4,q5:q5,respiro:respiro,q6:q6,q7:q7,analise:analise,resultado:resultado,vsl:vsl};
+  if(T[tela]){A={nome:'Alice',sexo:'f',idade:'3-4',formato:'lado',lado:'sempre',brucos:'pouco',medo:'estetica',pediatra:'esperar'};T[tela]()}
+  else intro();
+})();
+</script>
+</body>
+</html>
