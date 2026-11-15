@@ -33,3 +33,5 @@ cakto-upsell-reject::part(button){color:#8a849c;font-size:.9rem}
 .safe{color:#6d6880;font-size:.82rem;margin:12px 0 0}
 .foot{text-align:center;color:#8a849c;font-size:.8rem;margin:18px 0 0}
 .esconder{display:none}
+.only-video{padding-top:20px}
+.buttons-only{margin-top:4px}
