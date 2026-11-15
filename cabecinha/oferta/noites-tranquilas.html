@@ -6,10 +6,19 @@
 <title>Noites Tranquilas · Oferta exclusiva</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#1f2a4a">
+<!-- Carregamento antecipado do player VTurb -->
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/6af9bbd0185a09f98a27d654/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/6af9bbd0185a09f98a27d653/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="oferta.css?v=1">
+<link rel="stylesheet" href="oferta.css?v=2">
 </head>
 <body>
 
@@ -18,29 +27,28 @@
 <main>
   <div class="hero">
     <span class="kicker">Oferta exclusiva para quem acabou de comprar</span>
-    <h1>Seu bebê acorda várias vezes à noite e você não sabe mais o que fazer?</h1>
+    <h1>Seu bebê chora e você não sabe se é fome, sono, cólica ou colo?</h1>
     <p class="sub">Assista ao vídeo curto abaixo antes de acessar o seu Método 👇</p>
   </div>
 
-  <!-- ===== VSL: cole aqui o código do player da VTurb ===== -->
+  <!-- ===== VSL (VTurb) ===== -->
   <div id="vsl" class="vsl">
-    <div class="vsl-ph">🎬 Vídeo em breve</div>
+    <vturb-smartplayer id="vid-6af9bbd0185a09f98a27d654" style="display:block;margin:0 auto;width:100%;"></vturb-smartplayer>
+    <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/a863f268-2fb0-429d-88e9-42f82a5da6f4/players/6af9bbd0185a09f98a27d654/v4/player.js";s.async=!0;document.head.appendChild(s);</script>
   </div>
   <!-- ===== fim da VSL ===== -->
 
   <section class="offer">
     <div class="tag">🌙 Material extra</div>
     <h2>Noites Tranquilas</h2>
-    <p class="lead">O guia gentil para o seu bebê dormir melhor (e você também), do nascimento aos 6 meses.</p>
+    <p class="lead">Aprenda a ler o choro do seu bebê, saiba o que fazer em cada caso e tenha noites mais leves. Tudo explicado de forma simples, para aplicar ainda hoje.</p>
 
     <ul class="list">
-      <li><span>🛏️</span><div><b>Sono seguro em 6 regras</b>O que a Sociedade Brasileira de Pediatria recomenda, explicado de um jeito simples.</div></li>
-      <li><span>⏱️</span><div><b>A tabela da janela de sono</b>Quanto tempo o bebê aguenta acordado em cada fase, para ele não passar do ponto e brigar com o sono.</div></li>
-      <li><span>🌗</span><div><b>Dia é dia, noite é noite</b>Como ajudar o reloginho do bebê a entender quando é hora de dormir mais.</div></li>
-      <li><span>🪺</span><div><b>O Ritual do Ninho</b>5 passos, 20 minutos, todas as noites. A sequência que avisa ao cérebro do bebê que o sono longo chegou.</div></li>
-      <li><span>🤫</span><div><b>A Pausa dos 3 minutos</b>O que fazer quando ele acorda de madrugada (e quando é fome de verdade).</div></li>
-      <li><span>🗓️</span><div><b>O Plano de 7 Noites</b>Uma mudança por noite. No fim da semana, a rotina está montada sem estresse.</div></li>
-      <li><span>🎁</span><div><b>Extras</b>Cólicas, os 5 erros que mais roubam o sono e o diário do sono para levar ao pediatra.</div></li>
+      <li><span>👀</span><div><b>Reconhecer os sinais antes e durante o choro</b>Os avisos que o bebê dá antes de chorar, para você agir antes da crise.</div></li>
+      <li><span>🍼</span><div><b>O que fazer em cada caso</b>Fome, sono, cólica ou colo: como reconhecer cada choro e o passo a passo para acalmar.</div></li>
+      <li><span>🌙</span><div><b>Rotina de sono segura</b>Tabela da janela de sono por idade, o Ritual do Ninho e o Plano de 7 Noites para ele dormir melhor.</div></li>
+      <li><span>🩺</span><div><b>Quando ligar para o pediatra</b>Os sinais de choro diferente do normal e de febre que pedem atendimento.</div></li>
+      <li><span>🎁</span><div><b>Bônus: Tabela de Bolso da Madrugada</b>Uma folha rápida, de tela escura, para consultar no celular às 3 da manhã.</div></li>
     </ul>
 
     <div class="combo">
@@ -48,9 +56,9 @@
     </div>
 
     <div class="price">
-      <div class="p1">Só nesta página</div>
+      <div class="p1">De <s>R$ 97</s> por apenas</div>
       <div class="p2">R$ 37</div>
-      <div class="p3">pagamento único · acesso no mesmo app do Método</div>
+      <div class="p3">só nesta página · pagamento único · acesso no mesmo app do Método</div>
     </div>
 
     <div class="cta">
@@ -70,7 +78,7 @@
           Não, obrigada, prefiro continuar sem saber o que fazer
         </cakto-upsell-reject>
       </cakto-upsell-buttons>
-      <p class="safe">🔒 Compra com 1 clique · ⚡ Liberado na hora no seu app · 🛡️ Garantia de 7 dias</p>
+      <p class="safe">🔒 Compra com 1 clique · ⚡ Liberado na hora no seu app · 🛡️ Garantia de 30 dias</p>
     </div>
   </section>
 

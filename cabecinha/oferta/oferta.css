@@ -10,6 +10,7 @@ h1{font-family:"Playfair Display",Georgia,serif;font-size:1.65rem;line-height:1.
 .sub{color:#e3e0f5;margin:0;font-size:1rem}
 .vsl{background:#000;border-radius:16px;overflow:hidden;box-shadow:0 12px 30px rgba(20,20,60,.35);margin-bottom:18px}
 .vsl-ph{aspect-ratio:9/16;max-height:70vh;margin:0 auto;display:grid;place-items:center;color:#aaa;font-weight:700;background:#14182e}
+.vsl{min-height:200px}
 .offer{background:#fff;border-radius:20px;padding:22px 18px;box-shadow:0 8px 24px rgba(40,30,90,.08)}
 .tag{color:#6a4f86;font-weight:800;font-size:.85rem}
 h2{font-family:"Playfair Display",Georgia,serif;color:#1f2a4a;font-size:1.9rem;margin:.1em 0 .2em}
