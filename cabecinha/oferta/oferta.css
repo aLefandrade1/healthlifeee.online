@@ -43,3 +43,5 @@ body.dark cakto-upsell-reject::part(button){color:#c9c6e2}
 .loadbar-track{height:14px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
 .loadbar-fill{width:75%;height:100%;border-radius:99px;background:linear-gradient(90deg,#2fa36b,#5fd59a);background-size:200% 100%;animation:lb 1.6s linear infinite}
 @keyframes lb{0%{background-position:0 0}100%{background-position:200% 0}}
+.wait-h{color:#fff;text-align:center;font-size:1.5rem;line-height:1.25;margin:0 0 16px}
+.wait-h span{display:block;color:#f3d9a4;font-family:Nunito,system-ui,sans-serif;font-size:1.05rem;font-weight:800;margin-top:6px}
