@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>O plano da cabecinha</title>
+<meta name="theme-color" content="#FBF6EF">
+<meta name="robots" content="noindex">
+
+<!-- ===== RASTREAMENTO: colar aqui o pixel da Meta do Cabecinha (o mesmo do inlead) ===== -->
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fraunces:opsz,wght,SOFT@9..144,600..700,100&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div class="logo" style="margin:4px 0 10px"><svg viewBox="0 0 32 32" aria-hidden="true" style="width:26px;height:26px"><circle cx="16" cy="17" r="12" fill="#E7F0EA"/><circle cx="16" cy="17" r="8.5" fill="#6E9A86"/><path d="M12.5 17.5c1 1.4 2.2 2 3.5 2s2.5-.6 3.5-2" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M16 8.5c-1.6-2.6-.2-4.6 2-4.5" stroke="#E8917A" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Cabecinha Redonda</div>
+
+  <div class="center"><span class="kicker" id="kick">O plano do seu bebê</span></div>
+  <p class="vsl-h" id="hd">Assista até o fim: veja como ajudar a cabecinha do seu bebê a se formar redondinha, em casa.</p>
+  <div id="dra"></div>
+  <p class="sound">🔊 Confira se o som está ligado</p>
+
+  <div class="player" id="vsl-box"></div>
+
+  <!-- tudo abaixo aparece no pitch -->
+  <div class="esconder">
+    <div class="price">
+      <p class="muted" style="margin:0">Acesso completo ao Método Cabecinha Redonda</p>
+      <div class="v">R$ 47</div>
+      <p class="muted" style="margin:2px 0 0">pagamento único · acesso imediato no celular</p>
+    </div>
+    <a class="btn pulse" id="buy" href="#">QUERO O PLANO DO MEU BEBÊ</a>
+    <div class="seals"><span>🔒 Compra segura</span><span>📱 Acesso na hora</span><span>💛 30 dias de garantia</span></div>
+
+    <div class="card" style="margin-top:22px">
+      <h2 style="font-size:1.2rem;margin-top:0">O que você recebe</h2>
+      <ul class="list">
+        <li><span class="dot">✓</span><span><b>Rotina dos 4 Momentos</b>, em vídeos curtinhos: berço, colo, mamada e bruços</span></li>
+        <li><span class="dot">✓</span><span><b>Timer de bruços</b> que aumenta o tempo semana a semana</span></li>
+        <li><span class="dot">✓</span><span><b>Lembrete do “lado da vez”</b>, para não esquecer qual lado é</span></li>
+        <li><span class="dot">✓</span><span><b>Diário de fotos</b> para comparar a cabecinha de cima e ver a evolução</span></li>
+        <li><span class="dot">🎁</span><span><b>Bônus:</b> tabela da rotina para imprimir e colar na geladeira</span></li>
+        <li id="li-wpp" hidden><span class="dot">💬</span><span><b>Suporte no WhatsApp</b>, com gente de verdade do outro lado</span></li>
+      </ul>
+    </div>
+
+    <div class="card soft">
+      <div class="guar"><div class="seal"><div><b>30</b>DIAS</div></div>
+        <div><b>Garantia de 30 dias</b><p class="muted" style="margin:4px 0 0">Se não gostar, devolvemos 100% do valor. Basta um pedido, sem burocracia.</p></div></div>
+    </div>
+
+    <h2 style="font-size:1.2rem;margin:24px 0 8px">Perguntas frequentes</h2>
+    <details><summary>Me disseram que melhora sozinho. Preciso mesmo?</summary><p>Em casos bem leves, às vezes melhora. Mas melhora muito mais rápido quando a rotina ajuda, e você não perde nada fazendo. Esperar é a única coisa que não ajuda.</p></details>
+    <details><summary>Meu bebê já tem 5 ou 6 meses. Ainda dá tempo?</summary><p>Dá para ajudar, sim. O app tem a parte para bebês mais velhos. Só não deixe para depois: cada semana conta.</p></details>
+    <details><summary>Não tenho tempo. Vou conseguir?</summary><p>A maior parte da rotina acontece em momentos que você já tem: trocar, mamar, pôr para dormir. O resto são minutinhos.</p></details>
+    <details><summary>Meu bebê odeia ficar de bruços.</summary><p>Quase todos odeiam no começo. No app tem as posições que eles aceitam melhor, como no seu peito ou no seu colo, começando com um minuto.</p></details>
+    <details><summary>Como recebo o acesso?</summary><p>Na hora. Você paga e o acesso chega no seu e-mail. É só abrir no celular.</p></details>
+
+    <a class="btn" id="buy2" href="#">QUERO O PLANO DO MEU BEBÊ · R$ 47</a>
+  </div>
+
+  <footer>Orientações de cuidados em casa. Não substitui uma consulta médica individual.<br>Resultados variam de bebê para bebê.</footer>
+</main>
+
+<script>
+/* ================== CONFIGURAÇÃO ================== */
+var CONFIG = {
+  checkout:      'https://pay.cakto.com.br/fzk7na6',
+  vturb_conta:   'a863f268-2fb0-429d-88e9-42f82a5da6f4',
+  vturb_player:  '6af73b62316ca0a2a4f4a0ba',   // VSL atual. Trocar pelo player da VSL nova quando gravar.
+  pitch_segundos: 196,                          // VSL atual: 3:16. VSL nova: ~110 (1:50). Conferir o segundo exato.
+  dra_nome: 'Dra. Sofia',
+  dra_cred: '',                                 // ex.: 'Pediatra · CRM-SP 123456 · RQE 7890'
+  dra_foto: '',
+  whatsapp: false                               // true quando o suporte no WhatsApp estiver funcionando
+};
+/* ================================================== */
+(function(){
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  var A={}; try{A=JSON.parse(sessionStorage.getItem('cr_v2')||'{}')}catch(e){}
+  var nome=A.nome?esc(A.nome):'', m=A.sexo==='m';
+  if(nome){
+    var idade=A.idade==null?'':A.idade>12?', mais de 1 ano':A.idade===0?', menos de 1 mês':', '+A.idade+(A.idade===1?' mês':' meses');
+    document.getElementById('kick').textContent='O plano '+(m?'do ':'da ')+A.nome+idade;
+    document.getElementById('hd').innerHTML='Assista até o fim: a '+esc(CONFIG.dra_nome)+' te mostra como ajudar a cabecinha '+(m?'do ':'da ')+'<span class="hl">'+nome+'</span> a se formar redondinha, em casa.';
+    var t='QUERO O PLANO '+(m?'DO ':'DA ')+A.nome.toUpperCase();
+    document.getElementById('buy').textContent=t;
+    document.getElementById('buy2').textContent=t+' · R$ 47';
+  }
+  var av=CONFIG.dra_foto?'<span class="av" style="background-image:url('+esc(CONFIG.dra_foto)+')"></span>':'<span class="av">'+esc(CONFIG.dra_nome.replace('Dra. ','').charAt(0))+'</span>';
+  document.getElementById('dra').innerHTML='<div class="dra">'+av+'<div><b>'+esc(CONFIG.dra_nome)+'</b><small>'+esc(CONFIG.dra_cred||'Pediatra')+'</small></div></div>';
+  if(CONFIG.whatsapp)document.getElementById('li-wpp').hidden=false;
+
+  var url=CONFIG.checkout+(location.search||'');
+  ['buy','buy2'].forEach(function(id){document.getElementById(id).href=url});
+
+  document.getElementById('vsl-box').innerHTML='<vturb-smartplayer id="vid-'+CONFIG.vturb_player+'" style="display:block;margin:0 auto;width:100%;"></vturb-smartplayer>';
+  var s=document.createElement('script');
+  s.src='https://scripts.converteai.net/'+CONFIG.vturb_conta+'/players/'+CONFIG.vturb_player+'/v4/player.js';s.async=true;
+  document.head.appendChild(s);
+  var p=document.querySelector('vturb-smartplayer');
+  p.addEventListener('player:ready',function(){p.displayHiddenElements(CONFIG.pitch_segundos,['.esconder'],{persist:true})});
+
+  /* pré-visualização: ?ver=tudo mostra a parte de baixo sem esperar o vídeo */
+  if(new URLSearchParams(location.search).get('ver')==='tudo')document.querySelectorAll('.esconder').forEach(function(e){e.style.display='block'});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Teste da Cabecinha</title>
+<meta name="description" content="Teste rápido: veja se a cabecinha do seu bebê está se formando redondinha e o que fazer em casa.">
+<meta name="theme-color" content="#FBF6EF">
+<meta name="robots" content="noindex">
+
+<!-- ===== RASTREAMENTO: colar aqui o pixel da Meta do Cabecinha (o mesmo do inlead) ===== -->
+<!-- UTMs da Utmify (repassa as UTMs para o checkout) -->
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fraunces:opsz,wght,SOFT@9..144,600..700,100&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div class="top" id="top" hidden>
+    <div class="logo"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="17" r="12" fill="#E7F0EA"/><circle cx="16" cy="17" r="8.5" fill="#6E9A86"/><path d="M12.5 17.5c1 1.4 2.2 2 3.5 2s2.5-.6 3.5-2" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M16 8.5c-1.6-2.6-.2-4.6 2-4.5" stroke="#E8917A" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Cabecinha Redonda</div>
+    <div class="prog"><i id="prog"></i></div>
+  </div>
+  <div id="app"></div>
+</main>
+
+<script>
+/* ================== CONFIGURAÇÃO ==================
+   Preencha quando tiver os dados REAIS. Campo vazio = item escondido. */
+var CONFIG = {
+  dra_nome:  'Dra. Sofia',
+  dra_cred:  '',            // ex.: 'Pediatra · CRM-SP 123456 · RQE 7890'  (vazio = mostra só "Pediatra")
+  dra_foto:  '',            // ex.: 'img/dra-sofia.jpg'  (vazio = círculo com a inicial)
+  maes_total:'',            // ex.: '3.200'  (vazio = não mostra contador)
+  depoimentos: [            // SOMENTE depoimentos reais, com autorização. Vazio = tela pulada.
+    // {texto:'...', nome:'Ana', bebe:'Lucas, 4 meses'}
+  ],
+  vsl_url: 'vsl.html'
+};
+/* ================================================== */
+
+(function(){
+  var app=document.getElementById('app'), top=document.getElementById('top'), prog=document.getElementById('prog');
+  var TOTAL=25;
+  var A={nome:'',sexo:'f',idade:null,quem:'mae',formato:null,lado:null,sono:null,brucos:null,cadeira:null,pescoco:null,sinais:[],sentimento:null,tempo:null,desejo:null,alertas:[],pts:0};
+
+  /* ---------- utilidades ---------- */
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function N(){return A.nome?esc(A.nome):(A.sexo==='m'?'seu bebê':'sua bebê')}
+  function Ncap(){var n=N();return n.charAt(0).toUpperCase()+n.slice(1)}
+  function ele(){return A.sexo==='m'?'ele':'ela'}
+  function Ele(){return A.sexo==='m'?'Ele':'Ela'}
+  function dele(){return A.sexo==='m'?'dele':'dela'}
+  function o(){return A.sexo==='m'?'o':'a'}
+  function quem(){return {mae:'mãe',pai:'pai',avo:'vovó',outro:''}[A.quem]||''}
+  function opostoTxt(){return A.lado==='direita'?'esquerda':A.lado==='esquerda'?'direita':null}
+  function show(html,step){
+    window.scrollTo(0,0);
+    if(step){top.hidden=false;prog.style.width=Math.round(Math.sqrt(step/TOTAL)*100)+'%'}
+    else top.hidden=true;
+    app.innerHTML='<div class="screen">'+html+'</div>';
+    try{sessionStorage.setItem('cr_v2',JSON.stringify(A))}catch(e){}
+  }
+  function toast(t,ms){var d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},ms||1500)}
+  function $(id){return document.getElementById(id)}
+  function draHTML(){
+    var av=CONFIG.dra_foto?'<span class="av" style="background-image:url('+esc(CONFIG.dra_foto)+')"></span>':'<span class="av">'+esc(CONFIG.dra_nome.replace('Dra. ','').charAt(0))+'</span>';
+    return '<div class="dra">'+av+'<div><b>'+esc(CONFIG.dra_nome)+'</b><small>'+esc(CONFIG.dra_cred||'Pediatra')+'</small></div></div>';
+  }
+  /* pergunta de toque único */
+  function ask(step,q,hint,opts,key,next,cls,after){
+    var h='<p class="q">'+q+'</p>'+(hint?'<p class="hint">'+hint+'</p>':'')+'<div class="opts '+(cls||'')+'">';
+    opts.forEach(function(op,i){
+      h+='<button class="opt'+(op.svg?' shape':'')+'" data-i="'+i+'">'+(op.svg?op.svg:'<span class="ic">'+op.e+'</span>')+'<span>'+op.t+(op.s?'<small>'+op.s+'</small>':'')+'</span></button>';
+    });
+    show(h+'</div>',step);
+    app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      if(app.dataset.lock)return; app.dataset.lock=1;
+      b.classList.add('sel'); var op=opts[+b.dataset.i]; A[key]=op.v; A.pts+=(op.p||0);
+      var wait=280; if(after){var t=after(op); if(t){toast(t,2200);wait=1500}}
+      setTimeout(function(){delete app.dataset.lock;next()},wait);
+    }});
+  }
+  /* múltipla escolha */
+  function multi(step,q,hint,opts,key,next,none){
+    var h='<p class="q">'+q+'</p><p class="hint">'+hint+'</p><div class="opts">';
+    opts.forEach(function(op,i){h+='<button class="opt" data-i="'+i+'"><span class="ic">'+op.e+'</span><span>'+op.t+'</span><span class="ck">✓</span></button>'});
+    show(h+'</div><button class="btn" id="nx" disabled>Continuar</button>',step);
+    var sel={};
+    app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      var i=+b.dataset.i, isNone=opts[i].v===none;
+      if(isNone){sel={};app.querySelectorAll('.opt').forEach(function(x){x.classList.remove('sel')})}
+      else{var ni=opts.findIndex(function(x){return x.v===none});delete sel[ni];var nb=app.querySelector('[data-i="'+ni+'"]');if(nb)nb.classList.remove('sel')}
+      if(sel[i]){delete sel[i];b.classList.remove('sel')}else{sel[i]=1;b.classList.add('sel')}
+      $('nx').disabled=!Object.keys(sel).length;
+    }});
+    $('nx').onclick=function(){
+      A[key]=Object.keys(sel).map(function(i){return opts[i].v}).filter(function(v){return v!==none});
+      Object.keys(sel).forEach(function(i){A.pts+=(opts[i].p||0)});
+      next();
+    };
+  }
+  /* mito ou verdade */
+  function mito(step,claim,verdict,body,next){
+    show('<div class="center"><span class="kicker">Mito ou verdade?</span></div>'+
+      '<div class="claim">“'+claim+'”</div>'+
+      '<div class="mv" id="mv"><button data-v="m">MITO</button><button data-v="v">VERDADE</button></div>'+
+      '<div id="rv"></div>',step);
+    app.querySelectorAll('#mv button').forEach(function(b){b.onclick=function(){
+      if($('rv').innerHTML)return;
+      b.classList.add('sel');
+      $('rv').innerHTML='<div class="card soft reveal"><p class="verdict">'+verdict+'</p>'+body+'</div><button class="btn sage" id="nx">Continuar</button>';
+      $('nx').onclick=next;
+      setTimeout(function(){$('rv').scrollIntoView({behavior:'smooth',block:'start'})},120);
+    }});
+  }
+
+  /* ---------- cálculos ---------- */
+  function horas(){
+    var m=A.idade, base=m<=2?16:m<=5?15:m<=8?14:13;
+    var h=base-(A.brucos||0)/60+(A.cadeira==='mais2'?2:0);
+    return Math.max(8,Math.round(h));
+  }
+  function semanas(){return Math.max(2,(6-A.idade)*4)}
+  function nivel(){
+    var p=A.pts;
+    if(p>=8)return {k:'agir',t:'Agir agora',pos:86};
+    if(p>=4)return {k:'aten',t:'Atenção',pos:52};
+    return {k:'leve',t:'Atenção leve',pos:18};
+  }
+  function metaBrucos(){return A.idade<=2?'15 a 30 minutos somados no dia':A.idade<=5?'1 hora ou mais, somada no dia':'o máximo que '+ele()+' quiser brincar'}
+
+  /* ---------- ilustrações (cabecinha vista de cima) ---------- */
+  var ear='<ellipse cx="9" cy="62" rx="5" ry="9" fill="#F4C9B6"/><ellipse cx="91" cy="62" rx="5" ry="9" fill="#F4C9B6"/>';
+  var nose='<path d="M45 12 L50 3 L55 12 Z" fill="#EAAE95"/>';
+  function head(d){return '<svg viewBox="0 0 100 116" aria-hidden="true">'+ear+'<path d="'+d+'" fill="#FBE0D2" stroke="#D49A83" stroke-width="2.5"/>'+nose+'<path d="M50 30 Q60 40 50 50" fill="none" stroke="#D49A83" stroke-width="1.5" opacity=".5"/></svg>'}
+  var SH={
+    redonda:head('M50 10 C78 10 90 38 90 62 C90 92 72 110 50 110 C28 110 10 92 10 62 C10 38 22 10 50 10 Z'),
+    lado:head('M44 10 C74 8 90 32 90 56 C90 72 87 86 80 98 L62 108 C34 112 12 96 10 66 C8 36 18 12 44 10 Z'),
+    nuca:head('M50 14 C80 14 94 40 94 66 C94 82 92 92 89 99 L11 99 C8 92 6 82 6 66 C6 40 20 14 50 14 Z'),
+    nao:'<svg viewBox="0 0 100 116" aria-hidden="true"><circle cx="50" cy="58" r="40" fill="#E7F0EA"/><text x="50" y="74" text-anchor="middle" font-size="46" font-weight="800" fill="#6E9A86" font-family="Figtree">?</text></svg>'
+  };
+  var HERO='<svg class="hero-art" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="74" fill="#E7F0EA"/><circle cx="80" cy="84" r="46" fill="#FBE0D2" stroke="#D49A83" stroke-width="3"/><circle cx="64" cy="84" r="4" fill="#2F3B39"/><circle cx="96" cy="84" r="4" fill="#2F3B39"/><path d="M68 101c7 6 17 6 24 0" stroke="#2F3B39" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="56" cy="96" r="6" fill="#F6B9A6" opacity=".7"/><circle cx="104" cy="96" r="6" fill="#F6B9A6" opacity=".7"/><path d="M80 38c-6-12 2-20 12-17" stroke="#E8917A" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M120 40l4-9 4 9 9 4-9 4-4 9-4-9-9-4z" fill="#F7E9C6"/></svg>';
+
+  /* ================= TELAS ================= */
+  /* 1 · abertura */
+  function t1(){
+    show(HERO+'<div class="center"><span class="kicker">Teste gratuito · 3 minutos</span></div>'+
+      '<h1 class="center">A cabecinha do seu bebê está se formando <span class="hl">redondinha</span>?</h1>'+
+      '<p class="center muted">Responda algumas perguntas rápidas e veja o resultado do seu bebê e o que fazer em casa, de acordo com a idade dele.</p>'+
+      draHTML()+
+      '<button class="btn pulse" id="go">Começar o teste</button>'+
+      (CONFIG.maes_total?'<p class="note">Mais de <b>'+esc(CONFIG.maes_total)+'</b> mães já fizeram o teste</p>':'')+
+      '<div class="pills"><span>🔒 Sem cadastro</span><span>💛 Gratuito</span><span>📱 Pelo celular</span></div>');
+    $('go').onclick=t2;
+  }
+  /* 2 · nome + sexo */
+  function t2(){
+    show('<p class="q">Antes de tudo: como se chama o seu bebê? 💛</p><p class="hint">Vamos usar o nome para personalizar o resultado.</p>'+
+      '<input class="field" id="nm" maxlength="24" placeholder="Nome do bebê" autocomplete="off" enterkeyhint="next">'+
+      '<div class="opts two" style="margin-top:12px"><button class="opt" data-s="f"><span class="ic">🎀</span>Menina</button><button class="opt" data-s="m"><span class="ic">🧢</span>Menino</button></div>'+
+      '<button class="btn" id="nx" disabled>Continuar</button>',1);
+    var nm=$('nm'),nx=$('nx'),sx=null;
+    function chk(){nx.disabled=!(nm.value.trim().length>=2&&sx)}
+    nm.oninput=chk;
+    app.querySelectorAll('[data-s]').forEach(function(b){b.onclick=function(){
+      app.querySelectorAll('[data-s]').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');sx=b.dataset.s;chk();
+    }});
+    nx.onclick=function(){var v=nm.value.trim();A.nome=v.charAt(0).toUpperCase()+v.slice(1);A.sexo=sx;t3()};
+  }
+  /* 3 · idade */
+  function t3(){
+    ask(2,'Quantos meses <span class="hl">'+N()+'</span> tem?',null,[
+      {e:'🍼',t:'Menos de 1 mês',v:0},{e:'🌱',t:'1 mês',v:1},{e:'🌿',t:'2 meses',v:2,p:2},
+      {e:'🌼',t:'3 meses',v:3,p:2},{e:'🌻',t:'4 meses',v:4,p:2},{e:'🌷',t:'5 meses',v:5,p:2},
+      {e:'🧸',t:'6 a 8 meses',v:7,p:1},{e:'🚼',t:'9 a 12 meses',v:10},{e:'👣',t:'Mais de 1 ano',v:13}
+    ],'idade',t4);
+  }
+  /* 4 · quem responde */
+  function t4(){
+    ask(3,'E você é…',null,[
+      {e:'🤱',t:'A mãe de '+N(),v:'mae'},{e:'👨‍🍼',t:'O pai',v:'pai'},{e:'👵',t:'Avó ou avô',v:'avo'},{e:'🤍',t:'Outra pessoa que cuida',v:'outro'}
+    ],'quem',t5);
+  }
+  /* 5 · formato visto de cima */
+  function t5(){
+    ask(4,'Olhe a cabecinha de '+N()+' <span class="hl">de cima</span>. Qual imagem parece mais?','Com '+ele()+' no seu colo ou deitad'+o()+'. Pode ir lá olhar, a gente espera 😊',[
+      {svg:SH.redonda,t:'Redondinha',v:'redonda'},{svg:SH.nuca,t:'Achatada atrás',v:'nuca',p:2},
+      {svg:SH.lado,t:'Achatada de um lado',v:'lado',p:3},{svg:SH.nao,t:'Não consegui ver bem',v:'nao',p:1}
+    ],'formato',t6,'two',function(){return 'Ótimo, isso já ajuda muito no resultado ✓'});
+  }
+  /* 6 · lado preferido */
+  function t6(){
+    ask(5,'Quando '+N()+' está deitad'+o()+', vira a cabeça mais para um lado?',null,[
+      {e:'👉',t:'Sim, quase sempre para a <b>direita</b>',v:'direita',p:2},
+      {e:'👈',t:'Sim, quase sempre para a <b>esquerda</b>',v:'esquerda',p:2},
+      {e:'🔄',t:'Varia bastante',v:'varia'},{e:'🤔',t:'Não reparei',v:'nsei',p:1}
+    ],'lado',t7);
+  }
+  /* 7 · sono */
+  function t7(){
+    ask(6,'Como '+N()+' costuma dormir?',null,[
+      {e:'😴',t:'De barriga para cima',v:'cima'},{e:'🛏️',t:'De lado',v:'lado'},{e:'🙃',t:'De bruços',v:'brucos'},{e:'🔀',t:'Muda muito',v:'muda'}
+    ],'sono',t8,null,function(op){
+      if(op.v==='lado'||op.v==='brucos')return 'Para dormir, o mais seguro é sempre de barriga para cima. Já já te mostro como proteger a cabecinha assim mesmo 💛';
+    });
+  }
+  /* 8 · bruços */
+  function t8(){
+    ask(7,'Quanto tempo por dia '+N()+' fica de <span class="hl">bruços acordad'+o()+'</span>, com você do lado?',null,[
+      {e:'😭',t:'Quase nada',s:ele()+' chora e eu desisto',v:0,p:3},{e:'⏱️',t:'Uns 5 minutos',v:5,p:2},
+      {e:'🙂',t:'De 10 a 20 minutos',v:15,p:1},{e:'💪',t:'Mais de 30 minutos',v:30}
+    ],'brucos',t9);
+  }
+  /* 9 · cadeirinha */
+  function t9(){
+    ask(8,'E no bebê-conforto, cadeirinha ou carrinho? Somando o dia todo:',null,[
+      {e:'🙂',t:'Menos de 1 hora',v:'menos1'},{e:'🚗',t:'De 1 a 2 horas',v:'1a2',p:1},{e:'🛒',t:'Mais de 2 horas',v:'mais2',p:2}
+    ],'cadeira',t10);
+  }
+  /* 10 · pescoço */
+  function t10(){
+    ask(9,'Teste rápido do pescoço 👀','Com '+N()+' de barriga para cima, chame a atenção '+dele()+' com um brinquedo para um lado e depois para o outro. '+Ele()+' vira a cabeça igual para os dois lados?',[
+      {e:'✅',t:'Sim, igualzinho',v:'igual'},{e:'↪️',t:'Vira, mas para um lado vira menos',v:'menos',p:3},{e:'⏳',t:'Não consegui testar agora',v:'nt'}
+    ],'pescoco',t11);
+  }
+  /* 11 · sinais no rosto */
+  function t11(){
+    multi(10,'Você já reparou em alguma dessas coisas?','Pode marcar mais de uma.',[
+      {e:'👂',t:'Uma orelha parece mais para a frente que a outra',v:'orelha',p:1},
+      {e:'🙂',t:'A testa de um lado parece mais saliente',v:'testa',p:1},
+      {e:'💇',t:'O cabelo está mais ralo atrás ou de um lado',v:'cabelo',p:1},
+      {e:'🤍',t:'Nenhuma delas',v:'nenhuma'}
+    ],'sinais',t12,'nenhuma');
+  }
+  /* 12–14 · mito ou verdade */
+  function t12(){
+    mito(11,'Quando '+N()+' começar a sentar, a cabecinha arredonda sozinha.','Mito… em parte. 😕',
+      '<p>Quando o bebê senta, para de apoiar a cabeça sempre no mesmo ponto, e isso ajuda. Mas até lá o formato vai ficando mais firme a cada mês.</p><p>Em muitos bebês melhora um pouco, mas não volta tudo. Por isso, o que você faz <b>antes</b> de '+ele()+' sentar é o que mais conta.</p>',t13);
+  }
+  function t13(){
+    mito(12,'Se ninguém falou nada na consulta, está tudo bem.','Nem sempre.',
+      draHTML()+'<div class="quote">“Eu sou pediatra e vou ser sincera: a consulta de rotina é curta e precisa dar conta de peso, vacinas, alimentação e desenvolvimento. Quando o achatamento é leve, muitas vezes ninguém comenta. E é justamente nessa fase que dá para agir com mais facilidade.”</div>',t14);
+  }
+  function t14(){
+    mito(13,'Deixar o bebê de bruços é perigoso.','Depende da hora!',
+      '<p>Para <b>dormir</b>: sempre de barriga para cima.</p><p>Para brincar <b>acordad'+o()+' e com você do lado</b>: o bruços é recomendado desde as primeiras semanas. Fortalece o pescoço e tira o peso da parte de trás da cabeça.</p><p>O problema é que quase todo bebê chora no começo, e a gente desiste. Existe um jeito de fazer que eles aceitam bem.</p>',t15);
+  }
+  /* 15 · analisando */
+  function t15(){
+    var items=['Formato da cabecinha','Lado preferido e pescoço','Tempo de bruços e de cadeirinha','Fase de desenvolvimento ('+(A.idade>12?'1 ano+':A.idade+(A.idade===1?' mês':' meses'))+')'];
+    show('<div class="spinner"></div><p class="q">Analisando as respostas de '+N()+'…</p><ul class="checks">'+
+      items.map(function(t,i){return '<li id="c'+i+'"><span class="ok">✓</span>'+t+'</li>'}).join('')+'</ul>',14);
+    items.forEach(function(_,i){setTimeout(function(){$('c'+i).classList.add('on')},700+i*800)});
+    setTimeout(t16,700+items.length*800+500);
+  }
+  /* 16 · a conta das horas */
+  function t16(){
+    var h=horas(), pct=h/24, C=2*Math.PI*80;
+    var ladoTxt=(A.lado==='direita'||A.lado==='esquerda')?' …e quase sempre virad'+o()+' para a <b class="hl-p">'+A.lado+'</b>.':'';
+    show('<div class="center"><span class="kicker">A conta de '+N()+'</span></div>'+
+      '<div class="ring"><svg viewBox="0 0 190 190"><circle cx="95" cy="95" r="80" fill="none" stroke="#F5EDE3" stroke-width="18"/><circle id="arc" cx="95" cy="95" r="80" fill="none" stroke="#E8917A" stroke-width="18" stroke-linecap="round" stroke-dasharray="0 '+C+'" style="transition:stroke-dasharray 1.4s ease"/></svg><div class="lbl"><div><b>'+h+'h</b><small>de 24h por dia</small></div></div></div>'+
+      '<h2 class="center">'+Ncap()+' passa cerca de <span class="hl-p">'+h+' horas por dia</span> com a cabecinha apoiada.'+ladoTxt+'</h2>'+
+      '<p class="center muted">Nesta idade a cabecinha ainda é macia, feita para crescer rápido. Quando o peso cai sempre no mesmo ponto, dia após dia, aquele lado vai achatando aos pouquinhos. Sem doer, e sem a gente perceber.</p>'+
+      '<button class="btn" id="nx">Entendi</button>',15);
+    setTimeout(function(){$('arc').setAttribute('stroke-dasharray',(C*pct)+' '+C)},150);
+    $('nx').onclick=t17;
+  }
+  /* 17 · a janela */
+  function t17(){
+    var m=Math.min(A.idade,12), pos=(m/12*100);
+    var tl='<div class="tl"><div class="mark" style="left:'+Math.max(4,Math.min(96,pos))+'%">'+Ncap()+' está aqui</div><div class="track"><div class="zone"></div></div>'+
+      '<div class="ticks"><span>0</span><span>3m</span><span>6m</span><span>9m</span><span>12m</span></div><div class="zl">▲ melhor fase para agir (até ~6 meses)</div></div>';
+    var h;
+    if(A.idade<6){
+      h='<div class="center"><span class="kicker">O mais importante</span></div><h2 class="center">'+Ncap()+' ainda tem cerca de <span class="hl">'+semanas()+' semanas</span> na melhor fase.</h2>'+tl+
+        '<p class="center muted">Até por volta dos 6 meses, a cabecinha ainda é bem moldável. Nessa fase, mudanças simples na rotina já fazem diferença. Depois ela vai ficando mais firme, e corrigir passa a exigir mais tempo e esforço.</p>';
+    }else{
+      h='<div class="center"><span class="kicker">O mais importante</span></div><h2 class="center">'+Ncap()+' já passou da fase mais macia, <span class="hl">mas ainda dá para ajudar</span>.</h2>'+tl+
+        '<p class="center muted">Depois dos 6 meses a cabecinha fica mais firme, e cada semana passa a contar ainda mais. Quanto antes você ajustar a rotina, melhor.</p>';
+    }
+    show(h+'<button class="btn" id="nx">Continuar</button>',16);
+    $('nx').onclick=t18;
+  }
+  /* 18 · se esperar */
+  function t18(){
+    show('<p class="q">O que costuma acontecer quando a família espera “para ver se melhora”:</p>'+
+      '<div class="card"><ul class="list">'+
+      '<li><span class="dot">1</span><span>A cabecinha fica mais firme a cada mês, e a correção fica mais lenta.</span></li>'+
+      '<li><span class="dot">2</span><span>Em alguns casos, o bebê acaba precisando de fisioterapia ou do <b>capacete ortopédico</b>, usado quase o dia todo por meses, e que costuma custar alguns milhares de reais.</span></li>'+
+      '<li><span class="dot">3</span><span>E fica aquela dúvida: <i>“e se eu tivesse feito algo antes?”</i></span></li></ul></div>'+
+      '<div class="card soft"><b>A boa notícia:</b> na maioria dos casos leves e moderados, ajustar a rotina cedo já ajuda muito.</div>'+
+      '<button class="btn" id="nx">Quero saber o que fazer</button>',17);
+    $('nx').onclick=t19;
+  }
+  /* 19 · sentimento */
+  function t19(){
+    var q=quem();
+    ask(18,'E você'+(q?', '+q:'')+', como se sente quando olha a cabecinha de '+N()+'?',null,[
+      {e:'😟',t:'Preocupada',v:'preocupada'},{e:'😔',t:'Com culpa',s:'acho que deveria ter percebido antes',v:'culpa'},
+      {e:'😕',t:'Insegura',s:'não sei o que fazer',v:'insegura'},{e:'😊',t:'Tranquila',s:'só quero prevenir',v:'tranquila'}
+    ],'sentimento',t19b);
+  }
+  function t19b(){
+    var R={culpa:'Respira. <b>Não é culpa sua.</b> Quase nenhuma mãe é avisada disso. Você está aqui agora, e isso é o que importa.',
+      preocupada:'Faz todo sentido. A boa notícia é que você descobriu <b>na fase em que dá para agir</b>.',
+      insegura:'Normal. Ninguém nasce sabendo. No final eu te mostro <b>o passo a passo</b>, bem simples.',
+      tranquila:'Que ótimo! <b>Prevenir é muito mais fácil</b> do que corrigir depois.'};
+    show(draHTML()+'<div class="quote">'+R[A.sentimento]+'</div><button class="btn sage" id="nx">Continuar</button>',18);
+    $('nx').onclick=t20;
+  }
+  /* 20 · tempo */
+  function t20(){
+    ask(19,'Se existisse uma rotina simples, que se encaixa no que você já faz com '+N()+' (trocar, mamar, pôr no berço), quanto tempo extra você teria por dia?',null,[
+      {e:'🏃‍♀️',t:'Nenhum, minha rotina já é corrida',v:0},{e:'⏱️',t:'Uns 5 minutos',v:5},{e:'🕰️',t:'10 a 15 minutos',v:15}
+    ],'tempo',t21,null,function(){return 'Perfeito! A maior parte da rotina não precisa de tempo extra 💛'});
+  }
+  /* 21 · desejo */
+  function t21(){
+    ask(20,'O que mais te deixaria em paz?',null,[
+      {e:'🌕',t:'Ver a cabecinha de '+N()+' arredondando',v:'ver a cabecinha de '+N()+' arredondando'},
+      {e:'✅',t:'Saber que estou fazendo o certo',v:'saber que está fazendo o certo'},
+      {e:'🪖',t:'Evitar capacete e tratamento longo',v:'evitar capacete e tratamento longo'},
+      {e:'💬',t:'Ter alguém para tirar minhas dúvidas',v:'ter alguém para tirar suas dúvidas'}
+    ],'desejo',t22);
+  }
+  /* 22 · dica grátis + compromisso */
+  function t22(){
+    var op=opostoTxt();
+    var dica=op?'vire a cabecinha '+dele()+' para a <span class="hl">'+op+'</span>':'vire a cabecinha '+dele()+' para o lado que '+ele()+' <span class="hl">menos usa</span>';
+    show('<div class="center"><span class="kicker">Para fazer hoje</span></div>'+
+      '<h2 class="center">Hoje, quando for colocar '+N()+' no berço, '+dica+'.</h2>'+
+      '<div class="card soft"><p>Na próxima soneca, para o outro lado. E assim vai alternando.</p><p>Simples assim: o peso sai do lado que está achatando. Essa é a primeira das <b>4 rotinas</b> do plano de '+N()+'.</p></div>'+
+      '<button class="btn sage" id="nx">✓ Vou fazer hoje à noite</button>',21);
+    $('nx').onclick=function(){toast('Combinado! 💛');setTimeout(t23,700)};
+  }
+  /* 23 · sinais de alerta */
+  function t23(){
+    multi(22,'Antes do resultado, uma coisa importante','Você notou algum destes sinais em '+N()+'?',[
+      {e:'🔹',t:'Um “caroço” ou uma crista dura na cabeça',v:'crista'},
+      {e:'🔹',t:'A moleira parece fechada cedo demais, ou muito saliente',v:'moleira'},
+      {e:'🔹',t:N()+' não vira o pescoço de jeito nenhum para um lado',v:'pescoco'},
+      {e:'🔹',t:'O formato está piorando rápido, de uma semana para outra',v:'rapido'},
+      {e:'🤍',t:'Nenhum desses',v:'nenhum'}
+    ],'alertas',function(){ if(A.alertas.length){toast('Esses sinais pedem avaliação presencial. Mostramos no resultado.',2600);setTimeout(t24,1800)} else t24(); },'nenhum');
+  }
+  /* 24 · depoimento (só se houver real) */
+  function t24(){
+    var d=CONFIG.depoimentos;
+    if(!d||!d.length)return t25a();
+    var x=d[Math.floor(Math.random()*d.length)];
+    show('<div class="center"><span class="kicker">De outra mãe</span></div><div class="quote" style="margin-top:18px">“'+esc(x.texto)+'”</div><p class="center" style="margin-top:12px"><b>'+esc(x.nome)+'</b><br><span class="muted">'+esc(x.bebe)+'</span></p><button class="btn" id="nx">Ver o resultado</button>',23);
+    $('nx').onclick=t25a;
+  }
+  /* 25 · resultado */
+  function t25a(){
+    show('<div class="spinner"></div><p class="q">Preparando o resultado de '+N()+'…</p>',24);
+    setTimeout(t25,1600);
+  }
+  function t25(){
+    var nv=nivel(), F={redonda:'parece redondinha',nuca:'achatada atrás',lado:'achatada de um lado',nao:'não deu para ver bem'};
+    var alerta=(A.pescoco==='menos'||A.alertas.length)?'<div class="card alert"><b>⚠️ Agende uma avaliação presencial.</b> '+(A.alertas.length?'Os sinais que você marcou':'A diferença ao virar o pescoço')+' precisa'+(A.alertas.length>1?'m':'')+' ser examinad'+(A.alertas.length>1?'os':'a')+' de perto. A rotina em casa continua ajudando.</div>':'';
+    var idadeTxt=A.idade>12?'mais de 1 ano':A.idade===0?'menos de 1 mês':A.idade+(A.idade===1?' mês':' meses');
+    show('<div class="center"><span class="kicker">Resultado de '+N()+' · '+idadeTxt+'</span>'+
+      '<h1 style="margin-top:12px"><span class="badge b-'+nv.k+'">'+nv.t+'</span></h1></div>'+
+      '<div class="meter"><i id="pt" style="left:4%"></i></div><div class="meter-lbl"><span>Atenção leve</span><span>Atenção</span><span>Agir agora</span></div>'+
+      alerta+
+      '<div class="card"><b>O que encontramos</b><ul class="list">'+
+        '<li><span class="dot">●</span><span>Cabecinha: <b>'+F[A.formato]+'</b></span></li>'+
+        '<li><span class="dot">●</span><span>Lado preferido: <b>'+((A.lado==='direita'||A.lado==='esquerda')?A.lado:'não definido')+'</b></span></li>'+
+        '<li><span class="dot">●</span><span>Bruços: <b>'+A.brucos+' min/dia</b> (o ideal agora é '+metaBrucos()+')</span></li>'+
+        '<li><span class="dot">●</span><span>Cerca de <b>'+horas()+'h por dia</b> com a cabeça apoiada</span></li>'+
+        (A.idade<6?'<li><span class="dot">●</span><span><b>'+semanas()+' semanas</b> na melhor fase</span></li>':'')+
+      '</ul></div>'+
+      '<div class="card soft"><b>O plano de '+N()+'</b><ul class="list">'+
+        '<li><span class="dot">1</span><span>Alternar o lado no berço <b>(você já começa hoje ✓)</b></span></li>'+
+        '<li><span class="dot">2</span><span>Bruços que '+ele()+' aceita, aumentando um pouco por semana</span></li>'+
+        '<li><span class="dot">3</span><span>Ajustes no colo e na mamada</span></li></ul></div>'+
+      '<p class="center">Você disse que o que mais quer é <b>'+A.desejo+'</b>. No próximo vídeo, a '+esc(CONFIG.dra_nome)+' te mostra como, passo a passo.</p>'+
+      '<a class="btn pulse" id="go" href="#">▶ Ver o plano de '+N()+'</a>'+
+      '<footer>Teste educativo, com orientações gerais de cuidados em casa.</footer>',25);
+    setTimeout(function(){$('pt').style.left=nv.pos+'%'},200);
+    $('go').onclick=function(e){
+      e.preventDefault();
+      try{sessionStorage.setItem('cr_v2',JSON.stringify(Object.assign({},A,{nivel:nv.t})))}catch(_){}
+      if(window.fbq)fbq('track','ViewContent',{content_name:'resultado_quiz_v2'});
+      location.href=CONFIG.vsl_url+location.search;
+    };
+  }
+
+  /* atalho de pré-visualização: ?tela=t17 (só para conferir layout) */
+  var tela=new URLSearchParams(location.search).get('tela');
+  var T={t1:t1,t2:t2,t3:t3,t5:t5,t12:t12,t13:t13,t15:t15,t16:t16,t17:t17,t18:t18,t19b:t19b,t22:t22,t23:t23,t25:t25};
+  if(T[tela]){A=Object.assign(A,{nome:'Alice',sexo:'f',idade:3,quem:'mae',formato:'lado',lado:'direita',brucos:5,cadeira:'mais2',pescoco:'igual',sentimento:'culpa',desejo:'ver a cabecinha de Alice arredondando',pts:9});T[tela]()}
+  else t1();
+})();
+</script>
+</body>
+</html>
