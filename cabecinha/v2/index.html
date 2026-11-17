@@ -8,6 +8,15 @@
 <meta name="theme-color" content="#FBF6EF">
 <meta name="robots" content="noindex">
 
+<!-- MICROSOFT CLARITY (mapa de cliques, gravações e funil por tela). Colar o ID do projeto abaixo. -->
+<script>
+  var CLARITY_ID = '';
+  if (CLARITY_ID) {
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CLARITY_ID);
+  } else { window.clarity = function(){}; }
+</script>
 <!-- PIXEL UTMIFY (mesmo da oferta atual: Meta 1135723398952247 "Cabecinha Redonda") -->
 <script>
   window.pixelId = "6af7a5591a83f2204f501b51";
@@ -56,15 +65,23 @@ var CONFIG = {
 
   /* ---------- utilidades ---------- */
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-  function N(){return A.nome?esc(A.nome):(A.sexo==='m'?'seu bebê':'sua bebê')}
-  function Ncap(){var n=N();return n.charAt(0).toUpperCase()+n.slice(1)}
+  /* o nome do bebê fica mascarado nas gravações do Clarity */
+  function mask(t){return '<span data-clarity-mask="True">'+esc(t)+'</span>'}
+  function N(){return A.nome?mask(A.nome):(A.sexo==='m'?'seu bebê':'sua bebê')}
+  function Ncap(){return A.nome?mask(A.nome):(A.sexo==='m'?'Seu bebê':'Sua bebê')}
   function ele(){return A.sexo==='m'?'ele':'ela'}
   function Ele(){return A.sexo==='m'?'Ele':'Ela'}
   function dele(){return A.sexo==='m'?'dele':'dela'}
   function o(){return A.sexo==='m'?'o':'a'}
   function quem(){return {mae:'mãe',pai:'pai',avo:'vovó',outro:''}[A.quem]||''}
   function opostoTxt(){return A.lado==='direita'?'esquerda':A.lado==='esquerda'?'direita':null}
+  /* Clarity: um evento por tela (funil) */
+  var TELAS=['inicio','nome','idade','quem','formato','lado','sono','brucos','cadeirinha','pescoco','sinais','mito_sentar','mito_consulta','mito_brucos','analisando','horas','janela','se_esperar','sentimento','tempo','desejo','dica_gratis','alertas','depoimento','preparando','resultado'];
+  var ultimaTela=-1;
+  function marcaTela(step){var n=step||0; if(n===ultimaTela)return; ultimaTela=n;
+    var id=(n<10?'0':'')+n+'_'+TELAS[n]; try{clarity('event','tela_'+id);clarity('set','ultima_tela',id)}catch(e){}}
   function show(html,step){
+    marcaTela(step);
     window.scrollTo(0,0);
     if(step){top.hidden=false;prog.style.width=Math.round(Math.sqrt(step/TOTAL)*100)+'%'}
     else top.hidden=true;
@@ -87,6 +104,7 @@ var CONFIG = {
     app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
       if(app.dataset.lock)return; app.dataset.lock=1;
       b.classList.add('sel'); var op=opts[+b.dataset.i]; A[key]=op.v; A.pts+=(op.p||0);
+      try{clarity('set','resp_'+key, key==='desejo'?'opcao_'+b.dataset.i:String(op.v))}catch(e){}
       var wait=280; if(after){var t=after(op); if(t){toast(t,2200);wait=1500}}
       setTimeout(function(){delete app.dataset.lock;next()},wait);
     }});
@@ -106,6 +124,7 @@ var CONFIG = {
     }});
     $('nx').onclick=function(){
       A[key]=Object.keys(sel).map(function(i){return opts[i].v}).filter(function(v){return v!==none});
+      try{clarity('set','resp_'+key, A[key].length?A[key].join(','):'nenhum')}catch(e){}
       Object.keys(sel).forEach(function(i){A.pts+=(opts[i].p||0)});
       next();
     };
@@ -119,6 +138,7 @@ var CONFIG = {
     app.querySelectorAll('#mv button').forEach(function(b){b.onclick=function(){
       if($('rv').innerHTML)return;
       b.classList.add('sel');
+      try{clarity('event','mito_'+step+'_'+(b.dataset.v==='m'?'mito':'verdade'))}catch(e){}
       $('rv').innerHTML='<div class="card soft reveal"><p class="verdict">'+verdict+'</p>'+body+'</div><button class="btn sage" id="nx">Continuar</button>';
       $('nx').onclick=next;
       setTimeout(function(){$('rv').scrollIntoView({behavior:'smooth',block:'start'})},120);
@@ -394,6 +414,7 @@ var CONFIG = {
       e.preventDefault();
       try{sessionStorage.setItem('cr_v2',JSON.stringify(Object.assign({},A,{nivel:nv.t})))}catch(_){}
       if(window.fbq)fbq('track','ViewContent',{content_name:'resultado_quiz_v2'});
+      try{clarity('event','clicou_ver_plano');clarity('set','nivel',nv.t)}catch(_){}
       location.href=CONFIG.vsl_url+location.search;
     };
   }

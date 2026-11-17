@@ -7,6 +7,15 @@
 <meta name="theme-color" content="#FBF6EF">
 <meta name="robots" content="noindex">
 
+<!-- MICROSOFT CLARITY (mapa de cliques, gravações e funil por tela). Colar o ID do projeto abaixo. -->
+<script>
+  var CLARITY_ID = '';
+  if (CLARITY_ID) {
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CLARITY_ID);
+  } else { window.clarity = function(){}; }
+</script>
 <!-- PIXEL UTMIFY (mesmo da oferta atual: Meta 1135723398952247 "Cabecinha Redonda") -->
 <script>
   window.pixelId = "6af7a5591a83f2204f501b51";
@@ -29,8 +38,8 @@
 <main>
   <div class="logo" style="margin:4px 0 10px"><svg viewBox="0 0 32 32" aria-hidden="true" style="width:26px;height:26px"><circle cx="16" cy="17" r="12" fill="#E7F0EA"/><circle cx="16" cy="17" r="8.5" fill="#6E9A86"/><path d="M12.5 17.5c1 1.4 2.2 2 3.5 2s2.5-.6 3.5-2" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M16 8.5c-1.6-2.6-.2-4.6 2-4.5" stroke="#E8917A" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Cabecinha Redonda</div>
 
-  <div class="center"><span class="kicker" id="kick">O plano do seu bebê</span></div>
-  <p class="vsl-h" id="hd">Assista até o fim: veja como ajudar a cabecinha do seu bebê a se formar redondinha, em casa.</p>
+  <div class="center"><span class="kicker" id="kick" data-clarity-mask="True">O plano do seu bebê</span></div>
+  <p class="vsl-h" id="hd" data-clarity-mask="True">Assista até o fim: veja como ajudar a cabecinha do seu bebê a se formar redondinha, em casa.</p>
   <div id="dra"></div>
   <p class="sound">🔊 Confira se o som está ligado</p>
 
@@ -43,7 +52,7 @@
       <div class="v">R$ 47</div>
       <p class="muted" style="margin:2px 0 0">pagamento único · acesso imediato no celular</p>
     </div>
-    <a class="btn pulse" id="buy" href="#">QUERO O PLANO DO MEU BEBÊ</a>
+    <a class="btn pulse" id="buy" href="#" data-clarity-mask="True">QUERO O PLANO DO MEU BEBÊ</a>
     <div class="seals"><span>🔒 Compra segura</span><span>📱 Acesso na hora</span><span>💛 30 dias de garantia</span></div>
 
     <div class="card" style="margin-top:22px">
@@ -70,7 +79,7 @@
     <details><summary>Meu bebê odeia ficar de bruços.</summary><p>Quase todos odeiam no começo. No app tem as posições que eles aceitam melhor, como no seu peito ou no seu colo, começando com um minuto.</p></details>
     <details><summary>Como recebo o acesso?</summary><p>Na hora. Você paga e o acesso chega no seu e-mail. É só abrir no celular.</p></details>
 
-    <a class="btn" id="buy2" href="#">QUERO O PLANO DO MEU BEBÊ · R$ 47</a>
+    <a class="btn" id="buy2" href="#" data-clarity-mask="True">QUERO O PLANO DO MEU BEBÊ · R$ 47</a>
   </div>
 
   <footer>Orientações de cuidados em casa. Não substitui uma consulta médica individual.<br>Resultados variam de bebê para bebê.</footer>
@@ -115,6 +124,17 @@ var CONFIG = {
   document.head.appendChild(s);
   var p=document.querySelector('vturb-smartplayer');
   p.addEventListener('player:ready',function(){p.displayHiddenElements(CONFIG.pitch_segundos,['.esconder'],{persist:true})});
+
+  /* Clarity: eventos da página da VSL */
+  try{
+    clarity('event', A.nome?'vsl_veio_do_quiz':'vsl_acesso_direto');
+    if(A.nivel)clarity('set','nivel',A.nivel);
+    var esc1=document.querySelector('.esconder'), viu=false;
+    new MutationObserver(function(){ if(!viu && getComputedStyle(esc1).display!=='none'){viu=true;clarity('event','vsl_chegou_no_pitch')} }).observe(esc1,{attributes:true,attributeFilter:['style','class']});
+    document.getElementById('buy').addEventListener('click',function(){clarity('event','clicou_comprar_1')});
+    document.getElementById('buy2').addEventListener('click',function(){clarity('event','clicou_comprar_2')});
+    document.querySelectorAll('details').forEach(function(d,i){d.addEventListener('toggle',function(){if(d.open)clarity('event','abriu_faq_'+(i+1))})});
+  }catch(e){}
 
   /* pré-visualização: ?ver=tudo mostra a parte de baixo sem esperar o vídeo */
   if(new URLSearchParams(location.search).get('ver')==='tudo')document.querySelectorAll('.esconder').forEach(function(e){e.style.display='block'});
