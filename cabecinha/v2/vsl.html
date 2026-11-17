@@ -7,7 +7,15 @@
 <meta name="theme-color" content="#FBF6EF">
 <meta name="robots" content="noindex">
 
-<!-- ===== RASTREAMENTO: colar aqui o pixel da Meta do Cabecinha (o mesmo do inlead) ===== -->
+<!-- PIXEL UTMIFY (mesmo da oferta atual: Meta 1135723398952247 "Cabecinha Redonda") -->
+<script>
+  window.pixelId = "6af7a5591a83f2204f501b51";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
 <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
 
 <link rel="dns-prefetch" href="https://scripts.converteai.net">
@@ -35,7 +43,8 @@
       <div class="v">R$ 47</div>
       <p class="muted" style="margin:2px 0 0">pagamento único · acesso imediato no celular</p>
     </div>
-    <a class="btn pulse" id="buy" href="#">QUERO O PLANO DO MEU BEBÊ</a>
+    <p class="center" id="pronto" style="margin:14px 0 -6px;font-weight:700;color:var(--sage-d)">✓ O plano do seu bebê está pronto</p>
+    <a class="btn pulse" id="buy" href="#">QUERO CUIDAR DO MEU BEBÊ</a>
     <div class="seals"><span>🔒 Compra segura</span><span>📱 Acesso na hora</span><span>💛 30 dias de garantia</span></div>
 
     <div class="card" style="margin-top:22px">
@@ -62,7 +71,7 @@
     <details><summary>Meu bebê odeia ficar de bruços.</summary><p>Quase todos odeiam no começo. No app tem as posições que eles aceitam melhor, como no seu peito ou no seu colo, começando com um minuto.</p></details>
     <details><summary>Como recebo o acesso?</summary><p>Na hora. Você paga e o acesso chega no seu e-mail. É só abrir no celular.</p></details>
 
-    <a class="btn" id="buy2" href="#">QUERO O PLANO DO MEU BEBÊ · R$ 47</a>
+    <a class="btn" id="buy2" href="#">QUERO CUIDAR DO MEU BEBÊ</a>
   </div>
 
   <footer>Orientações de cuidados em casa. Não substitui uma consulta médica individual.<br>Resultados variam de bebê para bebê.</footer>
@@ -89,9 +98,8 @@ var CONFIG = {
     var idade=A.idade==null?'':A.idade>12?', mais de 1 ano':A.idade===0?', menos de 1 mês':', '+A.idade+(A.idade===1?' mês':' meses');
     document.getElementById('kick').textContent='O plano '+(m?'do ':'da ')+A.nome+idade;
     document.getElementById('hd').innerHTML='Assista até o fim: a '+esc(CONFIG.dra_nome)+' te mostra como ajudar a cabecinha '+(m?'do ':'da ')+'<span class="hl">'+nome+'</span> a se formar redondinha, em casa.';
-    var t='QUERO O PLANO '+(m?'DO ':'DA ')+A.nome.toUpperCase();
-    document.getElementById('buy').textContent=t;
-    document.getElementById('buy2').textContent=t+' · R$ 47';
+    /* texto do botão fica fixo: a Utmify detecta o InitiateCheckout por "QUERO CUIDAR DO MEU BEBÊ" */
+    document.getElementById('pronto').innerHTML='✓ O plano '+(m?'do ':'da ')+nome+' está pronto';
   }
   var av=CONFIG.dra_foto?'<span class="av" style="background-image:url('+esc(CONFIG.dra_foto)+')"></span>':'<span class="av">'+esc(CONFIG.dra_nome.replace('Dra. ','').charAt(0))+'</span>';
   document.getElementById('dra').innerHTML='<div class="dra">'+av+'<div><b>'+esc(CONFIG.dra_nome)+'</b><small>'+esc(CONFIG.dra_cred||'Pediatra')+'</small></div></div>';
