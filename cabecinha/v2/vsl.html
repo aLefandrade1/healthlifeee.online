@@ -129,6 +129,15 @@ var CONFIG = {
   try{
     clarity('event', A.nome?'vsl_veio_do_quiz':'vsl_acesso_direto');
     if(A.nivel)clarity('set','nivel',A.nivel);
+    /* vídeo: play com som (sai do autoplay mudo) e quanto tempo assistiu */
+    var deuPlay=false, marcos=[30,60,120,180], feitos={};
+    function play(){ if(!deuPlay){deuPlay=true;clarity('event','vsl_deu_play')} }
+    /* autoplay mudo toca sozinho; só conta quando a mãe toca/clica no vídeo */
+    document.getElementById('vsl-box').addEventListener('pointerdown',play,true);
+    p.addEventListener('video:timeupdate',function(){
+      if(!deuPlay)return; var t=p.currentTime||0;
+      marcos.forEach(function(s){ if(t>=s&&!feitos[s]){feitos[s]=1;clarity('event','vsl_assistiu_'+s+'s');clarity('set','vsl_assistiu',String(s))} });
+    });
     var esc1=document.querySelector('.esconder'), viu=false;
     new MutationObserver(function(){ if(!viu && getComputedStyle(esc1).display!=='none'){viu=true;clarity('event','vsl_chegou_no_pitch')} }).observe(esc1,{attributes:true,attributeFilter:['style','class']});
     document.getElementById('buy').addEventListener('click',function(){clarity('event','clicou_comprar_1')});
