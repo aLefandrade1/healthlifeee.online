@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Teste da Cintura</title>
 <meta name="description" content="Teste de 1 minuto: descubra por que a sua cintura sumiu e qual é o seu ajuste da Técnica Japonesa da Toalha.">
-<meta name="theme-color" content="#F7F3EC">
+<meta name="theme-color" content="#FBF7F4">
 <meta name="robots" content="noindex">
 
 <!-- MICROSOFT CLARITY. Por enquanto usa o mesmo projeto do Cabecinha, com a tag oferta=toalha para filtrar. -->
@@ -32,14 +32,14 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Zen+Old+Mincho:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
   <div class="top" id="top" hidden>
     <div class="toprow">
-      <div class="logo"><svg viewBox="20 0 130 130" aria-hidden="true"><circle cx="85" cy="65" r="64" fill="#FBE7E3"/><circle cx="85" cy="17" r="10" fill="#2B4C7E"/><path d="M79 28 C79 32 72 34 64 36 C58 38 58 44 62 48 C64 52 63 54 64 57 C66 62 73 64 73 68 C73 74 62 80 62 92 C62 102 63 108 64 114 H106 C107 108 108 102 108 92 C108 80 97 74 97 68 C97 64 104 62 106 57 C107 54 106 52 108 48 C112 44 112 38 106 36 C98 34 91 32 91 28 Z" fill="#2B4C7E"/><rect x="40" y="106" width="90" height="20" rx="10" fill="#D9483B"/><circle cx="50" cy="116" r="5" fill="#FBE7E3"/></svg>Técnica Japonesa da Toalha</div>
+      <div class="logo"><svg viewBox="18 -2 134 134" aria-hidden="true"><circle cx="85" cy="65" r="63" fill="#F7E6E8" stroke="#E8B4BA" stroke-width="3"/><circle cx="85" cy="17" r="9.5" fill="none" stroke="#A85F69" stroke-width="5"/><path d="M79 28 C79 32 72 34 64 36 C58 38 58 44 62 48 C64 52 63 54 64 57 C66 62 73 64 73 68 C73 74 62 80 62 92 C62 102 63 108 64 114 H106 C107 108 108 102 108 92 C108 80 97 74 97 68 C97 64 104 62 106 57 C107 54 106 52 108 48 C112 44 112 38 106 36 C98 34 91 32 91 28 Z" fill="#FBF7F4" stroke="#A85F69" stroke-width="5" stroke-linejoin="round"/><rect x="42" y="108" width="86" height="17" rx="8.5" fill="#fff" stroke="#C97B84" stroke-width="4.5"/><circle cx="51" cy="116.5" r="4" fill="none" stroke="#C97B84" stroke-width="3.5"/></svg>Técnica Japonesa da Toalha</div>
       <span class="bonus" id="bonus" hidden>🎁 R$ 0 em bônus</span>
     </div>
     <div class="prog"><i id="prog"></i></div>
@@ -143,10 +143,10 @@ var CONFIG = {
     geral:'C77 98 77 58 62 52'
   };
   function body(k,stroke){
-    return '<svg viewBox="0 0 100 140" aria-hidden="true"><circle cx="52" cy="15" r="10" fill="#E6ECF5" stroke="'+(stroke||'#2B4C7E')+'" stroke-width="2"/>'+
-      '<path d="M45 27 C40 45 37 60 39 72 C41 86 39 102 43 136 L61 136 C64 120 66 106 64 100 '+FRONT[k]+' C67 44 64 33 57 27 Z" fill="#E6ECF5" stroke="'+(stroke||'#2B4C7E')+'" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+    return '<svg viewBox="0 0 100 140" aria-hidden="true"><circle cx="52" cy="15" r="10" fill="#F7E6E8" stroke="'+(stroke||'#B5707C')+'" stroke-width="2"/>'+
+      '<path d="M45 27 C40 45 37 60 39 72 C41 86 39 102 43 136 L61 136 C64 120 66 106 64 100 '+FRONT[k]+' C67 44 64 33 57 27 Z" fill="#F7E6E8" stroke="'+(stroke||'#B5707C')+'" stroke-width="2.2" stroke-linejoin="round"/></svg>';
   }
-  var HERO='<svg class="hero-art" viewBox="0 0 170 130" aria-hidden="true"><circle cx="85" cy="60" r="56" fill="#D9483B"/><circle cx="85" cy="17" r="10" fill="#2B4C7E"/><path d="M79 28 C79 32 72 34 64 36 C58 38 58 44 62 48 C64 52 63 54 64 57 C66 62 73 64 73 68 C73 74 62 80 62 92 C62 102 63 108 64 114 H106 C107 108 108 102 108 92 C108 80 97 74 97 68 C97 64 104 62 106 57 C107 54 106 52 108 48 C112 44 112 38 106 36 C98 34 91 32 91 28 Z" fill="#2B4C7E"/><rect x="40" y="108" width="90" height="17" rx="8.5" fill="#fff" stroke="#E6DFD3" stroke-width="1.5"/><circle cx="48.5" cy="116.5" r="6.5" fill="#F7F3EC" stroke="#D9483B" stroke-width="2"/><path d="M48.5 116.5 m-3 0 a3 3 0 1 1 3 3" fill="none" stroke="#D9483B" stroke-width="1.6"/><path d="M60 114h64M60 119h64" stroke="#EFE8DC" stroke-width="2"/></svg>';
+  var HERO='<svg class="hero-art" viewBox="0 0 170 130" aria-hidden="true"><circle cx="85" cy="60" r="56" fill="#F7E6E8" stroke="#EBD3D7" stroke-width="1.5"/><ellipse cx="26" cy="28" rx="5" ry="3" transform="rotate(-30 26 28)" fill="#E8B4BA" opacity=".8"/><ellipse cx="146" cy="40" rx="5" ry="3" transform="rotate(25 146 40)" fill="#E8B4BA" opacity=".7"/><ellipse cx="138" cy="18" rx="5" ry="3" transform="rotate(-10 138 18)" fill="#E8B4BA" opacity=".5"/><ellipse cx="30" cy="70" rx="5" ry="3" transform="rotate(40 30 70)" fill="#E8B4BA" opacity=".5"/><ellipse cx="150" cy="84" rx="5" ry="3" transform="rotate(-35 150 84)" fill="#E8B4BA" opacity=".6"/><circle cx="85" cy="17" r="9.5" fill="#F0D3D7" stroke="#A85F69" stroke-width="2"/><path d="M79 28 C79 32 72 34 64 36 C58 38 58 44 62 48 C64 52 63 54 64 57 C66 62 73 64 73 68 C73 74 62 80 62 92 C62 102 63 108 64 114 H106 C107 108 108 102 108 92 C108 80 97 74 97 68 C97 64 104 62 106 57 C107 54 106 52 108 48 C112 44 112 38 106 36 C98 34 91 32 91 28 Z" fill="#F0D3D7" stroke="#A85F69" stroke-width="2" stroke-linejoin="round"/><path d="M73 68 C78 70 92 70 97 68" fill="none" stroke="#C97B84" stroke-width="1.6" stroke-dasharray="2.5 2.5"/><rect x="40" y="108" width="90" height="17" rx="8.5" fill="#fff" stroke="#E8B4BA" stroke-width="1.6"/><circle cx="48.5" cy="116.5" r="6" fill="#FBF7F4" stroke="#C97B84" stroke-width="1.6"/><path d="M48.5 116.5 m-2.6 0 a2.6 2.6 0 1 1 2.6 2.6" fill="none" stroke="#C97B84" stroke-width="1.4"/><path d="M60 114h62M60 119h62" stroke="#F4EAE6" stroke-width="1.6"/></svg>';
 
   var TIPO={estufa:'barriga que estufa no fim do dia',pochete:'barriga pochete',alto:'estômago alto',pos:'barriga pós-gestação',geral:'barriga por igual'};
   var AJUSTE={estufa:'Ajuste nº 1 · Barriga que estufa',pochete:'Ajuste nº 2 · Barriga pochete',alto:'Ajuste nº 3 · Estômago alto',pos:'Ajuste nº 4 · Pós-gestação',geral:'Ajuste nº 5 · Barriga por igual'};
@@ -256,7 +256,7 @@ var CONFIG = {
     var porque=motivos.length?'Com '+motivos.join(', ').replace(/, ([^,]*)$/,' e $1')+', ':'Com o tempo, ';
     show('<div class="center"><span class="kicker ai">O que está acontecendo</span></div>'+
       '<h2 class="center">'+N()+', a sua cintura não sumiu. <span class="hl">Ela foi empurrada pra frente.</span></h2>'+
-      '<div class="compare"><div>'+body('lugar','#8FA3C4')+'Cintura no lugar</div><div class="you">'+body(A.barriga,'#D9483B')+'A sua hoje</div></div>'+
+      '<div class="compare"><div>'+body('lugar','#CDB8C6')+'Cintura no lugar</div><div class="you">'+body(A.barriga,'#A85F69')+'A sua hoje</div></div>'+
       '<p class="center muted">'+porque+'o quadril vai girando pra frente aos pouquinhos. A barriga projeta, o abdômen de dentro “desliga”, e a cintura desaparece, mesmo sem você ter engordado tanto assim.</p>'+
       '<button class="btn ai" id="nx">Faz sentido</button>',14);
     $('nx').onclick=t16;
