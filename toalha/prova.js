@@ -17,16 +17,16 @@ window.PROVA = {
   /* PRINTS de comentários REAIS em vídeos da técnica no TikTok (18/11/2026).
      Nome e foto à mostra: o usuário informou em 18/11/2026 que cada autora autorizou o uso.
      Guardar os prints dessas autorizações. Comentário NOVO só entra com nome/foto se também autorizar.
-     img = print; trad = tradução (vazio se já é PT).
+     A oferta vai rodar em INGLÊS (EUA): só comentários em inglês, sem tradução.
+     img = print; trad = legenda opcional embaixo (deixar vazio).
      c1–c4: vídeo @harmoniehernandez1/7619790114381745421 (1,5 mi curtidas)
-     c5:    vídeo @uaimo_/7699244235203071253 (Brasil)
+     (c5 = comentário em português, guardado em img/cmt-c5.png, fora da lista)
      Se img estiver vazio, mostra o texto t como cartão. */
   comentarios: [
-    { img: 'img/cmt-c1.png?v=2', w: 768, h: 200, trad: 'Começo amanhã ✨ Te vejo em 30 dias com a minha atualização ✨' },
-    { img: 'img/cmt-c3.png?v=2', w: 768, h: 200, trad: 'Eu fazia isso há alguns anos e posso te dizer: funciona!!' },
-    { img: 'img/cmt-c5.png?v=2', w: 768, h: 156, trad: '' },
-    { img: 'img/cmt-c2.png?v=2', w: 768, h: 200, trad: 'Vou tentar, quero muito ajudar a minha barriga.' },
-    { img: 'img/cmt-c4.png?v=2', w: 768, h: 288, trad: 'Dói nos braços e ombros, mas sei que é porque eu preciso! Sinto que está me realinhando. Fiz por alguns dias e estou animada pra continuar.' }
+    { img: 'img/cmt-c1.png?v=2', w: 768, h: 200, trad: '' },
+    { img: 'img/cmt-c3.png?v=2', w: 768, h: 200, trad: '' },
+    { img: 'img/cmt-c2.png?v=2', w: 768, h: 200, trad: '' },
+    { img: 'img/cmt-c4.png?v=2', w: 768, h: 288, trad: '' }
   ],
 
   /* Depoimentos de CLIENTES do plano. Só com autorização por escrito.
