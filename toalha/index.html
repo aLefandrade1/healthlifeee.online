@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 <main>
@@ -143,7 +143,7 @@ var CONFIG = {
     geral:'C77 98 77 58 62 52'
   };
   function body(k){
-    return '<span class="mq"><img src="img/pessoa.jpg" width="300" height="400" alt="">'+(k&&k!=='lugar'?'<i class="hz hz-'+k+'"></i>':'')+'</span>';
+    return '<span class="mq"><img src="img/b-'+(k||'lugar')+'.jpg" width="300" height="400" alt=""></span>';
   }
   var HERO='<img class="hero-art" src="img/capa-3d.jpg" width="900" height="900" alt="" fetchpriority="high">';
 
