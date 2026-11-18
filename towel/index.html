@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Waist Quiz</title>
+<meta name="description" content="1-minute quiz: find out why your waistline disappeared and which Japanese Towel Technique adjustment fits your belly type.">
+<meta name="theme-color" content="#FBF7F4">
+<meta name="robots" content="noindex">
+
+<!-- MICROSOFT CLARITY. Mesmo projeto, com a tag oferta=towel_en para filtrar. -->
+<script>
+  var CLARITY_ID = 'zf34uvarqx';
+  if (CLARITY_ID) {
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CLARITY_ID);
+    clarity('set','oferta','towel_en');
+  } else { window.clarity = function(){}; }
+</script>
+<!-- PIXEL UTMIFY: colar o pixelId da oferta EUA. Vazio = não carrega. -->
+<script>
+  window.pixelId = "";
+  if (window.pixelId) {
+    var a = document.createElement("script");
+    a.setAttribute("async", ""); a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  }
+</script>
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+</head>
+<body>
+<main>
+  <div class="top" id="top" hidden>
+    <div class="toprow">
+      <div class="logo"><img src="img/logo.png" width="200" height="200" alt="">Japanese Towel Technique</div>
+      <span class="bonus" id="bonus" hidden>🎁 $0 in bonuses</span>
+    </div>
+    <div class="prog"><i id="prog"></i></div>
+  </div>
+  <div id="app"></div>
+</main>
+
+<script src="prova.js?v=1"></script>
+<script>
+/* ================== CONFIGURAÇÃO ================== */
+var CONFIG = {
+  views: '31 million',   // views reais de #japanesetowelmethod no TikTok (conferido em 18/11/2026)
+  vsl_url: 'vsl.html'
+};
+/* ================================================== */
+
+(function(){
+  var app=document.getElementById('app'), top=document.getElementById('top'), prog=document.getElementById('prog'), bonusEl=document.getElementById('bonus');
+  var TOTAL=21;
+  var A={nome:'',idade:null,barriga:null,filhos:null,sentada:null,dor:null,tentou:[],toalha:null,parede:null,inchaco:null,tempo:null,prazo:null,desejo:null,alertas:[],pts:0,bonus:[]};
+
+  /* ---------- utilidades ---------- */
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function mask(t){return '<span data-clarity-mask="True">'+esc(t)+'</span>'}
+  function N(){return A.nome?mask(A.nome):'you'}
+  function $(id){return document.getElementById(id)}
+  var TELAS=['inicio','nome','idade','barriga','filhos','sentada','dor','mito_abdominal','ja_tentou','toalha_video','parede','mito_cinta','inchaco','analisando','diagnostico','erro_toalha','tempo','prazo','desejo','seguranca','preparando','resultado'];
+  var ultimaTela=-1;
+  function marcaTela(n){n=n||0; if(n===ultimaTela)return; ultimaTela=n;
+    var id=(n<10?'0':'')+n+'_'+TELAS[n]; try{clarity('event','tj_tela_'+id);clarity('set','ultima_tela',id)}catch(e){}}
+  function save(){try{sessionStorage.setItem('tw_v1',JSON.stringify(A))}catch(e){}}
+  function show(html,step){
+    marcaTela(step); window.scrollTo(0,0);
+    if(step){top.hidden=false;prog.style.width=Math.round(Math.sqrt(step/TOTAL)*100)+'%'} else top.hidden=true;
+    app.innerHTML='<div class="screen">'+html+'</div>'; save();
+  }
+  function toast(t,ms,cls){var d=document.createElement('div');d.className='toast'+(cls?' '+cls:'');d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},ms||1500)}
+
+  /* bonuses unlocked during the quiz */
+  var BONUS={postura:{t:'Couch & desk posture fix',v:19},drenagem:{t:'3-minute lymphatic drainage',v:27},cha:{t:'De-bloat tea',v:17}};
+  function bonusTotal(){return A.bonus.reduce(function(s,k){return s+BONUS[k].v},0)}
+  function unlock(k,cb){
+    if(A.bonus.indexOf(k)<0){A.bonus.push(k); bonusEl.hidden=false; bonusEl.textContent='🎁 $'+bonusTotal()+' in bonuses';
+      bonusEl.classList.add('bump'); setTimeout(function(){bonusEl.classList.remove('bump')},350);
+      toast('🎁 Bonus unlocked: '+BONUS[k].t,2000,'gift'); try{clarity('event','tj_bonus_'+k)}catch(e){}
+      setTimeout(cb,1300); save(); }
+    else cb();
+  }
+
+  function ask(step,q,hint,opts,key,next,cls,after){
+    var h='<p class="q">'+q+'</p>'+(hint?'<p class="hint">'+hint+'</p>':'')+'<div class="opts '+(cls||'')+'">';
+    opts.forEach(function(op,i){
+      h+='<button class="opt'+(op.svg?' shape':'')+'" data-i="'+i+'">'+(op.svg?op.svg:'<span class="ic">'+op.e+'</span>')+'<span>'+op.t+(op.s?'<small>'+op.s+'</small>':'')+'</span></button>';
+    });
+    show(h+'</div>',step);
+    app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      if(app.dataset.lock)return; app.dataset.lock=1;
+      b.classList.add('sel'); var op=opts[+b.dataset.i]; A[key]=op.v; A.pts+=(op.p||0);
+      try{clarity('set','resp_'+key,String(op.v))}catch(e){}
+      var wait=280; if(after){var t=after(op); if(t){toast(t,2300);wait=1600}}
+      setTimeout(function(){delete app.dataset.lock;next()},wait);
+    }});
+  }
+  function multi(step,q,hint,opts,key,next,none){
+    var h='<p class="q">'+q+'</p><p class="hint">'+hint+'</p><div class="opts">';
+    opts.forEach(function(op,i){h+='<button class="opt" data-i="'+i+'"><span class="ic">'+op.e+'</span><span>'+op.t+'</span><span class="ck">✓</span></button>'});
+    show(h+'</div><button class="btn ai" id="nx" disabled>Continue</button>',step);
+    var sel={};
+    app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      var i=+b.dataset.i, isNone=opts[i].v===none;
+      if(isNone){sel={};app.querySelectorAll('.opt').forEach(function(x){x.classList.remove('sel')})}
+      else{var ni=opts.findIndex(function(x){return x.v===none});delete sel[ni];var nb=app.querySelector('[data-i="'+ni+'"]');if(nb)nb.classList.remove('sel')}
+      if(sel[i]){delete sel[i];b.classList.remove('sel')}else{sel[i]=1;b.classList.add('sel')}
+      $('nx').disabled=!Object.keys(sel).length;
+    }});
+    $('nx').onclick=function(){
+      A[key]=Object.keys(sel).map(function(i){return opts[i].v}).filter(function(v){return v!==none});
+      try{clarity('set','resp_'+key,A[key].length?A[key].join(','):'nenhum')}catch(e){}
+      Object.keys(sel).forEach(function(i){A.pts+=(opts[i].p||0)});
+      next();
+    };
+  }
+  function mito(step,claim,verdict,body,next){
+    show('<div class="center"><span class="kicker">Myth or fact?</span></div><div class="claim">“'+claim+'”</div>'+
+      '<div class="mv" id="mv"><button data-v="m">MYTH</button><button data-v="v">FACT</button></div><div id="rv"></div>',step);
+    app.querySelectorAll('#mv button').forEach(function(b){b.onclick=function(){
+      if($('rv').innerHTML)return; b.classList.add('sel');
+      try{clarity('event','tj_mito_'+step+'_'+(b.dataset.v==='m'?'mito':'verdade'))}catch(e){}
+      $('rv').innerHTML='<div class="card soft reveal"><p class="verdict">'+verdict+'</p>'+body+'</div><button class="btn ai" id="nx">Continue</button>';
+      $('nx').onclick=next;
+      setTimeout(function(){$('rv').scrollIntoView({behavior:'smooth',block:'start'})},120);
+    }});
+  }
+
+  function body(k){
+    return '<span class="mq"><img src="img/b-'+(k||'lugar')+'.jpg" width="300" height="400" alt=""></span>';
+  }
+  var HERO='<img class="hero-art" src="img/capa-3d.jpg" width="900" height="900" alt="" fetchpriority="high">';
+
+  var TIPO={estufa:'belly that bloats by the end of the day',pochete:'lower belly pooch',alto:'upper belly',pos:'post-pregnancy belly',geral:'all-over belly'};
+  var AJUSTE={estufa:'Adjustment #1 · Bloating belly',pochete:'Adjustment #2 · Lower belly pooch',alto:'Adjustment #3 · Upper belly',pos:'Adjustment #4 · Post-pregnancy',geral:'Adjustment #5 · All-over belly'};
+  var VSLV={estufa:'A',pochete:'B',geral:'B',alto:'C',pos:'C'};
+  function nivel(){var p=A.pts; return p>=8?3:p>=4?2:1}
+  function fimPlano(){var d=new Date(); d.setDate(d.getDate()+21); return d}
+  function dm(d){return d.toLocaleDateString('en-US',{month:'long',day:'numeric'})}
+  function tentouToalha(){return A.toalha==='sem_dif'||A.toalha==='desisti'}
+
+  /* ---------- social proof and specialist (data in prova.js; empty = hidden) ---------- */
+  var P=window.PROVA||{}, ESP=P.especialista||{}, CMT=P.comentarios||[], DEP=P.depoimentos||[];
+  function temEsp(){return !!ESP.nome}
+  function cmtCard(c){return window.cmtHTML?cmtHTML(c):''}
+  var FONTE_CMT=window.CMT_FONTE||'';
+  function espCard(txt){
+    if(!temEsp())return '';
+    return '<div class="esp">'+(ESP.foto?'<img src="'+esc(ESP.foto)+'" width="120" height="120" alt="">':'')+
+      '<div><small>'+(txt||'Method taught by')+'</small><b>'+esc(ESP.nome)+'</b>'+(ESP.titulo?'<span>'+esc(ESP.titulo)+'</span>':'')+'</div></div>'+
+      (ESP.frase?'<p class="esp-q">“'+esc(ESP.frase)+'”</p>':'');
+  }
+  function depCard(d){
+    return '<div class="dep">'+(d.foto?'<img src="'+esc(d.foto)+'" width="96" height="96" alt="">':'')+
+      '<div><p>“'+esc(d.texto)+'”</p><b>'+esc(d.nome)+'</b>'+(d.cidade?' · <span>'+esc(d.cidade)+'</span>':'')+'</div></div>';
+  }
+  function rodaCmt(id){
+    var lista=DEP.length?DEP.map(function(d){return {t:d.texto,l:d.nome}}):CMT; if(!lista.length)return;
+    var i=0, el=$(id); if(!el)return;
+    function vai(){ if(!$(id))return; el.innerHTML=(DEP.length?'<div class="cmt"><p>“'+esc(lista[i].t)+'”</p><span class="cmt-l">'+esc(lista[i].l)+'</span></div>':cmtCard(lista[i]))+(DEP.length?'':FONTE_CMT); el.classList.remove('fade');void el.offsetWidth;el.classList.add('fade'); i=(i+1)%lista.length; setTimeout(vai,2200)}
+    vai();
+  }
+
+  /* ================= SCREENS ================= */
+  function t1(){
+    show('<div class="logo" style="justify-content:center;margin:2px 0 12px"><img src="img/logo.png" width="200" height="200" alt="">Japanese Towel Technique</div>'+HERO+'<div class="center"><span class="kicker">Free quiz · 1 minute</span></div>'+
+      '<h1 class="center">Find out why your waistline <span class="hl">“disappeared”</span> and which Japanese Towel Technique adjustment will <span class="hl">bring it back</span></h1>'+
+      '<div class="proof"><b>'+esc(CONFIG.views)+'</b><span>views on TikTok. But most women are making one mistake that keeps it from working.</span></div>'+
+      '<button class="btn pulse" id="go">Take the quiz</button>'+
+      '<div class="pills"><span>🔒 No sign-up</span><span>⏱️ 1 minute</span><span>📱 On your phone</span></div>');
+    $('go').onclick=t2;
+  }
+  function t2(){
+    show('<p class="q">First things first: what’s your first name?</p><p class="hint">We’ll use it to build your results.</p>'+
+      '<input class="field" id="nm" maxlength="20" placeholder="Your name" autocomplete="given-name" enterkeyhint="next">'+
+      '<button class="btn ai" id="nx" disabled>Continue</button>',1);
+    var nm=$('nm'),nx=$('nx');
+    nm.oninput=function(){nx.disabled=nm.value.trim().length<2};
+    nm.onkeydown=function(e){if(e.key==='Enter'&&!nx.disabled)nx.click()};
+    nx.onclick=function(){var v=nm.value.trim().split(' ')[0];A.nome=v.charAt(0).toUpperCase()+v.slice(1).toLowerCase();t3()};
+  }
+  function t3(){
+    ask(2,'Nice to meet you, <span class="hl">'+N()+'</span>! How old are you?',null,[
+      {e:'🌱',t:'18 to 29',v:'18-29'},{e:'🌿',t:'30 to 39',v:'30-39',p:1},{e:'🌸',t:'40 to 49',v:'40-49',p:2},
+      {e:'🍂',t:'50 to 59',v:'50-59',p:2},{e:'🌼',t:'60 or older',v:'60+',p:2}
+    ],'idade',t4);
+  }
+  function t4(){
+    ask(3,'Looking at yourself sideways in the mirror, which belly looks most like yours?','Be honest, nobody’s watching 😉',[
+      {svg:body('estufa'),t:'Bloats by the end of the day',v:'estufa',p:2},{svg:body('pochete'),t:'Pooch below the belly button',v:'pochete',p:2},
+      {svg:body('alto'),t:'Upper belly',v:'alto',p:2},{svg:body('pos'),t:'Stuck out after having kids',v:'pos',p:3},
+      {svg:body('geral'),t:'Soft all over',v:'geral',p:1}
+    ],'barriga',t5,'two',function(){return 'Got it. Each belly type needs a different adjustment ✓'});
+  }
+  function t5(){
+    ask(4,'Do you have kids?',null,[
+      {e:'🙂',t:'No kids',v:0},{e:'👶',t:'1 child',v:1,p:1},{e:'👧👦',t:'2 children',v:2,p:2},{e:'👨‍👩‍👧‍👦',t:'3 or more',v:3,p:2}
+    ],'filhos',t6);
+  }
+  function t6(){
+    ask(5,'Adding up your whole day, how long do you spend <span class="hl">sitting</span>?','Work, car, couch, phone…',[
+      {e:'🚶‍♀️',t:'Less than 3 hours',v:2},{e:'🪑',t:'3 to 6 hours',v:5,p:1},{e:'💻',t:'6 to 9 hours',v:8,p:2},{e:'🛋️',t:'More than 9 hours',v:10,p:3}
+    ],'sentada',t7);
+  }
+  function t7(){
+    ask(6,'Do you feel pain or tiredness in your back?',null,[
+      {e:'⬇️',t:'Yes, in my lower back',v:'lombar',p:2},{e:'⬆️',t:'Yes, in my neck and shoulders',v:'pescoco',p:1},
+      {e:'↕️',t:'Both',v:'ambas',p:2},{e:'✅',t:'No, I don’t',v:'nao'}
+    ],'dor',t8);
+  }
+  function t8(){
+    mito(7,'Doing crunches every day slims your waist.','MYTH. It can even make it worse. 😬',
+      '<p>Regular crunches work the outer muscle, the “six-pack.” When your waist has been <b>pushed forward</b>, they make your belly firmer… and stick out even more.</p><p>For most women, the problem isn’t weak muscles. It’s a waist that’s <b>out of place</b>.</p>',
+      function(){unlock('postura',t9)});
+  }
+  function t9(){
+    multi(8,'What have you already tried to slim your waist?','Pick all that apply.',[
+      {e:'🥗',t:'Dieting',v:'dieta'},{e:'🍵',t:'Detox teas',v:'cha'},{e:'🩱',t:'Waist trainer / shapewear',v:'cinta',p:1},
+      {e:'💪',t:'Crunches',v:'abdominal',p:1},{e:'🏋️‍♀️',t:'Gym',v:'academia'},{e:'🤷‍♀️',t:'Nothing yet',v:'nada'}
+    ],'tentou',t10,'nada');
+  }
+  function t10(){
+    ask(9,'Have you seen or tried the <span class="hl">Japanese towel technique</span> in a video?',null,[
+      {e:'😕',t:'I tried it, but saw no difference',v:'sem_dif',p:1},{e:'😣',t:'I tried it, but gave up',s:'it hurt, I got tired or I forgot',v:'desisti',p:1},
+      {e:'👀',t:'I’ve seen it, but never tried',v:'viu'},{e:'🆕',t:'Never heard of it',v:'nunca'}
+    ],'toalha',t10b,null,function(op){
+      if(op.v==='sem_dif'||op.v==='desisti')return 'Keep that in mind: in your results you’ll see why it didn’t work.';
+      if(op.v==='nunca')return 'Good news: you’ll learn it the right way from day one 🇯🇵';
+    });
+  }
+  /* social proof: what women are saying */
+  function t10b(){
+    if(!CMT.length&&!temEsp()&&!(P.resultados||[]).length){t11();return}
+    try{clarity('event','tj_tela_09b_prova_social')}catch(e){}
+    show('<div class="center"><span class="kicker">Meanwhile, on TikTok…</span></div>'+
+      '<h2 class="center">'+esc(CONFIG.views)+' views. And this is what women are <span class="hl">saying</span>:</h2>'+
+      '<div class="cmts">'+CMT.slice(0,4).map(cmtCard).join('')+'</div>'+FONTE_CMT+(window.carrossel?window.carrossel('Results from women on the plan'):'')+
+      espCard()+
+      '<button class="btn ai" id="nx">Find my adjustment</button>',9);
+    if(window.carrosselLiga)carrosselLiga(app);
+    $('nx').onclick=t11;
+  }
+  function t11(){
+    ask(10,'Quick wall test 🧱','Stand with your back and butt against a wall, feet slightly away from it. Now try to slide your hand behind your lower back. How did it go?',[
+      {e:'✋',t:'My whole hand fit, with room to spare',v:'folga',p:3},{e:'🤚',t:'My hand fit, but just barely',v:'justa',p:1},
+      {e:'☝️',t:'My hand doesn’t really fit',v:'nao_passa'},{e:'⏳',t:'I can’t test it right now',v:'nt',p:1}
+    ],'parede',function(){unlock('drenagem',t12)},null,function(op){
+      if(op.v==='folga')return 'That’s a classic sign of a waist pushed forward.';
+    });
+  }
+  function t12(){
+    mito(11,'Wearing a waist trainer slims your waist over time.','MYTH.',
+      '<p>A waist trainer squeezes from the outside <b>only while you wear it</b>. Take it off and your belly goes right back, because nothing changed on the inside.</p><p>And many of them roll up, fold and dig into your belly. That’s why so many women buy one and regret it.</p>',t13);
+  }
+  function t13(){
+    ask(12,'Does your belly bloat after eating or by the end of the day?',null,[
+      {e:'🎈',t:'Almost every day',v:'sempre',p:2},{e:'🌗',t:'Sometimes',v:'as_vezes',p:1},{e:'🙂',t:'Rarely',v:'raro'}
+    ],'inchaco',function(){unlock('cha',t14)});
+  }
+  function t14(){
+    var items=['Belly type','Sitting time and posture','Wall test','Bloating and what you’ve tried'];
+    show('<div class="spinner"></div><p class="q">Analyzing '+(A.nome?mask(A.nome)+'’s':'your')+' answers…</p><ul class="checks">'+
+      items.map(function(t,i){return '<li id="c'+i+'"><span class="ok">✓</span>'+t+'</li>'}).join('')+'</ul><div class="rot" id="rot"></div>',13);
+    rodaCmt('rot');
+    items.forEach(function(_,i){setTimeout(function(){$('c'+i).classList.add('on')},700+i*750)});
+    setTimeout(t15,700+items.length*750+500);
+  }
+  /* the problem (mechanism), without the solution */
+  function t15(){
+    var motivos=[];
+    if(A.sentada>=5)motivos.push('about <b>'+A.sentada+' hours a day sitting</b>');
+    if(A.filhos)motivos.push('<b>'+(A.filhos===1?'one pregnancy':A.filhos+' pregnancies')+'</b>');
+    if(A.dor!=='nao')motivos.push('<b>back pain</b>');
+    var porque=motivos.length?'With '+motivos.join(', ').replace(/, ([^,]*)$/,' and $1')+', ':'Over time, ';
+    show('<div class="center"><span class="kicker ai">What’s going on</span></div>'+
+      '<h2 class="center">'+(A.nome?mask(A.nome)+', your':'Your')+' waist didn’t disappear. <span class="hl">It got pushed forward.</span></h2>'+
+      '<div class="compare"><div>'+body('lugar')+'Waist in place</div><div class="you">'+body(A.barriga)+'Yours today</div></div>'+
+      '<p class="center muted">'+porque+'your hips slowly tilt forward. Your belly sticks out, your deep core “switches off,” and your waist disappears, even if you haven’t gained that much weight.</p>'+
+      '<button class="btn ai" id="nx">That makes sense</button>',14);
+    $('nx').onclick=t16;
+  }
+  /* The Towel Mistake */
+  function t16(){
+    var intro=tentouToalha()?'Now you’ll understand why it didn’t work when you tried it.':'Before you try it on your own, watch out for this.';
+    show('<div class="center"><span class="kicker">The Towel Mistake</span></div>'+
+      '<h2 class="center">Most women who try the technique from a video make <span class="hl">The Towel Mistake</span>.</h2>'+
+      '<p class="center muted">'+intro+' There are 3 details that change from one woman to the next. If one of them is off, the technique does nothing for your waist.</p>'+
+      '<div class="lock"><span class="k">🔒</span><div class="t">1. The towel</div><div class="b">the right size depends on your belly type</div></div>'+
+      '<div class="lock"><span class="k">🔒</span><div class="t">2. The spot</div><div class="b">the exact placement changes with your posture</div></div>'+
+      '<div class="lock"><span class="k">🔒</span><div class="t">3. What comes after the 5 minutes</div><div class="b">the part almost nobody does, and the one that makes results last</div></div>'+
+      '<p class="lock-cta">Your results reveal YOUR adjustment.</p>'+
+      '<button class="btn ai" id="nx">Continue</button>',15);
+    $('nx').onclick=t17;
+  }
+  function t17(){
+    ask(16,'How much time can you set aside each day?',null,[
+      {e:'⏱️',t:'5 minutes',v:5},{e:'🕙',t:'10 minutes',v:10},{e:'🕒',t:'15 minutes or more',v:15}
+    ],'tempo',t18,null,function(){return 'Perfect! The plan takes less than 10 minutes a day ✓'});
+  }
+  function t18(){
+    var f=fimPlano();
+    ask(17,'When do you want to see a slimmer waist?','The plan lasts 21 days. Start today and you’ll finish on <b>'+dm(f)+'</b>.',[
+      {e:'🥂',t:'By New Year’s',v:'reveillon'},{e:'☀️',t:'By summer',v:'verao'},{e:'🎉',t:'I have an event coming up',s:'party, trip, wedding',v:'evento'},{e:'💛',t:'I just want to feel good',v:'sem_pressa'}
+    ],'prazo',t19);
+  }
+  function t19(){
+    ask(18,'What would make the biggest difference for you?',null,[
+      {e:'👗',t:'Wearing fitted clothes with confidence',v:'wearing fitted clothes with confidence'},
+      {e:'🪞',t:'Liking my side view in the mirror',v:'liking your side view in the mirror'},
+      {e:'📸',t:'Taking photos without hiding my belly',v:'taking photos without hiding your belly'},
+      {e:'✨',t:'Feeling beautiful again',v:'feeling beautiful again'}
+    ],'desejo',t20);
+  }
+  function t20(){
+    multi(19,'One last thing, for your safety','Does any of these apply to you right now?',[
+      {e:'🤰',t:'I’m pregnant',v:'gravida'},{e:'👶',t:'I had a baby less than 3 months ago',v:'posparto'},
+      {e:'🏥',t:'I recently had abdominal or spine surgery',v:'cirurgia'},
+      {e:'⚠️',t:'I have a herniated disc or severe back pain',v:'hernia'},
+      {e:'✅',t:'None of these',v:'nenhuma'}
+    ],'alertas',t21,'nenhuma');
+  }
+  function t21(){
+    show('<div class="spinner"></div><p class="q">Building '+(A.nome?mask(A.nome)+'’s':'your')+' plan…</p>'+espCard('Plan built with the method of')+'<div class="rot" id="rot"></div>',20);
+    rodaCmt('rot');
+    setTimeout(t22,temEsp()||DEP.length?3200:2400);
+  }
+  function t22(){
+    var nv=nivel(), f=fimPlano(), antesAnoNovo=(f.getMonth()===11&&f.getDate()<=31)||f.getMonth()<11;
+    var nm=A.nome?mask(A.nome)+'’s':'Your';
+    var alerta=A.alertas.length?'<div class="card alert"><b>⚠️ Talk to your doctor before you start.</b> Based on what you checked, it’s important to get clearance from a health professional.</div>':'';
+    var erro=tentouToalha()?'<div class="card sun"><b>Why didn’t it work when you tried it?</b> Based on your profile, you probably made <b>The Towel Mistake</b> for a <b>'+TIPO[A.barriga]+'</b>. The video you watched was made for someone else’s body.</div>':'';
+    var bon=A.bonus.map(function(k){return '<li><span class="dot">🎁</span><span>'+BONUS[k].t+'</span></li>'}).join('');
+    show('<div class="center"><span class="kicker">'+nm+' results</span>'+
+      '<h1 style="margin-top:12px">Pushed-Forward Waist <span class="badge">level '+nv+'</span></h1></div>'+
+      '<div class="meter"><i id="pt" style="left:4%"></i></div><div class="meter-lbl"><span>Level 1</span><span>Level 2</span><span>Level 3</span></div>'+
+      alerta+
+      '<div class="card"><b>What we found</b><ul class="list">'+
+        '<li><span class="dot">●</span><span>Belly type: <b>'+TIPO[A.barriga]+'</b></span></li>'+
+        '<li><span class="dot">●</span><span>Wall test: <b>'+({folga:'waist pushed forward',justa:'slight forward tilt',nao_passa:'straighter posture',nt:'do it when you can'})[A.parede]+'</b></span></li>'+
+        (A.sentada>=5?'<li><span class="dot">●</span><span>About <b>'+A.sentada+' hours a day sitting</b></span></li>':'')+
+        (A.inchaco!=='raro'?'<li><span class="dot">●</span><span>Bloating <b>'+(A.inchaco==='sempre'?'almost every day':'every now and then')+'</b></span></li>':'')+
+      '</ul></div>'+
+      erro+
+      '<div class="center" style="margin-top:18px"><span class="kicker ai">Your adjustment</span></div>'+
+      '<div class="lock" style="margin-top:10px"><span class="k">🔒</span><div class="t">'+AJUSTE[A.barriga]+'</div><div class="b">the right towel, spot and sequence for your belly</div></div>'+
+      '<p class="lock-cta">Unlocked in your plan</p>'+
+      '<div class="card soft"><b>'+nm+' 21-day plan</b><div class="phases"><div><b>Realign</b><small>days 1 to 7</small></div><div><b>Natural Corset</b><small>days 8 to 14</small></div><div><b>De-Bloat</b><small>days 15 to 21</small></div></div>'+
+      '<p style="margin:0">Less than 10 minutes a day. Start today and you’ll finish on <b>'+dm(f)+'</b>'+(antesAnoNovo&&A.prazo==='reveillon'?', before New Year’s 🥂':'')+'.</p></div>'+
+      (bon?'<div class="card"><b>Bonuses you unlocked</b><ul class="list">'+bon+'</ul></div>':'')+
+      (temEsp()?'<div class="card">'+espCard('Your guide for the 21 days')+'</div>':'')+
+      (window.carrossel?window.carrossel('Women who did the plan'):'')+
+      (DEP.length?'<div class="center" style="margin-top:18px"><span class="kicker">What women on the plan are saying</span></div>'+DEP.slice(0,3).map(depCard).join(''):'')+
+      '<p class="center">You said what you want most is <b>'+esc(A.desejo)+'</b>. In the next video you’ll see how, with the adjustment for your belly.</p>'+
+      '<a class="btn pulse" id="go" href="#">▶ '+(A.nome?'SEE '+mask(A.nome.toUpperCase())+'’S PLAN':'SEE MY PLAN')+'</a>'+
+      '<footer>Educational quiz with general guidance. It does not replace an evaluation by a health professional.</footer>',21);
+    if(window.carrosselLiga)carrosselLiga(app);
+    setTimeout(function(){$('pt').style.left=({1:18,2:52,3:86})[nv]+'%'},200);
+    $('go').onclick=function(e){
+      e.preventDefault();
+      try{sessionStorage.setItem('tw_v1',JSON.stringify(Object.assign({},A,{nivel:nv,vsl:VSLV[A.barriga],ajuste:AJUSTE[A.barriga],tipo:TIPO[A.barriga]})))}catch(_){}
+      try{clarity('event','tj_clicou_ver_plano');clarity('set','nivel',String(nv));clarity('set','tipo_barriga',A.barriga)}catch(_){}
+      location.href=CONFIG.vsl_url+location.search;
+    };
+  }
+
+  /* layout preview: ?tela=t22 */
+  var tela=new URLSearchParams(location.search).get('tela');
+  var T={t1:t1,t4:t4,t8:t8,t10b:t10b,t11:t11,t14:t14,t15:t15,t16:t16,t18:t18,t21:t21,t22:t22};
+  if(T[tela]){A=Object.assign(A,{nome:'Jessica',idade:'40-49',barriga:'estufa',filhos:2,sentada:8,dor:'lombar',tentou:['cinta','abdominal'],toalha:'sem_dif',parede:'folga',inchaco:'sempre',tempo:10,prazo:'reveillon',desejo:'wearing fitted clothes with confidence',alertas:[],pts:12,bonus:['postura','drenagem','cha']});T[tela]()}
+  else t1();
+})();
+</script>
+</body>
+</html>
