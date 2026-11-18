@@ -154,9 +154,9 @@ details p{color:var(--muted);margin:10px 0 0}
 .mq{position:relative;display:block;margin:0 auto;border-radius:14px;overflow:hidden;background:#F3DCD6}
 .mq img{width:100%;height:100%;object-fit:cover;display:block}
 .hz{position:absolute;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(214,84,108,.62),rgba(214,84,108,.25) 60%,rgba(214,84,108,0));animation:glow 2.2s ease-in-out infinite}
-.hz-estufa{left:35%;top:55%;width:40%;height:24%}
-.hz-pochete{left:37%;top:62%;width:30%;height:13%}
-.hz-alto{left:35%;top:45%;width:30%;height:13%}
-.hz-pos{left:36%;top:63%;width:38%;height:19%}
-.hz-geral{left:50%;top:54%;width:80%;height:40%}
+.hz-estufa{left:30%;top:50%;width:40%;height:26%}
+.hz-pochete{left:33%;top:60%;width:32%;height:14%}
+.hz-alto{left:32%;top:38%;width:32%;height:13%}
+.hz-pos{left:32%;top:57%;width:40%;height:20%}
+.hz-geral{left:45%;top:50%;width:80%;height:42%}
 @keyframes glow{0%,100%{opacity:.75}50%{opacity:1}}
