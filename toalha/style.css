@@ -29,7 +29,7 @@ b,strong{font-weight:700}
 .top{position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg) 70%,rgba(247,243,236,0));padding:6px 0 10px}
 .toprow{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .logo{display:flex;align-items:center;gap:8px;font-family:"Zen Old Mincho",serif;font-weight:700;font-size:.98rem;color:var(--ink)}
-.logo svg{width:24px;height:24px}
+.logo svg{width:32px;height:32px}
 .bonus{font-size:.78rem;font-weight:800;background:var(--gold);color:var(--gold-d);border-radius:99px;padding:5px 10px;white-space:nowrap;transition:transform .3s}
 .bonus.bump{transform:scale(1.15)}
 .prog{height:6px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-top:10px}
