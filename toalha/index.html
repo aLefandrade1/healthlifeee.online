@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Teste da Cintura</title>
+<meta name="description" content="Teste de 1 minuto: descubra por que a sua cintura sumiu e qual é o seu ajuste da Técnica Japonesa da Toalha.">
+<meta name="theme-color" content="#F7F3EC">
+<meta name="robots" content="noindex">
+
+<!-- MICROSOFT CLARITY. Por enquanto usa o mesmo projeto do Cabecinha, com a tag oferta=toalha para filtrar. -->
+<script>
+  var CLARITY_ID = 'zf34uvarqx';
+  if (CLARITY_ID) {
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CLARITY_ID);
+    clarity('set','oferta','toalha');
+  } else { window.clarity = function(){}; }
+</script>
+<!-- PIXEL UTMIFY: colar o pixelId da oferta NOVA (não usar o do Cabecinha). Vazio = não carrega. -->
+<script>
+  window.pixelId = "";
+  if (window.pixelId) {
+    var a = document.createElement("script");
+    a.setAttribute("async", ""); a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  }
+</script>
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Zen+Old+Mincho:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div class="top" id="top" hidden>
+    <div class="toprow">
+      <div class="logo"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="#D9483B"/><rect x="5" y="19" width="22" height="7" rx="3.5" fill="#F7F3EC"/><circle cx="8.5" cy="22.5" r="2.2" fill="none" stroke="#2B4C7E" stroke-width="1.4"/></svg>Técnica Japonesa da Toalha</div>
+      <span class="bonus" id="bonus" hidden>🎁 R$ 0 em bônus</span>
+    </div>
+    <div class="prog"><i id="prog"></i></div>
+  </div>
+  <div id="app"></div>
+</main>
+
+<script>
+/* ================== CONFIGURAÇÃO ================== */
+var CONFIG = {
+  views_gringa: '31 milhões',   // views reais de #japanesetowelmethod no TikTok (conferido em 18/11/2026)
+  vsl_url: 'vsl.html'
+};
+/* ================================================== */
+
+(function(){
+  var app=document.getElementById('app'), top=document.getElementById('top'), prog=document.getElementById('prog'), bonusEl=document.getElementById('bonus');
+  var TOTAL=21;
+  var A={nome:'',idade:null,barriga:null,filhos:null,sentada:null,dor:null,tentou:[],toalha:null,parede:null,inchaco:null,tempo:null,prazo:null,desejo:null,alertas:[],pts:0,bonus:[]};
+
+  /* ---------- utilidades ---------- */
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function mask(t){return '<span data-clarity-mask="True">'+esc(t)+'</span>'}
+  function N(){return A.nome?mask(A.nome):'você'}
+  function $(id){return document.getElementById(id)}
+  var TELAS=['inicio','nome','idade','barriga','filhos','sentada','dor','mito_abdominal','ja_tentou','toalha_video','parede','mito_cinta','inchaco','analisando','diagnostico','erro_toalha','tempo','prazo','desejo','seguranca','preparando','resultado'];
+  var ultimaTela=-1;
+  function marcaTela(n){n=n||0; if(n===ultimaTela)return; ultimaTela=n;
+    var id=(n<10?'0':'')+n+'_'+TELAS[n]; try{clarity('event','tj_tela_'+id);clarity('set','ultima_tela',id)}catch(e){}}
+  function save(){try{sessionStorage.setItem('tj_v1',JSON.stringify(A))}catch(e){}}
+  function show(html,step){
+    marcaTela(step); window.scrollTo(0,0);
+    if(step){top.hidden=false;prog.style.width=Math.round(Math.sqrt(step/TOTAL)*100)+'%'} else top.hidden=true;
+    app.innerHTML='<div class="screen">'+html+'</div>'; save();
+  }
+  function toast(t,ms,cls){var d=document.createElement('div');d.className='toast'+(cls?' '+cls:'');d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},ms||1500)}
+
+  /* bônus desbloqueados ao longo do teste */
+  var BONUS={postura:{t:'Postura do sofá e do trabalho',v:19},drenagem:{t:'Drenagem de 3 minutos',v:27},cha:{t:'Chá desinchar',v:17}};
+  function bonusTotal(){return A.bonus.reduce(function(s,k){return s+BONUS[k].v},0)}
+  function unlock(k,cb){
+    if(A.bonus.indexOf(k)<0){A.bonus.push(k); bonusEl.hidden=false; bonusEl.textContent='🎁 R$ '+bonusTotal()+' em bônus';
+      bonusEl.classList.add('bump'); setTimeout(function(){bonusEl.classList.remove('bump')},350);
+      toast('🎁 Bônus desbloqueado: '+BONUS[k].t,2000,'gift'); try{clarity('event','tj_bonus_'+k)}catch(e){}
+      setTimeout(cb,1300); save(); }
+    else cb();
+  }
+
+  function ask(step,q,hint,opts,key,next,cls,after){
+    var h='<p class="q">'+q+'</p>'+(hint?'<p class="hint">'+hint+'</p>':'')+'<div class="opts '+(cls||'')+'">';
+    opts.forEach(function(op,i){
+      h+='<button class="opt'+(op.svg?' shape':'')+'" data-i="'+i+'">'+(op.svg?op.svg:'<span class="ic">'+op.e+'</span>')+'<span>'+op.t+(op.s?'<small>'+op.s+'</small>':'')+'</span></button>';
+    });
+    show(h+'</div>',step);
+    app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      if(app.dataset.lock)return; app.dataset.lock=1;
+      b.classList.add('sel'); var op=opts[+b.dataset.i]; A[key]=op.v; A.pts+=(op.p||0);
+      try{clarity('set','resp_'+key,String(op.v))}catch(e){}
+      var wait=280; if(after){var t=after(op); if(t){toast(t,2300);wait=1600}}
+      setTimeout(function(){delete app.dataset.lock;next()},wait);
+    }});
+  }
+  function multi(step,q,hint,opts,key,next,none){
+    var h='<p class="q">'+q+'</p><p class="hint">'+hint+'</p><div class="opts">';
+    opts.forEach(function(op,i){h+='<button class="opt" data-i="'+i+'"><span class="ic">'+op.e+'</span><span>'+op.t+'</span><span class="ck">✓</span></button>'});
+    show(h+'</div><button class="btn ai" id="nx" disabled>Continuar</button>',step);
+    var sel={};
+    app.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      var i=+b.dataset.i, isNone=opts[i].v===none;
+      if(isNone){sel={};app.querySelectorAll('.opt').forEach(function(x){x.classList.remove('sel')})}
+      else{var ni=opts.findIndex(function(x){return x.v===none});delete sel[ni];var nb=app.querySelector('[data-i="'+ni+'"]');if(nb)nb.classList.remove('sel')}
+      if(sel[i]){delete sel[i];b.classList.remove('sel')}else{sel[i]=1;b.classList.add('sel')}
+      $('nx').disabled=!Object.keys(sel).length;
+    }});
+    $('nx').onclick=function(){
+      A[key]=Object.keys(sel).map(function(i){return opts[i].v}).filter(function(v){return v!==none});
+      try{clarity('set','resp_'+key,A[key].length?A[key].join(','):'nenhum')}catch(e){}
+      Object.keys(sel).forEach(function(i){A.pts+=(opts[i].p||0)});
+      next();
+    };
+  }
+  function mito(step,claim,verdict,body,next){
+    show('<div class="center"><span class="kicker">Mito ou verdade?</span></div><div class="claim">“'+claim+'”</div>'+
+      '<div class="mv" id="mv"><button data-v="m">MITO</button><button data-v="v">VERDADE</button></div><div id="rv"></div>',step);
+    app.querySelectorAll('#mv button').forEach(function(b){b.onclick=function(){
+      if($('rv').innerHTML)return; b.classList.add('sel');
+      try{clarity('event','tj_mito_'+step+'_'+(b.dataset.v==='m'?'mito':'verdade'))}catch(e){}
+      $('rv').innerHTML='<div class="card soft reveal"><p class="verdict">'+verdict+'</p>'+body+'</div><button class="btn ai" id="nx">Continuar</button>';
+      $('nx').onclick=next;
+      setTimeout(function(){$('rv').scrollIntoView({behavior:'smooth',block:'start'})},120);
+    }});
+  }
+
+  /* ---------- silhuetas de perfil ---------- */
+  var FRONT={
+    lugar:'C68 94 66 62 62 52',
+    estufa:'C82 96 82 60 62 52',
+    pochete:'C79 101 72 80 63 72 C62 64 64 56 62 52',
+    alto:'C67 88 80 68 62 50',
+    pos:'C81 104 73 74 64 70 C62 62 64 56 62 52',
+    geral:'C77 98 77 58 62 52'
+  };
+  function body(k,stroke){
+    return '<svg viewBox="0 0 100 140" aria-hidden="true"><circle cx="52" cy="15" r="10" fill="#E6ECF5" stroke="'+(stroke||'#2B4C7E')+'" stroke-width="2"/>'+
+      '<path d="M45 27 C40 45 37 60 39 72 C41 86 39 102 43 136 L61 136 C64 120 66 106 64 100 '+FRONT[k]+' C67 44 64 33 57 27 Z" fill="#E6ECF5" stroke="'+(stroke||'#2B4C7E')+'" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+  }
+  var HERO='<svg class="hero-art" viewBox="0 0 170 130" aria-hidden="true"><circle cx="85" cy="58" r="50" fill="#D9483B"/><rect x="18" y="82" width="134" height="34" rx="17" fill="#fff" stroke="#E6DFD3" stroke-width="2"/><circle cx="35" cy="99" r="13" fill="#F7F3EC" stroke="#2B4C7E" stroke-width="2.5"/><path d="M35 99 m-7 0 a7 7 0 1 1 7 7 a4 4 0 1 1 -4 -4" fill="none" stroke="#2B4C7E" stroke-width="2"/><path d="M60 90 h80 M60 99 h80 M60 108 h80" stroke="#EFE8DC" stroke-width="2.5"/></svg>';
+
+  var TIPO={estufa:'barriga que estufa no fim do dia',pochete:'barriga pochete',alto:'estômago alto',pos:'barriga pós-gestação',geral:'barriga por igual'};
+  var AJUSTE={estufa:'Ajuste nº 1 · Barriga que estufa',pochete:'Ajuste nº 2 · Barriga pochete',alto:'Ajuste nº 3 · Estômago alto',pos:'Ajuste nº 4 · Pós-gestação',geral:'Ajuste nº 5 · Barriga por igual'};
+  var VSLV={estufa:'A',pochete:'B',geral:'B',alto:'C',pos:'C'};
+  function nivel(){var p=A.pts; return p>=8?3:p>=4?2:1}
+  function fimPlano(){var d=new Date(); d.setDate(d.getDate()+21); return d}
+  function dm(d){return ('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)}
+  function tentouToalha(){return A.toalha==='sem_dif'||A.toalha==='desisti'}
+
+  /* ================= TELAS ================= */
+  function t1(){
+    show(HERO+'<div class="center"><span class="kicker">Teste gratuito · 1 minuto</span></div>'+
+      '<h1 class="center">Descubra por que a sua cintura <span class="hl">“sumiu”</span> e qual é o seu ajuste da Técnica Japonesa da Toalha</h1>'+
+      '<div class="proof"><b>'+esc(CONFIG.views_gringa)+'</b><span>de visualizações lá fora. Aqui no Brasil, quase ninguém conhece ainda.</span></div>'+
+      '<button class="btn pulse" id="go">Fazer o teste</button>'+
+      '<div class="pills"><span>🔒 Sem cadastro</span><span>⏱️ 1 minuto</span><span>📱 Pelo celular</span></div>');
+    $('go').onclick=t2;
+  }
+  function t2(){
+    show('<p class="q">Pra começar: qual é o seu primeiro nome?</p><p class="hint">Vamos usar pra montar o seu resultado.</p>'+
+      '<input class="field" id="nm" maxlength="20" placeholder="Seu nome" autocomplete="given-name" enterkeyhint="next">'+
+      '<button class="btn ai" id="nx" disabled>Continuar</button>',1);
+    var nm=$('nm'),nx=$('nx');
+    nm.oninput=function(){nx.disabled=nm.value.trim().length<2};
+    nm.onkeydown=function(e){if(e.key==='Enter'&&!nx.disabled)nx.click()};
+    nx.onclick=function(){var v=nm.value.trim().split(' ')[0];A.nome=v.charAt(0).toUpperCase()+v.slice(1).toLowerCase();t3()};
+  }
+  function t3(){
+    ask(2,'Prazer, <span class="hl">'+N()+'</span>! Qual é a sua idade?',null,[
+      {e:'🌱',t:'De 18 a 29',v:'18-29'},{e:'🌿',t:'De 30 a 39',v:'30-39',p:1},{e:'🌸',t:'De 40 a 49',v:'40-49',p:2},
+      {e:'🍂',t:'De 50 a 59',v:'50-59',p:2},{e:'🌼',t:'60 ou mais',v:'60+',p:2}
+    ],'idade',t4);
+  }
+  function t4(){
+    ask(3,'Olhando de lado no espelho, qual barriga parece mais com a sua?','Seja sincera, ninguém está vendo 😉',[
+      {svg:body('estufa'),t:'Estufa no fim do dia',v:'estufa',p:2},{svg:body('pochete'),t:'Pochete abaixo do umbigo',v:'pochete',p:2},
+      {svg:body('alto'),t:'Estômago alto',v:'alto',p:2},{svg:body('pos'),t:'Ficou pra fora depois dos filhos',v:'pos',p:3},
+      {svg:body('geral'),t:'Gordinha por igual',v:'geral',p:1}
+    ],'barriga',t5,'two',function(){return 'Anotado. Cada tipo de barriga tem um ajuste diferente ✓'});
+  }
+  function t5(){
+    ask(4,'Você tem filhos?',null,[
+      {e:'🙂',t:'Não tenho',v:0},{e:'👶',t:'1 filho',v:1,p:1},{e:'👧👦',t:'2 filhos',v:2,p:2},{e:'👨‍👩‍👧‍👦',t:'3 ou mais',v:3,p:2}
+    ],'filhos',t6);
+  }
+  function t6(){
+    ask(5,'Somando o dia todo, quanto tempo você passa <span class="hl">sentada</span>?','Trabalho, carro, sofá, celular…',[
+      {e:'🚶‍♀️',t:'Menos de 3 horas',v:2},{e:'🪑',t:'De 3 a 6 horas',v:5,p:1},{e:'💻',t:'De 6 a 9 horas',v:8,p:2},{e:'🛋️',t:'Mais de 9 horas',v:10,p:3}
+    ],'sentada',t7);
+  }
+  function t7(){
+    ask(6,'Você sente dor ou cansaço nas costas?',null,[
+      {e:'⬇️',t:'Sim, na lombar',v:'lombar',p:2},{e:'⬆️',t:'Sim, no pescoço e ombros',v:'pescoco',p:1},
+      {e:'↕️',t:'Nas duas',v:'ambas',p:2},{e:'✅',t:'Não sinto',v:'nao'}
+    ],'dor',t8);
+  }
+  function t8(){
+    mito(7,'Fazer abdominal todo dia afina a cintura.','MITO. E pode até piorar. 😬',
+      '<p>O abdominal tradicional trabalha o músculo de fora, o “tanquinho”. Quando a cintura foi <b>empurrada pra frente</b>, ele deixa a barriga mais durinha… e ainda mais projetada.</p><p>Na maioria das mulheres, o problema não é músculo fraco. É a cintura <b>fora do lugar</b>.</p>',
+      function(){unlock('postura',t9)});
+  }
+  function t9(){
+    multi(8,'O que você já tentou pra afinar a cintura?','Pode marcar mais de uma.',[
+      {e:'🥗',t:'Dieta',v:'dieta'},{e:'🍵',t:'Chá',v:'cha'},{e:'🩱',t:'Cinta modeladora',v:'cinta',p:1},
+      {e:'💪',t:'Abdominal',v:'abdominal',p:1},{e:'🏋️‍♀️',t:'Academia',v:'academia'},{e:'🤷‍♀️',t:'Nada ainda',v:'nada'}
+    ],'tentou',t10,'nada');
+  }
+  function t10(){
+    ask(9,'Você já viu ou tentou a <span class="hl">técnica japonesa da toalha</span> em algum vídeo?',null,[
+      {e:'😕',t:'Tentei, mas não vi diferença',v:'sem_dif',p:1},{e:'😣',t:'Tentei, mas desisti',s:'doeu, cansei ou esqueci',v:'desisti',p:1},
+      {e:'👀',t:'Já vi, mas nunca tentei',v:'viu'},{e:'🆕',t:'Nunca ouvi falar',v:'nunca'}
+    ],'toalha',t11,null,function(op){
+      if(op.v==='sem_dif'||op.v==='desisti')return 'Guarda isso: no resultado você vai entender por que não funcionou.';
+      if(op.v==='nunca')return 'Você está entre as primeiras do Brasil a conhecer 🇯🇵';
+    });
+  }
+  function t11(){
+    ask(10,'Teste rápido da parede 🧱','Encoste as costas e o bumbum numa parede, com os pés um pouquinho afastados dela. Agora tente passar a mão atrás da sua lombar. Como foi?',[
+      {e:'✋',t:'Passou a mão inteira, com folga',v:'folga',p:3},{e:'🤚',t:'Passou a mão, bem justinha',v:'justa',p:1},
+      {e:'☝️',t:'Quase não passa',v:'nao_passa'},{e:'⏳',t:'Não consigo testar agora',v:'nt',p:1}
+    ],'parede',function(){unlock('drenagem',t12)},null,function(op){
+      if(op.v==='folga')return 'Esse é um sinal clássico de cintura empurrada pra frente.';
+    });
+  }
+  function t12(){
+    mito(11,'Usar cinta modeladora afina a cintura com o tempo.','MITO.',
+      '<p>A cinta aperta por fora <b>enquanto você usa</b>. Tirou, a barriga volta pro mesmo lugar, porque nada mudou por dentro.</p><p>E muitas ainda enrolam, dobram e marcam a barriga. É por isso que tanta mulher compra e se arrepende.</p>',t13);
+  }
+  function t13(){
+    ask(12,'A sua barriga incha depois de comer ou no fim do dia?',null,[
+      {e:'🎈',t:'Quase todo dia',v:'sempre',p:2},{e:'🌗',t:'Às vezes',v:'as_vezes',p:1},{e:'🙂',t:'Raramente',v:'raro'}
+    ],'inchaco',function(){unlock('cha',t14)});
+  }
+  function t14(){
+    var items=['Tipo de barriga','Tempo sentada e postura','Teste da parede','Inchaço e o que você já tentou'];
+    show('<div class="spinner"></div><p class="q">Analisando as respostas de '+N()+'…</p><ul class="checks">'+
+      items.map(function(t,i){return '<li id="c'+i+'"><span class="ok">✓</span>'+t+'</li>'}).join('')+'</ul>',13);
+    items.forEach(function(_,i){setTimeout(function(){$('c'+i).classList.add('on')},700+i*750)});
+    setTimeout(t15,700+items.length*750+500);
+  }
+  /* o problema (mecanismo), sem a solução */
+  function t15(){
+    var motivos=[];
+    if(A.sentada>=5)motivos.push('cerca de <b>'+A.sentada+' horas por dia sentada</b>');
+    if(A.filhos)motivos.push('<b>'+(A.filhos===1?'uma gestação':A.filhos+' gestações')+'</b>');
+    if(A.dor!=='nao')motivos.push('<b>dor nas costas</b>');
+    var porque=motivos.length?'Com '+motivos.join(', ').replace(/, ([^,]*)$/,' e $1')+', ':'Com o tempo, ';
+    show('<div class="center"><span class="kicker ai">O que está acontecendo</span></div>'+
+      '<h2 class="center">'+N()+', a sua cintura não sumiu. <span class="hl">Ela foi empurrada pra frente.</span></h2>'+
+      '<div class="compare"><div>'+body('lugar','#8FA3C4')+'Cintura no lugar</div><div class="you">'+body(A.barriga,'#D9483B')+'A sua hoje</div></div>'+
+      '<p class="center muted">'+porque+'o quadril vai girando pra frente aos pouquinhos. A barriga projeta, o abdômen de dentro “desliga”, e a cintura desaparece, mesmo sem você ter engordado tanto assim.</p>'+
+      '<button class="btn ai" id="nx">Faz sentido</button>',14);
+    $('nx').onclick=t16;
+  }
+  /* o Erro da Toalha */
+  function t16(){
+    var intro=tentouToalha()?'Agora você vai entender por que não funcionou quando você tentou.':'Antes de você tentar sozinha, cuidado com isto.';
+    show('<div class="center"><span class="kicker">O Erro da Toalha</span></div>'+
+      '<h2 class="center">A maioria das mulheres que tentam a técnica vendo vídeo comete o <span class="hl">Erro da Toalha</span>.</h2>'+
+      '<p class="center muted">'+intro+' São 3 detalhes que mudam de uma mulher pra outra. Se um deles estiver errado, a técnica não faz efeito na cintura.</p>'+
+      '<div class="lock"><span class="k">🔒</span><div class="t">1. A toalha</div><div class="b">a medida certa depende do seu tipo de barriga</div></div>'+
+      '<div class="lock"><span class="k">🔒</span><div class="t">2. O ponto</div><div class="b">o lugar exato muda conforme a sua postura</div></div>'+
+      '<div class="lock"><span class="k">🔒</span><div class="t">3. O que vem depois dos 5 minutos</div><div class="b">a parte que quase ninguém faz e que segura o resultado</div></div>'+
+      '<p class="lock-cta">No seu resultado você descobre qual é o SEU ajuste.</p>'+
+      '<button class="btn ai" id="nx">Continuar</button>',15);
+    $('nx').onclick=t17;
+  }
+  function t17(){
+    ask(16,'Quanto tempo você consegue separar por dia?',null,[
+      {e:'⏱️',t:'5 minutos',v:5},{e:'🕙',t:'10 minutos',v:10},{e:'🕒',t:'15 minutos ou mais',v:15}
+    ],'tempo',t18,null,function(){return 'Perfeito! O plano leva menos de 10 minutos por dia ✓'});
+  }
+  function t18(){
+    var f=fimPlano();
+    ask(17,'Pra quando você quer ver a cintura mais fina?','O plano tem 21 dias. Se começar hoje, termina em <b>'+dm(f)+'</b>.',[
+      {e:'🥂',t:'Pro Réveillon',v:'reveillon'},{e:'☀️',t:'Pro verão',v:'verao'},{e:'🎉',t:'Tenho um evento',s:'festa, viagem, casamento',v:'evento'},{e:'💛',t:'Só quero me sentir bem',v:'sem_pressa'}
+    ],'prazo',t19);
+  }
+  function t19(){
+    ask(18,'O que mais faria diferença pra você?',null,[
+      {e:'👗',t:'Usar roupa justa sem vergonha',v:'usar roupa justa sem vergonha'},
+      {e:'🪞',t:'Me olhar de lado no espelho e gostar',v:'se olhar de lado no espelho e gostar'},
+      {e:'📸',t:'Tirar foto sem esconder a barriga',v:'tirar foto sem esconder a barriga'},
+      {e:'✨',t:'Me sentir bonita de novo',v:'se sentir bonita de novo'}
+    ],'desejo',t20);
+  }
+  function t20(){
+    multi(19,'Uma última coisa, pra sua segurança','Alguma dessas situações vale pra você agora?',[
+      {e:'🤰',t:'Estou grávida',v:'gravida'},{e:'👶',t:'Tive bebê há menos de 3 meses',v:'posparto'},
+      {e:'🏥',t:'Fiz cirurgia na barriga ou na coluna recentemente',v:'cirurgia'},
+      {e:'⚠️',t:'Tenho hérnia de disco ou dor forte na coluna',v:'hernia'},
+      {e:'✅',t:'Nenhuma delas',v:'nenhuma'}
+    ],'alertas',t21,'nenhuma');
+  }
+  function t21(){
+    show('<div class="spinner"></div><p class="q">Montando o plano de '+N()+'…</p>',20);
+    setTimeout(t22,1600);
+  }
+  function t22(){
+    var nv=nivel(), f=fimPlano(), antesReveillon=(f.getMonth()===11&&f.getDate()<=31)||f.getMonth()<11;
+    var alerta=A.alertas.length?'<div class="card alert"><b>⚠️ Antes de começar, converse com seu médico.</b> Pela situação que você marcou, é importante ter a liberação de um profissional.</div>':'';
+    var erro=tentouToalha()?'<div class="card sun"><b>Por que não funcionou quando você tentou?</b> Pelo seu perfil, você provavelmente fez o <b>Erro da Toalha</b> pro tipo de barriga <b>'+TIPO[A.barriga]+'</b>. O vídeo que você viu foi feito pro corpo de outra pessoa.</div>':'';
+    var bon=A.bonus.map(function(k){return '<li><span class="dot">🎁</span><span>'+BONUS[k].t+'</span></li>'}).join('');
+    show('<div class="center"><span class="kicker">Resultado de '+N()+'</span>'+
+      '<h1 style="margin-top:12px">Cintura Projetada <span class="badge">nível '+nv+'</span></h1></div>'+
+      '<div class="meter"><i id="pt" style="left:4%"></i></div><div class="meter-lbl"><span>Nível 1</span><span>Nível 2</span><span>Nível 3</span></div>'+
+      alerta+
+      '<div class="card"><b>O que encontramos</b><ul class="list">'+
+        '<li><span class="dot">●</span><span>Tipo de barriga: <b>'+TIPO[A.barriga]+'</b></span></li>'+
+        '<li><span class="dot">●</span><span>Teste da parede: <b>'+({folga:'cintura empurrada pra frente',justa:'leve projeção',nao_passa:'postura mais reta',nt:'fazer quando puder'})[A.parede]+'</b></span></li>'+
+        (A.sentada>=5?'<li><span class="dot">●</span><span>Cerca de <b>'+A.sentada+'h por dia sentada</b></span></li>':'')+
+        (A.inchaco!=='raro'?'<li><span class="dot">●</span><span>Inchaço <b>'+(A.inchaco==='sempre'?'quase todo dia':'de vez em quando')+'</b></span></li>':'')+
+      '</ul></div>'+
+      erro+
+      '<div class="center" style="margin-top:18px"><span class="kicker ai">O seu ajuste</span></div>'+
+      '<div class="lock" style="margin-top:10px"><span class="k">🔒</span><div class="t">'+AJUSTE[A.barriga]+'</div><div class="b">toalha, ponto e sequência certa pra sua barriga</div></div>'+
+      '<p class="lock-cta">Liberado no seu plano</p>'+
+      '<div class="card soft"><b>O plano de 21 dias de '+N()+'</b><div class="phases"><div><b>Reencaixe</b><small>dias 1 a 7</small></div><div><b>Cinto Natural</b><small>dias 8 a 14</small></div><div><b>Desinflamar</b><small>dias 15 a 21</small></div></div>'+
+      '<p style="margin:0">Menos de 10 minutos por dia. Se começar hoje, termina em <b>'+dm(f)+'</b>'+(antesReveillon&&A.prazo==='reveillon'?', antes do Réveillon 🥂':'')+'.</p></div>'+
+      (bon?'<div class="card"><b>Bônus que você desbloqueou</b><ul class="list">'+bon+'</ul></div>':'')+
+      '<p class="center">Você disse que o que mais quer é <b>'+esc(A.desejo)+'</b>. No próximo vídeo você vê como, com o ajuste da sua barriga.</p>'+
+      '<a class="btn pulse" id="go" href="#">▶ '+(A.nome?'VER O PLANO DA '+mask(A.nome.toUpperCase()):'VER O MEU PLANO')+'</a>'+
+      '<footer>Teste educativo, com orientações gerais. Não substitui a avaliação de um profissional de saúde.</footer>',21);
+    setTimeout(function(){$('pt').style.left=({1:18,2:52,3:86})[nv]+'%'},200);
+    $('go').onclick=function(e){
+      e.preventDefault();
+      try{sessionStorage.setItem('tj_v1',JSON.stringify(Object.assign({},A,{nivel:nv,vsl:VSLV[A.barriga],ajuste:AJUSTE[A.barriga],tipo:TIPO[A.barriga]})))}catch(_){}
+      try{clarity('event','tj_clicou_ver_plano');clarity('set','nivel',String(nv));clarity('set','tipo_barriga',A.barriga)}catch(_){}
+      location.href=CONFIG.vsl_url+location.search;
+    };
+  }
+
+  /* pré-visualização de layout: ?tela=t22 */
+  var tela=new URLSearchParams(location.search).get('tela');
+  var T={t1:t1,t4:t4,t8:t8,t11:t11,t15:t15,t16:t16,t18:t18,t22:t22};
+  if(T[tela]){A=Object.assign(A,{nome:'Cláudia',idade:'40-49',barriga:'estufa',filhos:2,sentada:8,dor:'lombar',tentou:['cinta','abdominal'],toalha:'sem_dif',parede:'folga',inchaco:'sempre',tempo:10,prazo:'reveillon',desejo:'usar roupa justa sem vergonha',alertas:[],pts:12,bonus:['postura','drenagem','cha']});T[tela]()}
+  else t1();
+})();
+</script>
+</body>
+</html>
