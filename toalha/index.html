@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 <main>
@@ -47,7 +47,7 @@
   <div id="app"></div>
 </main>
 
-<script src="prova.js?v=3"></script>
+<script src="prova.js?v=4"></script>
 <script>
 /* ================== CONFIGURAÇÃO ================== */
 var CONFIG = {
@@ -159,8 +159,8 @@ var CONFIG = {
   /* ---------- prova social e especialista (dados em prova.js; vazio = não aparece) ---------- */
   var P=window.PROVA||{}, ESP=P.especialista||{}, CMT=P.comentarios||[], DEP=P.depoimentos||[];
   function temEsp(){return !!ESP.nome}
-  function cmtCard(c){return '<div class="cmt"><p>“'+esc(c.t)+'”</p><span class="cmt-l">♥ '+esc(c.l)+'</span></div>'}
-  var FONTE_CMT='<p class="cmt-src">Comentários reais em vídeos da técnica no TikTok, lá fora · traduzidos</p>';
+  function cmtCard(c){return window.cmtHTML?cmtHTML(c):''}
+  var FONTE_CMT=window.CMT_FONTE||'';
   function espCard(txt){
     if(!temEsp())return '';
     return '<div class="esp">'+(ESP.foto?'<img src="'+esc(ESP.foto)+'" width="120" height="120" alt="">':'')+
@@ -175,7 +175,7 @@ var CONFIG = {
   function rodaCmt(id){
     var lista=DEP.length?DEP.map(function(d){return {t:d.texto,l:d.nome}}):CMT; if(!lista.length)return;
     var i=0, el=$(id); if(!el)return;
-    function vai(){ if(!$(id))return; el.innerHTML=(DEP.length?'<div class="cmt"><p>“'+esc(lista[i].t)+'”</p><span class="cmt-l">'+esc(lista[i].l)+'</span></div>':cmtCard(lista[i]))+(DEP.length?'':FONTE_CMT); el.classList.remove('fade');void el.offsetWidth;el.classList.add('fade'); i=(i+1)%lista.length; setTimeout(vai,1500)}
+    function vai(){ if(!$(id))return; el.innerHTML=(DEP.length?'<div class="cmt"><p>“'+esc(lista[i].t)+'”</p><span class="cmt-l">'+esc(lista[i].l)+'</span></div>':cmtCard(lista[i]))+(DEP.length?'':FONTE_CMT); el.classList.remove('fade');void el.offsetWidth;el.classList.add('fade'); i=(i+1)%lista.length; setTimeout(vai,2200)}
     vai();
   }
 

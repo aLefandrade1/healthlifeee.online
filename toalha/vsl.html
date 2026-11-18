@@ -32,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 <main>
@@ -91,7 +91,7 @@
   <footer>Resultados variam de pessoa para pessoa. Este conteúdo é educativo e não substitui a orientação de um profissional de saúde.</footer>
 </main>
 
-<script src="prova.js?v=3"></script>
+<script src="prova.js?v=4"></script>
 <script>
 /* ================== CONFIGURAÇÃO ================== */
 var CONFIG = {
@@ -125,9 +125,7 @@ var CONFIG = {
       return '<div class="dep">'+(d.foto?'<img src="'+esc(d.foto)+'" width="96" height="96" alt="">':'')+'<div><p>“'+esc(d.texto)+'”</p><b>'+esc(d.nome)+'</b>'+(d.cidade?' · <span>'+esc(d.cidade)+'</span>':'')+'</div></div>'}).join('');
   }
   if(C.length){
-    pv+='<h2 style="font-size:1.2rem;margin:24px 0 8px">O que estão comentando lá fora</h2><div class="cmts">'+C.slice(0,4).map(function(c){
-      return '<div class="cmt"><p>“'+esc(c.t)+'”</p><span class="cmt-l">♥ '+esc(c.l)+'</span></div>'}).join('')+
-      '</div><p class="cmt-src">Comentários reais em vídeos da técnica no TikTok, lá fora · traduzidos</p>';
+    pv+='<h2 style="font-size:1.2rem;margin:24px 0 8px">O que estão comentando lá fora</h2><div class="cmts">'+C.slice(0,5).map(function(c){return window.cmtHTML?cmtHTML(c):''}).join('')+'</div>'+(window.CMT_FONTE||'');
   }
   if(E.nome&&E.frase){
     pv+='<div class="card soft" style="margin-top:16px">'+(E.foto?'<div class="esp" style="margin:0 0 8px;border:0;padding:0;background:none"><img src="'+esc(E.foto)+'" width="120" height="120" alt=""><div><b>'+esc(E.nome)+'</b>'+(E.titulo?'<span>'+esc(E.titulo)+'</span>':'')+'</div></div>':'<b>'+esc(E.nome)+'</b>')+

@@ -197,3 +197,9 @@ details p{color:var(--muted);margin:10px 0 0}
 .car-dots{display:flex;justify-content:center;gap:6px;margin:4px 0}
 .car-dots i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:.2s}
 .car-dots i.on{background:var(--sun);width:18px;border-radius:99px}
+
+/* prints de comentários */
+.cprint{margin:0;background:#000;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.cprint img{display:block;width:100%;height:auto}
+.cprint figcaption{background:#fff;color:var(--ink);font-size:.86rem;line-height:1.4;padding:8px 12px;border:1px solid var(--line);border-top:0;border-radius:0 0 16px 16px}
+.rot .cprint{max-width:340px;margin:0 auto}

@@ -14,14 +14,17 @@ window.PROVA = {
     frase:  ''    // fala curta dela, entre aspas, ex.: 'A toalha certa no ponto certo muda tudo.'
   },
 
-  /* Comentários REAIS em vídeos da técnica no TikTok (lá fora), traduzidos.
-     Fonte: levantamento de 18/11/2026. l = curtidas do comentário. */
+  /* PRINTS de comentários REAIS em vídeos da técnica no TikTok (18/11/2026),
+     com nome e foto de perfil borrados. img = print; trad = tradução (vazio se já é PT).
+     c1–c4: vídeo @harmoniehernandez1/7619790114381745421 (1,5 mi curtidas)
+     c5:    vídeo @uaimo_/7699244235203071253 (Brasil)
+     Se img estiver vazio, mostra o texto t como cartão. */
   comentarios: [
-    { t: 'Finalmente o exercício pra minha preguiça 😂', l: '14,7 mil' },
-    { t: 'Não queria acreditar, mas me sinto muito mais alinhada.', l: '3,3 mil' },
-    { t: 'Drenagem linfática + toalha japonesa, combo 🔥', l: '1,5 mil' },
-    { t: 'Doeu demais no começo, não consegui relaxar, mas depois as costas ficaram leves.', l: '831' },
-    { t: 'Comecei hoje! 30 dias.', l: '984' }
+    { img: 'img/cmt-c1.png', w: 768, h: 200, trad: 'Começo amanhã ✨ Te vejo em 30 dias com a minha atualização ✨' },
+    { img: 'img/cmt-c3.png', w: 768, h: 200, trad: 'Eu fazia isso há alguns anos e posso te dizer: funciona!!' },
+    { img: 'img/cmt-c5.png', w: 768, h: 156, trad: '' },
+    { img: 'img/cmt-c2.png', w: 768, h: 200, trad: 'Vou tentar, quero muito ajudar a minha barriga.' },
+    { img: 'img/cmt-c4.png', w: 768, h: 288, trad: 'Dói nos braços e ombros, mas sei que é porque eu preciso! Sinto que está me realinhando. Fiz por alguns dias e estou animada pra continuar.' }
   ],
 
   /* Depoimentos de CLIENTES do plano. Só com autorização por escrito.
@@ -45,6 +48,15 @@ if (/[?&]demo=carrossel\b/.test(location.search) && !window.PROVA.resultados.len
     { nome: 'EXEMPLO 3', cidade: 'só layout, sem cliente real', dias: 21, antes: 'img/b-pos.jpg', depois: 'img/b-lugar.jpg' }
   ];
 }
+
+/* ---------- print de comentário (não mexer) ---------- */
+window.cmtHTML = function (c) {
+  function e(s){return String(s==null?'':s).replace(/[&<>"']/g,function(x){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]})}
+  if (c.img) return '<figure class="cprint"><img src="' + e(c.img) + '" width="' + (c.w||768) + '" height="' + (c.h||200) + '" alt="" loading="lazy">' +
+    (c.trad ? '<figcaption>🇧🇷 “' + e(c.trad) + '”</figcaption>' : '') + '</figure>';
+  return '<div class="cmt"><p>“' + e(c.t) + '”</p><span class="cmt-l">♥ ' + e(c.l) + '</span></div>';
+};
+window.CMT_FONTE = '<p class="cmt-src">Prints de comentários reais em vídeos da técnica no TikTok · nomes e fotos borrados</p>';
 
 /* ---------- carrossel de resultados (não mexer) ---------- */
 window.carrossel = function (titulo) {
