@@ -36,6 +36,16 @@ window.PROVA = {
   resultados: []
 };
 
+/* ---------- modo de visualização: ?demo=carrossel mostra o layout com fotos de EXEMPLO
+   (só aparece com esse link; visitante normal nunca vê) ---------- */
+if (/[?&]demo=carrossel\b/.test(location.search) && !window.PROVA.resultados.length) {
+  window.PROVA.resultados = [
+    { nome: 'EXEMPLO 1', cidade: 'só layout, sem cliente real', dias: 21, antes: 'img/b-estufa.jpg', depois: 'img/b-lugar.jpg', texto: 'Aqui entra a frase da cliente.' },
+    { nome: 'EXEMPLO 2', cidade: 'só layout, sem cliente real', dias: 21, antes: 'img/b-pochete.jpg', depois: 'img/b-lugar.jpg' },
+    { nome: 'EXEMPLO 3', cidade: 'só layout, sem cliente real', dias: 21, antes: 'img/b-pos.jpg', depois: 'img/b-lugar.jpg' }
+  ];
+}
+
 /* ---------- carrossel de resultados (não mexer) ---------- */
 window.carrossel = function (titulo) {
   var R = (window.PROVA && window.PROVA.resultados) || [];
