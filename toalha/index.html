@@ -33,13 +33,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <main>
   <div class="top" id="top" hidden>
     <div class="toprow">
-      <div class="logo"><svg viewBox="18 -2 134 134" aria-hidden="true"><circle cx="85" cy="65" r="63" fill="#F7E6E8" stroke="#E8B4BA" stroke-width="3"/><circle cx="85" cy="17" r="9.5" fill="none" stroke="#A85F69" stroke-width="5"/><path d="M79 28 C79 32 72 34 64 36 C58 38 58 44 62 48 C64 52 63 54 64 57 C66 62 73 64 73 68 C73 74 62 80 62 92 C62 102 63 108 64 114 H106 C107 108 108 102 108 92 C108 80 97 74 97 68 C97 64 104 62 106 57 C107 54 106 52 108 48 C112 44 112 38 106 36 C98 34 91 32 91 28 Z" fill="#FBF7F4" stroke="#A85F69" stroke-width="5" stroke-linejoin="round"/><rect x="42" y="108" width="86" height="17" rx="8.5" fill="#fff" stroke="#C97B84" stroke-width="4.5"/><circle cx="51" cy="116.5" r="4" fill="none" stroke="#C97B84" stroke-width="3.5"/></svg>Técnica Japonesa da Toalha</div>
+      <div class="logo"><img src="img/logo.png" width="200" height="200" alt="">Técnica Japonesa da Toalha</div>
       <span class="bonus" id="bonus" hidden>🎁 R$ 0 em bônus</span>
     </div>
     <div class="prog"><i id="prog"></i></div>
@@ -142,9 +142,8 @@ var CONFIG = {
     pos:'C81 104 73 74 64 70 C62 62 64 56 62 52',
     geral:'C77 98 77 58 62 52'
   };
-  function body(k,stroke){
-    return '<svg viewBox="0 0 100 140" aria-hidden="true"><circle cx="52" cy="15" r="10" fill="#F7E6E8" stroke="'+(stroke||'#B5707C')+'" stroke-width="2"/>'+
-      '<path d="M45 27 C40 45 37 60 39 72 C41 86 39 102 43 136 L61 136 C64 120 66 106 64 100 '+FRONT[k]+' C67 44 64 33 57 27 Z" fill="#F7E6E8" stroke="'+(stroke||'#B5707C')+'" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+  function body(k){
+    return '<span class="mq"><img src="img/manequim.png" width="149" height="200" alt="">'+(k&&k!=='lugar'?'<i class="hz hz-'+k+'"></i>':'')+'</span>';
   }
   var HERO='<img class="hero-art" src="img/capa-3d.jpg" width="900" height="900" alt="" fetchpriority="high">';
 
@@ -158,7 +157,7 @@ var CONFIG = {
 
   /* ================= TELAS ================= */
   function t1(){
-    show(HERO+'<div class="center"><span class="kicker">Teste gratuito · 1 minuto</span></div>'+
+    show('<div class="logo" style="justify-content:center;margin:2px 0 12px"><img src="img/logo.png" width="200" height="200" alt="">Técnica Japonesa da Toalha</div>'+HERO+'<div class="center"><span class="kicker">Teste gratuito · 1 minuto</span></div>'+
       '<h1 class="center">Descubra por que a sua cintura <span class="hl">“sumiu”</span> e qual é a Técnica Japonesa da Toalha que vai <span class="hl">trazer a sua cintura de volta</span></h1>'+
       '<div class="proof"><b>'+esc(CONFIG.views_gringa)+'</b><span>de visualizações lá fora. Aqui no Brasil, quase ninguém conhece ainda.</span></div>'+
       '<button class="btn pulse" id="go">Fazer o teste</button>'+
@@ -256,7 +255,7 @@ var CONFIG = {
     var porque=motivos.length?'Com '+motivos.join(', ').replace(/, ([^,]*)$/,' e $1')+', ':'Com o tempo, ';
     show('<div class="center"><span class="kicker ai">O que está acontecendo</span></div>'+
       '<h2 class="center">'+N()+', a sua cintura não sumiu. <span class="hl">Ela foi empurrada pra frente.</span></h2>'+
-      '<div class="compare"><div>'+body('lugar','#CDB8C6')+'Cintura no lugar</div><div class="you">'+body(A.barriga,'#A85F69')+'A sua hoje</div></div>'+
+      '<div class="compare"><div>'+body('lugar')+'Cintura no lugar</div><div class="you">'+body(A.barriga)+'A sua hoje</div></div>'+
       '<p class="center muted">'+porque+'o quadril vai girando pra frente aos pouquinhos. A barriga projeta, o abdômen de dentro “desliga”, e a cintura desaparece, mesmo sem você ter engordado tanto assim.</p>'+
       '<button class="btn ai" id="nx">Faz sentido</button>',14);
     $('nx').onclick=t16;
