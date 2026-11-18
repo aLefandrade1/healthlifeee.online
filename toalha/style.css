@@ -160,3 +160,22 @@ details p{color:var(--muted);margin:10px 0 0}
 .hz-pos{left:32%;top:57%;width:40%;height:20%}
 .hz-geral{left:45%;top:50%;width:80%;height:42%}
 @keyframes glow{0%,100%{opacity:.75}50%{opacity:1}}
+
+/* prova social e especialista */
+.cmts{display:grid;gap:10px;margin:14px 0 6px}
+.cmt{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:var(--shadow-s);display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.cmt p{margin:0;font-size:.98rem;line-height:1.4;color:var(--ink)}
+.cmt-l{flex:none;font-size:.78rem;font-weight:700;color:var(--sun-d);white-space:nowrap}
+.cmt-src{margin:4px 0 14px;text-align:center;font-size:.74rem;color:var(--muted)}
+.rot{min-height:96px;margin-top:18px}
+.rot.fade{animation:in .5s ease}
+.esp{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:14px 0 6px}
+.esp img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 10px rgba(168,95,105,.22);flex:none}
+.esp small{display:block;font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.esp b{display:block;font-family:"Cormorant Garamond",serif;font-size:1.2rem;color:var(--ink)}
+.esp span{display:block;font-size:.82rem;color:var(--muted)}
+.esp-q{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.15rem;text-align:center;color:var(--ai-d);margin:6px 0 12px}
+.dep{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:10px 0}
+.dep img{width:48px;height:48px;border-radius:50%;object-fit:cover;flex:none}
+.dep p{margin:0 0 4px;font-size:.96rem;line-height:1.4}
+.dep b{font-size:.86rem}.dep span{font-size:.82rem;color:var(--muted)}

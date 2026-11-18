@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 <main>
@@ -47,6 +47,7 @@
   <div id="app"></div>
 </main>
 
+<script src="prova.js?v=1"></script>
 <script>
 /* ================== CONFIGURAÇÃO ================== */
 var CONFIG = {
@@ -155,6 +156,29 @@ var CONFIG = {
   function dm(d){return ('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)}
   function tentouToalha(){return A.toalha==='sem_dif'||A.toalha==='desisti'}
 
+  /* ---------- prova social e especialista (dados em prova.js; vazio = não aparece) ---------- */
+  var P=window.PROVA||{}, ESP=P.especialista||{}, CMT=P.comentarios||[], DEP=P.depoimentos||[];
+  function temEsp(){return !!ESP.nome}
+  function cmtCard(c){return '<div class="cmt"><p>“'+esc(c.t)+'”</p><span class="cmt-l">♥ '+esc(c.l)+'</span></div>'}
+  var FONTE_CMT='<p class="cmt-src">Comentários reais em vídeos da técnica no TikTok, lá fora · traduzidos</p>';
+  function espCard(txt){
+    if(!temEsp())return '';
+    return '<div class="esp">'+(ESP.foto?'<img src="'+esc(ESP.foto)+'" width="120" height="120" alt="">':'')+
+      '<div><small>'+(txt||'Método ensinado por')+'</small><b>'+esc(ESP.nome)+'</b>'+(ESP.titulo?'<span>'+esc(ESP.titulo)+'</span>':'')+'</div></div>'+
+      (ESP.frase?'<p class="esp-q">“'+esc(ESP.frase)+'”</p>':'');
+  }
+  function depCard(d){
+    return '<div class="dep">'+(d.foto?'<img src="'+esc(d.foto)+'" width="96" height="96" alt="">':'')+
+      '<div><p>“'+esc(d.texto)+'”</p><b>'+esc(d.nome)+'</b>'+(d.cidade?' · <span>'+esc(d.cidade)+'</span>':'')+'</div></div>';
+  }
+  /* comentário trocando sozinho, nas telas de carregamento */
+  function rodaCmt(id){
+    var lista=DEP.length?DEP.map(function(d){return {t:d.texto,l:d.nome}}):CMT; if(!lista.length)return;
+    var i=0, el=$(id); if(!el)return;
+    function vai(){ if(!$(id))return; el.innerHTML=(DEP.length?'<div class="cmt"><p>“'+esc(lista[i].t)+'”</p><span class="cmt-l">'+esc(lista[i].l)+'</span></div>':cmtCard(lista[i]))+(DEP.length?'':FONTE_CMT); el.classList.remove('fade');void el.offsetWidth;el.classList.add('fade'); i=(i+1)%lista.length; setTimeout(vai,1500)}
+    vai();
+  }
+
   /* ================= TELAS ================= */
   function t1(){
     show('<div class="logo" style="justify-content:center;margin:2px 0 12px"><img src="img/logo.png" width="200" height="200" alt="">Técnica Japonesa da Toalha</div>'+HERO+'<div class="center"><span class="kicker">Teste gratuito · 1 minuto</span></div>'+
@@ -217,10 +241,21 @@ var CONFIG = {
     ask(9,'Você já viu ou tentou a <span class="hl">técnica japonesa da toalha</span> em algum vídeo?',null,[
       {e:'😕',t:'Tentei, mas não vi diferença',v:'sem_dif',p:1},{e:'😣',t:'Tentei, mas desisti',s:'doeu, cansei ou esqueci',v:'desisti',p:1},
       {e:'👀',t:'Já vi, mas nunca tentei',v:'viu'},{e:'🆕',t:'Nunca ouvi falar',v:'nunca'}
-    ],'toalha',t11,null,function(op){
+    ],'toalha',t10b,null,function(op){
       if(op.v==='sem_dif'||op.v==='desisti')return 'Guarda isso: no resultado você vai entender por que não funcionou.';
       if(op.v==='nunca')return 'Você está entre as primeiras do Brasil a conhecer 🇯🇵';
     });
+  }
+  /* prova social: o que estão comentando lá fora */
+  function t10b(){
+    if(!CMT.length&&!temEsp()){t11();return}
+    try{clarity('event','tj_tela_09b_prova_social')}catch(e){}
+    show('<div class="center"><span class="kicker">Enquanto isso, lá fora…</span></div>'+
+      '<h2 class="center">'+esc(CONFIG.views_gringa)+' de visualizações. E é isso que as mulheres estão <span class="hl">comentando</span>:</h2>'+
+      '<div class="cmts">'+CMT.slice(0,4).map(cmtCard).join('')+'</div>'+FONTE_CMT+
+      espCard()+
+      '<button class="btn ai" id="nx">Quero descobrir o meu ajuste</button>',9);
+    $('nx').onclick=t11;
   }
   function t11(){
     ask(10,'Teste rápido da parede 🧱','Encoste as costas e o bumbum numa parede, com os pés um pouquinho afastados dela. Agora tente passar a mão atrás da sua lombar. Como foi?',[
@@ -242,7 +277,8 @@ var CONFIG = {
   function t14(){
     var items=['Tipo de barriga','Tempo sentada e postura','Teste da parede','Inchaço e o que você já tentou'];
     show('<div class="spinner"></div><p class="q">Analisando as respostas de '+N()+'…</p><ul class="checks">'+
-      items.map(function(t,i){return '<li id="c'+i+'"><span class="ok">✓</span>'+t+'</li>'}).join('')+'</ul>',13);
+      items.map(function(t,i){return '<li id="c'+i+'"><span class="ok">✓</span>'+t+'</li>'}).join('')+'</ul><div class="rot" id="rot"></div>',13);
+    rodaCmt('rot');
     items.forEach(function(_,i){setTimeout(function(){$('c'+i).classList.add('on')},700+i*750)});
     setTimeout(t15,700+items.length*750+500);
   }
@@ -301,8 +337,9 @@ var CONFIG = {
     ],'alertas',t21,'nenhuma');
   }
   function t21(){
-    show('<div class="spinner"></div><p class="q">Montando o plano de '+N()+'…</p>',20);
-    setTimeout(t22,1600);
+    show('<div class="spinner"></div><p class="q">Montando o plano de '+N()+'…</p>'+espCard('Plano montado com o método de')+'<div class="rot" id="rot"></div>',20);
+    rodaCmt('rot');
+    setTimeout(t22,temEsp()||DEP.length?3200:2400);
   }
   function t22(){
     var nv=nivel(), f=fimPlano(), antesReveillon=(f.getMonth()===11&&f.getDate()<=31)||f.getMonth()<11;
@@ -326,6 +363,8 @@ var CONFIG = {
       '<div class="card soft"><b>O plano de 21 dias de '+N()+'</b><div class="phases"><div><b>Reencaixe</b><small>dias 1 a 7</small></div><div><b>Cinto Natural</b><small>dias 8 a 14</small></div><div><b>Desinflamar</b><small>dias 15 a 21</small></div></div>'+
       '<p style="margin:0">Menos de 10 minutos por dia. Se começar hoje, termina em <b>'+dm(f)+'</b>'+(antesReveillon&&A.prazo==='reveillon'?', antes do Réveillon 🥂':'')+'.</p></div>'+
       (bon?'<div class="card"><b>Bônus que você desbloqueou</b><ul class="list">'+bon+'</ul></div>':'')+
+      (temEsp()?'<div class="card">'+espCard('Quem vai te guiar nos 21 dias')+'</div>':'')+
+      (DEP.length?'<div class="center" style="margin-top:18px"><span class="kicker">Quem já está fazendo</span></div>'+DEP.slice(0,3).map(depCard).join(''):'')+
       '<p class="center">Você disse que o que mais quer é <b>'+esc(A.desejo)+'</b>. No próximo vídeo você vê como, com o ajuste da sua barriga.</p>'+
       '<a class="btn pulse" id="go" href="#">▶ '+(A.nome?'VER O PLANO DA '+mask(A.nome.toUpperCase()):'VER O MEU PLANO')+'</a>'+
       '<footer>Teste educativo, com orientações gerais. Não substitui a avaliação de um profissional de saúde.</footer>',21);
@@ -340,7 +379,7 @@ var CONFIG = {
 
   /* pré-visualização de layout: ?tela=t22 */
   var tela=new URLSearchParams(location.search).get('tela');
-  var T={t1:t1,t4:t4,t8:t8,t11:t11,t15:t15,t16:t16,t18:t18,t22:t22};
+  var T={t1:t1,t4:t4,t8:t8,t10b:t10b,t11:t11,t14:t14,t15:t15,t16:t16,t18:t18,t21:t21,t22:t22};
   if(T[tela]){A=Object.assign(A,{nome:'Cláudia',idade:'40-49',barriga:'estufa',filhos:2,sentada:8,dor:'lombar',tentou:['cinta','abdominal'],toalha:'sem_dif',parede:'folga',inchaco:'sempre',tempo:10,prazo:'reveillon',desejo:'usar roupa justa sem vergonha',alertas:[],pts:12,bonus:['postura','drenagem','cha']});T[tela]()}
   else t1();
 })();

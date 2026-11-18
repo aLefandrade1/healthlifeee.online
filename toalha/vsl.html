@@ -32,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 <main>
@@ -43,6 +43,7 @@
   <p class="sound">🔊 Confira se o som está ligado</p>
 
   <div class="player" id="vsl-box"></div>
+  <div id="esp-top"></div>
 
   <!-- tudo abaixo aparece no pitch -->
   <div class="esconder">
@@ -70,6 +71,8 @@
       <p style="margin-bottom:0">Porque o vídeo que você viu foi feito pro corpo de outra pessoa. A toalha, o ponto e o que vem depois dos 5 minutos mudam de uma mulher pra outra. No seu plano, tudo já vem ajustado pro seu tipo de barriga.</p>
     </div>
 
+    <div id="prova"></div>
+
     <div class="card soft">
       <div class="guar"><div class="seal"><div><b>30</b>DIAS</div></div>
         <div><b>Garantia de 30 dias</b><p class="muted" style="margin:4px 0 0">Se não gostar, devolvemos 100% do valor. Basta um pedido, sem burocracia.</p></div></div>
@@ -88,6 +91,7 @@
   <footer>Resultados variam de pessoa para pessoa. Este conteúdo é educativo e não substitui a orientação de um profissional de saúde.</footer>
 </main>
 
+<script src="prova.js?v=1"></script>
 <script>
 /* ================== CONFIGURAÇÃO ================== */
 var CONFIG = {
@@ -108,6 +112,28 @@ var CONFIG = {
     document.getElementById('buy2').textContent=t+' · R$ 37';
   }
   if(A.ajuste)document.getElementById('aj').textContent=A.ajuste;
+
+  /* prova social e especialista (dados em prova.js; vazio = não aparece) */
+  var P=window.PROVA||{}, E=P.especialista||{}, C=P.comentarios||[], D=P.depoimentos||[];
+  if(E.nome){
+    document.getElementById('esp-top').innerHTML='<div class="esp" style="margin-top:12px">'+(E.foto?'<img src="'+esc(E.foto)+'" width="120" height="120" alt="">':'')+
+      '<div><small>Apresentado por</small><b>'+esc(E.nome)+'</b>'+(E.titulo?'<span>'+esc(E.titulo)+'</span>':'')+'</div></div>';
+  }
+  var pv='';
+  if(D.length){
+    pv+='<h2 style="font-size:1.2rem;margin:24px 0 8px">Quem já está fazendo</h2>'+D.map(function(d){
+      return '<div class="dep">'+(d.foto?'<img src="'+esc(d.foto)+'" width="96" height="96" alt="">':'')+'<div><p>“'+esc(d.texto)+'”</p><b>'+esc(d.nome)+'</b>'+(d.cidade?' · <span>'+esc(d.cidade)+'</span>':'')+'</div></div>'}).join('');
+  }
+  if(C.length){
+    pv+='<h2 style="font-size:1.2rem;margin:24px 0 8px">O que estão comentando lá fora</h2><div class="cmts">'+C.slice(0,4).map(function(c){
+      return '<div class="cmt"><p>“'+esc(c.t)+'”</p><span class="cmt-l">♥ '+esc(c.l)+'</span></div>'}).join('')+
+      '</div><p class="cmt-src">Comentários reais em vídeos da técnica no TikTok, lá fora · traduzidos</p>';
+  }
+  if(E.nome&&E.frase){
+    pv+='<div class="card soft" style="margin-top:16px">'+(E.foto?'<div class="esp" style="margin:0 0 8px;border:0;padding:0;background:none"><img src="'+esc(E.foto)+'" width="120" height="120" alt=""><div><b>'+esc(E.nome)+'</b>'+(E.titulo?'<span>'+esc(E.titulo)+'</span>':'')+'</div></div>':'<b>'+esc(E.nome)+'</b>')+
+      '<p class="esp-q" style="margin:0">“'+esc(E.frase)+'”</p></div>';
+  }
+  document.getElementById('prova').innerHTML=pv;
 
   var url=CONFIG.checkout?CONFIG.checkout+(location.search||''):'#';
   ['buy','buy2'].forEach(function(id){document.getElementById(id).href=url});
