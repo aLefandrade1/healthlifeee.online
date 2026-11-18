@@ -26,5 +26,42 @@ window.PROVA = {
 
   /* Depoimentos de CLIENTES do plano. Só com autorização por escrito.
      { nome:'Ana', cidade:'Campinas, SP', foto:'img/dep-ana.jpg', texto:'...' } */
-  depoimentos: []
+  depoimentos: [],
+
+  /* Carrossel de RESULTADOS de clientes do plano (antes e depois).
+     SÓ fotos reais, enviadas pela própria cliente, com autorização por escrito
+     para uso de imagem e nome. Fotos em toalha/img/ (retrato 3:4, de lado).
+     Atenção: antes e depois não pode ir para anúncio da Meta, só para a página.
+     { nome:'Maria', cidade:'Recife, PE', dias:21, antes:'img/res-maria-antes.jpg', depois:'img/res-maria-depois.jpg', texto:'frase curta dela (opcional)' } */
+  resultados: []
+};
+
+/* ---------- carrossel de resultados (não mexer) ---------- */
+window.carrossel = function (titulo) {
+  var R = (window.PROVA && window.PROVA.resultados) || [];
+  if (!R.length) return '';
+  function e(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  var h = '<div class="car-wrap">' + (titulo ? '<div class="center"><span class="kicker">' + e(titulo) + '</span></div>' : '') +
+    '<div class="car" data-car>';
+  R.forEach(function (r) {
+    h += '<figure class="car-it"><div class="car-ph">' +
+      '<div><img src="' + e(r.antes) + '" width="300" height="400" alt="" loading="lazy"><span>Antes</span></div>' +
+      '<div><img src="' + e(r.depois) + '" width="300" height="400" alt="" loading="lazy"><span class="d">' + (r.dias ? e(r.dias) + ' dias' : 'Depois') + '</span></div>' +
+      '</div><figcaption>' + (r.texto ? '<p>“' + e(r.texto) + '”</p>' : '') +
+      '<b>' + e(r.nome) + '</b>' + (r.cidade ? ' · <span>' + e(r.cidade) + '</span>' : '') + '</figcaption></figure>';
+  });
+  h += '</div>' + (R.length > 1 ? '<div class="car-dots">' + R.map(function (_, i) { return '<i' + (i ? '' : ' class="on"') + '></i>'; }).join('') + '</div>' : '') +
+    '<p class="cmt-src">Fotos enviadas por clientes do plano, com autorização. Resultados variam de pessoa para pessoa.</p></div>';
+  return h;
+};
+/* liga as bolinhas ao arrastar (chamar depois de colocar o HTML na página) */
+window.carrosselLiga = function (raiz) {
+  (raiz || document).querySelectorAll('[data-car]').forEach(function (c) {
+    var dots = c.parentNode.querySelectorAll('.car-dots i');
+    if (!dots.length) return;
+    c.addEventListener('scroll', function () {
+      var i = Math.round(c.scrollLeft / c.firstChild.offsetWidth);
+      dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+    }, { passive: true });
+  });
 };

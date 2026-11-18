@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 <main>
@@ -47,7 +47,7 @@
   <div id="app"></div>
 </main>
 
-<script src="prova.js?v=1"></script>
+<script src="prova.js?v=2"></script>
 <script>
 /* ================== CONFIGURAÇÃO ================== */
 var CONFIG = {
@@ -248,13 +248,14 @@ var CONFIG = {
   }
   /* prova social: o que estão comentando lá fora */
   function t10b(){
-    if(!CMT.length&&!temEsp()){t11();return}
+    if(!CMT.length&&!temEsp()&&!(P.resultados||[]).length){t11();return}
     try{clarity('event','tj_tela_09b_prova_social')}catch(e){}
     show('<div class="center"><span class="kicker">Enquanto isso, lá fora…</span></div>'+
       '<h2 class="center">'+esc(CONFIG.views_gringa)+' de visualizações. E é isso que as mulheres estão <span class="hl">comentando</span>:</h2>'+
-      '<div class="cmts">'+CMT.slice(0,4).map(cmtCard).join('')+'</div>'+FONTE_CMT+
+      '<div class="cmts">'+CMT.slice(0,4).map(cmtCard).join('')+'</div>'+FONTE_CMT+(window.carrossel?window.carrossel('Resultados de quem fez o plano'):'')+
       espCard()+
       '<button class="btn ai" id="nx">Quero descobrir o meu ajuste</button>',9);
+    if(window.carrosselLiga)carrosselLiga(app);
     $('nx').onclick=t11;
   }
   function t11(){
@@ -364,10 +365,12 @@ var CONFIG = {
       '<p style="margin:0">Menos de 10 minutos por dia. Se começar hoje, termina em <b>'+dm(f)+'</b>'+(antesReveillon&&A.prazo==='reveillon'?', antes do Réveillon 🥂':'')+'.</p></div>'+
       (bon?'<div class="card"><b>Bônus que você desbloqueou</b><ul class="list">'+bon+'</ul></div>':'')+
       (temEsp()?'<div class="card">'+espCard('Quem vai te guiar nos 21 dias')+'</div>':'')+
+      (window.carrossel?window.carrossel('Quem já fez o plano'):'')+
       (DEP.length?'<div class="center" style="margin-top:18px"><span class="kicker">Quem já está fazendo</span></div>'+DEP.slice(0,3).map(depCard).join(''):'')+
       '<p class="center">Você disse que o que mais quer é <b>'+esc(A.desejo)+'</b>. No próximo vídeo você vê como, com o ajuste da sua barriga.</p>'+
       '<a class="btn pulse" id="go" href="#">▶ '+(A.nome?'VER O PLANO DA '+mask(A.nome.toUpperCase()):'VER O MEU PLANO')+'</a>'+
       '<footer>Teste educativo, com orientações gerais. Não substitui a avaliação de um profissional de saúde.</footer>',21);
+    if(window.carrosselLiga)carrosselLiga(app);
     setTimeout(function(){$('pt').style.left=({1:18,2:52,3:86})[nv]+'%'},200);
     $('go').onclick=function(e){
       e.preventDefault();
