@@ -99,7 +99,7 @@ var CONFIG = {
   checkout:     '',                                      // link do checkout da oferta EUA (ainda não criado)
   vturb_conta:  'a863f268-2fb0-429d-88e9-42f82a5da6f4',
   vturb_players:{ A:'', B:'', C:'' },                    // VSLs em inglês. A = estufa · B = pochete/por igual · C = estômago alto/pós-gestação. Vazio = usa o A.
-  pitch_segundos: 224                                    // narração A em inglês: "seventeen dollars" em 224,84 s
+  pitch_segundos: { A:281, B:278, C:282 }               // VSL v3 Alina (voz Sami): segundo em que ela fala "seventeen dollars". B e C calculados; A medido. Conferir depois da edição final.
 };
 /* ================================================== */
 (function(){
@@ -146,7 +146,7 @@ var CONFIG = {
     s.src='https://scripts.converteai.net/'+CONFIG.vturb_conta+'/players/'+player+'/v4/player.js';s.async=true;
     document.head.appendChild(s);
     p=document.querySelector('vturb-smartplayer');
-    p.addEventListener('player:ready',function(){p.displayHiddenElements(CONFIG.pitch_segundos,['.esconder'],{persist:true})});
+    p.addEventListener('player:ready',function(){p.displayHiddenElements(CONFIG.pitch_segundos[v]||CONFIG.pitch_segundos.A,['.esconder'],{persist:true})});
   } else {
     box.innerHTML='<div class="ph"><div>🎬 Video coming soon<br><small style="font-weight:500;opacity:.8">version '+v+'</small></div></div>';
   }
