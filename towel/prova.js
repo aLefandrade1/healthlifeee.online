@@ -8,7 +8,7 @@ window.PROVA = {
      Só preencher com autorização dela (nome, foto e fala).
      foto: arquivo em towel/img/ (ex.: 'img/especialista.jpg') */
   especialista: {
-    nome:   '',   // personagem nova vai substituir a Rachel Bennett (19/11/2026). Nome a definir. SEM título/formação: ela não é fisioterapeuta.
+    nome:   'Alina Brooks',   // personagem (19/11/2026), substitui a Rachel Bennett. Imagem e troca de nome autorizadas. SEM título/formação: ela não é fisioterapeuta.
     titulo: '',
     foto:   '',
     frase:  ''    // fala curta dela, entre aspas, em INGLÊS, ex.: 'The right towel in the right spot changes everything.'
