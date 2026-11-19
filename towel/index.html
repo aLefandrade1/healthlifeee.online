@@ -33,13 +33,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 <main>
   <div class="top" id="top" hidden>
     <div class="toprow">
-      <div class="logo"><img src="img/logo.png" width="200" height="200" alt="">Japanese Towel Technique</div>
+      <div class="logo"><img src="img/logo-v2.jpg" width="200" height="200" alt="">Japanese Towel Technique</div>
       <span class="bonus" id="bonus" hidden>🎁 $0 in bonuses</span>
     </div>
     <div class="prog"><i id="prog"></i></div>
@@ -171,7 +171,7 @@ var CONFIG = {
 
   /* ================= SCREENS ================= */
   function t1(){
-    show('<div class="logo" style="justify-content:center;margin:2px 0 12px"><img src="img/logo.png" width="200" height="200" alt="">Japanese Towel Technique</div>'+HERO+'<div class="center"><span class="kicker">Free quiz · 1 minute</span></div>'+
+    show('<img class="logo-big" src="img/logo-v2.jpg" width="480" height="480" alt="Japanese Towel Technique">'+HERO+'<div class="center"><span class="kicker">Free quiz · 1 minute</span></div>'+
       '<h1 class="center">Find out why your waistline <span class="hl">“disappeared”</span> and which Japanese Towel Technique adjustment will <span class="hl">bring it back</span></h1>'+
       '<div class="proof"><b>'+esc(CONFIG.views)+'</b><span>views on TikTok. But most women are making one mistake that keeps it from working.</span></div>'+
       '<button class="btn pulse" id="go">Take the quiz</button>'+
