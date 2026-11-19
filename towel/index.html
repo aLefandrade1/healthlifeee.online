@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
 <main>
@@ -137,7 +137,6 @@ var CONFIG = {
   function body(k){
     return '<span class="mq"><img src="img/b-'+(k||'lugar')+'.jpg" width="300" height="400" alt=""></span>';
   }
-  var HERO='<img class="hero-art" src="img/capa-3d.jpg" width="900" height="900" alt="" fetchpriority="high">';
 
   var TIPO={estufa:'belly that bloats by the end of the day',pochete:'lower belly pooch',alto:'upper belly',pos:'post-pregnancy belly',geral:'all-over belly'};
   var AJUSTE={estufa:'Adjustment #1 · Bloating belly',pochete:'Adjustment #2 · Lower belly pooch',alto:'Adjustment #3 · Upper belly',pos:'Adjustment #4 · Post-pregnancy',geral:'Adjustment #5 · All-over belly'};
@@ -171,7 +170,7 @@ var CONFIG = {
 
   /* ================= SCREENS ================= */
   function t1(){
-    show('<img class="logo-big" src="img/logo-v2.jpg" width="480" height="480" alt="Japanese Towel Technique">'+HERO+'<div class="center"><span class="kicker">Free quiz · 1 minute</span></div>'+
+    show('<img class="logo-big logo-capa" src="img/logo-v2.jpg" width="480" height="480" alt="Japanese Towel Technique" fetchpriority="high">'+'<div class="center"><span class="kicker">Free quiz · 1 minute</span></div>'+
       '<h1 class="center">Find out why your waistline <span class="hl">“disappeared”</span> and which Japanese Towel Technique adjustment will <span class="hl">bring it back</span></h1>'+
       '<div class="proof"><b>'+esc(CONFIG.views)+'</b><span>views on TikTok. But most women are making one mistake that keeps it from working.</span></div>'+
       '<button class="btn pulse" id="go">Take the quiz</button>'+

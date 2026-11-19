@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
 <main>
@@ -146,7 +146,6 @@ var CONFIG = {
   function body(k){
     return '<span class="mq"><img src="img/b-'+(k||'lugar')+'.jpg" width="300" height="400" alt=""></span>';
   }
-  var HERO='<img class="hero-art" src="img/capa-3d.jpg" width="900" height="900" alt="" fetchpriority="high">';
 
   var TIPO={estufa:'barriga que estufa no fim do dia',pochete:'barriga pochete',alto:'estômago alto',pos:'barriga pós-gestação',geral:'barriga por igual'};
   var AJUSTE={estufa:'Ajuste nº 1 · Barriga que estufa',pochete:'Ajuste nº 2 · Barriga pochete',alto:'Ajuste nº 3 · Estômago alto',pos:'Ajuste nº 4 · Pós-gestação',geral:'Ajuste nº 5 · Barriga por igual'};
@@ -181,7 +180,7 @@ var CONFIG = {
 
   /* ================= TELAS ================= */
   function t1(){
-    show('<img class="logo-big" src="img/logo-v2.jpg" width="480" height="480" alt="Japanese Towel Technique">'+HERO+'<div class="center"><span class="kicker">⚠️ Pare de fazer abdominal pra afinar a cintura</span></div>'+
+    show('<img class="logo-big logo-capa" src="img/logo-v2.jpg" width="480" height="480" alt="Japanese Towel Technique" fetchpriority="high">'+'<div class="center"><span class="kicker">⚠️ Pare de fazer abdominal pra afinar a cintura</span></div>'+
       '<h1 class="center">A sua cintura não sumiu. Ela foi <span class="hl">empurrada pra frente</span>.</h1>'+
       '<p class="center" style="font-size:1.08rem;margin-top:-4px">Descubra em 1 minuto o ajuste da Técnica Japonesa da Toalha que <b>puxa a sua cintura de volta</b>, com uma toalha que você já tem em casa e 5 minutos por dia.</p>'+
       '<div class="proof"><b>'+esc(CONFIG.views_gringa)+'</b><span>de visualizações lá fora. Aqui no Brasil, quase ninguém conhece ainda.</span></div>'+

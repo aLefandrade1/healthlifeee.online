@@ -206,3 +206,4 @@ details p{color:var(--muted);margin:10px 0 0}
 
 /* logo nova grande (capa e VSL) */
 .logo-big{display:block;width:118px;height:118px;margin:0 auto 8px;border-radius:50%;box-shadow:0 6px 18px rgba(168,95,105,.18)}
+.logo-big.logo-capa{width:230px;height:230px;margin:4px auto 12px}
