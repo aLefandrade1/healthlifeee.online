@@ -8,8 +8,8 @@ window.PROVA = {
      Só preencher com autorização dela (nome, foto e fala).
      foto: arquivo em towel/img/ (ex.: 'img/especialista.jpg') */
   especialista: {
-    nome:   'Rachel Bennett',   // confirmado pelo usuário em 19/11/2026 (nome real, DPT)
-    titulo: 'Doctor of Physical Therapy · 10 years with the Japanese towel technique',
+    nome:   '',   // personagem nova vai substituir a Rachel Bennett (19/11/2026). Nome a definir. SEM título/formação: ela não é fisioterapeuta.
+    titulo: '',
     foto:   '',
     frase:  ''    // fala curta dela, entre aspas, em INGLÊS, ex.: 'The right towel in the right spot changes everything.'
   },
