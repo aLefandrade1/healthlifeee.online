@@ -185,11 +185,17 @@ var CONFIG = {
       '<h1 class="center">Descubra por que a sua cintura <span class="hl">“sumiu”</span> e qual é a Técnica Japonesa da Toalha que vai <span class="hl">trazer a sua cintura de volta</span></h1>'+
       '<div class="proof"><b>'+esc(CONFIG.views_gringa)+'</b><span>de visualizações lá fora. Aqui no Brasil, quase ninguém conhece ainda.</span></div>'+
       '<button class="btn pulse" id="go">Fazer o teste</button>'+
-      '<div class="pills"><span>🔒 Sem cadastro</span><span>⏱️ 1 minuto</span><span>📱 Pelo celular</span></div>');
+      '<div class="pills"><span>🔒 Sem cadastro</span><span>⏱️ 1 minuto</span><span>📱 Pelo celular</span></div>'+
+      '<div class="card soft" style="margin-top:16px"><b>No final do teste você descobre como:</b><ul class="list">'+
+        '<li><span class="dot">✓</span><span>Trazer de volta a <b>cintura fina e marcada</b></span></li>'+
+        '<li><span class="dot">✓</span><span>Deixar a <b>barriga mais retinha</b> de lado, sem aquela “pochete”</span></li>'+
+        '<li><span class="dot">✓</span><span>Fechar a calça <b>sem marcar a barriga</b></span></li>'+
+        '<li><span class="dot">✓</span><span>E ainda deixar a <b>postura mais bonita</b> e as <b>costas mais leves</b></span></li>'+
+      '</ul></div>');
     $('go').onclick=t2;
   }
   function t2(){
-    show('<p class="q">Pra começar: qual é o seu primeiro nome?</p><p class="hint">Vamos usar pra montar o seu resultado.</p>'+
+    show('<p class="q">Pra começar: qual é o seu primeiro nome?</p><p class="hint">Vamos usar pra montar o seu plano pra afinar a cintura.</p>'+
       '<input class="field" id="nm" maxlength="20" placeholder="Seu nome" autocomplete="given-name" enterkeyhint="next">'+
       '<button class="btn ai" id="nx" disabled>Continuar</button>',1);
     var nm=$('nm'),nx=$('nx');
@@ -208,7 +214,7 @@ var CONFIG = {
       {svg:body('estufa'),t:'Estufa no fim do dia',v:'estufa',p:2},{svg:body('pochete'),t:'Pochete abaixo do umbigo',v:'pochete',p:2},
       {svg:body('alto'),t:'Estômago alto',v:'alto',p:2},{svg:body('pos'),t:'Ficou pra fora depois dos filhos',v:'pos',p:3},
       {svg:body('geral'),t:'Gordinha por igual',v:'geral',p:1}
-    ],'barriga',t5,'two',function(){return 'Anotado. Cada tipo de barriga tem um ajuste diferente ✓'});
+    ],'barriga',t5,'two',function(){return 'Anotado. Cada tipo de barriga tem um ajuste diferente pra afinar a cintura ✓'});
   }
   function t5(){
     ask(4,'Você tem filhos?',null,[
@@ -218,17 +224,21 @@ var CONFIG = {
   function t6(){
     ask(5,'Somando o dia todo, quanto tempo você passa <span class="hl">sentada</span>?','Trabalho, carro, sofá, celular…',[
       {e:'🚶‍♀️',t:'Menos de 3 horas',v:2},{e:'🪑',t:'De 3 a 6 horas',v:5,p:1},{e:'💻',t:'De 6 a 9 horas',v:8,p:2},{e:'🛋️',t:'Mais de 9 horas',v:10,p:3}
-    ],'sentada',t7);
+    ],'sentada',t7,null,function(op){
+      if(op.v>=5)return 'Ficar muito tempo sentada é um dos maiores motivos da cintura sumir. E isso tem ajuste ✓';
+    });
   }
   function t7(){
     ask(6,'Você sente dor ou cansaço nas costas?',null,[
       {e:'⬇️',t:'Sim, na lombar',v:'lombar',p:2},{e:'⬆️',t:'Sim, no pescoço e ombros',v:'pescoco',p:1},
       {e:'↕️',t:'Nas duas',v:'ambas',p:2},{e:'✅',t:'Não sinto',v:'nao'}
-    ],'dor',t8);
+    ],'dor',t8,null,function(op){
+      if(op.v!=='nao')return 'Anotado. Muitas vezes a dor nas costas e a barriga pra frente têm a mesma origem.';
+    });
   }
   function t8(){
     mito(7,'Fazer abdominal todo dia afina a cintura.','MITO. E pode até piorar. 😬',
-      '<p>O abdominal tradicional trabalha o músculo de fora, o “tanquinho”. Quando a cintura foi <b>empurrada pra frente</b>, ele deixa a barriga mais durinha… e ainda mais projetada.</p><p>Na maioria das mulheres, o problema não é músculo fraco. É a cintura <b>fora do lugar</b>.</p>',
+      '<p>O abdominal tradicional trabalha o músculo de fora, o “tanquinho”. Quando a cintura foi <b>empurrada pra frente</b>, ele deixa a barriga mais durinha… e ainda mais projetada.</p><p>Na maioria das mulheres, o problema não é músculo fraco. É a cintura <b>fora do lugar</b>. Quando ela volta pro lugar, a cintura aparece de novo, sem precisar de abdominal.</p>',
       function(){unlock('postura',t9)});
   }
   function t9(){
@@ -254,7 +264,7 @@ var CONFIG = {
       '<h2 class="center">'+esc(CONFIG.views_gringa)+' de visualizações. E é isso que as mulheres estão <span class="hl">comentando</span>:</h2>'+
       '<div class="cmts">'+CMT.slice(0,4).map(cmtCard).join('')+'</div>'+FONTE_CMT+(window.carrossel?window.carrossel('Resultados de quem fez o plano'):'')+
       espCard()+
-      '<button class="btn ai" id="nx">Quero descobrir o meu ajuste</button>',9);
+      '<button class="btn ai" id="nx">Quero o meu ajuste pra afinar a cintura</button>',9);
     if(window.carrosselLiga)carrosselLiga(app);
     $('nx').onclick=t11;
   }
@@ -263,20 +273,22 @@ var CONFIG = {
       {e:'✋',t:'Passou a mão inteira, com folga',v:'folga',p:3},{e:'🤚',t:'Passou a mão, bem justinha',v:'justa',p:1},
       {e:'☝️',t:'Quase não passa',v:'nao_passa'},{e:'⏳',t:'Não consigo testar agora',v:'nt',p:1}
     ],'parede',function(){unlock('drenagem',t12)},null,function(op){
-      if(op.v==='folga')return 'Esse é um sinal clássico de cintura empurrada pra frente.';
+      if(op.v==='folga')return 'Esse é um sinal clássico de cintura empurrada pra frente. E é isso que faz a cintura sumir.';
     });
   }
   function t12(){
     mito(11,'Usar cinta modeladora afina a cintura com o tempo.','MITO.',
-      '<p>A cinta aperta por fora <b>enquanto você usa</b>. Tirou, a barriga volta pro mesmo lugar, porque nada mudou por dentro.</p><p>E muitas ainda enrolam, dobram e marcam a barriga. É por isso que tanta mulher compra e se arrepende.</p>',t13);
+      '<p>A cinta aperta por fora <b>enquanto você usa</b>. Tirou, a barriga volta pro mesmo lugar, porque nada mudou por dentro.</p><p>E muitas ainda enrolam, dobram e marcam a barriga. É por isso que tanta mulher compra e se arrepende.</p><p>A técnica japonesa faz o contrário: trabalha <b>por dentro</b>, pra cintura ficar fina de verdade, sem cinta.</p>',t13);
   }
   function t13(){
     ask(12,'A sua barriga incha depois de comer ou no fim do dia?',null,[
       {e:'🎈',t:'Quase todo dia',v:'sempre',p:2},{e:'🌗',t:'Às vezes',v:'as_vezes',p:1},{e:'🙂',t:'Raramente',v:'raro'}
-    ],'inchaco',function(){unlock('cha',t14)});
+    ],'inchaco',function(){unlock('cha',t14)},null,function(op){
+      if(op.v!=='raro')return 'O inchaço deixa a cintura ainda mais grossa no fim do dia. O plano também cuida disso ✓';
+    });
   }
   function t14(){
-    var items=['Tipo de barriga','Tempo sentada e postura','Teste da parede','Inchaço e o que você já tentou'];
+    var items=['Tipo de barriga','Tempo sentada e postura','Teste da parede','Inchaço e o que você já tentou','Ajuste pra afinar a sua cintura'];
     show('<div class="spinner"></div><p class="q">Analisando as respostas de '+N()+'…</p><ul class="checks">'+
       items.map(function(t,i){return '<li id="c'+i+'"><span class="ok">✓</span>'+t+'</li>'}).join('')+'</ul><div class="rot" id="rot"></div>',13);
     rodaCmt('rot');
@@ -294,6 +306,13 @@ var CONFIG = {
       '<h2 class="center">'+N()+', a sua cintura não sumiu. <span class="hl">Ela foi empurrada pra frente.</span></h2>'+
       '<div class="compare"><div>'+body('lugar')+'Cintura no lugar</div><div class="you">'+body(A.barriga)+'A sua hoje</div></div>'+
       '<p class="center muted">'+porque+'o quadril vai girando pra frente aos pouquinhos. A barriga projeta, o abdômen de dentro “desliga”, e a cintura desaparece, mesmo sem você ter engordado tanto assim.</p>'+
+      '<div class="card soft"><b>A boa notícia: quando a cintura volta pro lugar…</b><ul class="list">'+
+        '<li><span class="dot">✓</span><span>A <b>cintura aparece de novo</b>, mais fina e marcada</span></li>'+
+        '<li><span class="dot">✓</span><span>A barriga <b>para de ficar pra frente</b> e fica mais retinha de lado</span></li>'+
+        '<li><span class="dot">✓</span><span>A roupa <b>veste melhor</b>, sem apertar nem marcar a barriga</span></li>'+
+        '<li><span class="dot">✓</span><span>A lombar sai da sobrecarga e as <b>costas ficam mais leves</b></span></li>'+
+        '<li><span class="dot">✓</span><span>A postura fica alinhada, e você <b>parece mais alta e mais magra</b></span></li>'+
+      '</ul></div>'+
       '<button class="btn ai" id="nx">Faz sentido</button>',14);
     $('nx').onclick=t16;
   }
@@ -313,7 +332,7 @@ var CONFIG = {
   function t17(){
     ask(16,'Quanto tempo você consegue separar por dia?',null,[
       {e:'⏱️',t:'5 minutos',v:5},{e:'🕙',t:'10 minutos',v:10},{e:'🕒',t:'15 minutos ou mais',v:15}
-    ],'tempo',t18,null,function(){return 'Perfeito! O plano leva menos de 10 minutos por dia ✓'});
+    ],'tempo',t18,null,function(){return 'Perfeito! Menos de 10 minutos por dia já bastam pra trabalhar a sua cintura ✓'});
   }
   function t18(){
     var f=fimPlano();
@@ -327,7 +346,25 @@ var CONFIG = {
       {e:'🪞',t:'Me olhar de lado no espelho e gostar',v:'se olhar de lado no espelho e gostar'},
       {e:'📸',t:'Tirar foto sem esconder a barriga',v:'tirar foto sem esconder a barriga'},
       {e:'✨',t:'Me sentir bonita de novo',v:'se sentir bonita de novo'}
-    ],'desejo',t20);
+    ],'desejo',t19b);
+  }
+  /* imaginando o resultado: cintura em primeiro lugar */
+  function t19b(){
+    try{clarity('event','tj_tela_18b_imagina')}catch(e){}
+    var f=fimPlano(), prazo=({reveillon:' pro Réveillon',verao:' pro verão',evento:' pro seu evento'})[A.prazo]||'';
+    var itens=[
+      ['👖','Fechando a calça <b>sem aquela marca</b> na barriga'],
+      ['🪞','Se olhando de lado no espelho e <b>vendo a sua cintura de novo</b>'],
+      ['👗','Usando aquela <b>roupa justa</b> que está guardada'+(prazo?', e indo assim'+prazo:'')],
+      ['🎈','Terminando o dia <b>sem a barriga estufada</b>'],
+      ['🧍‍♀️','Com a <b>postura mais bonita</b> e as <b>costas mais leves</b>']
+    ];
+    show('<div class="center"><span class="kicker">Daqui a 21 dias</span></div>'+
+      '<h2 class="center">'+N()+', imagina você no dia <span class="hl">'+dm(f)+'</span>…</h2>'+
+      '<div class="card"><ul class="list">'+itens.map(function(i){return '<li><span class="dot">'+i[0]+'</span><span>'+i[1]+'</span></li>'}).join('')+'</ul></div>'+
+      '<p class="center muted">Você disse que o que mais quer é <b>'+esc(A.desejo)+'</b>. É exatamente pra isso que o seu plano vai ser montado.</p>'+
+      '<button class="btn ai" id="nx">É isso que eu quero</button>',18);
+    $('nx').onclick=t20;
   }
   function t20(){
     multi(19,'Uma última coisa, pra sua segurança','Alguma dessas situações vale pra você agora?',[
@@ -338,7 +375,7 @@ var CONFIG = {
     ],'alertas',t21,'nenhuma');
   }
   function t21(){
-    show('<div class="spinner"></div><p class="q">Montando o plano de '+N()+'…</p>'+espCard('Plano montado com o método de')+'<div class="rot" id="rot"></div>',20);
+    show('<div class="spinner"></div><p class="q">Montando o plano de '+N()+' pra afinar a cintura…</p>'+espCard('Plano montado com o método de')+'<div class="rot" id="rot"></div>',20);
     rodaCmt('rot');
     setTimeout(t22,temEsp()||DEP.length?3200:2400);
   }
@@ -362,7 +399,18 @@ var CONFIG = {
       '<div class="lock" style="margin-top:10px"><span class="k">🔒</span><div class="t">'+AJUSTE[A.barriga]+'</div><div class="b">toalha, ponto e sequência certa pra sua barriga</div></div>'+
       '<p class="lock-cta">Liberado no seu plano</p>'+
       '<div class="card soft"><b>O plano de 21 dias de '+N()+'</b><div class="phases"><div><b>Reencaixe</b><small>dias 1 a 7</small></div><div><b>Cinto Natural</b><small>dias 8 a 14</small></div><div><b>Desinflamar</b><small>dias 15 a 21</small></div></div>'+
+      '<ul class="list" style="margin:4px 0 12px">'+
+        '<li><span class="dot">1</span><span><b>Reencaixe:</b> a cintura começa a voltar pro lugar e a barriga para de ficar tão pra frente</span></li>'+
+        '<li><span class="dot">2</span><span><b>Cinto Natural:</b> o abdômen de dentro volta a trabalhar e segura a cintura mais fina e marcada</span></li>'+
+        '<li><span class="dot">3</span><span><b>Desinflamar:</b> menos inchaço, barriga mais retinha do começo ao fim do dia</span></li>'+
+      '</ul>'+
       '<p style="margin:0">Menos de 10 minutos por dia. Se começar hoje, termina em <b>'+dm(f)+'</b>'+(antesReveillon&&A.prazo==='reveillon'?', antes do Réveillon 🥂':'')+'.</p></div>'+
+      '<div class="card"><b>E de quebra, com a cintura no lugar</b><ul class="list">'+
+        '<li><span class="dot">✓</span><span>Costas mais leves, sem a lombar sobrecarregada'+(A.dor&&A.dor!=='nao'?' (você disse que sente dor nas costas)':'')+'</span></li>'+
+        '<li><span class="dot">✓</span><span>Postura mais alinhada, no sofá e no trabalho</span></li>'+
+        '<li><span class="dot">✓</span><span>Menos sensação de barriga inchada e pesada</span></li>'+
+        '<li><span class="dot">✓</span><span>Mais confiança pra usar roupa justa e sair nas fotos</span></li>'+
+      '</ul></div>'+
       (bon?'<div class="card"><b>Bônus que você desbloqueou</b><ul class="list">'+bon+'</ul></div>':'')+
       (temEsp()?'<div class="card">'+espCard('Quem vai te guiar nos 21 dias')+'</div>':'')+
       (window.carrossel?window.carrossel('Quem já fez o plano'):'')+
@@ -382,7 +430,7 @@ var CONFIG = {
 
   /* pré-visualização de layout: ?tela=t22 */
   var tela=new URLSearchParams(location.search).get('tela');
-  var T={t1:t1,t4:t4,t8:t8,t10b:t10b,t11:t11,t14:t14,t15:t15,t16:t16,t18:t18,t21:t21,t22:t22};
+  var T={t1:t1,t19b:t19b,t4:t4,t8:t8,t10b:t10b,t11:t11,t14:t14,t15:t15,t16:t16,t18:t18,t21:t21,t22:t22};
   if(T[tela]){A=Object.assign(A,{nome:'Cláudia',idade:'40-49',barriga:'estufa',filhos:2,sentada:8,dor:'lombar',tentou:['cinta','abdominal'],toalha:'sem_dif',parede:'folga',inchaco:'sempre',tempo:10,prazo:'reveillon',desejo:'usar roupa justa sem vergonha',alertas:[],pts:12,bonus:['postura','drenagem','cha']});T[tela]()}
   else t1();
 })();
