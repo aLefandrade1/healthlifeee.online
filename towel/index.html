@@ -170,15 +170,22 @@ var CONFIG = {
 
   /* ================= SCREENS ================= */
   function t1(){
-    show('<img class="logo-big logo-capa" src="img/logo-v2.jpg" width="480" height="480" alt="Japanese Towel Technique" fetchpriority="high">'+'<div class="center"><span class="kicker">Free quiz · 1 minute</span></div>'+
-      '<h1 class="center">Find out why your waistline <span class="hl">“disappeared”</span> and which Japanese Towel Technique adjustment will <span class="hl">bring it back</span></h1>'+
+    show('<img class="logo-big logo-capa" src="img/logo-v2.jpg" width="480" height="480" alt="Japanese Towel Technique" fetchpriority="high">'+'<div class="center"><span class="kicker">⚠️ Stop doing crunches to slim your waist</span></div>'+
+      '<h1 class="center">Your waist didn’t disappear. It got <span class="hl">pushed forward</span>.</h1>'+
+      '<p class="center" style="font-size:1.08rem;margin-top:-4px">Find out in 1 minute the Japanese Towel Technique adjustment that <b>pulls your waist back in</b>, with a towel you already have at home and 5 minutes a day.</p>'+
       '<div class="proof"><b>'+esc(CONFIG.views)+'</b><span>views on TikTok. But most women are making one mistake that keeps it from working.</span></div>'+
-      '<button class="btn pulse" id="go">Take the quiz</button>'+
-      '<div class="pills"><span>🔒 No sign-up</span><span>⏱️ 1 minute</span><span>📱 On your phone</span></div>');
+      '<button class="btn pulse" id="go">Find my adjustment now</button>'+
+      '<div class="pills"><span>🔒 No sign-up</span><span>⏱️ 1 minute</span><span>📱 On your phone</span></div>'+
+      '<div class="card soft" style="margin-top:16px"><b>At the end of the quiz, you’ll find out how to:</b><ul class="list">'+
+        '<li><span class="dot">✓</span><span>Bring back a <b>slim, defined waist</b></span></li>'+
+        '<li><span class="dot">✓</span><span>Get a <b>flatter belly</b> from the side, without that “pooch”</span></li>'+
+        '<li><span class="dot">✓</span><span>Button your pants <b>without them digging into your belly</b></span></li>'+
+        '<li><span class="dot">✓</span><span>And on top of that, get <b>better posture</b> and a <b>lighter back</b></span></li>'+
+      '</ul></div>');
     $('go').onclick=t2;
   }
   function t2(){
-    show('<p class="q">First things first: what’s your first name?</p><p class="hint">We’ll use it to build your results.</p>'+
+    show('<p class="q">First things first: what’s your first name?</p><p class="hint">We’ll use it to build your plan to slim your waist.</p>'+
       '<input class="field" id="nm" maxlength="20" placeholder="Your name" autocomplete="given-name" enterkeyhint="next">'+
       '<button class="btn ai" id="nx" disabled>Continue</button>',1);
     var nm=$('nm'),nx=$('nx');
@@ -197,7 +204,7 @@ var CONFIG = {
       {svg:body('estufa'),t:'Bloats by the end of the day',v:'estufa',p:2},{svg:body('pochete'),t:'Pooch below the belly button',v:'pochete',p:2},
       {svg:body('alto'),t:'Upper belly',v:'alto',p:2},{svg:body('pos'),t:'Stuck out after having kids',v:'pos',p:3},
       {svg:body('geral'),t:'Soft all over',v:'geral',p:1}
-    ],'barriga',t5,'two',function(){return 'Got it. Each belly type needs a different adjustment ✓'});
+    ],'barriga',t5,'two',function(){return 'Got it. Each belly type needs a different adjustment to slim the waist ✓'});
   }
   function t5(){
     ask(4,'Do you have kids?',null,[
@@ -207,17 +214,21 @@ var CONFIG = {
   function t6(){
     ask(5,'Adding up your whole day, how long do you spend <span class="hl">sitting</span>?','Work, car, couch, phone…',[
       {e:'🚶‍♀️',t:'Less than 3 hours',v:2},{e:'🪑',t:'3 to 6 hours',v:5,p:1},{e:'💻',t:'6 to 9 hours',v:8,p:2},{e:'🛋️',t:'More than 9 hours',v:10,p:3}
-    ],'sentada',t7);
+    ],'sentada',t7,null,function(op){
+      if(op.v>=5)return 'Sitting too much is one of the biggest reasons a waist disappears. And it can be adjusted ✓';
+    });
   }
   function t7(){
     ask(6,'Do you feel pain or tiredness in your back?',null,[
       {e:'⬇️',t:'Yes, in my lower back',v:'lombar',p:2},{e:'⬆️',t:'Yes, in my neck and shoulders',v:'pescoco',p:1},
       {e:'↕️',t:'Both',v:'ambas',p:2},{e:'✅',t:'No, I don’t',v:'nao'}
-    ],'dor',t8);
+    ],'dor',t8,null,function(op){
+      if(op.v!=='nao')return 'Got it. Back pain and a belly pushed forward often have the same cause.';
+    });
   }
   function t8(){
     mito(7,'Doing crunches every day slims your waist.','MYTH. It can even make it worse. 😬',
-      '<p>Regular crunches work the outer muscle, the “six-pack.” When your waist has been <b>pushed forward</b>, they make your belly firmer… and stick out even more.</p><p>For most women, the problem isn’t weak muscles. It’s a waist that’s <b>out of place</b>.</p>',
+      '<p>Regular crunches work the outer muscle, the “six-pack.” When your waist has been <b>pushed forward</b>, they make your belly firmer… and stick out even more.</p><p>For most women, the problem isn’t weak muscles. It’s a waist that’s <b>out of place</b>. When it goes back into place, your waist shows up again, no crunches needed.</p>',
       function(){unlock('postura',t9)});
   }
   function t9(){
@@ -243,7 +254,7 @@ var CONFIG = {
       '<h2 class="center">'+esc(CONFIG.views)+' views. And this is what women are <span class="hl">saying</span>:</h2>'+
       '<div class="cmts">'+CMT.slice(0,4).map(cmtCard).join('')+'</div>'+FONTE_CMT+(window.carrossel?window.carrossel('Results from women on the plan'):'')+
       espCard()+
-      '<button class="btn ai" id="nx">Find my adjustment</button>',9);
+      '<button class="btn ai" id="nx">Get my adjustment to slim my waist</button>',9);
     if(window.carrosselLiga)carrosselLiga(app);
     $('nx').onclick=t11;
   }
@@ -252,20 +263,22 @@ var CONFIG = {
       {e:'✋',t:'My whole hand fit, with room to spare',v:'folga',p:3},{e:'🤚',t:'My hand fit, but just barely',v:'justa',p:1},
       {e:'☝️',t:'My hand doesn’t really fit',v:'nao_passa'},{e:'⏳',t:'I can’t test it right now',v:'nt',p:1}
     ],'parede',function(){unlock('drenagem',t12)},null,function(op){
-      if(op.v==='folga')return 'That’s a classic sign of a waist pushed forward.';
+      if(op.v==='folga')return 'That’s a classic sign of a waist pushed forward. And that’s what makes your waist disappear.';
     });
   }
   function t12(){
     mito(11,'Wearing a waist trainer slims your waist over time.','MYTH.',
-      '<p>A waist trainer squeezes from the outside <b>only while you wear it</b>. Take it off and your belly goes right back, because nothing changed on the inside.</p><p>And many of them roll up, fold and dig into your belly. That’s why so many women buy one and regret it.</p>',t13);
+      '<p>A waist trainer squeezes from the outside <b>only while you wear it</b>. Take it off and your belly goes right back, because nothing changed on the inside.</p><p>And many of them roll up, fold and dig into your belly. That’s why so many women buy one and regret it.</p><p>The Japanese technique does the opposite: it works <b>from the inside</b>, so your waist gets slim for real, without a waist trainer.</p>',t13);
   }
   function t13(){
     ask(12,'Does your belly bloat after eating or by the end of the day?',null,[
       {e:'🎈',t:'Almost every day',v:'sempre',p:2},{e:'🌗',t:'Sometimes',v:'as_vezes',p:1},{e:'🙂',t:'Rarely',v:'raro'}
-    ],'inchaco',function(){unlock('cha',t14)});
+    ],'inchaco',function(){unlock('cha',t14)},null,function(op){
+      if(op.v!=='raro')return 'Bloating makes your waist look even thicker by the end of the day. The plan takes care of that too ✓';
+    });
   }
   function t14(){
-    var items=['Belly type','Sitting time and posture','Wall test','Bloating and what you’ve tried'];
+    var items=['Belly type','Sitting time and posture','Wall test','Bloating and what you’ve tried','Adjustment to slim your waist'];
     show('<div class="spinner"></div><p class="q">Analyzing '+(A.nome?mask(A.nome)+'’s':'your')+' answers…</p><ul class="checks">'+
       items.map(function(t,i){return '<li id="c'+i+'"><span class="ok">✓</span>'+t+'</li>'}).join('')+'</ul><div class="rot" id="rot"></div>',13);
     rodaCmt('rot');
@@ -283,6 +296,13 @@ var CONFIG = {
       '<h2 class="center">'+(A.nome?mask(A.nome)+', your':'Your')+' waist didn’t disappear. <span class="hl">It got pushed forward.</span></h2>'+
       '<div class="compare"><div>'+body('lugar')+'Waist in place</div><div class="you">'+body(A.barriga)+'Yours today</div></div>'+
       '<p class="center muted">'+porque+'your hips slowly tilt forward. Your belly sticks out, your deep core “switches off,” and your waist disappears, even if you haven’t gained that much weight.</p>'+
+      '<div class="card soft"><b>The good news: when your waist goes back into place…</b><ul class="list">'+
+        '<li><span class="dot">✓</span><span>Your <b>waist shows up again</b>, slimmer and more defined</span></li>'+
+        '<li><span class="dot">✓</span><span>Your belly <b>stops sticking out</b> and looks flatter from the side</span></li>'+
+        '<li><span class="dot">✓</span><span>Your clothes <b>fit better</b>, without squeezing or clinging to your belly</span></li>'+
+        '<li><span class="dot">✓</span><span>Your lower back gets a break and your <b>back feels lighter</b></span></li>'+
+        '<li><span class="dot">✓</span><span>Your posture lines up, and you <b>look taller and slimmer</b></span></li>'+
+      '</ul></div>'+
       '<button class="btn ai" id="nx">That makes sense</button>',14);
     $('nx').onclick=t16;
   }
@@ -302,7 +322,7 @@ var CONFIG = {
   function t17(){
     ask(16,'How much time can you set aside each day?',null,[
       {e:'⏱️',t:'5 minutes',v:5},{e:'🕙',t:'10 minutes',v:10},{e:'🕒',t:'15 minutes or more',v:15}
-    ],'tempo',t18,null,function(){return 'Perfect! The plan takes less than 10 minutes a day ✓'});
+    ],'tempo',t18,null,function(){return 'Perfect! Less than 10 minutes a day is enough to work on your waist ✓'});
   }
   function t18(){
     var f=fimPlano();
@@ -316,7 +336,25 @@ var CONFIG = {
       {e:'🪞',t:'Liking my side view in the mirror',v:'liking your side view in the mirror'},
       {e:'📸',t:'Taking photos without hiding my belly',v:'taking photos without hiding your belly'},
       {e:'✨',t:'Feeling beautiful again',v:'feeling beautiful again'}
-    ],'desejo',t20);
+    ],'desejo',t19b);
+  }
+  /* imagining the result: waist first */
+  function t19b(){
+    try{clarity('event','tj_tela_18b_imagina')}catch(e){}
+    var f=fimPlano(), prazo=({reveillon:' to New Year’s',verao:' this summer',evento:' to your event'})[A.prazo]||'';
+    var itens=[
+      ['👖','Buttoning your pants <b>without that mark</b> on your belly'],
+      ['🪞','Looking at yourself sideways in the mirror and <b>seeing your waist again</b>'],
+      ['👗','Wearing those <b>fitted clothes</b> you’ve been saving'+(prazo?', and wearing them'+prazo:'')],
+      ['🎈','Ending the day <b>without a bloated belly</b>'],
+      ['🧍‍♀️','With <b>better posture</b> and a <b>lighter back</b>']
+    ];
+    show('<div class="center"><span class="kicker">21 days from now</span></div>'+
+      '<h2 class="center">'+(A.nome?mask(A.nome)+', imagine':'Imagine')+' yourself on <span class="hl">'+dm(f)+'</span>…</h2>'+
+      '<div class="card"><ul class="list">'+itens.map(function(i){return '<li><span class="dot">'+i[0]+'</span><span>'+i[1]+'</span></li>'}).join('')+'</ul></div>'+
+      '<p class="center muted">You said what you want most is <b>'+esc(A.desejo)+'</b>. That’s exactly what your plan will be built for.</p>'+
+      '<button class="btn ai" id="nx">That’s what I want</button>',18);
+    $('nx').onclick=t20;
   }
   function t20(){
     multi(19,'One last thing, for your safety','Does any of these apply to you right now?',[
@@ -327,7 +365,7 @@ var CONFIG = {
     ],'alertas',t21,'nenhuma');
   }
   function t21(){
-    show('<div class="spinner"></div><p class="q">Building '+(A.nome?mask(A.nome)+'’s':'your')+' plan…</p>'+espCard('Plan built with the method of')+'<div class="rot" id="rot"></div>',20);
+    show('<div class="spinner"></div><p class="q">Building '+(A.nome?mask(A.nome)+'’s':'your')+' plan to slim your waist…</p>'+espCard('Plan built with the method of')+'<div class="rot" id="rot"></div>',20);
     rodaCmt('rot');
     setTimeout(t22,temEsp()||DEP.length?3200:2400);
   }
@@ -352,7 +390,18 @@ var CONFIG = {
       '<div class="lock" style="margin-top:10px"><span class="k">🔒</span><div class="t">'+AJUSTE[A.barriga]+'</div><div class="b">the right towel, spot and sequence for your belly</div></div>'+
       '<p class="lock-cta">Unlocked in your plan</p>'+
       '<div class="card soft"><b>'+nm+' 21-day plan</b><div class="phases"><div><b>Realign</b><small>days 1 to 7</small></div><div><b>Natural Corset</b><small>days 8 to 14</small></div><div><b>De-Bloat</b><small>days 15 to 21</small></div></div>'+
+      '<ul class="list" style="margin:4px 0 12px">'+
+        '<li><span class="dot">1</span><span><b>Realign:</b> your waist starts going back into place and your belly stops sticking out so much</span></li>'+
+        '<li><span class="dot">2</span><span><b>Natural Corset:</b> your deep core starts working again and holds a slimmer, more defined waist</span></li>'+
+        '<li><span class="dot">3</span><span><b>De-Bloat:</b> less bloating, a flatter belly from morning to night</span></li>'+
+      '</ul>'+
       '<p style="margin:0">Less than 10 minutes a day. Start today and you’ll finish on <b>'+dm(f)+'</b>'+(antesAnoNovo&&A.prazo==='reveillon'?', before New Year’s 🥂':'')+'.</p></div>'+
+      '<div class="card"><b>And on top of that, with your waist in place</b><ul class="list">'+
+        '<li><span class="dot">✓</span><span>A lighter back, without an overloaded lower back'+(A.dor&&A.dor!=='nao'?' (you said you have back pain)':'')+'</span></li>'+
+        '<li><span class="dot">✓</span><span>Better posture, on the couch and at work</span></li>'+
+        '<li><span class="dot">✓</span><span>Less of that bloated, heavy belly feeling</span></li>'+
+        '<li><span class="dot">✓</span><span>More confidence to wear fitted clothes and be in photos</span></li>'+
+      '</ul></div>'+
       (bon?'<div class="card"><b>Bonuses you unlocked</b><ul class="list">'+bon+'</ul></div>':'')+
       (temEsp()?'<div class="card">'+espCard('Your guide for the 21 days')+'</div>':'')+
       (window.carrossel?window.carrossel('Women who did the plan'):'')+
@@ -372,7 +421,7 @@ var CONFIG = {
 
   /* layout preview: ?tela=t22 */
   var tela=new URLSearchParams(location.search).get('tela');
-  var T={t1:t1,t4:t4,t8:t8,t10b:t10b,t11:t11,t14:t14,t15:t15,t16:t16,t18:t18,t21:t21,t22:t22};
+  var T={t1:t1,t19b:t19b,t4:t4,t8:t8,t10b:t10b,t11:t11,t14:t14,t15:t15,t16:t16,t18:t18,t21:t21,t22:t22};
   if(T[tela]){A=Object.assign(A,{nome:'Jessica',idade:'40-49',barriga:'estufa',filhos:2,sentada:8,dor:'lombar',tentou:['cinta','abdominal'],toalha:'sem_dif',parede:'folga',inchaco:'sempre',tempo:10,prazo:'reveillon',desejo:'wearing fitted clothes with confidence',alertas:[],pts:12,bonus:['postura','drenagem','cha']});T[tela]()}
   else t1();
 })();
