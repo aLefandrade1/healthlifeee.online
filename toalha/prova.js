@@ -8,8 +8,8 @@ window.PROVA = {
      Só preencher com autorização dela (nome, foto e fala).
      foto: arquivo em toalha/img/ (ex.: 'img/especialista.jpg') */
   especialista: {
-    nome:   '',   // ex.: 'Yuki Tanaka'
-    titulo: '',   // ex.: 'Fisioterapeuta em Tóquio · ensina a técnica há 8 anos'
+    nome:   'Rachel Bennett',   // confirmada pelo usuário em 19/11/2026 (nome real, DPT)
+    titulo: 'Doutora em Fisioterapia · 10 anos com a técnica japonesa da toalha',
     foto:   '',
     frase:  ''    // fala curta dela, entre aspas, ex.: 'A toalha certa no ponto certo muda tudo.'
   },
