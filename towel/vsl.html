@@ -105,6 +105,7 @@ var CONFIG = {
 (function(){
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   var A={}; try{A=JSON.parse(sessionStorage.getItem('tw_v1')||'{}')}catch(e){}
+  try{var qv=(new URLSearchParams(location.search).get('vsl')||'').toUpperCase(); if(/^[ABC]$/.test(qv))A.vsl=qv;}catch(e){}
   document.getElementById('pr').textContent=CONFIG.preco;
   document.getElementById('buy2').textContent='GET MY PLAN · '+CONFIG.preco;
   if(A.nome){
