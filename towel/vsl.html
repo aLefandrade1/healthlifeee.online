@@ -98,7 +98,7 @@ var CONFIG = {
   preco:        '$17',                                   // preço EUA (decidido pelo usuário na narração, 19/11/2026)
   checkout:     '',                                      // link do checkout da oferta EUA (ainda não criado)
   vturb_conta:  'a863f268-2fb0-429d-88e9-42f82a5da6f4',
-  vturb_players:{ A:'', B:'', C:'' },                    // VSLs em inglês. A = estufa · B = pochete/por igual · C = estômago alto/pós-gestação. Vazio = usa o A.
+  vturb_players:{ A:'6b0083cc2d46d3b88205c220', B:'6b0084b23646841f82be5f3a', C:'' },   // VSL v3 Alina (20/11/2026). A = estufa · B = pochete/por igual · C = estômago alto/pós-gestação (em produção). Vazio = usa o A.
   pitch_segundos: { A:281, B:278, C:282 }               // VSL v3 Alina (voz Sami): segundo em que ela fala "seventeen dollars". B e C calculados; A medido. Conferir depois da edição final.
 };
 /* ================================================== */
@@ -139,14 +139,14 @@ var CONFIG = {
   var url=CONFIG.checkout?CONFIG.checkout+(location.search||''):'#';
   ['buy','buy2'].forEach(function(id){document.getElementById(id).href=url});
 
-  var v=A.vsl||'A', player=CONFIG.vturb_players[v]||CONFIG.vturb_players.A, box=document.getElementById('vsl-box'), p=null;
+  var v=A.vsl||'A'; if(!CONFIG.vturb_players[v])v='A'; var player=CONFIG.vturb_players[v], box=document.getElementById('vsl-box'), p=null;
   if(player){
     box.innerHTML='<vturb-smartplayer id="vid-'+player+'" style="display:block;margin:0 auto;width:100%;"></vturb-smartplayer>';
     var s=document.createElement('script');
     s.src='https://scripts.converteai.net/'+CONFIG.vturb_conta+'/players/'+player+'/v4/player.js';s.async=true;
     document.head.appendChild(s);
     p=document.querySelector('vturb-smartplayer');
-    p.addEventListener('player:ready',function(){p.displayHiddenElements(CONFIG.pitch_segundos[v]||CONFIG.pitch_segundos.A,['.esconder'],{persist:true})});
+    p.addEventListener('player:ready',function(){p.displayHiddenElements(CONFIG.pitch_segundos[v],['.esconder'],{persist:true})});
   } else {
     box.innerHTML='<div class="ph"><div>🎬 Video coming soon<br><small style="font-weight:500;opacity:.8">version '+v+'</small></div></div>';
   }
@@ -155,7 +155,7 @@ var CONFIG = {
     clarity('event', A.nome?'tj_vsl_veio_do_quiz':'tj_vsl_acesso_direto'); clarity('set','vsl_versao',v);
     if(A.nivel)clarity('set','nivel',String(A.nivel));
     if(p){
-      var deuPlay=false, marcos=[30,60,120,180], feitos={};
+      var deuPlay=false, marcos=[30,60,120,180,240,281], feitos={};
       box.addEventListener('pointerdown',function(){ if(!deuPlay){deuPlay=true;clarity('event','tj_vsl_deu_play')} },true);
       p.addEventListener('video:timeupdate',function(){
         if(!deuPlay)return; var t=p.currentTime||0;
