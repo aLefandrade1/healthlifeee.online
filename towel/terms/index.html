@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Terms of Use</title>
+<meta name="theme-color" content="#FBF7F4">
+<meta name="robots" content="noindex,nofollow">
+<script>
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","zf34uvarqx");
+  clarity('set','oferta','towel_en'); clarity('set','etapa','terms');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=11">
+<link rel="stylesheet" href="../members.css?v=1">
+</head>
+<body data-k="terms">
+<main>
+  <div class="center"><span class="kicker">Legal</span></div>
+  
+  <h1 class="m-h">Terms of Use</h1>
+  <p class="m-sub"></p>
+  
+
+  <div class="card">
+    <p><b>Last updated:</b> November 2026</p>
+    <h3>The product</h3><p>"Japanese Towel Technique" and its add-ons are digital wellness programs delivered online. Access links are sent by email after payment.</p>
+    <h3>Not medical advice</h3><p>The content is for general wellness and educational purposes only. It is not medical advice and does not diagnose, treat or cure any condition. Talk to your doctor before starting any exercise program, especially if you are pregnant, postpartum, or have a medical condition. Results vary from person to person and are not guaranteed.</p>
+    <h3>Payments</h3><p>Payments are processed by MundPay, which acts as Merchant of Record. Your statement will show a MUNDPAY descriptor. All prices are one-time payments unless clearly stated otherwise.</p>
+    <h3>Refunds</h3><p>You can request a full refund within 30 days of purchase by emailing <a href="mailto:marcela.moreirapfit@gmail.com">marcela.moreirapfit@gmail.com</a>.</p>
+    <h3>Use of content</h3><p>The content is for your personal use. Please don't copy, resell or share it publicly.</p>
+    <h3>Contact</h3><p><a href="mailto:marcela.moreirapfit@gmail.com">marcela.moreirapfit@gmail.com</a></p>
+  </div>
+  <footer class="m-foot">
+    Japanese Towel Technique · Questions? <a href="mailto:marcela.moreirapfit@gmail.com">marcela.moreirapfit@gmail.com</a><br>
+    <a href="../privacy/">Privacy</a> · <a href="../terms/">Terms</a><br>
+    This content is for general wellness and education. It does not replace advice from a doctor or health professional. Results vary from person to person.
+  </footer>
+</main>
+
+<script>
+(function(){
+  var KEY='tj_'+document.body.dataset.k;
+  var st={};try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+  function prog(){
+    var all=document.querySelectorAll('.days input'),n=0;all.forEach(function(c){if(c.checked)n++});
+    var b=document.getElementById('bar'),l=document.getElementById('barlbl');
+    if(b&&all.length){b.style.width=Math.round(n*100/all.length)+'%';l.textContent=n+' of '+all.length+' days completed'}
+  }
+  document.querySelectorAll('[data-s]').forEach(function(el){
+    var k=el.dataset.s;
+    if(el.type==='checkbox'){el.checked=!!st[k];var li=el.closest('li');if(li)li.classList.toggle('done',el.checked);
+      el.addEventListener('change',function(){st[k]=el.checked;if(li)li.classList.toggle('done',el.checked);save();prog();
+        try{if(el.checked)clarity('event','tj_'+document.body.dataset.k+'_'+k)}catch(e){}})}
+    else{el.value=st[k]||'';el.addEventListener('input',function(){st[k]=el.value;save()})}
+  });
+  prog();
+  document.querySelectorAll('[data-print]').forEach(function(b){b.addEventListener('click',function(){window.print()})});
+})();
+</script>
+
+</body>
+</html>
